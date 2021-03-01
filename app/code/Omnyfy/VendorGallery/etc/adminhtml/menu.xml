@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Omnyfy_VendorGallery::manage_gallery" title="Manage Gallery" translate="title" module="Omnyfy_VendorGallery" parent="Omnyfy_Vendor::vendor" sortOrder="10" dependsOnModule="Omnyfy_VendorGallery" action="vendor_gallery/album" resource="Omnyfy_Vendor::vendors"/>
+    </menu>
+</config>

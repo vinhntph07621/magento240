@@ -1,0 +1,206 @@
+<?php $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$kycData = $objectManager->create('Omnyfy\VendorSignUp\Model\VendorKyc')->load($this->getRequest()->getParam('id'),'vendor_id');
+$signUpData = $objectManager->create('Omnyfy\VendorSignUp\Model\SignUp')->load($kycData->getSignupId());
+
+$taxName = $signUpData->getTaxNumber();
+$countryId = $signUpData->getCountry();
+?>
+
+<script>
+require(['jquery','accordion',"mage/calendar",'mage/mage','jquery/validate'], function ($) {
+	var validateEmail = function(elementValue) {
+		var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+		return emailPattern.test(elementValue);
+	}
+	
+	$('<label for="vendor_email" generated="true" class="mage-error vendor-email-error" style="display:none;" id="vendor_email-error"></label>').insertAfter('.kyc-email-check');
+	
+	$('.kyc-email-check').keyup(function() {
+		var value = $(this).val();
+		var valid = validateEmail(value);
+		if (valid) {
+			var url = "<?php echo $this->getUrl('omnyfy_vendorsignup/index/checkaccount', ['_secure' => true]); ?>";
+			$.ajax({
+				url: url,
+				type: "POST",
+				dataType: "json",
+				data: {
+					email : value
+				},
+				showLoader: false,
+				cache: false,
+				success: function (response) {
+					if(response['type'] == 'exist'){
+						$('.vendor-email-error').text(response['message']);
+						$('.kyc-email-check').val('');
+						$('.vendor-email-error').show();
+					} else{
+						$(".vendor-email-error").text('');
+						$('.vendor-email-error').hide();
+					}
+				}
+			});
+		}
+	});
+	$('.save').click(function () {
+		if ($('#edit_form').valid()) {
+			$('body').trigger('processStart');
+		}
+		
+	});
+	<?php 
+	if($countryId=='US'){?>
+		var taxNumberOptions = "<option value='EIN' slected>EIN</option>";
+		document.getElementById("vendor_tax_number").innerHTML = taxNumberOptions;
+	<?php } else if($countryId=='AU'){ ?>
+		var taxNumberOptions = "<option value='ABN'<?php echo ($taxName == 'ABN') ? " selcted" : null?>>ABN</option><option value='ACN'<?php echo ($taxName == 'ACN') ? " selcted" : null?>>ACN</option>";
+		document.getElementById("vendor_tax_number").innerHTML = taxNumberOptions;
+	<?php } else if($countryId=='NZ'){ ?>
+		var taxNumberOptions = "<option value='NZBN' <?php echo ($taxName == 'NZBN') ? " selcted" : null?>>NZBN</option><option value='NZCN' <?php echo ($taxName == 'NZCN') ? " selcted" : null?>>NZCN</option>";
+		document.getElementById("vendor_tax_number").innerHTML = taxNumberOptions;
+	<?php } else if($countryId=='ZA'){ ?>
+		var taxNumberOptions = "<option value='CIPC' <?php echo ($taxName == 'CIPC') ? " selcted" : null?>>CIPC</option><option value='SARSNZ' <?php echo ($taxName == 'SARSNZ') ? " selcted" : null?>>SARSNZ</option>";
+		document.getElementById("vendor_tax_number").innerHTML = taxNumberOptions;
+	<?php } ?>
+	$('#vendor_tax_number').val('<?php echo $taxName?>');
+	$("#vendor_country").on("change",function(e) {	
+		var countryVal = $("#vendor_country").val();
+		var taxNumber  = {
+			US: ["EIN"],
+			AU: ["ABN", "ACN"],
+			NZ: ["NZBN", "NZCN"],
+			ZA: ["CIPC", "SARSNZ"]
+		}
+		var taxNumberArr = ["US", "AU", "NZ", "ZA"];
+		
+		if (taxNumberArr.includes(countryVal)){
+			var divsToHide = document.getElementsByClassName("field-tax_number"); //divsToHide is an array
+			for(var i = 0; i < divsToHide.length; i++){
+				divsToHide[i].style.display = "block"; // depending on what you're doing
+			}
+			
+			if(countryVal=='US'){
+				var taxNumberOptions = "<option value=''>Tax Name</option><option value='EIN'>EIN</option>";
+			} else if(countryVal=='AU'){
+				var taxNumberOptions = "<option value=''>Tax Name</option><option value='ABN'>ABN</option><option value='ACN'>ACN</option>";
+			} else if(countryVal=='NZ'){
+				var taxNumberOptions = "<option value=''>Tax Name</option><option value='NZBN'>NZBN</option><option value='NZCN'>NZCN</option>";
+			} else if(countryVal=='ZA'){
+				var taxNumberOptions = "<option value=''>Tax Name</option><option value='CIPC'>CIPC</option><option value='SARSNZ'>SARSNZ</option>";
+			}
+			document.getElementById("vendor_tax_number").innerHTML = taxNumberOptions;
+			$("#vendor_tax_number").addClass("required-entry");
+			$(".field-tax_number").show();
+		}
+		else {
+			var divsToHide = document.getElementsByClassName("field-tax_number"); //divsToHide is an array
+			for(var i = 0; i < divsToHide.length; i++){
+				divsToHide[i].style.display = "none"; // depending on what you're doing
+				divsToHide[i].classList.remove("required-entry");
+			}
+			var element = document.getElementById("vendor_tax_number");
+			$("#vendor_tax_number").removeClass("required-entry");
+			$(".field-tax_number").hide();
+		}
+	});
+	$(document).ready(function(){
+        $("#vendor_country").trigger('change');
+        $("#vendor_tax_number").val('<?php echo $taxName; ?>');
+    });
+});
+</script>
+
+<script type="text/javascript">// <![CDATA[
+    window.onload = function () {
+        initialize();
+    };
+    var placeSearch, autocomplete, autocomplete_textarea;
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'long_name',
+        country: 'short_name',
+        postal_code: 'short_name'
+    };
+    function initialize() {
+        // Create the autocomplete object, restricting the search
+        // to geographical location types.
+        setTimeout(function () {
+            autocomplete = new google.maps.places.Autocomplete(
+                    (document.getElementsByName("business_address")[0]),
+                    {types: ['geocode']});
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+
+
+                var addressDetail = {};
+                // Get each component of the address from the place details
+                // and fill the corresponding field on the form.
+                for (var i = 0; i < place.address_components.length; i++) {
+                    var addressType = place.address_components[i].types[0];
+
+                    if (componentForm[addressType]) {
+                        //alert(addressType);
+                        var val = place.address_components[i][componentForm[addressType]];
+                        //alert(val);
+                        addressDetail[addressType] = val;
+                    }
+                }
+
+                console.log(addressDetail);
+                document.getElementsByName("city")[0].value = (typeof addressDetail.locality === 'undefined') ? '' : addressDetail.locality;
+                document.getElementsByName("postcode")[0].value = (typeof addressDetail.postal_code === 'undefined') ? '' : addressDetail.postal_code;
+                document.getElementsByName("state")[0].value = (typeof addressDetail.administrative_area_level_1 === 'undefined') ? '' : addressDetail.administrative_area_level_1;
+                document.getElementById("vendor_country").value = (typeof addressDetail.country == 'undefined') ? '' : addressDetail.country;
+				
+				var taxNumber  = {
+					US: ["EIN"],
+					AU: ["ABN", "ACN"],
+					NZ: ["NZBN", "NZCN"],
+					ZA: ["CIPC", "SARSNZ"]
+				}
+				var taxNumberArr = ["US", "AU", "NZ", "ZA"];
+				
+				if (taxNumberArr.includes(addressDetail.country)){
+					var divsToHide = document.getElementsByClassName("field-tax_number"); //divsToHide is an array
+					for(var i = 0; i < divsToHide.length; i++){
+						divsToHide[i].style.display = "block"; // depending on what you're doing
+					}
+					
+					if(addressDetail.country=='US'){
+						var taxNumberOptions = "<option value=''>Tax Name</option><option value='EIN'>EIN</option>";
+					} else if(addressDetail.country=='AU'){
+						var taxNumberOptions = "<option value=''>Tax Name</option><option value='ABN'>ABN</option><option value='ACN'>ACN</option>";
+					} else if(addressDetail.country=='NZ'){
+						var taxNumberOptions = "<option value=''>Tax Name</option><option value='NZBN'>NZBN</option><option value='NZCN'>NZCN</option>";
+					} else if(addressDetail.country=='ZA'){
+						var taxNumberOptions = "<option value=''>Tax Name</option><option value='CIPC'>CIPC</option><option value='SARSNZ'>SARSNZ</option>";
+					}
+					document.getElementById("vendor_tax_number").innerHTML = taxNumberOptions;
+					var divsToHide = document.getElementsByClassName("field-tax_number"); //divsToHide is an array
+					for(var i = 0; i < divsToHide.length; i++){
+						divsToHide[i].style.display = "block"; // depending on what you're doing
+					}
+					document.getElementById("vendor_tax_number").className = "required-entry";
+					/* $("#vendor_tax_number").addClass("required-entry");
+					$(".field-tax_number").show(); */
+				}
+				else {
+					var divsToHide = document.getElementsByClassName("field-tax_number"); //divsToHide is an array
+					for(var i = 0; i < divsToHide.length; i++){
+						divsToHide[i].style.display = "none"; // depending on what you're doing
+					}
+					var element = document.getElementById("vendor_tax_number");
+					element.classList.remove("required-entry");
+					//document.getElementById("vendor_tax_number").classList.remove("required-entry");
+					/* $("#vendor_tax_number").removeClass("required-entry");
+					$(".field-tax_number").hide(); */
+				}
+            });
+        }, 23000);
+    }
+    // ]]>
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUwRqmez5aRoaF8E1k6MB5QCEjWNTPmTM&v=3.exp&libraries=places" type="text/javascript"></script>

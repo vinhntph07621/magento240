@@ -1,0 +1,88 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * @description:
+ *
+ */
+?>
+<?php
+$_items = $block->getReviewsCollection()->getItems();
+$format = $block->getDateFormat() ?: \IntlDateFormatter::SHORT;
+
+/** @var  $helper \Omnyfy\VendorReview\Helper\Vendor */
+$helper = $this->helper('Omnyfy\VendorReview\Helper\Vendor');
+?>
+<?php if ($helper->isVendorReviewEnabled()): ?>
+    <?php if (count($_items)):?>
+        <div class="block review-list" id="customer-reviews">
+            <div class="block-content">
+                <h3 class="box-title">
+                    Reviews of <?= $block->getVendor()->getName(); ?>
+                </h3>
+                <?php foreach ($_items as $_review):?>
+                    <?php $totalRating = 0; ?>
+                    <?php foreach($_review->getRatingVotes() as $rating):?>
+                        <?php $totalRating += $rating->getData('percent') ?>
+                    <?php endforeach; ?>
+
+                    <?php /* Not needed for demo
+                    <?php $numRating = count($_review->getRatingVotes()); ?>
+                    <?php $avgRating = $totalRating/$numRating; ?>
+                    <div class="rating-row-container">
+                        <div class="rating-stars-container">
+                            <div class="rating-stars-wrapper star-lg">
+                                <div class="rating-stars">
+                                    <span style="width: <?php echo $avgRating; ?>%;"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php */ ?>
+
+                    <div class="name-row">
+                        <?php $customerName = $block->getCustomerName($_review); ?>
+                        <h4 class="name" style="display: inline"><?php echo $block->escapeHtml($customerName) ?></h4>
+                        <span class="sep"> - </span>
+                        <span class="date"><time class="review-details-value" itemprop="datePublished" datetime="<?php /* @escapeNotVerified */ echo $block->formatDate($_review->getCreatedAt(), $format) ?>"><?php /* @escapeNotVerified */ echo $block->formatDate($_review->getCreatedAt(), $format) ?></time></span>
+                    </div>
+
+                    <?php if (count($_review->getRatingVotes())): ?>
+                        <div class="sub-rating-stars-wrapper">
+                            <?php foreach ($_review->getRatingVotes() as $_vote): ?>
+                                <div class="sub-rating-container">
+                                    <div class="rating-stars-container">
+                                        <div class="rating-stars-wrapper">
+                                            <div class="rating-stars">
+                                                <span style="width: <?php /* @escapeNotVerified */ echo $_vote->getPercent() ?>%;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="item-name"><?php echo $block->escapeHtml($_vote->getVendorRatingCode()) ?></span>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="comments">
+                        <p>
+                            <?php echo nl2br($block->escapeHtml($_review->getDetail())) ?>
+                        </p>
+                    </div>
+                <?php endforeach; ?>
+                <div class="toolbar review-toolbar" style="border: none;">
+                    <?php echo $block->getChildHtml('toolbar') ?>
+                </div>
+            </div>
+        </div>
+    <?php else: ?>
+        <p>There are current no reviews for this vendor</p>
+    <?php endif;?>
+<?php endif; ?>

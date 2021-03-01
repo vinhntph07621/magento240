@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">customersegment_segment_form.customersegment_segment_form_data_source</item>
+            <item name="deps" xsi:type="string">customersegment_segment_form.customersegment_segment_form_data_source</item>
+        </item>
+
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">customersegment_segment_form</item>
+        </item>
+
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Mirasvit\CustomerSegment\Ui\Segment\Form\Control\BackButton</item>
+            <item name="delete" xsi:type="string">Mirasvit\CustomerSegment\Ui\Segment\Form\Control\DeleteButton</item>
+            <item name="refresh" xsi:type="string">Mirasvit\CustomerSegment\Ui\Segment\Form\Control\RefreshButton</item>
+            <item name="save" xsi:type="string">Mirasvit\CustomerSegment\Ui\Segment\Form\Control\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">Mirasvit\CustomerSegment\Ui\Segment\Form\Control\SaveAndContinueButton</item>
+        </item>
+    </argument>
+
+    <dataSource name="customersegment_segment_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mirasvit\CustomerSegment\Ui\Segment\Form\DataProvider</argument>
+            <argument name="name" xsi:type="string">customersegment_segment_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">segment_id</argument>
+            <argument name="requestFieldName" xsi:type="string">segment_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="segment">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">General Information</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+
+        <field name="segment_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">segment</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Segment Title</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">segment</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Description</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">segment</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </field>
+        <field name="website_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Website</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Website</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">segment</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\CustomerSegment\Model\Config\Source\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">segment</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="type">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\CustomerSegment\Model\Config\Source\Type</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Apply To</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">segment</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <!--<field name="continue">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true"></item>
+                    <item name="title" xsi:type="string" translate="true">Continue</item>
+                    <item name="formElement" xsi:type="string">button</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="action1" xsi:type="array">
+                            <item name="targetName" xsi:type="string">customersegment_segment_form.areas</item>
+                            <item name="actionName" xsi:type="string">save</item>
+                            <item name="params" xsi:type="array">
+                                <item name="redirect" xsi:type="boolean">true</item>
+                                <item name="data" xsi:type="array">
+                                    <item name="back" xsi:type="string">edit</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </field>-->
+
+        <container name="refresh">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Mirasvit_CustomerSegment/js/segment/refresh</item>
+                    <item name="limit" xsi:type="number">300</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="id" xsi:type="string">${ $.provider }:data.segment_id</item>
+                    </item>
+                    <item name="refreshUrl" xsi:type="url" path="*/*/refresh">
+                        <param name="_current">1</param>
+                    </item>
+                </item>
+            </argument>
+
+            <container name="progress">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Mirasvit_CustomerSegment/js/segment/progress</item>
+                    </item>
+                </argument>
+            </container>
+        </container>
+    </fieldset>
+
+    <fieldset name="conditions">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Rules</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+
+        <container name="validation">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                </item>
+            </argument>
+
+
+            <field name="customer_ids">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Customer IDs</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="sortOrder" xsi:type="number">1</item>
+                        <item name="notice" xsi:type="string">Enter customer IDs separated by a comma</item>
+                        <item name="displayArea" xsi:type="string">body</item>
+                    </item>
+                </argument>
+            </field>
+
+            <field name="validate_button">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="title" xsi:type="string" translate="true">Validate</item>
+                        <item name="formElement" xsi:type="string">container</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
+                        <item name="template" xsi:type="string">ui/form/components/button/container</item>
+                        <item name="displayArea" xsi:type="string">insideGroup</item>
+                        <item name="additionalForGroup" xsi:type="boolean">true</item>
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">${ $.ns }.${ $.ns }.validation_modal</item>
+                                <item name="actionName" xsi:type="string">toggleModal</item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="targetName" xsi:type="string">${ $.ns }.${ $.ns }.validation_modal.customersegment_segment_validation_form</item>
+                                <item name="actionName" xsi:type="string">removeActions</item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="targetName" xsi:type="string">${ $.ns }.${ $.ns }.validation_modal.customersegment_segment_validation_form</item>
+                                <item name="actionName" xsi:type="string">destroyInserted</item>
+                            </item>
+                            <item name="3" xsi:type="array">
+                                <item name="targetName" xsi:type="string">${ $.ns }.${ $.ns }.validation_modal.customersegment_segment_validation_form</item>
+                                <item name="actionName" xsi:type="string">render</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+        </container>
+
+        <container name="conditions_serialized">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="componentType" xsi:type="string">fieldset</item>
+                </item>
+            </argument>
+
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Mirasvit\CustomerSegment\Ui\Segment\Form\Block\Rule</argument>
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="showSpinner" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+
+    <fieldset name="additional">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Actions</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+
+        <field name="to_group_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Customer\Model\Config\Source\Group</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Move to Group</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">segment</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="notice" xsi:type="string" translate="true">If no value is specified, customer's group will not be changed.</item>
+                </item>
+            </argument>
+        </field>
+        <field name="priority">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\CustomerSegment\Model\Config\Source\Priority</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Priority</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">segment</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="notice" xsi:type="string" translate="true">Priority of a segment determines Customer Group assigned to customer in case customer belongs to multiple segments.</item>
+                </item>
+            </argument>
+        </field>
+        <field name="is_manual">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Refresh Mode</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">segment</item>
+                    <item name="sortOrder" xsi:type="number">80</item>
+                    <item name="notice" xsi:type="string" translate="true">Refresh segment data automatically by cron or add customers only manually.</item>
+                </item>
+                <item name="options" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="value" xsi:type="number">0</item>
+                        <item name="label" xsi:type="string" translate="true">Automatic</item>
+                    </item>
+                    <item name="1" xsi:type="array">
+                        <item name="value" xsi:type="number">1</item>
+                        <item name="label" xsi:type="string" translate="true">Manual</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+
+    <fieldset name="customers">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Matched Customers</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+
+        <insertListing name="customersegment_customer_listing">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="autoRender" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">customersegment_customer_listing</item>
+                    <item name="ns" xsi:type="string">customersegment_customer_listing</item>
+                    <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                    <item name="provider" xsi:type="string">customersegment_segment_form.customersegment_segment_form_data_source</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="segment_id" xsi:type="string">${ $.provider }:data.segment_id</item>
+                    </item>
+                    <item name="exports" xsi:type="array">
+                        <item name="segment_id" xsi:type="string">${ $.externalProvider }:params.segment_id</item>
+                    </item>
+                </item>
+            </argument>
+        </insertListing>
+    </fieldset>
+
+    <fieldset name="guests">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Matched Guests</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+
+        <insertListing name="customersegment_guest_listing">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="autoRender" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">customersegment_guest_listing</item>
+                    <item name="ns" xsi:type="string">customersegment_guest_listing</item>
+                    <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                    <item name="provider" xsi:type="string">customersegment_segment_form.customersegment_segment_form_data_source</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="segment_id" xsi:type="string">${ $.provider }:data.segment_id</item>
+                    </item>
+                    <item name="exports" xsi:type="array">
+                        <item name="segment_id" xsi:type="string">${ $.externalProvider }:params.segment_id</item>
+                    </item>
+                </item>
+            </argument>
+        </insertListing>
+    </fieldset>
+
+    <fieldset name="history">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">History</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+
+        <insertListing name="customersegment_history_listing">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="autoRender" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">customersegment_history_listing</item>
+                    <item name="ns" xsi:type="string">customersegment_history_listing</item>
+                    <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                    <item name="provider" xsi:type="string">customersegment_segment_form.customersegment_segment_form_data_source</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="segment_id" xsi:type="string">${ $.provider }:data.segment_id</item>
+                    </item>
+                    <item name="exports" xsi:type="array">
+                        <item name="segment_id" xsi:type="string">${ $.externalProvider }:params.segment_id</item>
+                    </item>
+                </item>
+            </argument>
+        </insertListing>
+    </fieldset>
+
+    <modal name="validation_modal">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="isTemplate" xsi:type="boolean">false</item>
+                <item name="imports" xsi:type="array">
+                    <item name="state" xsi:type="string">!index=customersegment_segment_validation_form:responseStatus</item>
+                </item>
+                <item name="options" xsi:type="array">
+                    <item name="type" xsi:type="string">slide</item>
+                    <item name="title" xsi:type="string">Preview Segment Customers</item>
+                </item>
+            </item>
+        </argument>
+
+        <insertForm name="customersegment_segment_validation_form">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Mirasvit_CustomerSegment/js/segment/validation-form</item>
+                    <item name="formSubmitType" xsi:type="string">ajax</item>
+                    <item name="toolbarContainer" xsi:type="string">${ $.parentName }</item>
+                    <item name="ns" xsi:type="string">customersegment_segment_validation_form</item>
+                    <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                    <item name="autoRender" xsi:type="boolean">false</item>
+                    <item name="render_url" xsi:type="url" path="mui/index/render_handle">
+                        <param name="handle">customersegment_segment_validation_form</param>
+                        <param name="buttons">1</param>
+                        <param name="_current">1</param>
+                    </item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render">
+                        <param name="_current">1</param>
+                    </item>
+                </item>
+            </argument>
+        </insertForm>
+    </modal>
+</form>

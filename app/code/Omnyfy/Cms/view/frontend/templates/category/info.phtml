@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Cms category info template
+ *
+ * @var $block \Omnyfy\Cms\Block\Category\Info
+ */
+?>
+
+<?php
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $om->get('Magento\Store\Model\StoreManagerInterface');
+$folderName = 'wysiwyg';
+$imgname = 'topic-icon01.png';
+$path = $folderName . '/' . $imgname;
+$base_url = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+$imageName = $base_url . $path;
+$defaultImage = $base_url . $folderName . '/topic-banner.jpg';
+
+$imgName = $defaultImage;
+if ($block->getCategory()->getCategoryBannerFrontend()) {
+    $imgName = $block->getCategory()->getCategoryBannerFrontend();
+}
+?>
+<?php //if ($content = $this->getContent()): ?>
+<?php //echo $content ?>
+<?php //endif;  ?>
+
+<section class="hero-banner-corporate bg-green with-tabs after-header short-banner">
+    <div class="banner-info-wrapper">
+        <div class="container">
+            <div class="banner-info">
+                <h1><?php echo $block->getCategory()->getTitle(); ?></h1>
+            </div>
+        </div>
+    </div>
+    <div class="banner-bg clearfix">
+            <div class="banner-img-wrapper"><img class="banner-img" src="<?php echo $imgName ?>" alt="" /></div>
+    </div>
+</section>
+

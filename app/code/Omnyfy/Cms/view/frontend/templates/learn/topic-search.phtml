@@ -1,0 +1,107 @@
+<?php $_articleCollection = $block->getArticleCollection()?>
+<div id="element-<?php echo $this->getTopicIdentifier();?>-content">
+	<div class="col-sm-5 col-sm-adjusted">
+		<div class="page-sidebar">
+			<div class="list-group sidebar-nav">
+				<span class="list-group-item nav-heading">
+					<?php echo $this->getTopicTabTitle();?>
+				</span>
+				<?php foreach ($_articleCollection as $_article): ?>
+					<?php 
+						$_articleUrl = $_article->getArticleUrl();
+						$_articleName = $block->escapeHtml($_article->getTitle(), null, true);
+					?>
+					<div data-role="collapsible">
+						<a data-role="trigger" class="list-group-item">
+							<span><?php echo $_articleName;?></span>
+						</a>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-7 col-sm-adjusted">
+        <div id="message" style="display:none"></div>
+	<?php foreach ($_articleCollection as $_article): ?>
+		<div data-role="content">
+			
+			<div class="page-column">
+				<article class="article">
+					<h2 class="article-heading"><?php echo $block->escapeHtml($_article->getTitle(), null, true);?></h2>
+					<div class="article-info-row">
+                        <?php echo $this->getLayout()->createBlock("Omnyfy\MyReadingList\Block\Widget\Bookmark")->setArticleId($_article->getArticleId())->toHtml(); ?>
+						<span class="article-info">Last updated 
+						<?php echo $this->helper('\Omnyfy\Cms\Helper\Data')->getDateFormat($_article->getUpdateTime());?>
+						<?php #echo $this->timezone->date($_article->getUpdateTime())->format('l, d F'); ?></span>
+					</div>
+					<?php echo $_article->getContent();?>
+				</article>
+				<?php /* $businessTypeCollection = $this->helper('\Omnyfy\Cms\Helper\Data')->getBusinessTypes($_article->getArticleId());?>
+					<?php if($businessTypeCollection->getSize()>0){?>
+					<div class="related-block mb-50">
+						<p class="block-title"><?php echo __('Related business types');?></p>
+						<div class="sidebar-widget-tile">
+							<div class="tile-content bottom-adjusted">
+								<?php foreach($businessTypeCollection as $business):?>
+									<a href="javascript:void(0)" class="link-title"><?php echo $business->getName()?></a>
+								<?php endforeach;?>	
+							</div>
+						</div>
+					</div>
+				<?php } */?>
+				<?php $_relatedServiceProviderCollection = $this->helper('\Omnyfy\Cms\Helper\Data')->getServiceProvider($_article->getArticleId());?>
+				<?php if($_relatedServiceProviderCollection->getSize()>0){?>
+					<div class="related-block">
+						<p class="block-title"0><?php echo __('Related export service providers');?></p>
+						<div class="related-list">	
+							<?php foreach($_relatedServiceProviderCollection as $service):?>
+							<div class="related-tile">
+								<?php 
+								$logoUrl = $this->getViewFileUrl('Omnyfy_Cms::images/related-image.jpg');
+								if ($service->getLogo()) {
+									$logoUrl = $this->helper('\Omnyfy\Cms\Helper\Data')->imageResize($service->getLogo(), 120, 130);
+								}
+								?>
+								<a href="#" class="tile-image-container">
+									<img alt="image description" src="<?php echo $logoUrl?>" class="tile-image">
+								</a>
+								<div class="tile-content">
+									<a href="#" class="title"><?php echo $service->getLocationName()?></a>
+									<ul class="bullet-list">
+										<li>Market entry</li>
+										<li>Export coaching and assistance</li>
+										<li>Trade advisory services for China and East Asia</li>
+									</ul>
+								</div>
+							</div>
+							<?php endforeach;?>
+						</div>
+					</div>
+				<?php }else{?>
+					<div class="related-block">
+						<div class="topic-landing-cls">
+							<div class="sidebar-widget-tile">
+								<?php /* <div class="tile-image-container">
+									<img alt="image description" src="<?php echo $this->getViewFileUrl('Omnyfy_Cms::images/feature02.jpg')?>" class="tile-image">
+								</div> */ ?>
+								<div class="tile-content">
+									<span class="title">
+										<span class="icon-question-circle"></span> Get assistance
+									</span>
+									<p>Find specialist service providers who can help you fast track your export goals.</p>
+									<a href="#" class="btn btn-green btn-block">Find an export service provider</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php }?>
+			</div>
+		</div>
+		<?php endforeach; ?>
+	</div>
+</div>
+<script>
+	require(['jquery','accordion'], function ($) {
+		$("#element-<?php echo $this->getTopicIdentifier();?>-content").accordion({ openedState: "active"});
+	});
+</script>

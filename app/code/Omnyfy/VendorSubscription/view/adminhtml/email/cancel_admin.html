@@ -1,0 +1,21 @@
+<!--@subject {{var vendor_name}} has cancelled the subscription plan @-->
+<!--@vars {
+    "template config_path=\"design\/email\/footer_template\"":"Email Footer Template",
+    "template config_path=\"design\/email\/header_template\"":"Email Header Template"
+    }
+ @-->
+{{template config_path="design/email/header_template"}}
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr class="email-intro">
+        <td>
+            <p>{{var vendor_name}} has canceled the subscription plan and the current subscription will be valid until {{var end_date}}.</p>
+            <p>Please view the details of the canceled subscription plan, as below:</p>
+            <p>Business name: {{var vendor_name}}</p>
+            <p>Subscription Plan Name: {{var plan_name}}</p>
+            <p>Plan Price: {{var plan_price}}</p>
+            <p>Billing Interval: {{var billing_interval}}</p>
+            <p>Description: {{var plan_description}}</p>
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

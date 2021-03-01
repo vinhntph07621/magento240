@@ -1,0 +1,58 @@
+<?php
+/**
+ * Project: favourite vendor.
+ * User: seth
+ * Date: 9/9/19
+ * Time: 2:37 PM
+ */
+?>
+<?php
+/** @var $block Omnyfy\Vendor\Block\Customer\Account\FavouriteVendor */
+$vendors = $block->getFavouriteVendors();
+$customerId = $block->getCustomerId();
+?>
+
+<div id="message" style="display:none"></div>
+<div class="row flex-row" id="right-content-section">
+    <?php if ($vendors->getSize() > 0): ?>
+        <?php foreach($vendors as $vendor):?>
+            <div class="col-sm-4 col-lg-3 saved-item-tile-wrapper js-favourite-vendor-block-<?= $vendor->getEntityId();?>">
+                <div class="saved-item-tile">
+                    <div class="tile-image-container">
+                        <a class="tile-image" href="<?= $block->getVendorLink($vendor->getId()); ?>" title="<?= $vendor->getName() ?>">
+                            <span class="product-image-container">
+                                <span class="product-image-wrapper" style="padding-bottom: 100%;">
+                                    <img class="product-image-photo" src="<?= $block->getImage($vendor->getId()) ?>" alt="">
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                    <a href="<?= $block->getVendorLink($vendor->getId()); ?>" title="<?= $vendor->getName() ?>" class="name">
+                        <?= $vendor->getName() ?>
+                    </a>
+                </div>
+
+                <div class="saved-item-tile-actions">
+                    <a class="btn btn-link-red action edit favourite-remove-btn" data-action-type="remove" data-vendor-id="<?= $vendor->getEntityId(); ?>">
+                        <span>Remove</span>
+                    </a>
+                    <a class="btn btn-dark-green action edit" href="<?= $block->getVendorLink($vendor->getId()); ?>">
+                        <span>View</span>
+                    </a>
+                </div>
+            </div>
+        <?php endforeach;?>
+    <?php else: ?>
+        <div class="message info empty"><span>No Favourite vendors found.</span></div>
+    <?php endif;?>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "vendorProfile":{},
+            "galleryCarousel":{},
+            "Omnyfy_Vendor/js/model/favouriteVendor": {}
+        }
+    }
+</script>

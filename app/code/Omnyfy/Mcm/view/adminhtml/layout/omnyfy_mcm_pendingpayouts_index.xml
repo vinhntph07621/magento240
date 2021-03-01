@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Omnyfy_Mcm::css/mcm_admin.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Omnyfy\Mcm\Block\Adminhtml\PendingPayouts\Index" name="omnyfy_mcm_pending_payouts_index"/>
+            <uiComponent name="omnyfy_mcm_pending_payout_listing"/>
+        </referenceContainer>
+    </body>
+</page>

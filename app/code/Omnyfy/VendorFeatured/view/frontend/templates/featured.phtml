@@ -1,0 +1,158 @@
+<?php
+/**
+ * @var $block \Omnyfy\VendorFeatured\Block\Vendor\Featured
+ */
+?>
+
+<?php $tags = $block->getTags() ?>
+<?php $isFirstTag = 1 ?>
+<?php if($tags->count() > 0):?>
+    <div class="cate-nav-wrapper">
+        <div class="cate-nav">
+            <?php foreach($tags as $tag): ?>
+                <div class="nav-item <?php echo $isFirstTag?"active":"" ?>" data-target-tab="<?php echo $tag->getId() ?>">
+                    <?php echo $tag->getName() ?>
+                </div>
+                <?php $isFirstTag = 0 ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
+<?php if($tags->count() > 0):?>
+    <?php $isFirstTag = 1 ?>
+    <?php foreach($tags as $tag): ?>
+        <div class="cate-list-wrapper <?php echo $isFirstTag?"active":"" ?>" id="cate-list-<?php echo $tag->getId() ?>">
+            <div class="cate-wrapper">
+                <div class="cate-heading">
+                    Featured <?php echo $tag->getName() ?>
+                </div>
+                <div class="cate-list-staging">
+                    <div class="cate-list">
+                        <?php $vendors = $block->getFeaturedVendors($tag->getId()) ?>
+
+                        <?php if ($vendors && $vendors->count() > 0): ?>
+                            <?php foreach($vendors as $vendor):?>
+                                <?php $vendorObject = $block->getVendor($vendor->getData("vendor_id")); ?>
+                                <?php if($vendorObject): ?>
+                                    <?php $typeId = $vendorObject->getData("type_id") ?>
+                                    <?php $vendorLink  = "" ?>
+                                    <?php if (!$block->isVendorTemplate($typeId) ): ?>
+                                        <?php $vendorLink = "/shop/brands/view/id/".$vendor->getData("vendor_id")?>
+                                        <?php $name = $vendorObject->getName() ?>
+                                        <?php $name = $vendorObject->getName() ?>
+                                        <?php $address = $vendorObject->getData("address"); ?>
+                                    <?php else: ?>
+                                        <?php $vendorLink = "/booking/practice/view/id/".$vendor->getData("location_id")?>
+                                        <?php if ($locationId = $vendor->getData("location_id")): ?>
+                                              <?php $location = $block->getLocation($locationId) ?>
+                                              <?php $name = $location->getName() ?>
+                                              <?php $address = $location->getData("address").", ".$location->getData("suburb").", ".$location->getData("region").", ".$location->getData("postcode"); ?>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                    <div class="cate-item-wrapper">
+                                        <div class="cate-item-card">
+                                            <div class="card-image-container">
+                                                <a href="<?php echo $vendorLink; ?>">
+                                                    <img src="<?php echo $block->getVendorMedia($vendorObject) ?>" class="card-image" />
+                                                </a>
+                                            </div>
+                                            <div class="card-content">
+                                                <p class="top-line"><?php echo $address ?></p>
+                                                <a href="<?php echo $vendorLink; ?>" class="main-line"><?php echo $name ?></a>
+                                                <div class="sub-line">
+                                                </div>
+                                                <div class="rating-row-container">
+                                                    <div class="rating-stars-container">
+                                                        <div class="rating-stars-wrapper">
+                                                            <div class="rating-stars">
+                                                                <span style="width: <?php echo $block->getStarSummery($vendorObject)?>%;"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="rating-review">
+                                                        <a href="<?php echo $vendorLink; ?>"><?php echo $block->getReviewSummaryCount($vendorObject) ?></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php $isFirstTag = 0 ?>
+    <?php endforeach; ?>
+<?php else: ?>
+    <div class="cate-list-wrapper active" id="cate-list">
+        <div class="cate-wrapper">
+            <div class="cate-heading">
+                <?php echo __("Featured Vendors") ?>
+            </div>
+            <div class="cate-list-staging">
+                <div class="cate-list">
+                    <?php $vendors = $block->getFeaturedVendors() ?>
+
+                    <?php if ($vendors && $vendors->count() > 0): ?>
+                        <?php foreach($vendors as $vendor):?>
+                            <?php $vendorObject = $block->getVendor($vendor->getData("vendor_id")); ?>
+                            <?php if($vendorObject): ?>
+                                <?php $typeId = $vendorObject->getData("type_id") ?>
+                                <?php $vendorLink  = "" ?>
+                                <?php if (!$block->isVendorTemplate($typeId) ): ?>
+                                    <?php $vendorLink = "/shop/brands/view/id/".$vendor->getData("vendor_id")?>
+                                    <?php $name = $vendorObject->getName() ?>
+                                    <?php $name = $vendorObject->getName() ?>
+                                    <?php $address = $vendorObject->getData("address"); ?>
+                                <?php else: ?>
+                                    <?php $vendorLink = "/booking/practice/view/id/".$vendor->getData("location_id")?>
+                                    <?php if ($locationId = $vendor->getData("location_id")): ?>
+                                        <?php $location = $block->getLocation($locationId) ?>
+                                        <?php $name = $location->getName() ?>
+                                        <?php $address = $location->getData("address").", ".$location->getData("suburb").", ".$location->getData("region").", ".$location->getData("postcode"); ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                                <div class="cate-item-wrapper">
+                                    <div class="cate-item-card">
+                                        <div class="card-image-container">
+                                            <a href="<?php echo $vendorLink; ?>">
+                                                <img src="<?php echo $block->getVendorMedia($vendorObject) ?>" class="card-image" />
+                                            </a>
+                                        </div>
+                                        <div class="card-content">
+                                            <p class="top-line"><?php echo $address ?></p>
+                                            <a href="<?php echo $vendorLink; ?>" class="main-line"><?php echo $name ?></a>
+                                            <div class="sub-line">
+                                            </div>
+                                            <div class="rating-row-container">
+                                                <div class="rating-stars-container">
+                                                    <div class="rating-stars-wrapper">
+                                                        <div class="rating-stars">
+                                                            <span style="width: <?php echo $block->getStarSummery($vendorObject)?>%;"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="rating-review">
+                                                    <a href="<?php echo $vendorLink; ?>"><?php echo $block->getReviewSummaryCount($vendorObject) ?></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "featuredTabs":{}
+    }
+}
+</script>

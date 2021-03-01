@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="omnyfy_vendor_edit_form_add_button">
+        <observer name="omnyfy_vendorsignup_observer_add_kyc_button" instance="Omnyfy\VendorSignUp\Observer\AddKycButton"/>
+    </event>
+</config>

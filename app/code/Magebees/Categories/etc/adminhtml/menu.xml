@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+	<menu>
+		<add id="Magebees_Categories::Heading" title=" MageBees - Import/Export Categories" module="Magebees_Categories" sortOrder="50" parent="Magento_Backend::system" resource="Magebees_Categories::Heading" />
+			<add id="Magebees_Categories::import" title="Import Categories"  action="categories/import/index" module="Magebees_Categories" sortOrder="2" parent="Magebees_Categories::Heading"  resource="Magebees_Categories::import"/>
+			<add id="Magebees_Categories::export" title="Export Categories"  action="categories/export/index" module="Magebees_Categories" sortOrder="3" parent="Magebees_Categories::Heading"  resource="Magebees_Categories::export"/>
+	</menu>
+</config>
+

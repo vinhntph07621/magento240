@@ -1,0 +1,177 @@
+<?php $childCategories = $block->getCategory($this->getCurrentCat())->getChildrenIds();?>
+<?php #$articleCollectionNew = $block->getArticleCollectionNew($country);?>
+<?php
+$url = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+if (strpos($url, '/article/') !== false) {
+    $url = $block->getCategory($this->getCurrentCat())->getCategoryUrl().'usertype/'.$this->getRequest()->getParam('usertype');
+}
+?>
+<?php if($block->isAnyCategory()){?>
+<div id="element-<?php echo $this->getTopicIdentifier();?>-content">
+	<div class="col-sm-5 col-sm-adjusted">
+		<div class="page-sidebar">
+			<div class="list-group sidebar-nav apie-tab-nav">
+				<span class="list-group-item nav-heading">
+					<?php echo __('For Specific Country');?>
+				</span>
+				<?php /* <div class="btns-wrapper">
+					<?php if($childCategories){?>
+						<?php $i = 1; 
+							foreach($childCategories as $child):
+							$category = null;
+							$category = $block->getCategory($child);
+							if($category->getIsActive() && $category->getIsLearn() && $category->getIsSpecificCountry()){?>
+							<?php $articleCollection = $block->getArticleCollection($child);?>
+							<?php if($articleCollection->getSize()>0){?>
+							<div class="sub-list-container <?php if($i==1){echo ' expanded';}?> <?php echo 'country-main-'.$category->getCountryId()?>">
+								<a href="#" class="list-group-item toggle-btn">
+									<?php echo $category->getTitle();?>
+									<span class="state-arrow"></span>
+								</a>
+								<div class="sub-list">
+									<?php $j =1; foreach($articleCollection as $article):?>
+										<div class="<?php echo 'country-main-'.$category->getCountryId()?> <?php if($j==1 && $i==1){echo 'active';}?>">
+											<a href="#tab-12-<?php echo $j.$category->getId()?>-<?php echo $article->getArticleId();?>" class="list-group-item" export-data-url="<?php echo $article->getArticleUrl();?>"><?php echo $article->getTitle()?></a>
+										</div>									
+									<?php $j++; endforeach;?>
+								</div>
+							</div>	
+							<?php } ?>
+						<?php $i++;
+							} 
+						endforeach;?>
+					<?php } ?>
+				</div> */ ?>
+				<?php $i = 1; 
+				foreach($block->getCountries() as $category=>$country):
+					$j =1; 
+					foreach($block->getArticleCollectionNew($country,$category) as $article):?>
+					<?php $category = $block->getCategory($article->getCategoryId());?>
+					<?php if($category->getParentId()==$this->getRequest()->getParam('id')){?>
+						<?php $articleUrl = $url.'/article/'.$article->getIdentifier();?>
+						<div class="<?php echo 'country-info-main-'.$article->getCountryId()?> <?php if($j==1 && $i==1){echo 'active';}?>">
+							<a href="#tab-12-<?php echo $j.$article->getCategoryId()?>-<?php echo $article->getArticleId();?>" data-url="<?php echo $articleUrl?>" class="list-group-item" export-data-url="<?php echo $article->getArticleUrl();?>"><?php echo $article->getTitle()?></a>
+						</div>	
+					<?php $j++; }endforeach;?>
+				<?php $i++; endforeach;?>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-7 col-sm-adjusted" id="content-country">
+        <div id="message" style="display:none"></div>
+		<?php #if($childCategories){?>
+				<?php $i = 1; 
+					foreach($block->getCountries() as $category=>$country):
+					/* $category = $block->getCategory($child);
+					if($category->getIsActive() && $category->getIsLearn() && $category->getIsSpecificCountry()){ */ ?>
+					<?php /*  $articleCollection = $block->getArticleCollection($category->getId());?>
+					<?php if($articleCollection->getSize()>0){ */ ?>
+						<?php $j =1; foreach($block->getArticleCollectionNew($country,$category) as $article):?>
+							<?php $category = $block->getCategory($article->getCategoryId());?>
+							<?php if($category->getParentId()==$this->getRequest()->getParam('id')){?>
+							<div id="tab-12-<?php echo $j.$article->getCategoryId()?>-<?php echo $article->getArticleId();?>" class="apie-tab-panel <?php echo 'country-info-main-content'.$article->getCountryId().$j?> <?php if($j==1 && $i==1){echo ' active';}?>">
+								<div class="page-column">
+									<article class="article">
+										<h2 class="article-heading"><?php echo $article->getTitle()?></h2>
+										<div class="article-info-row">
+                                            <?php echo $this->getLayout()->createBlock("Omnyfy\MyReadingList\Block\Widget\Bookmark")->setArticleId($article->getArticleId())->toHtml(); ?>
+											<span class="article-info">Last updated <?php echo $this->helper('\Omnyfy\Cms\Helper\Data')->getDateFormat($article->getUpdateTime()); ?></span>
+										</div>
+										<?php echo $this->helper('\Omnyfy\Cms\Helper\Data')->getContent($article->getContent()); ?>
+									</article>
+									<?php $businessTypeCollection = $this->helper('\Omnyfy\Cms\Helper\Data')->getBusinessTypes($article->getArticleId()); ?>
+									<?php if ($businessTypeCollection->getSize() > 0) { ?>
+										<div class="related-block">
+											<p class="block-title"><?php echo __('Related business types'); ?></p>
+											<div class="sidebar-widget-tile">
+												<div class="tile-content bottom-adjusted">
+												<?php foreach ($businessTypeCollection as $business): ?>
+														<a href="<?php echo $block->getUrl('servicesearch/index/index').'?cat=' . $business->getId() . '&country=all'; ?>" class="link-title"><?php echo $business->getName() ?></a>
+												<?php endforeach; ?>
+												</div>
+											</div>							
+										</div>
+									<?php } ?>
+									<?php $_relatedServiceProviderCollection = $this->helper('\Omnyfy\Cms\Helper\Data')->getServiceProvider($article->getArticleId()); ?>
+									<?php if ($_relatedServiceProviderCollection->getSize() > 0) { ?>
+										<div class="related-block">
+											<p class="block-title"><?php echo __('Related export service providers'); ?></p>
+											<div class="related-list">	
+												<?php foreach ($_relatedServiceProviderCollection as $service): ?>
+												<div class="related-tile">
+													<?php
+													$logoUrl = $this->getViewFileUrl('Omnyfy_Cms::images/related-image.jpg');
+													if ($service->getLogo()) {
+														$logoUrl = $this->helper('\Omnyfy\Cms\Helper\Data')->imageResize($service->getLogo(), 120, 130);
+													}
+													?>
+													<a href="<?php echo $block->getProviderUrl($service->getLocationId())?>" class="tile-image-container">
+														<img alt="image description" src="<?php echo $logoUrl ?>" class="tile-image">
+													</a>
+													<div class="tile-content">
+														<a href="<?php echo $block->getProviderUrl($service->getLocationId())?>" class="title"><?php echo $service->getLocationName() ?></a>
+														<ul class="bullet-list">
+															<li>Market entry</li>
+															<li>Export coaching and assistance</li>
+															<li>Trade advisory services for China and East Asia</li>
+														</ul>
+													</div>
+												</div>
+												<?php endforeach; ?>
+											</div>
+										</div>
+									<?php } if ($businessTypeCollection->getSize() == 0 && $_relatedServiceProviderCollection->getSize() == 0) { ?>
+										<div class="related-block">
+											<div class="topic-landing-cls">
+												<div class="sidebar-widget-tile">
+													<div class="tile-content">
+														<span class="title">
+															<span class="icon-question-circle"></span> Get assistance
+														</span>
+														<p>Find specialist service providers who can help you fast track your export goals.</p>
+														<a href="<?php echo $this->getUrl('servicesearch/index/index/') . '?cat=all&country=all'; ?>" class="btn btn-green btn-block">Find an export service provider</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									<?php } ?>
+								</div>
+							</div>
+							<?php $j++; } endforeach;?>
+					<?php #}?>
+				<?php $i++;
+					#} 
+				endforeach;?>
+			<?php #}?>
+	</div>
+</div>
+<script>
+	require(['jquery','accordion'], function ($) {
+		$("#element-<?php echo $this->getTopicIdentifier();?>-content").accordion({ openedState: "active"});
+		$(document).ready(function(){
+			/* $(".apie-tab-nav").find("a.list-group-item:not(.toggle-btn)").each(function(){
+				var $this = $(this);
+				$this.on("click", function(e){
+					alert('1111');
+					e.preventDefault();
+					var target_id = $this.attr("href"),
+					parentDiv = $this.parent();
+					// console.log(target_id);
+
+					if(!parentDiv.hasClass("active")) {
+						
+						$this.parents(".apie-tab-nav").find("a.list-group-item:not(.toggle-btn)").parent().removeClass("active");
+						parentDiv.addClass("active");
+
+						$this.parents(".page-content-row").find(".apie-tab-panel").removeClass("active");
+						$(target_id).addClass("active");
+
+					}
+
+				});
+			});
+			apieTabInit(); */
+		});
+	});
+</script>
+<?php }?>

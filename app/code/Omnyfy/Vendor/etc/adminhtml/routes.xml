@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+<router id="admin">
+    <route id="omnyfy_vendor" frontName="omnyfy_vendor">
+        <module name="Omnyfy_Vendor" />
+    </route>
+    <route id="adminhtml">
+        <module name="Omnyfy_Vendor" after="Magento_Shipping" />
+    </route>
+    <route id="reindexdata" frontName="reindexdata">
+        <module name="Omnyfy_Vendor"/>
+    </route>
+</router>
+</config>

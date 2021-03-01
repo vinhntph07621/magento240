@@ -1,0 +1,21 @@
+{
+    "name": "omnyfy/module-checklist",
+    "description": "Omnyfy Checklist Module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "info@mage2gen.com",
+            "name": "Mage2Gen"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Omnyfy\\Checklist\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

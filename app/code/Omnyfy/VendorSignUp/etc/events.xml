@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!--
+    <event name="omnyfy_vendor_form_validation">
+        <observer name="omnyfy_vendorsignup_validation_observer" instance="Omnyfy\VendorSignUp\Observer\Validation"/>
+    </event>
+    -->
+    <event name="omnyfy_vendor_form_after_save">
+        <observer name="omnyfy_vendorsignup_form_after_save" instance="Omnyfy\VendorSignUp\Observer\FormAfterSave"/>
+    </event>
+
+    <event name="omnyfy_vendorsignup_kyc_status_update">
+        <observer name="omnyfy_vendorsignup_update_kyc_status" instance="Omnyfy\VendorSignUp\Observer\UpdateKycStatus" />
+    </event>
+</config>

@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route method="POST" url="/V1/omnyfy-vendorfeatured/vendor_featured">
+		<service class="Omnyfy\VendorFeatured\Api\VendorFeaturedRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Omnyfy_VendorFeatured::vendor_featured_save"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/omnyfy-vendorfeatured/vendor_featured/search">
+		<service class="Omnyfy\VendorFeatured\Api\VendorFeaturedRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Omnyfy_VendorFeatured::vendor_featured_view"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/omnyfy-vendorfeatured/vendor_featured/:vendorFeaturedId">
+		<service class="Omnyfy\VendorFeatured\Api\VendorFeaturedRepositoryInterface" method="getById"/>
+		<resources>
+			<resource ref="Omnyfy_VendorFeatured::vendor_featured_view"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/omnyfy-vendorfeatured/vendor_featured/:vendorFeaturedId">
+		<service class="Omnyfy\VendorFeatured\Api\VendorFeaturedRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Omnyfy_VendorFeatured::vendor_featured_update"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/omnyfy-vendorfeatured/vendor_featured/:vendorFeaturedId">
+		<service class="Omnyfy\VendorFeatured\Api\VendorFeaturedRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Omnyfy_VendorFeatured::vendor_featured_delete"/>
+		</resources>
+	</route>
+	<route method="POST" url="/V1/omnyfy-vendorfeatured/vendor_tag">
+		<service class="Omnyfy\VendorFeatured\Api\VendorTagRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Omnyfy_VendorFeatured::vendor_tag_save"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/omnyfy-vendorfeatured/vendor_tag/search">
+		<service class="Omnyfy\VendorFeatured\Api\VendorTagRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Omnyfy_VendorFeatured::vendor_tag_view"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/omnyfy-vendorfeatured/vendor_tag/:vendorTagId">
+		<service class="Omnyfy\VendorFeatured\Api\VendorTagRepositoryInterface" method="getById"/>
+		<resources>
+			<resource ref="Omnyfy_VendorFeatured::vendor_tag_view"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/omnyfy-vendorfeatured/vendor_tag/:vendorTagId">
+		<service class="Omnyfy\VendorFeatured\Api\VendorTagRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Omnyfy_VendorFeatured::vendor_tag_update"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/omnyfy-vendorfeatured/vendor_tag/:vendorTagId">
+		<service class="Omnyfy\VendorFeatured\Api\VendorTagRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Omnyfy_VendorFeatured::vendor_tag_delete"/>
+		</resources>
+	</route>
+</routes>

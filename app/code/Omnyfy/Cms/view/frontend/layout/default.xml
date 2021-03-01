@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="Omnyfy_Cms::js/my-reading-list.js"/>
+    </head>
+    <body>
+        <referenceBlock name="footer_links">
+            <block class="Omnyfy\Cms\Block\Link" name="footer_cms_link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Cms</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

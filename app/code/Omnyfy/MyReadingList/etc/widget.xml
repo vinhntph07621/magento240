@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+	<widget class="Omnyfy\MyReadingList\Block\Widget\Bookmark" id="Omnyfy_MyReadingList_bookmark">
+		<label>Reading List Bookmark</label>
+		<description>Add this widjet to a CMS article page to add the book mark button </description>
+		<parameters>
+			<parameter name="article_id" sort_order="10" visible="true" xsi:type="text">
+				<label>article_id</label>
+			</parameter>
+		</parameters>
+	</widget>
+</widgets>

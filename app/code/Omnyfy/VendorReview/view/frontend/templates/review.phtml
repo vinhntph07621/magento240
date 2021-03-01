@@ -1,0 +1,19 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<div id="vendor-review-container" data-role="vendor-review"></div>
+<?php echo $block->getChildHtml(); ?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Omnyfy_VendorReview/js/process-reviews": {
+                "vendorReviewUrl": "<?php /* @escapeNotVerified */ echo $block->getVendorReviewUrl();?>"
+            }
+        }
+    }
+</script>

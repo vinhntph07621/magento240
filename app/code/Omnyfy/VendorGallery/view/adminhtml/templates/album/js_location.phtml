@@ -1,0 +1,24 @@
+<script>
+    require(
+        ['jquery','mage/template','jquery/ui','mage/translate'],
+        function($, mageTemplate) {
+            $('#album_vendor_id').change(function () {
+                $("#album_location_ids").empty();
+                $.ajax({
+                    url : '<?= $this->getUrl("*/*/ajaxLocation") ?>',
+                    data: {form_key: window.FORM_KEY,vendorId: $(this).val()},
+                    type: 'get',
+                    dataType: 'json',
+                    showLoader:true,
+                    success: function(data){
+                        $.each(data, function (index, location) {
+                            let locationOption = new Option(location.label, location.value);
+                            $(locationOption).html(location.label);
+                            $("#album_location_ids").append(locationOption);
+                        });
+                    }
+                });
+            });
+        });
+
+</script>

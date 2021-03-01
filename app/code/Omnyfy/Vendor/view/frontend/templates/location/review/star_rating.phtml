@@ -1,0 +1,28 @@
+<?php
+/**
+ * Project: Service Booking.
+ * User: jing
+ * Date: 18/12/17
+ * Time: 2:48 AM
+ */
+?>
+<?php #if ($block->getReviewCount() > 0):?>
+<?php $locationId = $this->getRequest()->getParam('id');?>
+<div class="rating-row-container">
+	<div class="rating-stars-container">
+		<div class="score">
+			<?php echo $block->getScore();?>
+		</div>
+		<div class="rating-stars-wrapper">
+			<div class="rating-stars">
+				<span style="width: <?php echo $block->getRatingPercent()?>%;"></span>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="rating-review">
+		<a href="<?php echo $this->getUrl('booking/review/location', ['location_id' => $locationId]);?>">From <?php echo $block->getReviewCount();?> verified reviews</a>
+	</div>
+</div>
+<?php #endif; ?>

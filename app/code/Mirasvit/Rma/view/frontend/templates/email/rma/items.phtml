@@ -1,0 +1,12 @@
+<?php
+/* @var $block \Mirasvit\Rma\Block\Rma\View\Items */
+?>
+<?php
+$orders = $block->getOrders();
+
+if ($block->getRma()) { //when we preview template, rma is not set
+    foreach ($orders as $order) {
+        echo $block->displayOrder($order);
+    }
+}
+?>

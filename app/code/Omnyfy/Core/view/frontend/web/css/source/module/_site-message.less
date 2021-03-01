@@ -1,0 +1,34 @@
+//
+//  Variables
+//  ------------------------------------
+@site-message-wrapper__width: 100%;
+@site-message-wrapper__margin: 0 auto;
+@site-message-wrapper__padding: 0;
+@site-message-wrapper__background: #e30000;
+
+@site-message__max-width: @layout__max-width;
+@site-message__margin: 0 auto;
+@site-message__padding: @indent__base;
+@site-message__color: #fff;
+@site-message__text-align: center;
+
+//
+//  Common styles
+//  ------------------------------------
+
+& when(@media-common = true) {
+	.site-message-wrapper {
+		width: @site-message-wrapper__width;
+		margin: @site-message-wrapper__margin;
+		padding: @site-message-wrapper__padding;
+		background: @site-message-wrapper__background;
+	}
+
+	.site-message {
+		max-width: @site-message__max-width;
+		margin: @site-message__margin;
+		padding: @site-message__padding;
+		color: @site-message__color;
+		text-align: @site-message__text-align;
+	}
+}

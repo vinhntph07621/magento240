@@ -1,0 +1,109 @@
+<?php /** @var $_helper \Omnyfy\Vendor\Helper\Product */?>
+<?php $_helper = $this->helper('Omnyfy\Vendor\Helper\Product'); ?>
+<?php /** @var $_vendorHelper \Omnyfy\Vendor\Helper\Data */?>
+<?php $_vendorHelper = $this->helper('Omnyfy\Vendor\Helper\Data'); ?>
+<?php $_order = $block->getOrder() ?>
+
+<div class="actions-toolbar">
+    <a href="<?= $block->escapeUrl($block->getPrintAllInvoicesUrl($_order)) ?>"
+       target="_blank"
+       class="action print">
+        <span><?= $block->escapeHtml(__('Print All Invoices')) ?></span>
+    </a>
+</div>
+<?php foreach ($_order->getInvoiceCollection() as $_invoice) : ?>
+    <div class="order-title">
+        <strong><?= $block->escapeHtml(__('Invoice #')) ?><?= $block->escapeHtml($_invoice->getIncrementId()) ?></strong>
+        <?php if ($_vendorHelper->getInvoiceBy() == \Omnyfy\Vendor\Model\Config::INVOICE_BY_MO): ?>
+            <div><?= $_vendorHelper->getMoName() ?></div>
+            <div><?= $block->escapeHtml(__('ABN #')) ?><?= $_vendorHelper->getMoAbn() ?></div>
+        <?php endif; ?>
+        <a href="<?= $block->escapeUrl($block->getPrintInvoiceUrl($_invoice)) ?>"
+           onclick="this.target='_blank'"
+           class="action print">
+            <span><?= $block->escapeHtml(__('Print Invoice')) ?></span>
+        </a>
+    </div>
+    <?php if ($_vendorHelper->getInvoiceBy() == \Omnyfy\Vendor\Model\Config::INVOICE_BY_MO): ?>
+        <div class="table-wrapper table-order-items invoice">
+            <table class="data table table-order-items invoice" id="my-invoice-table-<?= (int) $_invoice->getId() ?>">
+                <caption class="table-caption"><?= $block->escapeHtml(__('Items Invoiced')) ?></caption>
+                <thead>
+                <tr>
+                    <th class="col name"><?= $block->escapeHtml(__('Product Name')) ?></th>
+                    <th class="col sku"><?= $block->escapeHtml(__('SKU')) ?></th>
+                    <th class="col price"><?= $block->escapeHtml(__('Price')) ?></th>
+                    <th class="col qty"><?= $block->escapeHtml(__('Qty Invoiced')) ?></th>
+                    <th class="col subtotal"><?= $block->escapeHtml(__('Subtotal')) ?></th>
+                </tr>
+                </thead>
+                <?php $_items = $_invoice->getAllItems(); ?>
+                <?php foreach ($_items as $_item) : ?>
+                    <?php if (!$_item->getOrderItem()->getParentItem()) : ?>
+                        <tbody>
+                        <?= $block->getItemHtml($_item) ?>
+                        </tbody>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                <tfoot>
+                <?= $block->getInvoiceTotalsHtml($_invoice) ?>
+                </tfoot>
+            </table>
+        </div>
+    <?php else: ?>
+        <?php $_items = $_invoice->getAllItems(); ?>
+        <?php $_locations = $_vendorHelper->getLocationsInfo($_items); ?>
+        <?php foreach($_locations as $_location): ?>
+            <table>
+                <tr>
+                    <td colspan="3" class="item-extra" style="padding: 0;">
+                        <table class="pickup-location" style="width: 100%; background: #ECECEC; margin-top: 10px;">
+                            <tr>
+                                <td>
+                                    <p></p>
+                                    <p class="vendor" style="padding: 8px; text-align: center"><?= /* @escapeNotVerified */  __('Vendor'); ?>: <?= $block->escapeHtml($_helper->getLocation($_location->getId())->getName()) ?>
+                                        <br>
+                                        <?php $vendorDetails = $_helper->getVendor($_location->getVendorId()); ?>
+                                        <?php if (!empty($vendorDetails) && !empty($vendorDetails->getAbn())): ?>
+                                            <span>ABN: <?php echo $vendorDetails->getAbn(); ?></span>
+                                        <?php endif; ?>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table class="data table table-order-items invoice" id="my-invoice-table-<?= (int) $_invoice->getId() ?>">
+                <caption class="table-caption"><?= $block->escapeHtml(__('Items Invoiced')) ?></caption>
+                <thead>
+                <tr>
+                    <th class="col name"><?= $block->escapeHtml(__('Product Name')) ?></th>
+                    <th class="col sku"><?= $block->escapeHtml(__('SKU')) ?></th>
+                    <th class="col price"><?= $block->escapeHtml(__('Price')) ?></th>
+                    <th class="col qty"><?= $block->escapeHtml(__('Qty Invoiced')) ?></th>
+                    <th class="col subtotal"><?= $block->escapeHtml(__('Subtotal')) ?></th>
+                </tr>
+                </thead>
+                <?php $_items = $_invoice->getAllItems(); ?>
+                <?php foreach ($_items as $_item) : ?>
+                    <?php if (!$_item->getOrderItem()->getParentItem()) : ?>
+                        <tbody>
+                        <?php if ($_item->getLocationId() == $_location->getId()) :?>
+                        <?= $block->getItemHtml($_item) ?>
+                        <?php endif; ?>
+                        </tbody>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </table>
+        <?php endforeach; ?>
+        <table>
+            <tfoot>
+            <?= $block->getInvoiceTotalsHtml($_invoice) ?>
+            </tfoot>
+        </table>
+
+    <?php endif; ?>
+
+    <?= $block->getInvoiceCommentsHtml($_invoice) ?>
+<?php endforeach; ?>

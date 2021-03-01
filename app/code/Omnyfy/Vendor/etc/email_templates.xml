@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="vendor_enquiry" label="Make an Enquiry" file="vendorenquiry.html" type="html" module="Omnyfy_Vendor" area="frontend"/>
+    <template id="vendor_order_notification_template" label="Vendor Order Notification" file="vendor_order_notification.html" type="html" module="Omnyfy_Vendor" area="frontend"/>
+    <template id="sales_email_invoice_template" label="New Invoice" file="invoice_new.html" type="html" module="Omnyfy_Vendor" area="frontend"/>
+    <template id="sales_email_invoice_guest_template" label="New Invoice for Guest" file="invoice_new_guest.html" type="html" module="Omnyfy_Vendor" area="frontend"/>
+</config>

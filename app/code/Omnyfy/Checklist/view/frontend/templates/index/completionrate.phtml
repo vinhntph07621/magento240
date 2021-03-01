@@ -1,0 +1,20 @@
+<?php if($block->isChecklistEnable()) {?>
+    <?php $percentage = $block->percentageComplete()?>
+    <div class="completion-rate">
+        <div class="c100 p<?php echo $percentage;?> big">
+            <div class="c-text">
+                <?php if ($percentage > 0) { ?>
+                    <span class="percentage"><?php echo $percentage;?><sup>%<sup></span>
+                    <span class="text"><?php echo __("complete")?></span>
+                <?php } else { ?>
+                    <span class="text"><?php echo __("Get started")?></span>
+                <?php } ?>
+            </div>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+

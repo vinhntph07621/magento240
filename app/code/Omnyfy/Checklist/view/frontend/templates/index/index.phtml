@@ -1,0 +1,216 @@
+<?php /* @var \Omnyfy\Checklist\Block\OmnyfyChecklist $block*/ ?>
+
+<?php if($block->isChecklistEnable()) {?>
+<?php if ($block->isLoggedIn()) { ?>
+    <?php $checklistItems = $block->getChecklistItems(); ?>
+    <?php $count = 1; ?>
+
+    <?php foreach($checklistItems as $item) {?>
+        <div class="alert alert-eligible floating-md" role="alert" id="message-<?php echo $item["checklistitems_id"]?>" style="display:none">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <span class="icon-tick symbol"></span>
+            <span class="message-text"></span></a>
+        </div>
+        <div class="checklist-tile">
+
+            <div class="tile-body">
+                <div class="desc">
+                    <p class="heading"><?php echo $count; ?>) <?php echo $item["checklist_item_title"]; ?></p>
+                    <p><?php echo $item["checklist_item_description"]?></p>
+                </div>
+                <?php $options = $block->getChecklistItemOptions($item["checklistitems_id"]) ?>
+                <?php foreach($options as $option) { ?>
+                    <?php $isChecked = "" ?>
+                    <?php
+                        $userCheckedId = $block->isItemChecked($option["checklistitemoptions_id"],$item["checklistitems_id"]);
+                        $url = "/cms/article/".$option["article_url"]."/option/".$option["checklistitemoptions_id"]."/item/".$item["checklistitems_id"];
+                        if ($userCheckedId) {
+                            $isChecked = "checked";
+                        }
+                    ?>
+
+                    <div class="checkbox-style">
+                        <input id="check<?php echo $option["checklistitemoptions_id"]?>"
+                        type="checkbox"
+                        name="check<?php echo $option["checklistitemoptions_id"]?>"
+                        data-optionid="<?php echo $option["checklistitemoptions_id"]?>"
+                        data-itemid="<?php echo $item["checklistitems_id"]?>"
+                        class="item-option-checkbox"
+                        <?php echo $isChecked ?> >
+                        <label for="check<?php echo $option["checklistitemoptions_id"]?>"></label>
+                        <a class="checklist-article-link" href="<?php echo $url ?>"><?php echo $option["name"] ?></a>
+                    </div>
+
+                <?php } ?>
+            </div>
+            <div class="tile-footer">
+                <?php if ($item["is_upload"]) {?>
+                    <?php $uploadedFiles = $block->getUploadedFiles($item["checklistitems_id"])?>
+                    <div id="file-list-<?php echo $item["checklistitems_id"]?>" class="uploaded-files">
+                        <?php foreach($uploadedFiles as $file) { ?>
+                            <div class="file-item">
+                                <?php $tmp = explode('/', rtrim($file->getUploadLink(), '/'))?>
+                                <?php $end = end($tmp); ?>
+                                <a target="_blank" class="btn btn-text-green file-name" href="<?php echo strstr($file->getUploadLink(),'media/') ?>"><?php echo $end ?></a>
+                                <button class="btn btn-text-green edit delete-btn" data-uploadid="<?php echo $item["checklistitems_id"]?>" data-document-id="<?php echo $file->getData("checklistitemuseruploads_id")?>"><span class="icon-trash-o"></span></button>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <?php $uploads = $block->getChecklistItemUploads($item["checklistitems_id"]) ?>
+                    <?php foreach ($uploads as $upload) {?>
+                        <div class="btn btn-green-stroke"><span class="large-icon icon-upload2"></span>&nbsp;<?php echo __('Upload') ?> <?php echo ($upload["upload_name"]!= "")?$upload["upload_name"]:"files" ?>
+                            <input data-uploadid="<?php echo $item["checklistitems_id"]?>" class="upload-file" style="position: absolute;top: 0;right: 0;left: 0;bottom: 0;width: 100%;opacity: 0;" name="file-upload-<?php echo $upload['checklistitemuploads_id']?>" id="file-upload-<?php echo $upload['checklistitemuploads_id']?>" type="file" />
+                        </div>
+                    <?php } ?>
+                <?php } ?>
+            </div>
+        </div>
+        <?php $count++; ?>
+    <?php } ?>
+    <script>
+        require(
+            ["jquery",
+                "mage/template",
+                "mage/mage",
+                "Magento_Ui/js/block-loader",
+                'Magento_Ui/js/modal/confirm'
+            ],
+            function($,mageTemplate, mage, blockLoader, confirm){
+                $(".tab-content").on("click",".item-option-checkbox", function(){
+                    var optionId=$(this).data("optionid");
+                    var itemId=$(this).data("itemid");
+                    var ajaxurl = '<?php echo $block->getItemOptionUpdateUrl() ?>';
+                    var message = "#message-"+itemId;
+                    $.ajax({
+                        url:ajaxurl,
+                        type:'POST',
+                        showLoader: true,
+                        data: {optionid:optionId,itemid:itemId,checklistid:<?php echo $block->getChecklistId()?>},
+                        dataType: "json",
+                        success:function(response){
+                            $('.completion-rate').html("");
+                            $(message).show();
+                            $(message +" .message-text").html(response["message"]);
+                            $(message).addClass('success');
+                            var progressTmpl = mageTemplate('#completion-rate-template'), tmpl;
+                            if (response['percentage'] == 100) {
+                                $("#well-done-block").show();
+                            }else{
+                                $("#well-done-block").hide();
+                            }
+                            tmpl = progressTmpl({
+                                data: {
+                                    percentage: response['percentage'],
+                                    percentagetext: response["percentagetext"],
+                                }
+                            });
+                            $('.completion-rate').html(tmpl);
+                            $(message).delay(5000).fadeOut("slow");
+                        },
+                        fail:function () {
+                            $(message).show();
+                            $(message +" .message-text").html("Error updating your checklist");
+                            $(message).addClass('error');
+                            $(message).delay(5000).fadeOut("slow");
+                        },
+                        always:function () {}
+                    });
+                });
+
+                $(".tab-content").on("change",".upload-file", function() {
+                    var uploadId = $(this).data("uploadid");
+                    var file = $(this).get(0).files[0];
+                    var formData = new FormData();
+                    var fileListId = "#file-list-"+uploadId;
+                    var message = "#message-"+uploadId;
+
+                    formData.append('file', file);
+                    formData.append('uploadid', uploadId);
+                    formData.append('checklistid', <?php echo $block->getChecklistId() ?>);
+
+                    var ajaxurl = '<?php echo $block->getFileUploadUrl() ?>';
+                    $.ajax({
+                        url:ajaxurl,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        type:'POST',
+                        showLoader: true,
+                        data: formData,
+                        success:function(response){
+                            $(message).show()
+                            $(message +" .message-text").html(response["message"])
+                            $(message).addClass(response["type"]).delay(5000).fadeOut("slow");
+
+                            $(fileListId).append(response["filelist"]);
+                        },
+                        fail:function () {
+                            $(message).show();
+                            $(message +" .message-text" ).html("Error updating your checklist");
+                            $(message).addClass('error');
+                            $(message).delay(5000).fadeOut("slow");
+                        },
+                        always:function () {}
+                    });
+                });
+
+                $(".tab-content").on("click",".delete-btn", function () {
+
+                    var fileId = $(this).data("document-id");
+                    var uploadId = $(this).data("uploadid");
+
+                    var parent = $(this).parent();
+                    var message = "#message-"+uploadId;
+
+                    confirm({
+                        content: jQuery.mage.__('Are you sure you want to delete the document?'),
+                        title: "Confirmation",
+                        actions: {
+                            confirm: function() {
+                                $.ajax({
+                                    url:"/checklist/delete/index/",
+                                    type:'POST',
+                                    showLoader: true,
+                                    data: {documentId:fileId},
+                                    dataType: "json",
+                                    success:function(response){
+                                        $(message).show();
+                                        $(message +" .message-text").html(response["message"]);
+                                        $(message).addClass(response["type"]);
+                                        $(message).delay(5000).fadeOut("slow");
+                                    },
+                                    fail:function () {
+                                        $(message).show();
+                                        $(message +" .message-text").html("Error updating your checklist");
+                                        $(message).addClass('error');
+                                        $(message).delay(5000).fadeOut("slow");
+                                    },
+                                    always:function () {}
+                                });
+                                parent.fadeOut("slow");
+                                return true;
+                            },
+                            cancel: function() {
+                                return false;
+                            }
+                        }
+                    });
+                });
+            });
+    </script>
+<?php }else{ ?>
+    <p><?php echo __("Please login to access your checklist.")?></p>
+<?php } ?>
+<script id="completion-rate-template" type="text/x-magento-template">
+    <div class="c100 p<%- data.percentage %> big">
+        <div class="c-text">
+            <span class="percentage"><%- data.percentage %><sup>%<sup></span>
+            <span class="text"><%- data.percentagetext %></span>
+        </div>
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+        </div>
+    </div>
+</script>
+<?php } ?>

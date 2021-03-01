@@ -1,0 +1,148 @@
+// /**
+//  * Copyright © Omnyfy, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+@import "./view/_navigation";
+@import "./view/_details";
+@import "./view/_policies";
+
+
+//
+//  Variables
+//  ---------------------------------------------
+
+// Vendor header
+@hero-banner__width: 100%;
+@hero-banner__position: relative;
+@hero-banner__background-position: center center;
+@hero-banner__background-size: cover;
+
+@hero-banner-container__height: 400px;
+
+@vendor-logo__max-width: 144px;
+@vendor-logo__max-height: 144px;
+@vendor-logo__position: absolute;
+@vendor-logo__top: 50%;
+@vendor-logo__left: 50%;
+@vendor-logo__transform: translate(-50%, -50%);
+
+@logo-container__width: @vendor-logo__max-width + @indent__base;
+@logo-container__height: @vendor-logo__max-height + @indent__base;
+@logo-container__border: 0 solid @color-white;
+@logo-container__margin: -@indent__base auto @indent__l;
+@logo-container__margin__tablet: -@indent__base @indent__l 0 0;
+@logo-container__position: relative;
+@logo-container__background: @color-white;
+
+@vendor-header-container__display: block;
+@vendor-header-container__display__tablet: flex;
+@vendor-header-container__justify-content: space-between;
+@vendor-header-container__align-items: center;
+
+@vendor-brand__display: block;
+@vendor-brand__display__tablet: flex;
+
+@merchant-name__margin: @indent__base 0 @indent__l;
+
+@products-toolbar__display: none;
+
+// Vendor about section
+@about-section__margin:  0 0 @indent__base * 4;
+
+
+
+//
+//    Common
+//--------------------------------------
+
+& when (@media-common = true) {
+
+	.hide {
+		display: none;
+	}
+
+	.omnyfy-vendor-merchant-view,
+	.omnyfy_vendor-brands-view {
+		.hero-banner {
+			width: @hero-banner__width;
+			position: @hero-banner__position;
+			background-position: @hero-banner__background-position;
+			background-size: @hero-banner__background-size;
+
+			.container {
+				height: @hero-banner-container__height;
+			}
+		}
+
+		.logo-container {
+			width: @logo-container__width;
+			height: @logo-container__height;
+			border: @logo-container__border;
+			margin: @logo-container__margin;
+			position: @logo-container__position;
+			background: @logo-container__background;
+		}
+
+		.vendor-logo {
+			max-width: @vendor-logo__max-width;
+			max-height: @vendor-logo__max-height;
+			position: @vendor-logo__position;
+			top: @vendor-logo__top;
+			left: @vendor-logo__left;
+			transform: @vendor-logo__transform;
+		}
+
+		.merchant-name {
+			margin: @merchant-name__margin;
+		}
+	}
+
+	// Vendor about section
+	.about-section {
+		margin: @about-section__margin;
+	}
+
+	// Vendor products
+	.products-section {
+		.toolbar {
+			display: @products-toolbar__display;
+		}
+	}
+
+	.view-all-products {
+		.lib-link-as-button();
+		.lib-button-primary();
+	}
+	
+	.text-center {
+		text-align: center;
+	}
+}
+
+
+
+
+//
+//    Tablet
+//--------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+	.omnyfy-vendor-merchant-view,
+	.omnyfy_vendor-brands-view {
+		.logo-container {
+			margin: @logo-container__margin__tablet;
+		}
+
+		.vendor-header {
+			.container {
+				display: @vendor-header-container__display__tablet;
+				justify-content: @vendor-header-container__justify-content;
+				align-items: @vendor-header-container__align-items;
+			}
+		}
+
+		.vendor-brand {
+			display: @vendor-brand__display__tablet;
+		}
+	}
+}

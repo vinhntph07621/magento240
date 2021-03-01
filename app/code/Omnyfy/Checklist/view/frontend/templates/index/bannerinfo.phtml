@@ -1,0 +1,14 @@
+<?php
+/**
+ * @var $block \Omnyfy\Checklist\Block\OmnyfyChecklist
+ */
+?>
+<?php $checklist = $block->getChecklist();?>
+<?php if($block->isChecklistEnable()) {?>
+    <?php if(isset($checklist) && count($checklist) > 0 ) {?>
+        <div class="banner-info">
+            <h1><?php echo $checklist['title'] ?></h1>
+            <p><?php echo $checklist['description'] ?></p>
+        </div>
+    <?php } ?>
+<?php } ?>

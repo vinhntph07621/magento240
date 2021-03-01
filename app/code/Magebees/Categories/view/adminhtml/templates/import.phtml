@@ -1,0 +1,206 @@
+<?php $helper = $this->helper('Magebees\Categories\Helper\Data'); ?>
+<?php $storeone = $helper->getStoreone();  ?>
+<div class="admin__old">
+	<div class="main-cols" id="containers">
+	<div id="result"></div><br/>
+	   <div id="messages">
+			<div class="messages">
+				<div class="message message-notice notice">
+					<div>
+						Make sure that data encoding in the file is consistent and saved in CSV (comma separated only) with supported encodings (UTF-8 or ANSI).
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="messages">
+			<div class="messages">
+				<div class="message message-notice notice">
+					<div>
+						Note: If you are going to Import Categories with its images then make sure you put images in <b>your store directory/pub/media/import/category</b> folder.
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="messages">
+			<div class="messages">
+				<div class="message message-notice notice">
+					<div>
+						Note: Please set <b>"category_id"</b> column blank/remove for add category and set <b>"category_id"</b> and <b>"name"</b> column in your CSV for the update category. Before import, the categories please refer <a href="https://www.magebees.com/import-export-categories-extension-for-magento-2.html" target="_blank">sample CSV</a> files.
+					</div>
+				</div>
+			</div>
+		</div> 
+	<?php $store_info = $helper->getStoreData(); ?>
+		<div id="import_content"></div>
+		<div class="entry-edit form-inline">
+			<form method="post" action="<?php //echo $block->getUrl('*/*/import') ?>" id="import_edit_form" enctype="multipart/form-data">
+				           
+				
+                <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>" />
+                <div class="entry-edit form-inline">
+                    <fieldset id="import_form" class="fieldset admin__fieldset ">
+                        <legend class="admin__legend legend">
+                            <span>Import CSV file only</span>
+                        </legend><br>
+                   
+                        <div class="admin__field field field-filename">
+                            <label for="filename" class="label admin__field-label">
+                                <span>Upload CSV</span>
+                            </label>
+                            <div class="admin__field-control control">
+                                <input type="file" class="input-file required-entry _required" title="Select File to Import" value=""  name="filename" id="filename" >      
+                            </div>
+                        </div>
+                        
+						<?php if(!$storeone){ ?>
+						 <div>
+							<label class="label admin__field-label">
+								<span><b>Store View </b></span> &nbsp;&nbsp;
+							</label>
+							<select id="store_id" name="store_id" class="select admin__control-select">
+								<?php  foreach ($store_info as $value) {
+									if ($value['value']==0) { ?>
+									   <option value="0"><?php echo $value['label']; ?></option>
+										 <?php } else { ?>
+									<optgroup label="<?php echo $value['label']; ?>"></optgroup>
+										<?php if (!empty($value['value'])) {
+											 foreach ($value['value'] as $option) { ?>
+												<option value="<?php echo $option['value']; ?>"><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;".$option['label'];?></option>
+													<?php   }}}} ?>
+
+							</select>
+						</div>
+						<br>
+						<?php }else{ ?>
+							<input type="hidden" name="store_id" id="store_id" value="0" >
+						<?php } ?>
+						
+						 <div>
+							<label class="label admin__field-label">
+								<span><b>Import Behavior</b></span> &nbsp;&nbsp;
+							</label>
+							<select id="import_behavior" name="import_behavior" class="select admin__control-select">
+								<option value="add_update">Add/Update Categories</option>
+								<option value="delete">Delete Categories</option>
+							</select>
+						</div>
+						
+						
+                    </fieldset>
+                     <button id="import_cate" type="button" class="action- scalable"><span>Click here for Proceed</span></button>
+                </div>
+            <!--<button type="submit" id="import_attr" class="action- scalable"><span>Click on for Import</span></button>-->
+                
+            </form>
+        </div>
+    </div>
+</div>
+<?php $import_url = $block->getUrl('*/*/import'); ?>
+<script type="text/javascript">
+    require([
+        'jquery',
+		'Magento_Ui/js/modal/modal'
+    ],
+	
+    function(jQuery,modal) {
+		
+		var options = {
+			type: 'popup',
+			responsive: true,
+			innerScroll: true,
+			title: 'Import',
+			buttons: [{
+				text: jQuery.mage.__('Close'),
+				class: '',
+				click: function () {
+					this.closeModal();
+					window.location= "<?php echo $this->getUrl('categories/import/index') ?>";	
+				}
+			}],
+			
+		};	       							
+										
+        jQuery('#import_edit_form').on('click', '#import_cate', function(event){
+
+            var filename = jQuery('#filename').val();
+            if(filename) {
+				var popup = modal(options, jQuery('#import_content')); //initialize popup
+				jQuery('#import_content').modal('openModal');
+				 jQuery(".action-close").hide();
+				
+				var store_id = jQuery( "#store_id" ).val();
+				jQuery('#store_id').on('change', function (e) {
+					var optionSelected = jQuery("option:selected", this);
+					store_id = this.value;
+
+				});
+
+				var import_behavior = jQuery( "#import_behavior" ).val();
+				jQuery('#import_behavior').on('change', function (e) {
+					var optionSelected = jQuery("option:selected", this);
+					import_behavior = this.value;
+
+				});
+
+				if(import_behavior == "delete"){
+					jQuery('#import_content').html('<img src="<?php echo $this->getViewFileUrl("Magebees_Categories::images/loader-1.gif"); ?>" /><br\> Delete Process Starts.');
+				}else{
+					jQuery('#import_content').html('<img src="<?php echo $this->getViewFileUrl("Magebees_Categories::images/loader-1.gif"); ?>" /><br\> Import Process Starts.');
+				}	
+				importRecursive(1,store_id,import_behavior);
+			             
+            }else{
+                alert("Please Upload CSV File");
+            }
+        })
+    }
+    );
+	
+	
+	function importRecursive(next,store_id,import_behavior,imported=0){
+	
+			var formkey = "<?php echo $block->getFormKey() ?>";
+       		var importurl = "<?php echo $import_url ?>";
+		    var file = document.getElementById("filename");
+            var formData = new FormData();
+            formData.append("filename", file.files[0]);
+            formData.append('form_key', formkey);
+            formData.append('store_id', store_id);
+            formData.append('import_behavior', import_behavior);
+            formData.append('pointer_next', next);
+	        var filename = jQuery('#filename').val();
+    	
+			jQuery.ajax({
+				url : importurl,
+				showLoader:false,
+				contentType: false,
+				processData: false,
+				data: formData,                         
+				type: 'post',
+				success: function(response){
+	
+					var pointer_next = response.pointer_last;
+					imported = imported + response.count;
+						if(response.fail){
+							window.location= "<?php echo $this->getUrl("categories/import/index"); ?>";	
+						}else if(!response.no_more){
+							if(import_behavior == "delete"){
+								jQuery('#import_content').html('<img src="<?php echo $this->getViewFileUrl("Magebees_Categories::images/loader-1.gif"); ?>" /><br\>'+imported+' Categories are deleted.');
+							}else{
+								jQuery('#import_content').html('<img src="<?php echo $this->getViewFileUrl("Magebees_Categories::images/loader-1.gif"); ?>" /><br\>'+imported+' Categories are imported.');
+							}	
+							importRecursive(pointer_next,store_id,import_behavior,imported);
+						}else{
+							if(import_behavior == "delete"){
+								jQuery('#import_content').html('Categories Deleted Successfully');
+							}else{
+								jQuery('#import_content').html('Categories Imported Successfully');
+							}
+							setTimeout(function(){jQuery('#import_content').modal('closeModal');window.location='$this->getUrl("categories/import/index")'; }, 5000);
+								
+						}			
+				  }
+			});
+   	}
+</script>

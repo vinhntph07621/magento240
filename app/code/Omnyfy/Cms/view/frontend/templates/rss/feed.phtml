@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Cms rss feed template
+ *
+ * @var $block \Omnyfy\Cms\Block\Rss\Feed
+ */
+?>
+<?php $_articleCollection = $block->getArticleCollection(); ?>
+<?php echo '<?xml version="1.0" encoding="UTF-8" ?>' . "\r\n" ?>
+<rss version="2.0">
+<channel>
+   <title><?php echo $block->escapeHtml($this->getTitle()) ?></title>
+   <link><?php echo $this->getLink() ?></link>
+   <description><?php echo $block->escapeHtml($this->getDescription()) ?></description>
+   <?php foreach($_articleCollection as $_article) { ?>
+   <item>
+      <title><?php echo $block->escapeHtml($_article->getTitle(), null, true) ?></title>
+      <link><?php echo $_article->getArticleUrl() ?></link>
+      <description><![CDATA[<?php echo $_article->getContent() ?>]]></description>
+      <?php if ($featuredImage = $_article->getFeaturedImage()) { ?>
+         <image><?php echo $featuredImage ?></image>
+      <?php } ?>
+      <pubDate><?php echo $_article->getPublishDate('c') ?></pubDate>
+      <?php foreach($_article->getParentCategories() as $category) { ?>
+      <category><![CDATA[<?php echo $category->getTitle() ?>]]></category>
+      <?php } ?>
+   </item>
+   <?php } ?>
+</channel>
+</rss>

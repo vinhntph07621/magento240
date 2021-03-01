@@ -1,0 +1,33 @@
+"Configuration file was generated.","Configuration file was generated."
+"Path to configuration file: \n%1","Path to configuration file: \n%1"
+Done.,Done.
+"Please Restart Sphinx Daemon and run a search reindex.","Please Restart Sphinx Daemon and run a search reindex."
+"Sphinx daemon has successfully restarted.","Sphinx daemon has successfully restarted."
+"Sphinx daemon is not running.","Sphinx daemon is not running."
+"Sphinx daemon running.","Sphinx daemon running."
+"PHP function ""exec"" not available","PHP function ""exec"" not available"
+"Please reset and restart your sphinx daemon to search by a new index","Please reset and restart your sphinx daemon to search by a new index"
+"Please generate a new configuration file and place it in your remote server to search by a new index","Please generate a new configuration file and place it in your remote server to search by a new index"
+"Please reset and restart your sphinx daemon to apply changes to the search index","Please reset and restart your sphinx daemon to apply changes to the search index"
+"'Searchd has already use the following config file(s) : ' . . .","'Searchd has already use the following config file(s) : ' . . ."
+"Please make sure you use different sphinx ports for all these instances.","Please make sure you use different sphinx ports for all these instances."
+"Searchd not found at %1","Searchd not found at %1"
+"File %1 is not writable","File %1 is not writable"
+"Directory %1 is not writable","Directory %1 is not writable"
+"Sphinx Host","Sphinx Host"
+"Sphinx Port","Sphinx Port"
+"Sphinx installed on same server","Sphinx installed on same server"
+"Sphinx Bin Path","Sphinx Bin Path"
+"Allow auto-start Sphinx Daemon","Allow auto-start Sphinx Daemon"
+"Additional Configuration","Additional Configuration"
+"Custom Base Path","Custom Base Path"
+"Additional searchd configuration","Additional searchd configuration"
+"Additional index configuration","Additional index configuration"
+"Custom Charset Table","Custom Charset Table"
+"Fast Mode","Fast Mode"
+"This option is available for Sphinx search and Elastic engines only.","This option is available for Sphinx search and Elastic engines only."
+"The autocomplete results with <br/>
+                                ""fast mode"" enabled are less accurate <br/>
+                                and may be somewhat different from the main search results. <br/>","The autocomplete results with <br/>
+                                ""fast mode"" enabled are less accurate <br/>
+                                and may be somewhat different from the main search results. <br/>"

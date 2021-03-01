@@ -1,0 +1,39 @@
+<?php
+/* @var $filter \Omnyfy\LayeredNavigation\Model\Layer\Filter\AbstractFilter */
+
+$filterItems = $filter->getItems();
+$filterType = $filter->getAttributeModel()->getFrontendInput();
+?>
+
+<?php if ($filterType == 'select'): ?>
+    <select class="items">
+        <option value="" data-url="<?php echo $filter->getClearLinkUrl(); ?>"><?php echo __('Please select'); ?></option>
+    <?php foreach ($filterItems as $filterItem): ?>
+        <option
+            value="<?php echo $filterItem->getValue(); ?>"
+            data-url="<?php echo $block->escapeUrl($filterItem->getSelectUrl()) ?>"
+            <?php if ($filterItem->isSelected()): ?>selected="selected"<?php endif; ?>
+        >
+            <?php echo $filterItem->getLabel(); ?>
+        </option>
+    <?php endforeach; ?>
+    </select>
+<?php else: ?>
+    <ol class="items">
+    <?php foreach ($filterItems as $filterItem): ?>
+        <li class="item">
+            <label>
+                <input
+                    type="checkbox"
+                    data-url="<?php echo $block->escapeUrl($filterItem->getUrl()) ?>"
+                    <?php if ($filterItem->isSelected()): ?>checked="checked"<?php endif; ?>
+                />
+
+                <?php echo $filterItem->getLabel() ?>
+
+                <span class="count"><?php echo $filterItem->getCount()?><span class="filter-count-label"><?php echo ($filterItem->getCount() == 1) ? 'item' : 'items'; ?></span></span>
+            </label>
+        </li>
+    <?php endforeach  ?>
+    </ol>
+<?php endif; ?>

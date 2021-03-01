@@ -1,0 +1,37 @@
+<?php
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Cms sidebar recent articles template
+ *
+ * @var $block \Omnyfy\Cms\Block\Sidebar\Recent
+ */
+?>
+
+<?php
+    $_articleCollection = $block->getArticleCollection();
+?>
+<?php if ($_articleCollection->count()) { ?>
+<div class="widget block block-recent-articles" data-bind="scope: 'recemt-articles'">
+    <div class="block-title">
+        <strong><?php echo __('Recent Articles') ?></strong>
+    </div>
+    <div class="block-content">
+        <?php foreach ($_articleCollection as $_article) { ?>
+            <div class="item">
+                <a class="article-item-link"
+                   href="<?php echo $_article->getArticleUrl() ?>">
+                    <?php echo $block->escapeHtml($_article->getTitle()) ?>
+                </a>
+            </div>
+
+        <?php } ?>
+    </div>
+</div>
+<?php } ?>

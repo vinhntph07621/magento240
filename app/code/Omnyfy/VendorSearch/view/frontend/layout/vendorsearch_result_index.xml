@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<page layout="2columns-left" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<script src="Omnyfy_VendorSearch::js/vendorsearch.js"/>
+	</head>
+	<body>
+		<attribute name="class" value="page-vendors"/>
+		<referenceContainer name="content">
+			<block class="Omnyfy\VendorSearch\Block\Result\Index" name="vendor.search.result" template="Omnyfy_VendorSearch::result/index.phtml">
+				<container name="vendor.search.form.container"
+						   htmlTag="div"
+						   htmlClass="search-bar"
+						   after="-">
+					<block as="vendor_search_form"
+						   class="Omnyfy\VendorSearch\Block\Search\Form"
+						   name="vendor.search.form"
+						   template="Omnyfy_VendorSearch::search/form.phtml">
+						<arguments>
+							<argument name="num_active_forms" xsi:type="string">1</argument>
+							<argument name="forms" xsi:type="array">
+								<item name="construction_form" xsi:type="array">
+									<item name="name" xsi:type="string">Reseller Partner</item>
+									<item name="default_distance" xsi:type="string">5</item>
+									<item name="default_sort_order" xsi:type="string">name</item>
+									<item name="vendor_type_id" xsi:type="string">1</item>
+									<item name="action_url" xsi:type="string">vendorsearch/result/*</item>
+									<item name="websites" xsi:type="array">
+										<item name="1" xsi:type="string">1</item>
+									</item>
+									<item name="search_fields" xsi:type="array">
+									</item>
+								</item>
+								<item name="distributor_form" xsi:type="array">
+									<item name="name" xsi:type="string">Distributor</item>
+									<item name="default_distance" xsi:type="string">5</item>
+									<item name="default_sort_order" xsi:type="string">name</item>
+									<item name="vendor_type_id" xsi:type="string">3</item>
+									<item name="action_url" xsi:type="string">vendorsearch/result/*</item>
+									<item name="websites" xsi:type="array">
+										<item name="1" xsi:type="string">1</item>
+									</item>
+									<item name="search_fields" xsi:type="array">
+									</item>
+								</item>
+							</argument>
+						</arguments>
+					</block>
+				</container>
+				<!-- Toolbar -->
+				<container name="vendor.search.summery.container" htmlTag="div" htmlClass="search-result-info-bar" after="vendor.search.form.container">
+					<block as="vendor_search_summery"
+						   class="Omnyfy\VendorSearch\Block\Search\Result"
+						   name="vendor.search.summery"
+						   template="Omnyfy_VendorSearch::search/result/summery.phtml"
+						   cacheable="false">
+					</block>
+				</container>
+				<!-- /toolbar -->
+				<container name="vendor.search.result.container"
+						   htmlTag="div"
+						   htmlClass="search-result-main-row"
+						   after="vendor.search.summery.container">
+					<container name="vendor.search.result.cover.container"
+							   htmlTag="div"
+							   htmlClass="search-result-filter-cover"
+							   after="vendor.search.result.filter.container">
+						<block as="vendor_search_container"
+							   class="Omnyfy\VendorSearch\Block\Search\Container"
+							   name="vendor.search.result.cover"
+							   template="Omnyfy_VendorSearch::search/container.phtml"
+							   cacheable="false">
+						</block>
+					</container>
+					<container name="vendor.search.result.wrapper.container"
+							   htmlTag="div"
+							   htmlClass="search-result-wrapper"
+							   after="vendor.search.result.cover.container">
+						<block as="vendor_search_result"
+							   class="Omnyfy\VendorSearch\Block\Search\Result"
+							   name="vendor.search.result.result"
+							   template="Omnyfy_VendorSearch::search/result.phtml"
+							   cacheable="false">
+							<arguments>
+								<argument name="display_data" xsi:type="array">
+								</argument>
+							</arguments>
+						</block>
+					</container>
+				</container>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="sidebar.main">
+			<container name="vendor.search.result.filter.container"
+					   htmlTag="div"
+					   htmlClass="search-result-filter-wrapper"
+					   after="-">
+				<block as="vendor_search_filter"
+					   class="Omnyfy\VendorSearch\Block\Search\Result"
+					   name="vendor.search.result.filter"
+					   template="Omnyfy_VendorSearch::search/filter.phtml"
+					   cacheable="false">
+				</block>
+			</container>
+		</referenceContainer>
+	</body>
+</page>

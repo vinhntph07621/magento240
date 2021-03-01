@@ -1,0 +1,54 @@
+<?php
+/**
+ * Category list template
+ *
+ * @var $block \Smartwave\Post\Block\ListPost
+ */
+$collection = $block->getCollectionPost();
+?>
+
+<div class="section-blog">
+<p style="text-transform: uppercase; margin-bottom: 30px; font-size: 20px; font-weight: 500">What we do</p>
+</div>
+<div class="row" style="padding-bottom: 15px">
+    <div class="col-lg-4">
+        <div class="image-blog">
+            <img src="<?php echo $block->getBaseUrl() ?>pub/media/wysiwyg/smartwave/porto/blog/blog1.png"
+                             alt="" style="width: 100%; height: 100%">
+        </div>
+        <div class="text-blog">
+            <h4>Our Products</h4>
+            <p>We have a range of furniture and home goods available for purchase online or in store. All
+                our pieces are
+                designed by us and hand crafted in our Sydney factory.</p>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="image-blog">
+           <img src="<?php echo $block->getBaseUrl() ?>pub/media/wysiwyg/smartwave/porto/blog/blog2.png"
+                             alt="" style="width: 100%; height: 100%">
+        </div>
+        <div class="text-blog">
+            <h4>Shop Fitting</h4>
+            <p>Olsen Collective provides a unique shop fitting service. We work closely with brands to develop and
+                execute high quality and one of a kind retail and commercial spaces.</p>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="image-blog">
+            <img src="<?php echo $block->getBaseUrl() ?>pub/media/wysiwyg/smartwave/porto/blog/blog3.png"
+                             alt="" style="width: 100%; height: 100%">
+        </div>
+        <div class="text-blog">
+            <h4>Olsen Collective Bespoke</h4>
+            <p>After something specific for your home or office space? Olsen Collective can design and create a uniqie
+                timber feature to suit your needs.</p>
+        </div>
+    </div>
+</div>
+
+<?php //foreach ($collection as $item): ?>
+<!--    <h1>--><?php //echo $item->getTitle() ?><!--</h1>-->
+<?php //endforeach; ?>

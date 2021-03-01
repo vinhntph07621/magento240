@@ -1,0 +1,8 @@
+<?php echo $this->getChildHtml('tool.template.block')?>
+<?php if($block->isToolTemplate()){?>
+	<section class="">
+		<div class="container nothing-found-message">
+			<h2 class="light-header"><?php echo __('No tools & templates found')?></h2>
+		</div>
+	</section>
+<?php }?>

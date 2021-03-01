@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Omnyfy_Mcm::base" title="Earnings Management" translate="title" module="Omnyfy_Mcm" sortOrder="100" parent="Omnyfy_Vendor::base" resource="Omnyfy_Mcm::base" dependsOnConfig="omnyfy_mcm/general/fees_management"/>
+        <add id="Omnyfy_Mcm::fees" module="Omnyfy_Mcm" parent="Omnyfy_Mcm::base" resource="Omnyfy_Mcm::fees" sortOrder="110" title="Marketplace Fees and Charges Management" action="omnyfy_mcm/fees/index" dependsOnConfig="omnyfy_mcm/general/fees_management"/>
+        <add id="Omnyfy_Mcm::vendor_earning" module="Omnyfy_Mcm" parent="Omnyfy_Mcm::base" resource="Omnyfy_Mcm::vendor_earning" sortOrder="110" title="Vendor Earnings" action="omnyfy_mcm/vendorEarning/index" dependsOnConfig="omnyfy_mcm/general/fees_management"/>
+        <add id="Omnyfy_Mcm::marketplace_earning" module="Omnyfy_Mcm" parent="Omnyfy_Mcm::base" resource="Omnyfy_Mcm::marketplace_earning" sortOrder="120" title="Marketplace Earnings" action="omnyfy_mcm/marketplaceEarning/index" dependsOnConfig="omnyfy_mcm/general/fees_management"/>
+        <add id="Omnyfy_Mcm::payouts" title="Payout Management" translate="title" module="Omnyfy_Mcm" sortOrder="120" parent="Omnyfy_Vendor::base" resource="Omnyfy_Mcm::payouts" dependsOnConfig="omnyfy_mcm/general/fees_management"/>
+        <add id="Omnyfy_Mcm::pending_payouts" module="Omnyfy_Mcm" parent="Omnyfy_Mcm::payouts" resource="Omnyfy_Mcm::pending_payouts" sortOrder="130" title="Pending Payouts" action="omnyfy_mcm/pendingpayouts/index" dependsOnConfig="omnyfy_mcm/general/fees_management"/>
+        <add id="Omnyfy_Mcm::payout_history" module="Omnyfy_Mcm" parent="Omnyfy_Mcm::payouts" resource="Omnyfy_Mcm::payout_history" sortOrder="140" title="Payout History" action="omnyfy_mcm/payouthistory/index" dependsOnConfig="omnyfy_mcm/general/fees_management"/>
+        <add id="Omnyfy_Mcm::withdrawal_management" title="Withdrawal Management" translate="title" module="Omnyfy_Mcm" sortOrder="140" parent="Omnyfy_Vendor::base" resource="Omnyfy_Mcm::withdrawal_management" dependsOnConfig="omnyfy_mcm/general/fees_management"/>
+        <add id="Omnyfy_Mcm::vendor_withdrawal" module="Omnyfy_Mcm" parent="Omnyfy_Mcm::withdrawal_management" resource="Omnyfy_Mcm::vendor_withdrawal" sortOrder="150" title="Withdrawal History" action="omnyfy_mcm/vendorWithdrawal/index" dependsOnConfig="omnyfy_mcm/general/fees_management"/>
+        
+        <add id="Omnyfy_Mcm::omnymart_reports" title="Omnymart Reports" translate="title" module="Omnyfy_Mcm" sortOrder="200" parent="Magento_Reports::report" resource="Omnyfy_Mcm::omnymart_reports"/>
+        <add id="Omnyfy_Mcm::marketplace_detailedearning_reports" module="Omnyfy_Mcm" parent="Omnyfy_Mcm::omnymart_reports" resource="Omnyfy_Mcm::marketplace_detailedearning_reports" sortOrder="10" title="Marketplace Fees Detailed Earnings Report" action="omnyfy_mcm/marketplacedetailedreport/index" />
+        <add id="Omnyfy_Mcm::marketplace_summaryearning_reports" module="Omnyfy_Mcm" parent="Omnyfy_Mcm::omnymart_reports" resource="Omnyfy_Mcm::marketplace_summaryearning_reports" sortOrder="20" title="Marketplace Fees Summary Report - By Order" action="omnyfy_mcm/marketplacecommissionreport/index" />
+        <add id="Omnyfy_Mcm::marketplace_summaryearning_reports_byvendor" module="Omnyfy_Mcm" parent="Omnyfy_Mcm::omnymart_reports" resource="Omnyfy_Mcm::marketplace_summaryearning_reports_byvendor" sortOrder="30" title="Marketplace Fees Summary Report - By Vendor" action="omnyfy_mcm/vendorfeereport/index" />
+        <add id="Omnyfy_Mcm::vendor_fee_reports" module="Omnyfy_Mcm" parent="Omnyfy_Mcm::omnymart_reports" resource="Omnyfy_Mcm::vendor_fee_reports" sortOrder="40" title="Vendor Fees Report" action="omnyfy_mcm/vendorreport/index" />
+        <add id="Omnyfy_Mcm::category_commission_reports" module="Omnyfy_Mcm" parent="Omnyfy_Mcm::omnymart_reports" resource="Omnyfy_Mcm::category_commission_reports" sortOrder="50" title="Category Commission Report" action="omnyfy_mcm/categoryreport/index" />
+    </menu>
+</config>

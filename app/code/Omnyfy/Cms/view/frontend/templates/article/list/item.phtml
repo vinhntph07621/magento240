@@ -1,0 +1,64 @@
+<?php
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Cms article list item template
+ *
+ * @var $block \Omnyfy\Cms\Block\Article\AbstractArticle
+ */
+?>
+<?php
+    $_article = $this->getArticle();
+    $_articleUrl = $_article->getArticleUrl();
+    $_articleName = $block->escapeHtml($_article->getTitle(), null, true);
+?>
+<li class="article-holder article-holder-<?php echo $_article->getId() ?>">
+    <div class="article-header">
+
+        <div class="article-title-holder clearfix">
+            <h2 class="article-title">
+                <a class="article-item-link"
+                   href="<?php echo $_articleUrl ?>">
+                    <?php echo $_articleName; ?>
+                </a>
+            </h2>
+
+            <div class="addthis_toolbox addthis_default_style" addthis:url="<?php echo $_articleUrl ?>">
+                <a class="addthis_button_facebook"></a>
+                <a class="addthis_button_twitter"></a>
+                <a class="addthis_button_email"></a>
+                <a class="addthis_button_compact"></a>
+            </div>
+        </div>
+
+        <?php echo $this->getInfoHtml() ?>
+    </div>
+
+    <div class="article-content">
+        <div class="article-description clearfix">
+            <?php if ($featuredImage = $_article->getFeaturedImage()) { ?>
+            <div class="article-ftimg-hld">
+                <a href="<?php echo $_articleUrl ?>" title="<?php echo $_articleName ?>">
+                    <img src="<?php echo $featuredImage ?>" alt="<?php echo $_articleName ?>" />
+                </a>
+            </div>
+            <?php } ?>
+            <div class="article-text-hld clearfix">
+                <?php echo $block->getShorContent() ?>
+            </div>
+            <a class="article-read-more" href="<?php echo $_articleUrl ?>" title="<?php echo $_articleName ?>"
+               >
+               <?php echo __('Read more &#187;') ?>
+            </a>
+        </div>
+    </div>
+    <div class="article-footer">
+
+    </div>
+</li>

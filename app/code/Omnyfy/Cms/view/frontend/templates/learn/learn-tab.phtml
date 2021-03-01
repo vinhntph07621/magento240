@@ -1,0 +1,65 @@
+<?php $categoryCollection = $this->getTopicCategoryCollection(); 
+    $_categoryCollection = $this->getCollection($categoryCollection);
+?>
+<?php if ($_categoryCollection->getSize() > 0) :?>
+	<div class="row flex-row">
+	<?php $i=1;
+		$customCondition = null;
+		$cls = null;
+		foreach ($_categoryCollection as $_category): 
+		if($i>8){
+			$customCondition = ' style="display:none;"';
+		}
+		if($i>1){
+			$cls = ' moreBox';
+		}#foreach ($_categoryCollection as $_category): ?>
+		<div class="col-sm-6 col-md-3 articleBox<?php echo $cls?>" <?php echo $customCondition?>>
+			<div class="topic-tile">
+				<div class="tile-body">
+					<div class="symbol-row">
+						<?php 
+						$imgUrl = $this->getViewFileUrl('Omnyfy_Cms::images/topic-icon01.png');
+						if($_category->getCategoryIconFrontend()){
+							$imgUrl = $_category->getCategoryIconFrontend();
+						}
+						?>
+						<img alt="image description" src="<?php echo $imgUrl?>" class="tile-icon">
+					</div>
+					<div class="tile-content">
+						<a href="<?php echo $this->getUrl().'cms/category/'.$_category->getIdentifier().'/usertype/'.$_category->getUserTypeId();?>" class="title"><?php echo $_category->getTitle();?></a>
+						<p><?php echo strip_tags($_category->getCategorySnippet());?></p>
+					</div>
+				</div>
+				<div class="tile-footer">
+					<a href="<?php echo $this->getUrl().'cms/category/'.$_category->getIdentifier().'/usertype/'.$_category->getUserTypeId();?>">
+						<span class="icon-file2"></span>
+						<?php echo $this->getArticleCount($_category->getCategoryId(),$_category->getUserTypeId())?>
+					</a>
+				</div>
+			</div>
+		</div>
+	<?php $i++; endforeach; ?>
+	</div>
+	<?php if($_categoryCollection->getSize()>8){?>
+		<div class="text-center">
+			<button class="btn btn-green btn-lg btn-xl-desktop padding-btn loadMore" >
+				View all topics
+			</button>
+		</div> 
+	<?php }?>
+<?php endif;?>	
+<script type="text/javascript">
+	require(['jquery'],function($){
+		jQuery(".moreBox").slice(0, 7).show();
+		if (jQuery(".articleBox:hidden").length != 0) {
+			jQuery(".loadMore").show();
+		}		
+		jQuery(".loadMore").on('click', function (e) {
+			e.preventDefault();
+			jQuery(".moreBox:hidden").slice(0, 100).slideDown();
+			if (jQuery(".moreBox:hidden").length == 0) {
+				jQuery(".loadMore").fadeOut('slow');
+			}
+		});
+	});
+</script>		

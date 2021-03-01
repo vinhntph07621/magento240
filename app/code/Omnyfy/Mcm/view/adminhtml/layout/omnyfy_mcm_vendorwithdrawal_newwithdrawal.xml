@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Omnyfy_Mcm::css/mcm_admin.css"/>
+        <!--<script src="Omnyfy_Mcm::js/form/help.js"/>-->
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Omnyfy\Mcm\Block\Adminhtml\VendorWithdrawal\NewWithdrawal" cacheable="false" name="omnyfy_mcm_vendor_withdrawal_New_withdrawal"/> 
+            <uiComponent name="omnyfy_mcm_newwithdrawal_form"/>
+        </referenceContainer>
+    </body>
+</page>

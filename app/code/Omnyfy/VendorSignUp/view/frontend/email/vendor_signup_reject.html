@@ -1,0 +1,16 @@
+<!--@subject Your signup request has been rejected @-->
+<!--@vars { 
+    "template config_path=\"design\/email\/footer_template\"":"Email Footer Template", 
+    "template config_path=\"design\/email\/header_template\"":"Email Header Template"
+    }
+ @-->
+{{template config_path="design/email/header_template"}}
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">Dear {{var businessname}},</p>
+            <p>Your vendor signup request has been rejected by {{config path="general/store_information/name"}}. For more information, please contact us via {{config path="trans_email/ident_general/email"}} or call us at {{config path="general/store_information/phone"}}.</p>
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

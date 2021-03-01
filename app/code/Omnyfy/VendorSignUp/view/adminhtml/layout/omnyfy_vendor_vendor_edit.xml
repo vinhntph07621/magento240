@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="admin-2columns-left">
+    <update handle="omnyfy_vendor_vendor_edit"/>
+    <body>
+        <referenceContainer name="left">
+            <referenceBlock name="omnyfy_vendor_vendor_edit_tabs">
+                <block class="Omnyfy\VendorSignUp\Block\Adminhtml\Vendor\Edit\Tab\KycInfo" name="omnyfy_vendor_vendor_edit_tab_kyc_info"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">vendorsignup_kyc_info</argument>
+                    <argument name="block" xsi:type="string">omnyfy_vendor_vendor_edit_tab_kyc_info</argument>
+                </action>
+            </referenceBlock>
+			<block class="Magento\Framework\View\Element\Template" name="test_file" template="Omnyfy_VendorSignUp::signup/scripts.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+		<add id="Omnyfy_VendorSignUp::base" title="Vendor SignUp" translate="title" module="Omnyfy_VendorSignUp" parent="Omnyfy_Vendor::base" sortOrder="20" dependsOnModule="Omnyfy_Vendor" resource="Omnyfy_VendorSignUp::base" />
+        <add id="Omnyfy_VendorSignUp::vendorsignup" title="Manage Vendor Sign Up" translate="title" module="Omnyfy_VendorSignUp" parent="Omnyfy_VendorSignUp::base" sortOrder="30" action="omnyfy_vendorsignup/signup/listing" resource="Omnyfy_VendorSignUp::vendorsignup" />
+	</menu>
+</config>

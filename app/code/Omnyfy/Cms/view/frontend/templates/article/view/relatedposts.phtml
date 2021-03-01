@@ -1,0 +1,64 @@
+<?php
+/**
+* Copyright © Omnyfy, Inc. All rights reserved.
+* See COPYING.txt for license details.
+*/?>
+<?php
+/**
+ * Cms tile articles template
+ *
+ * @var $block \Omnyfy\Cms\Block\Article\View\tileArticles
+ */
+
+$imageHelper = $this->helper('Magento\Cms\Helper\Wysiwyg\Images')->getBaseUrl();
+?>
+
+<?php if ($block->displayArticles()) : ?>
+    <?php $_articleCollection = $block->getArticleCollection(); ?>
+    <?php if ($_articleCollection->count()) : ?>
+        <div class="block tile">
+            <h4 class="tile-articles-heading" role="heading" aria-level="2">
+                <?php echo __('Related Articles') ?>
+            </h4>
+            <ul class="tile-articles-wrapper">
+                <?php foreach ($_articleCollection as $_article) { ?>
+                    <?php $postCategories = $_article->getParentCategories(); ?>
+                    <li class="tile-article-wrapper">
+                        <div class="tile-article">
+                            <?php
+                            $_articleUrl = $_article->getArticleUrl().'category/'.$this->getRequest()->getParam('id');
+                            $_articleName = $block->escapeHtml($_article->getTitle(), null, true);
+                            ?>
+                            <?php if ($featuredImage = $_article->getFeaturedImage()) { ?>
+                                <a href="<?php echo $_articleUrl?>" class="tile-image-link">
+                                    <img alt="<?php echo $_articleName?>" src="<?php echo $featuredImage?>" class="tile-image">
+                                </a>
+                            <?php }?>
+                            <div class="tile-article-content">
+                                <h4 class="text-center tile-article-title title"><a href="<?php echo $_articleUrl?>" class="title-link"><?php echo $_articleName?></a></h4>
+                                <div class="article-published">
+                                    <div class="author">by <span class="author-name"><?php echo $_article->getAuthor()->getName(); ?></span></div>
+                                    <div class="date"><?php echo date("F j, Y", strtotime($_article->getPublishTime()));?></div>
+                                </div>
+                                <?php $postCategories = $_article->getParentCategories(); ?>
+                                <?php if (count($postCategories) > 0): ?>
+                                    <div class="cms-tags-list">
+                                        <?php foreach ($postCategories as $category) { ?>
+                                            <?php if ($category->getCategoryId() != 1) { ?>
+                                                <a class="article-tag" href="/<?= $category->getUrl()?>"><?php echo $category->getTitle(); ?></a>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </div>
+                                <?php endif ?>
+                                <div class="description"><?php echo mb_strimwidth($_article->getMetaDescription(), 0, 120, "..."); ?></div>
+                            </div>
+                            <div class="tile-article-footer">
+                                <a class="tile-article-read-more" href="<?php echo $_articleUrl?>"><?= __('Read More')?></a>
+                            </div>
+                        </div>
+                    </li>
+                <?php } ?>
+            </ul>
+        </div>
+    <?php endif ?>
+<?php endif ?>

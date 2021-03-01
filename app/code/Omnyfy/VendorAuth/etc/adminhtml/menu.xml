@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add action="omnyfy_vendorauth/log/index" id="Omnyfy_VendorAuth::log" module="Omnyfy_VendorAuth" parent="Omnyfy_Vendor::base" resource="Omnyfy_VendorAuth::log" sortOrder="9999" title="Vendor Auth Log"/>
+	</menu>
+</config>

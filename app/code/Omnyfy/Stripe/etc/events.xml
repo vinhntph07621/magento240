@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <event name="omnyfy_stripe_payments_webhook_payout_paid">
+        <observer name="omnyfy_stripe_payments_webhook_payout_paid" instance="Omnyfy\Stripe\Observer\PayoutResponseObserver" />
+    </event>
+    <event name="omnyfy_stripe_payments_webhook_payout_failed">
+        <observer name="omnyfy_stripe_payments_webhook_payout_failed" instance="Omnyfy\Stripe\Observer\PayoutResponseObserver" />
+    </event>
+    <event name="omnyfy_stripe_payments_webhook_account_updated">
+        <observer name="omnyfy_stripe_payments_webhook_account_updated" instance="Omnyfy\Stripe\Observer\PayoutResponseObserver" />
+    </event>
+</config>

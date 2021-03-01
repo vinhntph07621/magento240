@@ -1,0 +1,143 @@
+<?php
+/**
+ * @var $block \Omnyfy\VendorSearch\Block\Search\Result
+ */
+?>
+<?php $vendorType = $block->getVendorType();?>
+<?php $viewMode = $block->getVendorViewMode() ?>
+<?php $isSearchByLocation = $block->isSearchByLocation(); ?>
+
+<?php
+/**
+ * View mode settings
+ *
+ * View mode is set on Vendor Type page in Dashboard
+ * There are two options: 0 = grid, 1 = list
+ */
+if ($viewMode == 0) {
+    $viewModeName = 'grid';
+    $image = 'vendor_page_grid';
+    $showDescription = false;
+    // Update rating functionality here
+    //$templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+} else {
+    $viewModeName = 'list';
+    $image = 'vendor_page_list';
+    $showDescription = true;
+    // Update rating functionality here
+    //$templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+}
+?>
+
+<div class="vendors-wrapper vendors-<?= $viewModeName ?>">
+    <ol class="vendors <?= $viewModeName ?> items vendor-items">
+        <?php $vendors = $block->getVendors() ?>
+        <?php foreach($vendors as $vendor): ?>
+            <?php
+            if ($isSearchByLocation){
+                $vendorLink = $block->getLocationUrl($vendor->getId());
+                $logoLink = $block->getImage($vendor->getData('vendor_id'));
+                $attrData = $block->getLocationVendorData($vendor->getData('vendor_id'));
+            } else {
+                $vendorLink = $block->getUrl("shop/brands/view/id/".$vendor->getId());
+                $logoLink = $block->getImage($vendor->getId());
+                $attrData = $block->getVendorData($vendor);
+            }
+            $description = substr($vendor->getData("description"),0, 20);
+            ?>
+
+        <li class="vendor-item vendor item">
+            <a href="<?php echo $vendorLink ?>" class="vendor-item-link">
+                <div class="vendor-item-info">
+                    <div class="vendor-item-photo photo">
+                        <img src="<?php echo $logoLink ?>" class="photo-image">
+                    </div>
+
+                    <div class="vendor vendor-item-details details">
+                        <h5 class="vendor-name"><?php echo $vendor->getData("entity_name") ?></h5>
+
+                        <?php if ($viewMode): ?>
+                            <?php if ($isSearchByLocation): ?>
+                                <p class="vendor-location">
+                                    <?php echo $vendor->getData("address") ?>,
+                                    <?php echo $vendor->getData("suburb") ?>,
+                                    <?php echo $vendor->getData("region") ?>,
+                                    <?php echo $vendor->getData("country") ?>,
+                                    <?php echo $vendor->getData("postcode") ?>
+                                </p>
+                            <?php else: ?>
+                                <p class="vendor-location">
+                                    <?php echo $vendor->getData("address") ?>
+                                </p>
+                            <?php endif; ?>
+
+                            <?php if ($description): ?>
+                                <div class="vendor-description">
+                                    <?php echo $description; ?>
+                                </div>
+                            <?php endif ?>
+                        <?php endif; ?>
+
+                        <?php if ($attrData): ?>
+                            <?php foreach($attrData as $attr): ?>
+                                <?php if ($attr["type"] == "multiselect"):?>
+                                    <?php if (!empty($attr["data"])): ?>
+                                        <?php if (is_array($attr["data"])): ?>
+                                        <ul class="vendor-tags-list">
+                                            <?php foreach($attr["data"] as $data): ?>
+                                                <li class="vendor-tag"><?php echo $data ?></li>
+                                            <?php endforeach;?>
+                                        </ul>
+                                        <?php else: ?>
+                                            <ul class="vendor-attributes-list">
+                                                <li class="vendor-attribute">
+                                                    <span class="vendor-attribute-label"><?= $attr["label"] ?></span>
+                                                    <span class="vendor-attribute-value"><?= $attr["data"] ?></span>
+                                                </li>
+                                            </ul>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach;?>
+                        <?php endif; ?>
+
+                        <?php if (!$viewMode): ?>
+                            <?php if ($isSearchByLocation): ?>
+                                <p class="vendor-location">
+                                    <?php echo $vendor->getData("address") ?>,
+                                    <?php echo $vendor->getData("suburb") ?>,
+                                    <?php echo $vendor->getData("region") ?>,
+                                    <?php echo $vendor->getData("country") ?>,
+                                    <?php echo $vendor->getData("postcode") ?>
+                                </p>
+                            <?php else: ?>
+                                <p class="vendor-location">
+                                    <?php echo $vendor->getData("address") ?>
+                                </p>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
+                        <div class="info-left">
+                            <span class="info-text"><?php echo $vendor->getData("location_name") ?></span>
+                            <?php if ($vendor->getData("location_count") >0 ):?>
+                                <span class="more">and <?php echo $vendor->getData("location_count") ?> more locations</span>
+                            <?php endif; ?>
+                        </div>
+                        <div class="info-right">
+                            <span class="info-text"><?php echo $vendor->getData("suburb") ?></span>
+                            <?php /* <span class="more">and 1 more suburbs</span> */?>
+                        </div>
+
+                        <?php if ($viewMode): ?>
+                            <div class="vendor-footer">
+                                <button href="<?php echo $vendorLink ?>" class="vendor-view-link"><?= __("View")?></button>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+            </a>
+        </li>
+    <?php endforeach; ?>
+    </ol>
+</div>

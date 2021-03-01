@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <!--
+        <tab id="omnyfy" translate="label" sortOrder="10">
+            <label>Omnyfy</label>
+        </tab>
+        -->
+        <section id="omnyfy_subscription" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label>Subscription</label>
+            <tab>omnyfy</tab>
+            <resource>Omnyfy_VendorSubscription::base</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Vendor Subscription Configuration</label>
+                <field id="cancel_template_admin" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label><![CDATA[<b>Subscription Canceled Template - Admin</b>]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="cancel_template_vendor" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label><![CDATA[<b>Subscription Canceled Template - Vendor</b>]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
+

@@ -1,0 +1,22 @@
+{
+    "name": "omnyfy/module-vendordashboard",
+    "description": "Vendor Dash Board Generator ",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "info@omnyfy.com",
+            "name": "Omnyfy"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Omnyfy\\VendorDashBoard\\": ""
+        }
+    }
+}

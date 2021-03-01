@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title" remove="true"/>
+        <referenceContainer name="page.wrapper">
+            <block class="Omnyfy\Vendor\Block\Vendor\View" name="merchant.banner" template="Omnyfy_Vendor::merchant/hero-banner.phtml" before="main.content"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Omnyfy\Vendor\Block\Vendor\View" name="merchant" template="Omnyfy_Vendor::merchant/view.phtml">
+                <block class="Omnyfy\Vendor\Block\Vendor\View" name="overview" template="Omnyfy_Vendor::merchant/view/overview.phtml"/>
+                <block class="Omnyfy\Vendor\Block\Vendor\View" name="products" template="Omnyfy_Vendor::merchant/view/products.phtml">
+                    <block class="Omnyfy\Vendor\Block\Vendor\ListProduct" name="vendor.products.list" as="product_list" template="Magento_Catalog::product/list.phtml">
+                        <container name="category.product.list.additional" as="additional" />
+                        <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                            <block class="Magento\Framework\View\Element\Template" as="default"/>
+                        </block>
+                        <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                            <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                        </block>
+                        <action method="setToolbarBlockName">
+                            <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                        </action>
+                    </block>
+                </block>
+                <block class="Omnyfy\Vendor\Block\Vendor\View\Policy" name="store_policy" template="Omnyfy_Vendor::merchant/view/policy.phtml"/>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\Catalog\Block\Navigation" name="catalog.leftnav" before="-" template="navigation/left.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,58 @@
+<?php $checklistDocs = $block->getChecklistDocument() ?>
+<?php foreach($checklistDocs as $doc) {?>
+    <fieldset class="fieldset admin__fieldset " id="docs_base_fieldset">
+        <legend class="admin__legend legend">
+            <span>Enquiry Information</span>
+        </legend><br>
+
+                <div>
+                    <h2><strong>Customer #<?php echo $doc->getUserId() ?></strong></h2>
+                </div>
+                <table class="admin__table-secondary">
+                    <tbody>
+                    <tr>
+                        <th><?php echo __("Customer Name")?></th>
+                        <td><?php echo $doc->getCustomerName() ?></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo __("Email")?></th>
+                        <td><?php echo $doc->getCustomerEmail() ?></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo __("Mobile Number")?></th>
+                        <td><?php echo $doc->getCustomerMobile() ?></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo __("Last Updated")?></th>
+                        <td><?php echo $doc->getCompleteDate() ?></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+    </fieldset>
+    <fieldset class="fieldset admin__fieldset " id="docs_checklist_documents">
+        <legend class="admin__legend legend">
+            <span>Checklist Documents</span>
+        </legend><br>
+
+        <div>
+            <h2><strong><?php echo $doc->getChecklistTitle() ?></strong></h2>
+        </div>
+        <table class="admin__table-secondary">
+            <tbody>
+            <?php $uploadDocuments = $block->getUploadedFiles($doc->getUserId(), $doc->getChecklistId())?>
+            <?php foreach ($uploadDocuments as $document) {?>
+                <?php $tmp = explode('/', rtrim($document->getUploadLink(), '/'))?>
+                <?php $end = end($tmp); ?>
+                <tr>
+                    <th><?php echo $document->getUploadName()?"Upload ".$document->getUploadName():"Upload Files" ?></th>
+                    <td><a target="_blank" href="<?php echo $this->getBaseUrl()?><?php echo strstr($document->getUploadLink(),'media/') ?>"><?php echo $end ?></a></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </fieldset>
+<?php } ?>
+
+
+

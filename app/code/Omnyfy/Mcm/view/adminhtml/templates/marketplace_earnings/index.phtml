@@ -1,0 +1,97 @@
+<?php
+$totalEarning = $block->getTotalEarning();
+$totalEarningCurrentMonth = $block->getTotalEarningCurrentMonth();
+$widthdrawalsData = $block->getWithdrawalsPayoutReceived();
+$withdrawalAmount = $block->getWithdrawalAmount();
+$ewalletAvailableBalance = $block->ewalletAvailableBalance();
+//echo "<pre>";
+//print_r($block->getEarningLastUpdated());
+//die;
+?>
+
+<div class="payout-tile">
+    <div class="tile-row">
+        <div class="tile-title"><strong>Lifetime Earnings</strong></div>
+        <div class="tile-updated"><?php echo $block->getEarningLastUpdated() ? 'Last Updated: ' . $block->getEarningLastUpdated() : ''; ?></div>
+    </div>
+    <div class="tile-row">
+        <div class="tile-first-col">
+            <div class="font-size-1r">Total </div>
+            <div class="tile3-currency"><?php echo $block->escapeHtml($block->currency(isset($totalEarning['total_balance_owing']) ? $totalEarning['total_balance_owing'] : 0)); ?></div>
+
+        </div>
+        <div class="tile-2nd-col">
+            <div class="font-size-1r">Net Amount </div>
+            <div class="tile3-currency"><?php echo $block->escapeHtml($block->currency(isset($totalEarning['total_balance_owing_net_amount']) ? $totalEarning['total_balance_owing_net_amount'] : 0)); ?></div>
+        </div>
+        <div class="tile-2nd-col">
+            <div class="font-size-1r">Shipping Collected </div>
+            <div class="tile3-currency"><?php echo $block->escapeHtml($block->currency(isset($totalEarning['total_shipping']) ? $totalEarning['total_shipping'] : 0)); ?></div>
+        </div>
+        <div class="tile-3rd-col">
+            <div class="font-size-1r">Taxes </div>
+            <div class="tile3-currency"><?php echo $block->escapeHtml($block->currency(isset($totalEarning['total_balance_owing_tax']) ? $totalEarning['total_balance_owing_tax'] : 0)); ?> </div>
+        </div>
+    </div>
+    <hr>
+    <div class="font-size-1r">
+        <div class="internal-row">
+            <div class="row-half">
+                <div class="internal-1sthalf">Category Fees Earned</div>
+                <div class="internal-2ndhalf"><?php echo $block->escapeHtml($block->currency(isset($totalEarning['category_commission_paid']) ? $totalEarning['category_commission_paid'] : 0)); ?></div>
+                <div class="internal-1sthalf">Seller Fees Earned</div>
+                <div class="internal-2ndhalf"><?php echo $block->escapeHtml($block->currency(isset($totalEarning['seller_fee_paid']) ? $totalEarning['seller_fee_paid'] : 0)); ?></div>
+            </div>
+            <div class="tile-separator">&nbsp;</div>
+            <div class="row-half">
+                <div class="internal-1sthalf">Transaction Fee Earned</div>
+                <div class="internal-2ndhalf"><?php echo $block->escapeHtml($block->currency(isset($totalEarning['transaction_fee_paid']) ? $totalEarning['transaction_fee_paid'] : 0)); ?></div>
+                <div class="internal-1sthalf">Disbursement Fees Earned</div>
+                <div class="internal-2ndhalf"><?php echo $block->escapeHtml($block->currency(isset($totalEarning['disbursement_fee_paid']) ? $totalEarning['disbursement_fee_paid'] : 0)); ?></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tile-separator">
+    &nbsp;
+</div>
+<div class="payout-tile">
+    <div class="tile-row">
+        <div class="tile-title"><strong><?php echo date('F Y'); ?> Earnings</strong></div>
+        <div class="tile-updated"><?php echo $block->getEarningLastUpdated() ? 'Last Updated: ' . $block->getEarningLastUpdated() : ''; ?></div>
+    </div>
+    <div class="tile-row">
+        <div class="tile-first-col">
+            <div class="font-size-1r">Total </div>
+            <div class="tile3-currency"><?php echo $block->escapeHtml($block->currency(isset($totalEarningCurrentMonth['total_balance_owing']) ? $totalEarningCurrentMonth['total_balance_owing'] : 0)); ?></div>
+
+        </div>
+        <div class="tile-2nd-col">
+            <div class="font-size-1r">Net Amount </div>
+            <div class="tile3-currency"><?php echo $block->escapeHtml($block->currency(isset($totalEarningCurrentMonth['total_balance_owing_net_amount']) ? $totalEarningCurrentMonth['total_balance_owing_net_amount'] : 0)); ?></div>
+        </div>
+        <div class="tile-3rd-col">
+            <div class="font-size-1r">Taxes </div>
+            <div class="tile3-currency"><?php echo $block->escapeHtml($block->currency(isset($totalEarningCurrentMonth['total_balance_owing_tax']) ? $totalEarningCurrentMonth['total_balance_owing_tax'] : 0)); ?></div>
+        </div>
+    </div>
+    <hr>
+    <div class="font-size-1r">
+        <div class="internal-row">
+            <div class="row-half">
+                <div class="internal-1sthalf">Category Fees Earned</div>
+                <div class="internal-2ndhalf"><?php echo $block->escapeHtml($block->currency(isset($totalEarningCurrentMonth['category_commission_paid']) ? $totalEarningCurrentMonth['category_commission_paid'] : 0)); ?></div>
+                <div class="internal-1sthalf">Seller Fees Earned</div>
+                <div class="internal-2ndhalf"><?php echo $block->escapeHtml($block->currency(isset($totalEarningCurrentMonth['seller_fee_paid']) ? $totalEarningCurrentMonth['seller_fee_paid'] : 0)); ?></div>
+            </div>
+            <div class="tile-separator">&nbsp;</div>
+            <div class="row-half">
+                <div class="internal-1sthalf">Transaction Fee Earned</div>
+                <div class="internal-2ndhalf"><?php echo $block->escapeHtml($block->currency(isset($totalEarningCurrentMonth['transaction_fee_paid']) ? $totalEarningCurrentMonth['transaction_fee_paid'] : 0)); ?></div>
+                <div class="internal-1sthalf">Disbursement Fees Earned</div>
+                <div class="internal-2ndhalf"><?php echo $block->escapeHtml($block->currency(isset($totalEarningCurrentMonth['disbursement_fee_paid']) ? $totalEarningCurrentMonth['disbursement_fee_paid'] : 0)); ?></div>
+            </div>
+        </div>        
+    </div>
+</div>
+<div class="clear-both"></div>

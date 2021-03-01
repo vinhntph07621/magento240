@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+	<template id="omnyfy_mcm_email_payout_notification_to_mo_template" label="Payout Notification To MO" file="payout_notification_to_mo.html" type="html" module="Omnyfy_Mcm" area="adminhtml"/>
+	<template id="payout_notification_to_vendor_email_template" label="Payout Notification To Vendor" file="payout_notification_to_vendor.html" type="html" module="Omnyfy_Mcm" area="adminhtml"/>
+	<template id="withdrawal_success_notification_to_vendor_email_template" label="Withdrawal Notification To Vendor" file="withdrawal_success_notification_to_vendor.html" type="html" module="Omnyfy_Mcm" area="adminhtml"/>
+</config>

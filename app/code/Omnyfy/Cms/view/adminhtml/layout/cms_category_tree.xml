@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <update handle="editor"/>
+    <head>
+        <link src="Omnyfy_Cms::js/edit-tree.js" />
+    </head>
+    <body>
+        <referenceContainer name="left" htmlTag="div" />
+<!--        <referenceContainer name="left" htmlTag="div" />
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="category.store.switcher" template="Magento_Backend::store/switcher.phtml"/>
+        </referenceContainer>-->
+<!--        <container  name="left" after="page_top" htmlTag="div" >
+            <block class="Omnyfy\Cms\Block\Adminhtml\Category\Tree" name="category.tree" template="Omnyfy_Cms::category/tree.phtml" />
+        </container>-->
+        
+        <referenceContainer name="left" htmlTag="div">
+            <!--<block class="Magento\Catalog\Block\Adminhtml\Category\Tree" name="category.tree" template="catalog/category/tree.phtml"/>--> 
+           <block class="Omnyfy\Cms\Block\Adminhtml\Category\Tree" name="cms_category_tree" template="category/tree.phtml" />
+        </referenceContainer><!--
+        <referenceContainer name="content">
+            <uiComponent name="cms_category_form"/>
+        </referenceContainer>-->
+    </body>
+</page>

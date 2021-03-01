@@ -1,0 +1,12 @@
+<?php
+/**
+ * Project: Strip Subscription
+ * User: jing
+ * Date: 2019-08-15
+ * Time: 10:13
+ */
+$_plan = $block->getVendorPlan();
+if (!empty($_plan) && !$_plan->getIsFree()) {
+?>
+<script src="https://js.stripe.com/v3/"></script>
+<?php } ?>

@@ -1,0 +1,43 @@
+wwwwwwwwwwwwwwwwwwwwwwwwwww<?php
+/**
+ * Project: Multi Vendor M2.
+ * User: jing
+ * Date: 15/8/17
+ * Time: 4:19 PM
+ */
+$vendor = $block->getVendor();
+
+if ($vendor) {
+    $logo = $vendor->getLogo();
+    ?>
+    <div class="block merchant_logo">
+        <div class="clearer"></div>
+        <div class="block-title title">
+            <strong id="block-merchant-heading" role="heading" aria-level="2">Merchant</strong>
+        </div>
+        <div class="block-content content" aria-labelledby="block-merchant-heading">
+
+            <?php if (!empty($logo)) {?>
+                <a href="<?php echo $block->getVendorUrl($vendor);?>" title="<?php echo $vendor->getName();?>">
+                    <img src="<?php echo $block->getLogoUrl($vendor);?>" alt="<?php echo $vendor->getName();?>"/>
+                </a>
+                <a class="vendor-name-with-img" href="<?php echo $block->getVendorUrl($vendor);?>" title="<?php echo $vendor->getName();?>">
+                    <?php echo $vendor->getName();?>
+                </a>
+            <?php }else { ?>
+                <a href="<?php echo $block->getVendorUrl($vendor);?>" title="<?php echo $vendor->getName();?>">
+                    <?php echo $vendor->getName();?>
+                </a>
+            <?php } ?>
+        </div>
+    </div>
+
+    <style>
+        .vendor-name-with-img {
+            text-align: left;
+            width: 100%;
+            display: block;
+            margin-top: 10px;
+        }
+    </style><?php
+} ?>

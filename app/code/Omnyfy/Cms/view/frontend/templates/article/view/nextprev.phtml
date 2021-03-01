@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Cms article next and prev article links
+ *
+ * @var $block \Omnyfy\Cms\Block\Article\View\NextPrev
+ */
+?>
+
+<?php if ($block->displayLinks()) { ?>
+    <?php
+        $prevArticle = $this->getPrevArticle();
+        $nextArticle = $this->getNextArticle();
+    ?>
+    <?php if ($prevArticle || $nextArticle) { ?>
+        <div class="article-nextprev-hld clearfix">
+            <?php if ($prevArticle) { ?>
+                <?php $title = $block->escapeHtml($prevArticle->getTitle()) ?>
+                <a class="nextprev-link prev-link" href="<?php echo $prevArticle->getArticleUrl() ?>" title="<?php echo __('Read %1',$title) ?>">
+                    <?php echo __('&larr; Previous') ?>
+                </a>
+            <?php } ?>
+            <?php if ($nextArticle) { ?>
+                <?php $title = $block->escapeHtml($nextArticle->getTitle()) ?>
+                <a class="nextprev-link next-link" href="<?php echo $nextArticle->getArticleUrl() ?>" title="<?php echo __('Read %1',$title) ?>">
+                    <?php echo __('Next &rarr;') ?>
+                </a>
+            <?php } ?>
+        </div>
+    <?php } ?>
+<?php } ?>

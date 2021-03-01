@@ -1,0 +1,1495 @@
+/* line 38, ../sass/uthermic/_mediaquery.scss */
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0px;
+  outline: 0;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+}
+
+/* line 51, ../sass/uthermic/_mediaquery.scss */
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+/* line 54, ../sass/uthermic/_mediaquery.scss */
+.modal-header .close {
+  float: right;
+  font-size: 21px;
+  font-weight: 700;
+  height: auto;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: 0.2;
+  -webkit-appearance: none;
+  padding: 0;
+  cursor: pointer;
+  background: 0 0;
+  border: 0;
+  margin-top: -2px;
+}
+
+/* line 73, ../sass/uthermic/_mediaquery.scss */
+.modal-title {
+  margin: 0;
+}
+
+/* line 77, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary) {
+  transition: background-color 0.2s, color 0.2s;
+  position: relative;
+  font-size: 16px;
+  border-radius: 0px;
+  height: 38px;
+  line-height: 36px;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-weight: 500;
+}
+@media only screen and (min-width: 992px) {
+  /* line 87, ../sass/uthermic/_mediaquery.scss */
+  .btn:not(.primary):not(.btn-block) {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+/* line 93, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary):focus {
+  outline: none;
+}
+/* line 96, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-red {
+  background-color: #ed290a;
+  color: #fff;
+}
+/* line 99, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-red:hover {
+  background-color: #e83643;
+}
+/* line 103, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-green {
+  background-color: #000;
+  border-color: #000;
+  color: #fff;
+}
+/* line 107, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-green:hover {
+  background-color: #000;
+  border-color: #000;
+  color: #fff;
+}
+/* line 113, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-link {
+  background-color: transparent;
+}
+/* line 116, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-link-red {
+  background-color: transparent;
+  color: #ed290a;
+}
+/* line 120, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-link-dark {
+  background-color: transparent;
+  color: #292f33;
+}
+/* line 124, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-text-green {
+  border: 0;
+  background: none;
+  color: #000;
+}
+/* line 128, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-text-green:active {
+  box-shadow: none;
+}
+/* line 132, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-dark-green {
+  background-color: #000;
+  border-color: #000;
+  color: #fff;
+}
+/* line 136, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-dark-green:hover {
+  background-color: #000;
+  border-color: #000;
+  color: #fff;
+}
+/* line 142, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-green-stroke {
+  border: 1px solid #000;
+  color: #000;
+  box-shadow: none;
+  background-color: transparent;
+}
+/* line 147, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-green-stroke.active, .btn:not(.primary).btn-green-stroke:hover {
+  color: #fff;
+  background-color: #000;
+}
+/* line 153, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-stroke {
+  border: 1px solid #d0d5d8;
+  color: #535f67;
+  font-weight: bold;
+  background-color: #fff;
+}
+/* line 158, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-stroke:hover {
+  background-color: transparent;
+}
+/* line 162, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-white {
+  background-color: #fff;
+  color: #000;
+}
+/* line 165, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-white:active {
+  box-shadow: none;
+}
+/* line 168, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-white:hover {
+  color: #fff;
+  background-color: #000;
+}
+/* line 173, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).text-green {
+  color: #000;
+}
+@media only screen and (max-width: 479px) {
+  /* line 176, ../sass/uthermic/_mediaquery.scss */
+  .btn:not(.primary).btn-block-xs {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 599px) {
+  /* line 181, ../sass/uthermic/_mediaquery.scss */
+  .btn:not(.primary).btn-block-sm {
+    width: 100%;
+  }
+}
+/* line 186, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-md {
+  font-weight: 500;
+}
+@media only screen and (min-width: 992px) {
+  /* line 186, ../sass/uthermic/_mediaquery.scss */
+  .btn:not(.primary).btn-md {
+    height: 52px;
+    line-height: 52px;
+    font-size: 18px;
+  }
+}
+/* line 194, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).padding-btn {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+/* line 198, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-lg {
+  height: 46px;
+  line-height: 46px;
+}
+@media only screen and (min-width: 992px) {
+  /* line 202, ../sass/uthermic/_mediaquery.scss */
+  .btn:not(.primary).btn-xl-desktop {
+    height: 58px;
+    line-height: 58px;
+  }
+}
+/* line 208, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).text-left {
+  text-align: left;
+}
+/* line 211, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).btn-wrapped-text {
+  height: auto;
+  min-height: 38px;
+  line-height: 1.3em;
+  white-space: normal;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+/* line 219, ../sass/uthermic/_mediaquery.scss */
+.btn:not(.primary).footer-floating-btn {
+  position: fixed;
+  right: 8px;
+  bottom: 10px;
+  z-index: 13;
+}
+
+/* line 227, ../sass/uthermic/_mediaquery.scss */
+.btn-lg,
+.btn-group-lg > .btn {
+  border-radius: 4px;
+}
+
+/* line 2, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .search-feature-section {
+  padding-top: 30px;
+}
+@media only screen and (min-width: 600px) {
+  /* line 6, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .search-feature-row {
+    display: flex;
+  }
+}
+/* line 10, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .search-feature-row .search-feature {
+  text-align: center;
+  margin-bottom: 30px;
+}
+@media only screen and (min-width: 600px) {
+  /* line 10, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .search-feature-row .search-feature {
+    flex: 0 0 auto;
+    width: 33.33%;
+    padding: 0 15px;
+  }
+}
+/* line 18, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .search-feature-row .search-feature p {
+  font-size: 14px;
+}
+@media only screen and (min-width: 600px) {
+  /* line 18, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .search-feature-row .search-feature p {
+    font-size: 16px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  /* line 18, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .search-feature-row .search-feature p {
+    font-size: 18px;
+  }
+}
+/* line 27, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .search-feature-row .search-feature .feature-icon {
+  display: inline-block;
+  margin-bottom: 15px;
+  width: 60px;
+}
+@media only screen and (min-width: 992px) {
+  /* line 27, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .search-feature-row .search-feature .feature-icon {
+    width: 91px;
+  }
+}
+/* line 38, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex {
+  padding: 0 !important;
+  z-index: 10000;
+  display: none;
+}
+/* line 42, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex > form {
+  height: 100%;
+}
+/* line 45, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-dialog {
+  width: 100%;
+  margin: 0;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transform: translate(0, 0) !important;
+}
+/* line 54, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-content {
+  border: 0;
+  border-radius: 0;
+  height: 100%;
+}
+/* line 59, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-footer {
+  height: 63px;
+}
+/* line 62, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-header {
+  height: 63px;
+  flex: 0 0 auto;
+}
+/* line 66, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-content {
+  display: flex;
+  flex-direction: column;
+}
+/* line 70, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-body {
+  flex: 1 1 auto;
+  padding: 0;
+  height: calc(100% - 63px);
+}
+@media only screen and (max-width: 767px) {
+  /* line 70, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal-full-flex .modal-body {
+    overflow-y: auto;
+  }
+}
+@media only screen and (min-width: 768px) {
+  /* line 70, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal-full-flex .modal-body {
+    display: flex;
+  }
+}
+@media only screen and (min-width: 768px) {
+  /* line 82, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal-full-flex.has-features .modal-body {
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+  }
+}
+@media only screen and (min-width: 768px) {
+  /* line 90, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal-full-flex .modal-body-flex-row {
+    display: flex;
+    border-top: 5px solid #000;
+    flex: 1 0 auto;
+  }
+}
+/* line 100, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .sidebar-wrapper {
+  padding: 0;
+  background-color: #fff;
+}
+@media only screen and (min-width: 768px) {
+  /* line 100, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal-full-flex .sidebar-wrapper {
+    width: 300px;
+    flex: 0 0 auto;
+    overflow-y: auto;
+  }
+}
+@media only screen and (min-width: 992px) {
+  /* line 100, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal-full-flex .sidebar-wrapper {
+    width: 400px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  /* line 100, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal-full-flex .sidebar-wrapper {
+    width: 500px;
+  }
+}
+/* line 115, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .row-eq-height-sm {
+  min-height: calc(100vh - 126px);
+}
+/* line 118, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .more-info {
+  padding: 15px;
+  color: #3d3e40;
+}
+/* line 122, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-body {
+  padding-top: 0;
+  padding-bottom: 0;
+  position: relative;
+}
+/* line 127, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-content {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 131, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-header {
+  height: 63px;
+  background-color: #000;
+}
+/* line 135, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-header.logined .before-login {
+  display: none;
+}
+/* line 138, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-header.logined .after-login {
+  display: block;
+}
+/* line 142, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-header .close {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  color: #fff;
+  line-height: 28px;
+  text-shadow: none;
+}
+/* line 152, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-header .modal-title {
+  font-size: 24px;
+  color: #fff;
+  font-weight: 400;
+  order: -1;
+}
+/* line 158, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-header .user-info {
+  float: left;
+  height: 48px;
+  margin: 0px 15px -8px 0;
+  color: #3d3e40;
+}
+@media only screen and (min-width: 600px) {
+  /* line 158, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal-full-flex .modal-header .user-info {
+    font-size: 24px;
+    margin-top: -6px;
+  }
+}
+/* line 167, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-header .user-info .welcome {
+  margin-bottom: 2px;
+  font-size: 12px;
+  display: block;
+}
+/* line 172, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-header .user-info .username {
+  color: #f3f4f5;
+  display: block;
+  line-height: 1em;
+  max-width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 14px;
+}
+@media only screen and (min-width: 600px) {
+  /* line 172, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal-full-flex .modal-header .user-info .username {
+    font-size: 24px;
+    max-width: 300px;
+  }
+}
+/* line 187, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-header .user-icon {
+  float: left;
+  font-size: 32px;
+  margin-right: 15px;
+}
+@media only screen and (max-width: 479px) {
+  /* line 187, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal-full-flex .modal-header .user-icon {
+    display: none;
+  }
+}
+/* line 195, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .modal-header .after-login {
+  display: none;
+}
+/* line 199, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .main-wrapper {
+  padding-left: 0;
+  padding-right: 0;
+  background-color: #f3f4f5;
+}
+@media only screen and (min-width: 768px) {
+  /* line 199, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal-full-flex .main-wrapper {
+    flex: 1 1 auto;
+    overflow-y: auto;
+  }
+}
+/* line 208, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .date-field {
+  background-color: #fff;
+  position: relative;
+}
+/* line 211, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .date-field:before {
+  content: "\f073";
+  font-family: "icomoon";
+  position: absolute;
+  left: 12px;
+  line-height: 38px;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 18px;
+  z-index: 1;
+}
+@media only screen and (min-width: 992px) {
+  /* line 211, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal-full-flex .date-field:before {
+    line-height: 52px;
+  }
+}
+/* line 224, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal-full-flex .date-field input {
+  background-color: transparent;
+  padding-left: 38px;
+  position: relative;
+  z-index: 2;
+}
+/* line 248, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container {
+  padding: 15px;
+  border-bottom: 1px solid #535f67;
+}
+/* line 236, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container .action {
+  flex: 0 0 auto;
+  width: 70px;
+  text-align: right;
+}
+/* line 240, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container .action a {
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+}
+/* line 250, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container .practice-name {
+  margin: 0;
+  padding: 10px 0 25px 0;
+  font-size: 24px;
+  color: #000;
+}
+/* line 257, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container .practitioner-info .name {
+  font-size: 20px;
+}
+/* line 260, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container .practitioner-info .title {
+  font-size: 16px;
+}
+/* line 264, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container .practitioner-row {
+  display: flex;
+  margin-bottom: 15px;
+}
+/* line 267, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container .practitioner-row .pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+/* line 273, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container .practitioner-row .pic img {
+  width: 60px;
+  height: 60px;
+}
+/* line 278, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container .practitioner-row .practitioner-info {
+  flex: 1 1 auto;
+  padding: 5px 15px 0 15px;
+}
+/* line 281, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container .practitioner-row .practitioner-info .name {
+  display: block;
+  margin: 0 0 10px 0;
+  font-size: 20px;
+}
+/* line 286, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container .practitioner-row .practitioner-info .title {
+  margin: 0;
+  font-size: 16px;
+}
+/* line 291, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .practitioner-container .practitioner-row .action {
+  padding-top: 5px;
+}
+/* line 297, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .step-container {
+  padding: 30px 0;
+  display: none;
+}
+/* line 300, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .step-container.active {
+  display: block;
+}
+/* line 303, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .step-container .panel-wrapper {
+  padding: 0 15px;
+}
+/* line 308, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-container {
+  padding: 15px 0;
+}
+/* line 312, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-wrapper {
+  width: 100%;
+}
+/* line 316, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row {
+  display: flex;
+  /* 	.all-times {
+      display: none;
+  } */
+}
+/* line 318, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .label-col {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  width: 180px;
+  flex: 0 0 auto;
+  text-align: right;
+  padding: 0 15px 0 0;
+}
+@media only screen and (max-width: 767px) {
+  /* line 318, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .time-sheet-row .label-col {
+    width: 140px;
+  }
+}
+@media only screen and (max-width: 599px) {
+  /* line 318, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .time-sheet-row .label-col {
+    width: 74px;
+  }
+}
+/* line 332, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .label-col .date-label {
+  width: 100%;
+  font-size: 16px;
+  color: #3d3e40;
+  display: block;
+}
+@media only screen and (max-width: 599px) {
+  /* line 332, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .time-sheet-row .label-col .date-label {
+    font-size: 13px;
+  }
+}
+/* line 341, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .label-col .toggle-btn {
+  color: #000;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+}
+@media only screen and (max-width: 599px) {
+  /* line 341, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .time-sheet-row .label-col .toggle-btn {
+    font-size: 11px;
+  }
+}
+/* line 349, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .label-col .toggle-btn.hide-rest {
+  display: none;
+  color: #999;
+}
+/* line 355, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .times-col {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  margin-right: -5px;
+}
+/* line 360, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .times-col .actions {
+  display: inline-block;
+}
+/* line 362, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .times-col .actions .unavailable {
+  display: none;
+}
+/* line 366, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .times-col .actions.no-actions .more,
+#vendor-signup-wrapper .time-sheet-row .times-col .actions.no-actions .less {
+  display: none !important;
+}
+/* line 370, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .times-col .actions.no-actions .unavailable {
+  display: block;
+}
+/* line 379, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn-wrapper {
+  width: 25%;
+  padding: 5px;
+}
+/* line 382, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn-wrapper:nth-child(n + 3) {
+  display: none;
+}
+/* line 385, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn-wrapper.meridian-active, #vendor-signup-wrapper .time-sheet-row .time-btn-wrapper.active, #vendor-signup-wrapper .time-sheet-row .time-btn-wrapper.actions {
+  display: block;
+}
+/* line 390, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn-wrapper.meridian-inactive {
+  display: none;
+}
+/* line 393, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn-wrapper.wide-wrapper {
+  flex: 1 1 37.5%;
+  width: auto;
+}
+@media only screen and (max-width: 479px) {
+  /* line 379, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .time-sheet-row .time-btn-wrapper {
+    width: 33.33%;
+  }
+  /* line 399, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .time-sheet-row .time-btn-wrapper.actions {
+    flex: 1 1 auto;
+  }
+}
+/* line 404, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn {
+  height: 46px;
+  min-width: 46px;
+  width: 100%;
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  border-color: #000;
+  padding-left: 5px;
+  padding-right: 5px;
+  cursor: pointer;
+}
+@media only screen and (max-width: 599px) {
+  /* line 404, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .time-sheet-row .time-btn {
+    font-size: 12px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    margin-right: 2px;
+  }
+}
+/* line 422, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn .next-text {
+  display: block;
+  line-height: 16px;
+}
+/* line 426, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn .time {
+  display: block;
+  line-height: 16px;
+}
+/* line 430, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn .icon-minus-circle,
+#vendor-signup-wrapper .time-sheet-row .time-btn .icon-plus-circle {
+  vertical-align: middle;
+}
+@media only screen and (min-width: 600px) {
+  /* line 430, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .time-sheet-row .time-btn .icon-minus-circle,
+  #vendor-signup-wrapper .time-sheet-row .time-btn .icon-plus-circle {
+    font-size: 18px;
+  }
+}
+/* line 437, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn .text {
+  vertical-align: middle;
+}
+/* line 440, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn.more, #vendor-signup-wrapper .time-sheet-row .time-btn.less {
+  line-height: 16px;
+}
+/* line 444, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn.less {
+  display: none;
+  border-color: #828287;
+  color: #828287;
+}
+/* line 449, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn.active {
+  background-color: #000;
+  color: #fff;
+}
+/* line 453, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-row .time-btn.selected {
+  border-color: #000;
+  background-color: #000;
+  color: #fff;
+}
+/* line 462, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-next .time-sheet-row {
+  padding: 10px 0 10px 0;
+  border-bottom: 1px solid #b7b7b7;
+}
+/* line 465, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-next .time-sheet-row:first-child {
+  padding-top: 0;
+}
+/* line 469, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-next .view-more-row {
+  text-align: right;
+  padding: 15px 5px 5px 0;
+  margin-right: -5px;
+}
+/* line 473, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .time-sheet-next .view-more-row .btn-stroke-primary {
+  border: 1px solid #535f67;
+  height: 46px;
+  line-height: 46px;
+  color: #292f33;
+}
+@media only screen and (min-width: 600px) {
+  /* line 482, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .hidden-gt-md {
+    display: none;
+  }
+}
+/* line 488, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container {
+  padding: 15px;
+  border-bottom: 1px solid #535f67;
+}
+/* line 236, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .action {
+  flex: 0 0 auto;
+  width: 70px;
+  text-align: right;
+}
+/* line 240, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .action a {
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+}
+/* line 490, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .appointment-row {
+  display: flex;
+  padding-bottom: 5px;
+}
+/* line 493, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .appointment-row .date {
+  flex: 1 1 auto;
+  font-size: 20px;
+}
+/* line 497, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .appointment-row .action {
+  padding-top: 5px;
+}
+/* line 500, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .appointment-row .close-btn {
+  display: none;
+}
+/* line 506, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container.expanded .appointment-row .close-btn {
+  display: inline;
+}
+/* line 509, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container.expanded .appointment-row .expand-btn {
+  display: none;
+}
+/* line 513, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container.expanded .time-sheet-container {
+  display: block;
+}
+/* line 517, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .footer-area {
+  padding-top: 15px;
+}
+/* line 519, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .footer-area span {
+  display: block;
+  margin-bottom: 15px;
+}
+/* line 523, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .footer-area .tier1 {
+  font-size: 16px;
+}
+/* line 526, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .footer-area .tier2 {
+  font-size: 20px;
+}
+/* line 529, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .footer-area .price {
+  font-size: 20px;
+  font-weight: bold;
+}
+/* line 534, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .time-sheet-container {
+  background-color: #fff;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: none;
+}
+/* line 542, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .time-sheet-wrapper {
+  width: 100%;
+}
+/* line 546, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .time-sheet-row .label-col {
+  width: 74px;
+}
+/* line 548, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .time-sheet-row .label-col .date-label {
+  font-size: 13px;
+}
+/* line 551, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .more-time-container .time-sheet-row .label-col .toggle-btn {
+  font-size: 11px;
+}
+@media only screen and (min-width: 768px) {
+  /* line 556, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .more-time-container .time-sheet-row .time-btn .hidden-gt-md {
+    display: inline-block;
+  }
+}
+@media only screen and (min-width: 768px) {
+  /* line 563, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .more-time-container .time-sheet-row .time-btn .text .hidden-xs,
+  #vendor-signup-wrapper .more-time-container .time-sheet-row .time-btn .next-text .hidden-xs {
+    display: none;
+  }
+}
+/* line 572, ../sass/uthermic/_signup.scss */
+.sidebar-wrapper #vendor-signup-wrapper .more-time-container .booking-change-times {
+  margin: 10px 0px;
+}
+@media only screen and (max-width: 767px) {
+  /* line 580, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .terms-container.expanded .terms-wrapper {
+    display: block;
+  }
+}
+@media only screen and (max-width: 767px) {
+  /* line 585, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .terms-container.expanded .view-terms {
+    display: none;
+  }
+}
+/* line 591, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .terms-container .terms-list {
+  padding: 15px;
+  border-bottom: 1px solid #535f67;
+  border-bottom: 0;
+}
+/* line 236, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .terms-container .terms-list .action {
+  flex: 0 0 auto;
+  width: 70px;
+  text-align: right;
+}
+/* line 240, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .terms-container .terms-list .action a {
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+}
+/* line 594, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .terms-container .terms-list .list-item {
+  display: flex;
+  padding: 5px 0 5px 0;
+}
+/* line 597, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .terms-container .terms-list .list-item .icon-wrapper {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  flex: 0 0 auto;
+}
+/* line 602, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .terms-container .terms-list .list-item .icon-wrapper span {
+  line-height: 40px;
+  font-size: 32px;
+}
+/* line 607, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .terms-container .terms-list .list-item .item-content {
+  flex: 1 1 auto;
+  padding-left: 15px;
+}
+/* line 610, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .terms-container .terms-list .list-item .item-content .title {
+  margin: 0 0 5px 0;
+  color: #535f67;
+  font-size: 18px;
+}
+/* line 615, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .terms-container .terms-list .list-item .item-content .desc {
+  line-height: 1.2em;
+}
+/* line 621, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .terms-container .view-terms,
+#vendor-signup-wrapper .terms-container .close-terms {
+  padding: 7px 15px;
+  background-color: #f3f4f5;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+@media only screen and (min-width: 768px) {
+  /* line 621, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .terms-container .view-terms,
+  #vendor-signup-wrapper .terms-container .close-terms {
+    display: none;
+  }
+}
+/* line 632, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .terms-container .view-terms .arrow,
+#vendor-signup-wrapper .terms-container .close-terms .arrow {
+  margin-left: 5px;
+}
+@media only screen and (max-width: 767px) {
+  /* line 636, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .terms-container .terms-wrapper {
+    display: none;
+  }
+}
+/* line 644, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .steps-info .steps-list {
+  padding: 15px;
+  border-bottom: 1px solid #535f67;
+  border-bottom: 0;
+  padding: 0;
+}
+/* line 236, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .steps-info .steps-list .action {
+  flex: 0 0 auto;
+  width: 70px;
+  text-align: right;
+}
+/* line 240, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .steps-info .steps-list .action a {
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+}
+/* line 648, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .steps-info .steps-list .list-item {
+  display: flex;
+  padding: 25px 15px 25px 15px;
+  border-bottom: 1px solid #fff;
+  background-color: #000;
+  color: #fff;
+}
+/* line 654, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .steps-info .steps-list .list-item .icon-wrapper {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  flex: 0 0 auto;
+}
+/* line 659, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .steps-info .steps-list .list-item .icon-wrapper span {
+  line-height: 40px;
+  font-size: 32px;
+}
+/* line 664, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .steps-info .steps-list .list-item .item-content {
+  flex: 1 1 auto;
+  padding-left: 15px;
+}
+/* line 667, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .steps-info .steps-list .list-item .item-content .title {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+}
+/* line 671, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .steps-info .steps-list .list-item .item-content .desc {
+  line-height: 1.2em;
+}
+/* line 679, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-header {
+  text-align: center;
+  border-bottom: 3px solid #000;
+  padding: 20px 15px;
+  position: relative;
+}
+/* line 690, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-header.normal {
+  border-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 694, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-header.normal .heading {
+  padding-left: 0;
+}
+/* line 698, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-header .heading {
+  display: inline-block;
+  font-size: 18px;
+  color: #000;
+  margin: 0;
+  font-weight: 500;
+  position: relative;
+}
+@media only screen and (max-width: 479px) {
+  /* line 698, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-header .heading {
+    display: block;
+  }
+}
+@media only screen and (min-width: 480px) {
+  /* line 698, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-header .heading {
+    padding-left: 46px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  /* line 698, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-header .heading {
+    font-size: 22px;
+  }
+}
+@media only screen and (min-width: 480px) {
+  /* line 714, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-header .heading .heading-icon {
+    position: absolute;
+    height: 32px;
+    margin-top: -16px;
+    left: 0;
+    top: 50%;
+  }
+}
+@media only screen and (max-width: 479px) {
+  /* line 724, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-header .back-btn {
+    margin-bottom: 15px;
+  }
+}
+@media only screen and (min-width: 480px) {
+  /* line 724, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-header .back-btn {
+    position: absolute;
+    left: 0;
+    font-size: 18px;
+    line-height: 1.1;
+    height: auto;
+  }
+}
+@media only screen and (min-width: 992px) {
+  /* line 724, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-header .back-btn {
+    font-size: 22px;
+  }
+}
+/* line 741, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-body {
+  padding: 35px 15px 15px 15px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 746, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-body.full-width {
+  max-width: none;
+}
+/* line 749, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-body .msg {
+  text-align: center;
+  padding: 15px 0;
+}
+/* line 753, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-body .msg.completed p {
+  margin-bottom: 25px;
+}
+/* line 757, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-body .msg p {
+  font-size: 18px;
+}
+/* line 760, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-body .msg .h1 {
+  display: block;
+  font-size: 28px;
+  margin: 0;
+  font-weight: 400;
+}
+@media only screen and (min-width: 992px) {
+  /* line 760, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-body .msg .h1 {
+    font-size: 48px;
+  }
+}
+/* line 769, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-body .msg .highlight {
+  color: #000;
+}
+/* line 773, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-body .msg-warning {
+  color: #3d3e40;
+  text-align: center;
+  padding: 15px;
+  background-color: #d7e8f2;
+}
+/* line 779, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-body .msg-info {
+  color: #3d3e40;
+  text-align: center;
+  padding: 15px;
+  background-color: #fff;
+}
+/* line 784, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-body .msg-info h6 {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+@media only screen and (max-width: 991px) {
+  /* line 790, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-body .time-sheet-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media only screen and (max-width: 991px) {
+  /* line 796, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-body .time-sheet-wrapper {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 991px) {
+  /* line 802, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-body .time-sheet-row .label-col {
+    width: 74px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  /* line 806, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-body .time-sheet-row .label-col .date-label {
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  /* line 811, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-body .time-sheet-row .label-col .toggle-btn {
+    font-size: 11px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  /* line 818, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-body .time-sheet-row .time-btn .hidden-gt-md {
+    display: inline-block;
+  }
+}
+@media only screen and (max-width: 991px) {
+  /* line 825, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-body .time-sheet-row .time-btn .text .hidden-xs,
+  #vendor-signup-wrapper .fields-body .time-sheet-row .time-btn .next-text .hidden-xs {
+    display: none;
+  }
+}
+/* line 833, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-body hr {
+  border-color: #777;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+/* line 841, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-group .group-label {
+  color: #3d3e40;
+  font-size: 14px;
+  padding: 7px 15px;
+}
+@media only screen and (min-width: 992px) {
+  /* line 841, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .fields-group .group-label {
+    text-align: right;
+  }
+}
+/* line 849, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-group .group-item {
+  margin-bottom: 15px;
+}
+/* line 851, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-group .group-item label {
+  color: #535f67;
+  font-size: 14px;
+}
+/* line 855, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-group .group-item ul {
+  list-style: none;
+  padding: 0;
+  color: #3d3e40;
+}
+/* line 859, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-group .group-item ul li {
+  margin-bottom: 3px;
+}
+/* line 861, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-group .group-item ul li:before {
+  content: "\2022";
+  color: #000;
+  font-size: 26px;
+  line-height: 16px;
+  vertical-align: top;
+  margin-right: 5px;
+}
+/* line 869, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-group .group-item ul li.postcode-search-option:before {
+  display: none;
+}
+/* line 874, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-group .group-item select {
+  padding-left: 10px;
+  height: 38px;
+}
+/* line 878, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-group .group-item .btn-group {
+  display: flex;
+  width: 100%;
+}
+/* line 881, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-group .group-item .btn-group .btn {
+  width: 50%;
+  flex: 1 1 auto;
+  font-size: 14px;
+}
+/* line 886, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-group .group-item .btn-group .active + .active {
+  border-left: 1px solid #fff;
+}
+/* line 890, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .fields-group .group-item .border-wrapper {
+  border: 1px solid #d0d5d8;
+  padding: 15px;
+  border-radius: 4px;
+}
+/* line 899, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .btn-group .btn {
+  border: 1px solid #000;
+  margin-left: -1px;
+}
+/* line 902, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .btn-group .btn:first-child {
+  margin-left: 0;
+}
+/* line 905, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .btn-group .btn.active {
+  background-color: #000;
+  color: #fff;
+}
+/* line 912, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .step-actions {
+  padding: 15px 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 917, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .step-actions .note {
+  padding: 10px 0 30px 0;
+  font-size: 16px;
+}
+/* line 920, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .step-actions .note a {
+  color: #ed290a;
+}
+/* line 924, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .step-actions .actions {
+  text-align: center;
+}
+/* line 926, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .step-actions .actions .btn {
+  margin-bottom: 10px;
+}
+@media only screen and (min-width: 480px) {
+  /* line 926, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .step-actions .actions .btn {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+/* line 937, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .verification-code .code-row {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+}
+/* line 941, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .verification-code .code-row .code-input-wrapper {
+  margin: 0 8px;
+}
+/* line 943, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .verification-code .code-row .code-input-wrapper .code-input {
+  text-align: center;
+  width: 32px;
+  padding-left: 0;
+  padding-right: 0;
+}
+@media only screen and (min-width: 480px) {
+  /* line 943, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .verification-code .code-row .code-input-wrapper .code-input {
+    width: 40px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  /* line 943, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .verification-code .code-row .code-input-wrapper .code-input {
+    width: 64px;
+    height: 64px;
+  }
+}
+/* line 960, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .payment-selection {
+  text-align: center;
+  padding: 25px 0;
+}
+/* line 963, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .payment-selection .payment-btn {
+  margin: 0 15px;
+  width: 60px;
+  height: 60px;
+  border: 1px solid #000;
+  color: #000;
+  padding: 0;
+  line-height: 1.4rem;
+  background-color: transparent;
+}
+@media only screen and (min-width: 768px) {
+  /* line 963, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .payment-selection .payment-btn {
+    width: 90px;
+    height: 90px;
+  }
+}
+/* line 976, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .payment-selection .payment-btn.active {
+  color: #fff;
+  background-color: #000;
+}
+/* line 980, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .payment-selection .payment-btn [class^="icon-"],
+#vendor-signup-wrapper .payment-selection .payment-btn [class*=" icon-"] {
+  font-size: 28px;
+}
+@media only screen and (min-width: 768px) {
+  /* line 980, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .payment-selection .payment-btn [class^="icon-"],
+  #vendor-signup-wrapper .payment-selection .payment-btn [class*=" icon-"] {
+    font-size: 42px;
+  }
+}
+/* line 990, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal.modal-full-flex {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 950;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+}
+/* line 1000, ../sass/uthermic/_signup.scss */
+#vendor-signup-wrapper .modal.modal-full-flex .section-header {
+  margin: 30px 0;
+}
+@media only screen and (max-width: 767px) {
+  /* line 1000, ../sass/uthermic/_signup.scss */
+  #vendor-signup-wrapper .modal.modal-full-flex .section-header {
+    margin: 15px 0;
+    font-size: 18px;
+  }
+}
+
+/* line 1010, ../sass/uthermic/_signup.scss */
+.signup-show {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+}
+/* line 1015, ../sass/uthermic/_signup.scss */
+.signup-show #vendor-signup-wrapper .modal.modal-full-flex {
+  display: block;
+  opacity: 1;
+}

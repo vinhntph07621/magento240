@@ -1,0 +1,47 @@
+<?php
+/**
+ * Project: Vendor Subscription
+ * User: jing
+ * Date: 2019-09-16
+ * Time: 00:12
+ */
+/**
+ * @var Omnyfy\VendorSubscription\Block\Adminhtml\Subscription\Update\Edit\PlanOptions $block
+ */
+$plans = $block->getPlans();
+$i = 0;
+?>
+<div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th><label><?php echo __('');?></label></th>
+                <th><label><?php echo __('Plan Name');?></label></th>
+                <th><label><?php echo __('Price');?></label></th>
+                <th><label><?php echo __('Interval');?></label></th>
+                <th><label><?php echo __('Benefits');?></label></th>
+            </tr>
+        </thead>
+        <tbody id="update_to_plan_container">
+            <?php foreach($plans as $plan) { $i++; ?>
+            <tr>
+                <td>
+                    <input type="radio" id="update_to_plan_id_<?php echo $i;?>" name="to_plan_id" value="<?php echo $plan->getId()?>" class="radio" data-validate="{'validate-one-required-by-name':true}" data-form-part="omnyfy_subscription_update_form" <?php if ($block->isSelected($plan)){?>checked<?php }?>/>
+                </td>
+                <td>
+                    <?php echo $plan->getPlanName();?>
+                </td>
+                <td>
+                    <?php echo $block->formatPrice($plan->getPrice());?>
+                </td>
+                <td>
+                    <?php echo $block->parseInterval($plan); ?>
+                </td>
+                <td>
+                    <?php echo $block->parseBenefits($plan); ?>
+                </td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>

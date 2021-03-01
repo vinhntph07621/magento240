@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../
+../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Omnyfy_Checklist::css/check_list_document.css"/>
+    </head>
+    <body>
+        <referenceContainer name="left">
+            <block class="Omnyfy\Checklist\Block\Adminhtml\ChecklistDocuments\Edit\Tabs"
+                   name="omnyfy_checklist_checklist_documents.edit.tabs"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Omnyfy\Checklist\Block\Adminhtml\ChecklistDocuments\Edit"
+                   name="omnyfy_checklist_checklist_documents.edit"
+                   template="Omnyfy_Checklist::checklist_documents.phtml" />
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,405 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Omnyfy\VendorReview\Model\ResourceModel\Review;
+
+use Magento\Backend\App\Area\FrontNameResolver;
+use Magento\Framework\App\State as AppState;
+use Magento\Backend\Model\Session as BackendSession;
+
+/**
+ * Review collection resource model
+ *
+ * @author      Magento Core Team <core@magentocommerce.com>
+ */
+class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
+{
+    /**
+     * Review table
+     *
+     * @var string
+     */
+    protected $_reviewTable = null;
+
+    /**
+     * Review detail table
+     *
+     * @var string
+     */
+    protected $_reviewDetailTable = null;
+
+    /**
+     * Review status table
+     *
+     * @var string
+     */
+    protected $_reviewStatusTable = null;
+
+    /**
+     * Review entity table
+     *
+     * @var string
+     */
+    protected $_reviewEntityTable = null;
+
+    /**
+     * Review store table
+     *
+     * @var string
+     */
+    protected $_reviewStoreTable = null;
+
+    /**
+     * Add store data flag
+     * @var bool
+     */
+    protected $_addStoreDataFlag = false;
+
+    /**
+     * Review data
+     *
+     * @var \Omnyfy\VendorReview\Helper\Data
+     */
+    protected $_reviewData = null;
+
+    /**
+     * Rating option model
+     *
+     * @var \Omnyfy\VendorReview\Model\Rating\Option\VoteFactory
+     */
+    protected $_voteFactory;
+
+    /**
+     * Core model store manager interface
+     *
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $_storeManager;
+
+    protected $backendSession;
+
+    protected $appState;
+
+    /**
+     * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
+     * @param \Psr\Log\LoggerInterface $logger
+     * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
+     * @param \Magento\Framework\Event\ManagerInterface $eventManager
+     * @param \Omnyfy\VendorReview\Helper\Data $reviewData
+     * @param \Omnyfy\VendorReview\Model\Rating\Option\VoteFactory $voteFactory
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param mixed $connection
+     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource
+     */
+    public function __construct(
+        BackendSession $backendSession,
+        AppState $appState,
+        \Magento\Framework\Data\Collection\EntityFactory $entityFactory,
+        \Psr\Log\LoggerInterface $logger,
+        \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy,
+        \Magento\Framework\Event\ManagerInterface $eventManager,
+        \Omnyfy\VendorReview\Helper\Data $reviewData,
+        \Omnyfy\VendorReview\Model\Rating\Option\VoteFactory $voteFactory,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
+        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
+    ) {
+        $this->_reviewData = $reviewData;
+        $this->_voteFactory = $voteFactory;
+        $this->_storeManager = $storeManager;
+        $this->backendSession = $backendSession;
+        $this->appState = $appState;
+
+        parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
+    }
+
+    /**
+     * Define module
+     *
+     * @return void
+     */
+    protected function _construct()
+    {
+        $this->_init('Omnyfy\VendorReview\Model\Review', 'Omnyfy\VendorReview\Model\ResourceModel\Review');
+    }
+
+    /**
+     * Initialize select
+     *
+     * @return $this
+     */
+    protected function _initSelect()
+    {
+        parent::_initSelect();
+        $this->getSelect()->join(
+            ['detail' => $this->getReviewDetailTable()],
+            'main_table.omnyfy_vendor_review_id = detail.omnyfy_vendor_review_id',
+            ['detail_id', 'title', 'detail', 'nickname', 'customer_id']
+        );
+        return $this;
+    }
+
+    /**
+     * Add customer filter
+     *
+     * @param int|string $customerId
+     * @return $this
+     */
+    public function addCustomerFilter($customerId)
+    {
+        $this->addFilter('customer', $this->getConnection()->quoteInto('detail.customer_id=?', $customerId), 'string');
+        return $this;
+    }
+
+    /**
+     * Add store filter
+     *
+     * @param int|int[] $storeId
+     * @return $this
+     */
+    public function addStoreFilter($storeId)
+    {
+        $inCond = $this->getConnection()->prepareSqlCondition('store.store_id', ['in' => $storeId]);
+        $this->getSelect()->join(
+            ['store' => $this->getReviewStoreTable()],
+            'main_table.omnyfy_vendor_review_id=store.omnyfy_vendor_review_id',
+            []
+        );
+        $this->getSelect()->where($inCond);
+        return $this;
+    }
+
+    /**
+     * Add stores data
+     *
+     * @return $this
+     */
+    public function addStoreData()
+    {
+        $this->_addStoreDataFlag = true;
+        return $this;
+    }
+
+    /**
+     * Add entity filter
+     *
+     * @param int|string $entity
+     * @param int $pkValue
+     * @return $this
+     */
+    public function addEntityFilter($entity, $pkValue)
+    {
+        $reviewEntityTable = $this->getReviewEntityTable();
+        if (is_numeric($entity)) {
+            $this->addFilter('entity', $this->getConnection()->quoteInto('main_table.entity_id=?', $entity), 'string');
+        } elseif (is_string($entity)) {
+            $this->_select->join(
+                $reviewEntityTable,
+                'main_table.entity_id=' . $reviewEntityTable . '.entity_id',
+                ['entity_code']
+            );
+
+            $this->addFilter(
+                'entity',
+                $this->getConnection()->quoteInto($reviewEntityTable . '.entity_code=?', $entity),
+                'string'
+            );
+        }
+
+        $this->addFilter(
+            'entity_pk_value',
+            $this->getConnection()->quoteInto('main_table.entity_pk_value=?', $pkValue),
+            'string'
+        );
+
+        return $this;
+    }
+
+    /**
+     * Add status filter
+     *
+     * @param int|string $status
+     * @return $this
+     */
+    public function addStatusFilter($status)
+    {
+        if (is_string($status)) {
+            $statuses = array_flip($this->_reviewData->getReviewStatuses());
+            $status = isset($statuses[$status]) ? $statuses[$status] : 0;
+        }
+        if (is_numeric($status)) {
+            $this->addFilter('status', $this->getConnection()->quoteInto('main_table.status_id=?', $status), 'string');
+        }
+        return $this;
+    }
+
+    /**
+     * Set date order
+     *
+     * @param string $dir
+     * @return $this
+     */
+    public function setDateOrder($dir = 'DESC')
+    {
+        $this->setOrder('main_table.created_at', $dir);
+        return $this;
+    }
+
+    /**
+     * Add rate votes
+     *
+     * @return $this
+     */
+    public function addRateVotes()
+    {
+        foreach ($this->getItems() as $item) {
+            $votesCollection = $this->_voteFactory->create()->getResourceCollection()->setReviewFilter(
+                $item->getId()
+            )->setStoreFilter(
+                $this->_storeManager->getStore()->getId()
+            )->addRatingInfo(
+                $this->_storeManager->getStore()->getId()
+            )->load();
+            $item->setRatingVotes($votesCollection);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add reviews total count
+     *
+     * @return $this
+     */
+    public function addReviewsTotalCount()
+    {
+        $this->_select->joinLeft(
+            ['r' => $this->getReviewTable()],
+            'main_table.entity_pk_value = r.entity_pk_value',
+            ['total_reviews' => new \Zend_Db_Expr('COUNT(r.omnyfy_vendor_review_id)')]
+        )->group(
+            'main_table.omnyfy_vendor_review_id'
+        );
+
+        return $this;
+    }
+
+    /**
+     * Load data
+     *
+     * @param boolean $printQuery
+     * @param boolean $logQuery
+     * @return $this
+     */
+    public function load($printQuery = false, $logQuery = false)
+    {
+        if ($this->isLoaded()) {
+            return $this;
+        }
+        $this->_eventManager->dispatch('review_review_collection_load_before', ['collection' => $this]);
+        parent::load($printQuery, $logQuery);
+        if ($this->_addStoreDataFlag) {
+            $this->_addStoreData();
+        }
+        return $this;
+    }
+
+    /**
+     * Add store data
+     *
+     * @return void
+     */
+    protected function _addStoreData()
+    {
+        $connection = $this->getConnection();
+
+        $reviewsIds = $this->getColumnValues('omnyfy_vendor_review_id');
+        $storesToReviews = [];
+        if (count($reviewsIds) > 0) {
+            $inCond = $connection->prepareSqlCondition('omnyfy_vendor_review_id', ['in' => $reviewsIds]);
+            $select = $connection->select()->from($this->getReviewStoreTable())->where($inCond);
+            $result = $connection->fetchAll($select);
+            foreach ($result as $row) {
+                if (!isset($storesToReviews[$row['omnyfy_vendor_review_id']])) {
+                    $storesToReviews[$row['omnyfy_vendor_review_id']] = [];
+                }
+                $storesToReviews[$row['omnyfy_vendor_review_id']][] = $row['store_id'];
+            }
+        }
+
+        foreach ($this as $item) {
+            if (isset($storesToReviews[$item->getId()])) {
+                $item->setStores($storesToReviews[$item->getId()]);
+            } else {
+                $item->setStores([]);
+            }
+        }
+    }
+
+    /**
+     * Get review table
+     *
+     * @return string
+     */
+    protected function getReviewTable()
+    {
+        if ($this->_reviewTable === null) {
+            $this->_reviewTable = $this->getTable('vendor_review');
+        }
+        return $this->_reviewTable;
+    }
+
+    /**
+     * Get review detail table
+     *
+     * @return string
+     */
+    protected function getReviewDetailTable()
+    {
+        if ($this->_reviewDetailTable === null) {
+            $this->_reviewDetailTable = $this->getTable('omnyfy_vendor_review_detail');
+        }
+        return $this->_reviewDetailTable;
+    }
+
+    /**
+     * Get review status table
+     *
+     * @return string
+     */
+    protected function getReviewStatusTable()
+    {
+        if ($this->_reviewStatusTable === null) {
+            $this->_reviewStatusTable = $this->getTable('omnyfy_vendor_review_status');
+        }
+        return $this->_reviewStatusTable;
+    }
+
+    /**
+     * Get review entity table
+     *
+     * @return string
+     */
+    protected function getReviewEntityTable()
+    {
+        if ($this->_reviewEntityTable === null) {
+            $this->_reviewEntityTable = $this->getTable('omnyfy_vendor_review_entity');
+        }
+        return $this->_reviewEntityTable;
+    }
+
+    /**
+     * Get review store table
+     *
+     * @return string
+     */
+    protected function getReviewStoreTable()
+    {
+        if ($this->_reviewStoreTable === null) {
+            $this->_reviewStoreTable = $this->getTable('omnyfy_vendor_review_store');
+        }
+        return $this->_reviewStoreTable;
+    }
+}

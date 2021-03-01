@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">omnyfy_mcm_newwithdrawal_form.omnyfy_mcm_newwithdrawal_form_data_source</item>
+            <item name="deps" xsi:type="string">omnyfy_mcm_newwithdrawal_form.omnyfy_mcm_newwithdrawal_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Vendor Fee Management</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">omnyfy_mcm_newwithdrawal_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Omnyfy\Mcm\Block\Adminhtml\Edit\BackButton</item>
+            <item name="save" xsi:type="string">Omnyfy\Mcm\Block\Adminhtml\VendorWithdrawal\SubmitButton</item>
+        </item>
+    </argument>
+    <dataSource name="omnyfy_mcm_newwithdrawal_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Omnyfy\Mcm\Ui\DataProvider\VendorWithdrawalHistory\Form\NewWithdrawalDataProvider</argument>
+            <argument name="name" xsi:type="string">omnyfy_mcm_newwithdrawal_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">vendor_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="omnyfy_mcm/vendorWithdrawal/save"/>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+<!--                    <item name="filter_url_params" xsi:type="array">
+                        <item name="vendor_id" xsi:type="string">*</item>
+                    </item>-->
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+                <item name="additionalClasses" xsi:type="string">new_withdrawal</item>
+            </item>
+        </argument>
+        <field name="vendor_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">vendor_id</item>
+                </item>
+            </argument>
+        </field>
+        <field name="bank_account_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Omnyfy\Mcm\Model\Source\VendorBankAccount</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Select a Bank Account</item>
+                    <item name="component" xsi:type="string">Omnyfy_Mcm/js/form/components/choose_bank_acc</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">bank_account_id</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[ <div class="admin__field-note" ><span> Select an account to receive the funds. <a href="#" id="vendor_bank_link">Click here</a> to create and manage your bank accounts.</span></div><div class="admin__field-note account-detail hidden"></div>]]>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="withdrawal_amount">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Withdrawal Amount</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataScope" xsi:type="string">withdrawal_amount</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[ <div class="admin__field-note withdrawal-limit" ><div> You can withdraw up to <strong><span>0</span></strong></div>]]>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="greater-than-equals-to" xsi:type="string">0</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        
+    </fieldset>    
+</form>

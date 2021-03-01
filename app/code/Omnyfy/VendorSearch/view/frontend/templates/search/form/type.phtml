@@ -1,0 +1,17 @@
+<?php
+/**
+ * @var $block \Omnyfy\VendorSearch\Block\Search\Form
+ */
+?>
+<?php
+   $types = $block->getSearchForms();
+   foreach($types as $type):
+?>
+    <div class="type-item" data-nav-target="1">
+        <span class="nav-icon">
+            <img src="./imgs/svg/dumbbell-white.svg">
+        </span>
+        <span class="nav-name"><?php echo __($type["name"])?></span>
+    </div>
+<?php endforeach; ?>
+

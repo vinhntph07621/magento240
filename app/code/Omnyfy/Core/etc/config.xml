@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <omnyfy_core>
+            <sms>
+                <title>Basic</title>
+                <api_url><![CDATA[https://api.smsglobal.com/http-api.php]]></api_url>
+                <api_user><![CDATA[ov9i7kay]]></api_user>
+                <api_pass><![CDATA[cK9GRFvL]]></api_pass>
+                <from_number>Omnymart</from_number>
+            </sms>
+            <rest>
+                <log_enabled>0</log_enabled>
+            </rest>
+        </omnyfy_core>
+        <customer>
+            <create_account>
+                <allow_registration>1</allow_registration>
+            </create_account>
+        </customer>
+    </default>
+</config>

@@ -1,0 +1,60 @@
+"Add Template","Add Template"
+ID,ID
+Title,Title
+Actions,Actions
+Edit,Edit
+Remove,Remove
+Duplicate,Duplicate
+"Add Theme","Add Theme"
+"Email Designer","Email Designer"
+"Manage Templates","Manage Templates"
+"Sorry, but you cannot remove the default template.","Sorry, but you cannot remove the default template."
+"Template was successfully deleted","Template was successfully deleted"
+"Template ""%1"" was successfully duplicated.","Template ""%1"" was successfully duplicated."
+"Unable to find template to duplicate","Unable to find template to duplicate"
+"This item not exists.","This item not exists."
+"Liquid template engine is not installed.</br>To show Preview page correctly, please install the Liquid package on the server via the SSH command: composer require liquid/liquid':'~1.4","Liquid template engine is not installed.</br>To show Preview page correctly, please install the Liquid package on the server via the SSH command: composer require liquid/liquid':'~1.4"
+"New Template","New Template"
+"This template no longer exists.","This template no longer exists."
+"You saved the template.","You saved the template."
+"Manage Themes","Manage Themes"
+"Theme was successfully deleted","Theme was successfully deleted"
+"Theme ""%1"" was successfully duplicated.","Theme ""%1"" was successfully duplicated."
+"Unable to find theme to duplicate","Unable to find theme to duplicate"
+"New Theme","New Theme"
+"This theme no longer exists.","This theme no longer exists."
+"You saved the theme.","You saved the theme."
+"Follow Up Email","Follow Up Email"
+Magento,Magento
+"Order/Quote Item","Order/Quote Item"
+"General Variables","General Variables"
+"Customer Name","Customer Name"
+"{{ customer_name }}","{{ customer_name }}"
+"Customer Email","Customer Email"
+"{{ customer_email }}","{{ customer_email }}"
+"Customer First Name","Customer First Name"
+"{{ customer_name | split: "" "" | first }}","{{ customer_name | split: "" "" | first }}"
+"%1 Variables","%1 Variables"
+Delete,Delete
+"Delete item?","Delete item?"
+"Are you sure you want to delete this template?","Are you sure you want to delete this template?"
+"Are you sure you want to delete this theme?","Are you sure you want to delete this theme?"
+"Theme Variables","Theme Variables"
+"Create Editable Area","Create Editable Area"
+Loading...,Loading...
+"Please wait...","Please wait..."
+"Insert Variable","Insert Variable"
+Desktop,Desktop
+Mobile,Mobile
+"Auto Refresh","Auto Refresh"
+Refresh,Refresh
+"Insert Variable...","Insert Variable..."
+"General Information","General Information"
+Back,Back
+Reset,Reset
+Save,Save
+"Save and Continue Edit","Save and Continue Edit"
+Name,Name
+Theme,Theme
+Subject,Subject
+Type,Type

@@ -1,0 +1,33 @@
+<?php
+/**
+ * Project: apcd.
+ * User: jing
+ * Date: 16/11/18
+ * Time: 3:43 PM
+ */
+?>
+<div class="modal fade" tabindex="-1" role="dialog" id="vendor-modal" data-keyboard="false" data-backdrop="static"></div>
+
+<script type="text/x-magento-init">
+{
+    "*" : {
+        "Omnyfy_Vendor/js/view/customer/form" :{}
+    }
+}
+</script>
+
+<script type="text/javascript">
+    require(
+        [
+            'jquery',
+            'jquery/ui',
+            'jquery.bootstrap'
+        ],
+        function($) {
+            if (!window.$bootstrap) window.$bootstrap = {};
+            window.$bootstrap.modal = $.fn.modal.noConflict();
+            window.vendor_id = <?php echo $block->getCurrentStore(); ?>;
+            window.is_loggedin = <?php echo $block->isLoggedIn(); ?>;
+        }
+    );
+</script>

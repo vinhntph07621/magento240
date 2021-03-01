@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Omnyfy\Cms\Api\ArticleManagementInterface" type="Omnyfy\Cms\Model\ArticleManagement" />
+    <preference for="Omnyfy\Cms\Api\CategoryManagementInterface" type="Omnyfy\Cms\Model\CategoryManagement" />
+    <preference for="Magento\Sitemap\Model\Sitemap" type="Omnyfy\Cms\Model\Sitemap" />
+    <virtualType name="Omnyfy\Cms\ImageUpload" type="Omnyfy\Cms\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">omnyfy_cms/tmp</argument>
+            <argument name="basePath" xsi:type="string">omnyfy_cms</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="csv" xsi:type="string">csv</item>
+                <item name="xlsx" xsi:type="string">xlsx</item>
+                <item name="xls" xsi:type="string">xls</item>
+                <item name="doc" xsi:type="string">doc</item>
+                <item name="pdf" xsi:type="string">pdf</item>
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+                <item name="docx" xsi:type="string">docx</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Omnyfy\Cms\Controller\Adminhtml\Article\Upload\FeaturedImg">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Cms\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Cms\Controller\Adminhtml\Article\Upload\OgImg">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Cms\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Cms\Controller\Adminhtml\Category\Upload\CategoryBanner">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Cms\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Cms\Controller\Adminhtml\Category\Upload\CategoryIcon">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Cms\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Cms\Controller\Adminhtml\Country\Upload\FlagImage">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Cms\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Cms\Controller\Adminhtml\Country\Upload\BannerImage">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Cms\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Cms\Controller\Adminhtml\Country\Upload\BackgroundImage">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Cms\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Cms\Controller\Adminhtml\Country\Upload\CalloutImage">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Cms\ImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Omnyfy\Cms\Controller\Adminhtml\Industry\Upload\BackgroundImage">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Cms\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Cms\Controller\Adminhtml\Industry\Upload\IndustryProfileImage">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Cms\ImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Omnyfy\Cms\Controller\Adminhtml\Tool\Template\Upload\Icon">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Cms\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Cms\Controller\Adminhtml\Tool\Template\Upload\UploadTemplate">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Cms\ImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Omnyfy\Vendor\Model\Resource\Location\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_vendor_location_entity</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_vendor_location_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_vendor_location_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Vendor\Model\Resource\Location</argument>
+        </arguments>
+    </type>
+
+    <type name="Omnyfy\Cms\Model\Resource\ToolTemplate\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_cms_tool_template</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_cms_tool_template_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_cms_tool_template_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Cms\Model\Resource\ToolTemplate</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="cms_service_providers_article_listing_data_source" xsi:type="string">Omnyfy\Vendor\Model\Resource\Location\Grid\Collection</item>
+                <item name="cms_tool_templates_article_listing_data_source" xsi:type="string">Omnyfy\Cms\Model\ResourceModel\ToolTemplate\Grid\Collection</item>
+                <item name="cms_tool_template_listing_data_source" xsi:type="string">Omnyfy\Cms\Model\ResourceModel\ToolTemplate\Grid\Collection</item>
+                <item name="cms_user_type_listing_data_source" xsi:type="string">Omnyfy\Cms\Model\ResourceModel\UserType\Grid\Collection</item>
+                <item name="cms_country_listing_data_source" xsi:type="string">Omnyfy\Cms\Model\ResourceModel\Country\Grid\Collection</item>
+                <item name="cms_industry_listing_data_source" xsi:type="string">Omnyfy\Cms\Model\ResourceModel\Industry\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+
+    <type name="Omnyfy\Cms\Ui\Component\MassAction\Status\Options">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlPath" xsi:type="string">cms/tool_template/massStatusUpdate</item>
+                <item name="paramName" xsi:type="string">status</item>
+                <item name="confirm" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Change Status</item>
+                    <item name="message" xsi:type="string" translate="true">Are you sure to change status of selected tool and template?</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

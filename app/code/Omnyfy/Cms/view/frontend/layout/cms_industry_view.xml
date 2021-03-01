@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title" remove="true"/>
+		<attribute name="class" value="bg-light-grey"/>
+		<attribute name="class" value="wrapper-body"/>
+        <referenceContainer name="content">
+            <block class="Omnyfy\Cms\Block\Industry\View" name="industry.profile" template="Omnyfy_Cms::industry/view.phtml">
+				<block class="Magento\Cms\Block\Block" as="ready.to.sell" name="ready_to_sell">
+					<arguments>
+						<argument name="block_id" xsi:type="string">ready_to_sell</argument>
+					</arguments>
+				</block>
+				<!-- <block class="Omnyfy\Cms\Block\Country\View\Export" name="country.profile.export" template="Omnyfy_Cms::country/view/export.phtml">
+					<block class="Magento\Cms\Block\Block" as="country.export" name="country_export">
+						<arguments>
+							<argument name="block_id" xsi:type="string">country_export</argument>
+						</arguments>
+					</block>
+				</block>
+				<block class="Omnyfy\Cms\Block\Country\View\Industry" name="country.profile.industry" template="Omnyfy_Cms::country/view/industry.phtml" /> -->
+				<block class="Omnyfy\Cms\Block\Industry\View\GeneralInfo" name="industry.generalinfo" template="Omnyfy_Cms::industry/view/generalinfo.phtml" /> 
+				<block class="Omnyfy\Cms\Block\Industry\View\ByCountry" name="industry.bycountry" template="Omnyfy_Cms::industry/view/bycountry.phtml" /> 
+				<block class="Omnyfy\Events\Block\CountryIndustry\Event" name="industry.events" template="Omnyfy_Events::cms/events.phtml" /> 
+            </block>
+        </referenceContainer>
+    </body>
+</page>

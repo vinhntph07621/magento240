@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="vendor.navigation">
+            <block name="vendor.navigation.gallery" class="Omnyfy\Core\Block\Element\Html\Link\PageSectionLink" after="-">
+                <arguments>
+                    <argument name="css_class" xsi:type="string">vendor-nav-item</argument>
+                    <argument name="path" xsi:type="string">#gallery</argument>
+                    <argument name="label" xsi:type="string">Gallery</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="vendor.sections">
+            <block class="Omnyfy\VendorGallery\Block\Vendor\View"
+                   name="vendor_gallery_merchant"
+                   template="Omnyfy_VendorGallery::albums/album_listing.phtml"
+                   after="overview">
+                <arguments>
+                    <argument name="title" xsi:type="string">Gallery</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

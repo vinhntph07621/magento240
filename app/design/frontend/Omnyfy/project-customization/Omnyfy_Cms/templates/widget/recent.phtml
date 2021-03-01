@@ -1,0 +1,51 @@
+<?php
+/**
+ * Cms article list template
+ *
+ * @var $block \Omnyfy\Cms\Block\Article\ArticleList
+ */
+?>
+<?php
+$_articleCollection = $block->getArticleCollection();
+?>
+
+<?php if ($_articleCollection->count()): ?>
+    <div class="media-article">
+        <p style="font-size: 20px; font-weight: 500; text-transform: uppercase">Media</p>
+        <div class="content-media" style="padding-top: 30px">
+            <div class="row">
+                <?php foreach ($_articleCollection as $_article): ?>
+                    <?php $postCategories = $_article->getParentCategories(); ?>
+                    <div class="col-md-4">
+                        <div class="article-image">
+                            <a href="<?php echo $_article->getArticleUrl() ?>"><img
+                                        src="<?php echo $_article->getFeaturedImage() ?>" alt=""></a>
+                        </div>
+                        <div class="article-info" style="line-height: 20px;">
+                            <div class="article-text">
+                                <span style="font-size: 11px; text-transform: uppercase"><?php echo date("F j, Y", strtotime($_article->getPublishTime())); ?></span>
+                                -
+                                <?php if (count($postCategories) > 0): ?>
+                                    <?php foreach ($postCategories as $category): ?>
+                                        <?php if ($category->getCategoryId() != 1) : ?>
+                                            <a style="text-decoration: none; font-size: 12px" href="/<?= $category->getUrl()?>"><?php echo $category->getTitle(); ?></a>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </div>
+                            <div class="article-title">
+                                <a href="<?php echo $_article->getArticleUrl() ?>"><p
+                                            style="font-size: 14px; font-weight: 500"><?php echo $block->escapeHtml($_article->getTitle(), null, true); ?></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+<?php else: ?>
+    <div class="message info empty"><?php echo __('We can\'t find articles matching the selection.') ?></div>
+<?php endif; ?>
+
+

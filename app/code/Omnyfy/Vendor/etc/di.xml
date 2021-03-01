@@ -1,0 +1,424 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="order_total" xsi:type="object">Omnyfy\Vendor\Command\ProcessOrderTotal</item>
+                <item name="invoice_total" xsi:type="object">Omnyfy\Vendor\Command\ProcessInvoiceTotal</item>
+                <item name="notification_email" xsi:type="object">Omnyfy\Vendor\Command\SendVendorEmail</item>
+                <item name="import_inventory" xsi:type="object">Omnyfy\Vendor\Command\ImportInventory</item>
+                <item name="generate_order_json" xsi:type="object">Omnyfy\Vendor\Command\GenerateOrderJson</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="omnyfy_quote_address" type="Omnyfy\Vendor\Plugin\Quote\Model\Quote\Address" sortOrder="100" />
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address\Total\Shipping">
+        <plugin name="omnyfy_quote_address_total_shipping" type="Omnyfy\Vendor\Plugin\Quote\Model\Quote\Address\Total\Shipping" />
+    </type>
+
+    <type name="Magento\CatalogInventory\Model\StockRegistry">
+        <plugin name="omnyfy_stock_registry" type="Omnyfy\Vendor\Plugin\StockRegistry" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\StockRegistryProvider">
+        <plugin name="omnyfy_stock_registry_provider" type="Omnyfy\Vendor\Plugin\StockRegistryProvider" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\StockStateProvider">
+        <plugin name="omnyfy_stock_status_provider" type="Omnyfy\Vendor\Plugin\StockStateProvider" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\Quote\Item\QuantityValidator\Initializer\Option">
+        <plugin name="omnyfy_quantity_validator_initializer_option"
+                type="Omnyfy\Vendor\Plugin\Quote\Model\Quote\Item\QuantityValidator\Initializer\Option" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\Quote\Item\QuantityValidator\Initializer\StockItem">
+        <plugin name="omnyfy_quantity_validator_initializer_stockitem"
+                type="Omnyfy\Vendor\Plugin\Quote\Model\Quote\Item\QuantityValidator\Initializer\StockItem" sortOrder="100"/>
+    </type>
+    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
+        <plugin name="omnyfy_cart_shipping_method_converter"
+                type="Omnyfy\Vendor\Plugin\Quote\Model\Cart\ShippingMethodConverter" sortOrder="100"/>
+    </type>
+    <type name="Magento\Quote\Model\QuoteValidator">
+        <plugin name="omnyfy_quote_validator"
+                type="Omnyfy\Vendor\Plugin\Quote\Model\QuoteValidator" sortOrder="100"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="omnyfy_vendor_to_order_item"
+                type="Omnyfy\Vendor\Plugin\Quote\Model\Quote\Item\ToOrderItem" sortOrder="100" />
+    </type>
+    <type name="Magento\Checkout\Model\DefaultConfigProvider">
+        <plugin name="omnyfy_vendor_config_provider"
+                type="Omnyfy\Vendor\Plugin\DefaultConfigProvider" sortOrder="100" />
+    </type>
+    <type name="Magento\Checkout\Model\PaymentInformationManagement">
+        <plugin name="omnyfy_vendor_payment_info_management"
+                type="Omnyfy\Vendor\Plugin\PaymentInformationManagement" sortOrder="100" />
+    </type>
+    <type name="Magento\Quote\Model\ShippingMethodManagement">
+        <plugin name="omnyfy_vendor_shipping_method_management"
+                type="Omnyfy\Vendor\Plugin\ShippingMethodManagement" sortOrder="100"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\ShippingAssignment\ShippingProcessor">
+        <plugin name="omnyfy_vendor_quote_shipping_assignment"
+                type="Omnyfy\Vendor\Plugin\Quote\ShippingAssignment\ShippingProcessor" sortOrder="100"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\ToOrder">
+        <plugin name="omnyfy_vendor_quote_address_to_order"
+                type="Omnyfy\Vendor\Plugin\Quote\Address\ToOrder" sortOrder="100"/>
+    </type>
+    <type name="Magento\Sales\Model\Order">
+        <plugin name="omnyfy_vendor_order_set_shipping_method"
+                type="Omnyfy\Vendor\Plugin\Sales\Model\Order" sortOrder="100"/>
+    </type>
+
+    <type name="Magento\Rule\Model\Condition\Product\AbstractProduct">
+        <plugin name="Omnyfy_Vendor::Rule_Condition_Product_AbstractProduct"
+                type="Omnyfy\Vendor\Plugin\Rule\Condition\Product\AbstractProduct" sortOrder="100" />
+    </type>
+    <type name="Magento\Rule\Model\Condition\AbstractCondition">
+        <plugin name="Omnyfy_Vendor::Condition_AbstractCondition"
+                type="Omnyfy\Vendor\Plugin\Rule\Condition\AbstractCondition" sortOrder="100" />
+    </type>
+
+    <type name="Magento\SalesRule\Model\Rule\Condition\Product">
+        <plugin name="Omnyfy_Vendor::SalesRule_Rule_Condition_Product"
+                type="Omnyfy\Vendor\Plugin\SalesRule\RuleConditionProduct" sortOrder="100" />
+    </type>
+
+    <type name="Magento\Rule\Model\Condition\Combine">
+        <plugin name="Omnyfy_Vendor::SalesRule_Rule_Condition_Product"
+                type="Omnyfy\Vendor\Plugin\Rule\Condition\Combine" sortOrder="100" />
+    </type>
+
+    <type name="Magento\Sales\Model\ResourceModel\Order\Handler\State">
+        <plugin name="omnyfy_vendor_order_handler_state"
+                type="Omnyfy\Vendor\Plugin\Sales\Model\ResourceModel\OrderHandlerState" sortOrder="100" />
+    </type>
+
+    <type name="Magento\SalesRule\Model\Rule">
+        <plugin name="omnyfy_vendor_plugin_salesrule_rule"
+                type="Omnyfy\Vendor\Plugin\SalesRule\Rule" sortOrder="100"/>
+    </type>
+
+    <type name="Amasty\AdminActionsLog\Helper\Data">
+        <plugin name="Omnyfy_Vendor::eav_attribute_group_not_need_origin"
+                type="Omnyfy\Vendor\Plugin\Amasty\AdminActionLog\Helper" sortOrder="100" />
+    </type>
+
+    <type name="Omnyfy\Vendor\Model\Vendor">
+        <plugin name="add_extension_attributes" type="Omnyfy\Vendor\Plugin\Vendor\SetExtensionAttributes" sortOrder="100"/>
+    </type>
+    <type name="Omnyfy\Vendor\Model\Location">
+        <plugin name="add_extension_attributes" type="Omnyfy\Vendor\Plugin\Vendor\SetExtensionAttributes" sortOrder="100"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote">
+        <plugin name="omnyfy_vendor_plugin_quote" type="Omnyfy\Vendor\Plugin\Quote" sortOrder="100"/>
+    </type>
+
+    <type name="Magento\Eav\Model\Entity\Setup\PropertyMapper\Composite">
+        <arguments>
+            <argument name="propertyMappers" xsi:type="array">
+                <item name="omnyfy_vendor" xsi:type="string">Omnyfy\Vendor\Model\Resource\Setup\PropertyMapper</item>
+            </argument>
+        </arguments>
+    </type>
+
+<!--
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="omnyfy_vendor_vendor_listing_data_source" xsi:type="string">Omnyfy\Vendor\Model\Resource\Vendor\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="VendorGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="VendorGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Omnyfy\Vendor\Model\Resource\Vendor\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">VendorGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Omnyfy\Vendor\Model\Resource\Vendor\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_vendor</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Vendor\Model\Resource\Vendor</argument>
+        </arguments>
+    </virtualType>
+-->
+    <virtualType name="ShipmentGridAggregator">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="location_id" xsi:type="string">sales_shipment.location_id</item>
+                <item name="vendor_id" xsi:type="string">sales_shipment.vendor_id</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Omnyfy\Vendor\VendorImageUpload" type="Omnyfy\Vendor\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">omnyfy/tmp/vendor</argument>
+            <argument name="basePath" xsi:type="string">omnyfy/vendor</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+                <item name="pdf" xsi:type="string">pdf</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Omnyfy\Vendor\Controller\Adminhtml\Vendor\Store\Upload\Logo">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Vendor\VendorImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Controller\Adminhtml\Vendor\Store\Upload\Banner">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Vendor\VendorImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Controller\Adminhtml\Vendor\Store\Upload\Media">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Vendor\VendorImageUpload</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Omnyfy\Vendor\LocationImageUpload" type="Omnyfy\Vendor\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">omnyfy/tmp/location</argument>
+            <argument name="basePath" xsi:type="string">omnyfy/location</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+                <item name="pdf" xsi:type="string">pdf</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Omnyfy\Vendor\Controller\Adminhtml\Location\Upload\Logo">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Vendor\LocationImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Omnyfy\Vendor\Controller\Adminhtml\Location\Upload\Media">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Omnyfy\Vendor\LocationImageUpload</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Omnyfy\Vendor\Model\System\Config\Source\InputtypeFactory" type="Magento\Eav\Model\Adminhtml\System\Config\Source\InputtypeFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Magento\Catalog\Model\System\Config\Source\Inputtype</argument>
+        </arguments>
+    </virtualType>
+    <!--
+    <preference for="Magento\Quote\Model\ShippingMethodManagement" type="Omnyfy\Vendor\Model\ShippingMethodManagement"/>
+    -->
+    <preference for="Magento\Checkout\Model\ShippingInformationManagement" type="Omnyfy\Vendor\Model\ShippingInformationManagement" />
+
+    <preference for="Magento\Checkout\Model\TotalsInformationManagement" type="Omnyfy\Vendor\Model\TotalsInformationManagement" />
+
+<!--
+    <preference for="Magento\Quote\Model\Quote\Address\Total\Shipping" type="Omnyfy\Vendor\Model\Quote\Address\Total\Shipping" />
+-->
+
+    <preference for="Magento\Shipping\Controller\Adminhtml\Order\Shipment\Save"
+                type="Omnyfy\Vendor\Controller\Adminhtml\Order\Shipment\Save" />
+
+    <preference for="Magento\Shipping\Controller\Adminhtml\Order\Shipment\Start"
+                type="Omnyfy\Vendor\Controller\Adminhtml\Order\Shipment\Start" />
+    <preference for="Omnyfy\Vendor\Api\LocationRepositoryInterface" type="Omnyfy\Vendor\Model\LocationRepository" />
+    <preference for="Omnyfy\Vendor\Api\Data\LocationSearchResultsInterface" type="\Magento\Framework\Api\SearchResults" />
+    <preference for="Omnyfy\Vendor\Api\VendorRepositoryInterface" type="Omnyfy\Vendor\Model\VendorRepository" />
+    <preference for="Omnyfy\Vendor\Api\Data\VendorSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Omnyfy\Vendor\Api\VendorTypeRepositoryInterface" type="Omnyfy\Vendor\Model\VendorTypeRepository" />
+    <preference for="Omnyfy\Vendor\Api\Data\VendorTypeSearchResultInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Magento\Sales\Model\ResourceModel\Order\Grid\Collection" type="Omnyfy\Vendor\Model\Resource\Order\GridCollection" />
+    <preference for="Magento\Sales\Model\ResourceModel\Order\Item\Collection" type="Omnyfy\Vendor\Model\Resource\Order\ItemCollection" />
+    <preference for="Magento\Sales\Model\ResourceModel\Order\Invoice\Grid\Collection" type="Omnyfy\Vendor\Model\Resource\Invoice\GridCollection" />
+    <preference for="Magento\Sales\Model\ResourceModel\Order\Shipment\Grid\Collection" type="Omnyfy\Vendor\Model\Resource\Shipment\GridCollection" />
+    <preference for="Magento\Sales\Model\ResourceModel\Order\Shipment\Order\Grid\Collection" type="Omnyfy\Vendor\Model\Resource\Shipment\GridCollection" />
+    <preference for="Magento\Catalog\Model\ResourceModel\Product\Collection" type="Omnyfy\Vendor\Model\Resource\Product\Collection" />
+    <preference for="Magento\Catalog\Ui\DataProvider\Product\ProductCollection" type="Omnyfy\Vendor\Ui\DataProvider\Product\ProductCollection" />
+    <preference for="Magento\Customer\Model\ResourceModel\Grid\Collection" type="Omnyfy\Vendor\Model\Resource\Customer\GridCollection" />
+    <preference for="Magento\SalesRule\Model\ResourceModel\Rule\Quote\Collection" type="Omnyfy\Vendor\Model\Resource\Rule\QuoteCollection" />
+
+    <preference for="Magento\Sales\Block\Adminhtml\Order\View\Items\Renderer\DefaultRenderer" type="Omnyfy\Vendor\Block\Adminhtml\Order\View\Items\Renderer\DefaultRenderer" />
+
+    <preference for="Magento\Sales\Block\Adminhtml\Items\Renderer\DefaultRenderer" type="Omnyfy\Vendor\Block\Adminhtml\Items\Renderer\DefaultRenderer" />
+    <preference for="Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form"
+                type="Omnyfy\Vendor\Block\Adminhtml\Order\Create\Shipping\Method\Form" />
+    <preference for="Magento\Tax\Helper\Data" type="Omnyfy\Vendor\Helper\Tax" />
+
+    <preference for="Omnyfy\Vendor\Api\LocationAttributeRepositoryInterface"
+                type="Omnyfy\Vendor\Model\Location\AttributeRepository" />
+    <preference for="Omnyfy\Vendor\Api\VendorAttributeRepositoryInterface"
+                type="Omnyfy\Vendor\Model\Vendor\AttributeRepository" />
+    <preference for="Omnyfy\Vendor\Api\VendorAttributeManagementInterface" type="Omnyfy\Vendor\Model\Vendor\Attribute\Management" />
+    <preference for="Omnyfy\Vendor\Api\LocationAttributeManagementInterface" type="Omnyfy\Vendor\Model\Location\Attribute\Management" />
+
+    <preference for="Omnyfy\Vendor\Api\Data\VendorAttributeInterface" type="Omnyfy\Vendor\Model\Resource\Vendor\Eav\Attribute" />
+    <preference for="Omnyfy\Vendor\Api\Data\LocationAttributeInterface" type="Omnyfy\Vendor\Model\Resource\Eav\Attribute" />
+
+    <preference for="Magento\Sales\Model\Order\Pdf\Invoice" type="Omnyfy\Vendor\Model\Order\Pdf\Invoice" />
+
+    <preference for="Omnyfy\Vendor\Api\SearchRepositoryInterface" type="Omnyfy\Vendor\Model\SearchRepository" />
+
+    <virtualType name="locationRowsFlatTableBuilder" type="Omnyfy\Vendor\Model\Indexer\Location\Flat\FlatTableBuilder">
+        <arguments>
+            <argument name="tableData" xsi:type="object">Omnyfy\Vendor\Model\Indexer\Location\Flat\Action\Rows\TableData</argument>
+        </arguments>
+    </virtualType>
+    <type name="Omnyfy\Vendor\Model\Indexer\Location\Flat\Action\Rows">
+        <arguments>
+            <argument name="flatTableBuilder" xsi:type="object">locationRowsFlatTableBuilder</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Model\Indexer\Location\Flat\FlatTableBuilder">
+        <arguments>
+            <argument name="tableData" xsi:type="object">Omnyfy\Vendor\Model\Indexer\Location\Flat\TableData</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="vendorRowsFlatTableBuilder" type="Omnyfy\Vendor\Model\Indexer\Vendor\Flat\FlatTableBuilder">
+        <arguments>
+            <argument name="tableData" xsi:type="object">Omnyfy\Vendor\Model\Indexer\Vendor\Flat\Action\Rows\TableData</argument>
+        </arguments>
+    </virtualType>
+    <type name="Omnyfy\Vendor\Model\Indexer\Vendor\Flat\Action\Rows">
+        <arguments>
+            <argument name="flatTableBuilder" xsi:type="object">vendorRowsFlatTableBuilder</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Model\Indexer\Vendor\Flat\FlatTableBuilder">
+        <arguments>
+            <argument name="tableData" xsi:type="object">Omnyfy\Vendor\Model\Indexer\Vendor\Flat\TableData</argument>
+        </arguments>
+    </type>
+
+    <preference for="Omnyfy\Vendor\Api\Data\LocationSimpleParameterSearchInterface"
+                type="\Omnyfy\Core\Api\SimpleParameterSearch" />
+
+    <preference for="Omnyfy\Vendor\Api\BindRepositoryInterface"
+                type="Omnyfy\Vendor\Model\BindRepository" />
+
+    <preference for="Omnyfy\Vendor\Api\StockRepositoryInterface"
+                type="Omnyfy\Vendor\Model\StockRepository" />
+
+    <preference for="Omnyfy\Vendor\Api\Data\StockInterface"
+                type="Omnyfy\Vendor\Model\Stock" />
+
+    <preference for="Omnyfy\Vendor\Api\BindFavouriteVendorRepositoryInterface"
+                type="Omnyfy\Vendor\Model\BindFavouriteVendorRepository" />
+
+    <preference for="Omnyfy\Vendor\Api\Data\InventoryInterface"
+                type="Omnyfy\Vendor\Model\Location\Inventory" />
+
+    <preference for="Omnyfy\Vendor\Api\LocationProductRepositoryInterface"
+                type="Omnyfy\Vendor\Model\Service\Product\LocationRepository" />
+
+    <preference for="Omnyfy\Vendor\Api\VendorProductRepositoryInterface"
+                type="Omnyfy\Vendor\Model\Service\Product\VendorRepository" />
+
+    <type name="Omnyfy\Vendor\Model\Resource\Location\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_vendor_location_entity</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_vendor_location_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_vendor_location_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Vendor\Model\Resource\Location</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Model\Resource\Inventory\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_vendor_inventory</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_vendor_inventory_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_vendor_inventory_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Vendor\Model\Resource\Inventory</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Model\Resource\Inventory\Grid\StockReportCollection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_vendor_inventory</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_vendor_location_stock_report</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_vendor_location_stock_report</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Vendor\Model\Resource\Inventory\StockReportCollection</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Model\Resource\Vendor\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_vendor_vendor_entity</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_vendor_vendor_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_vendor_vendor_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Vendor\Model\Resource\Vendor</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="omnyfy_vendor_location_listing_data_source" xsi:type="string">Omnyfy\Vendor\Model\Resource\Location\Grid\Collection</item>
+                <item name="omnyfy_vendor_inventory_listing_data_source" xsi:type="string">Omnyfy\Vendor\Model\Resource\Inventory\Grid\Collection</item>
+                <item name="omnyfy_vendor_location_stock_report_data_source" xsi:type="string">Omnyfy\Vendor\Model\Resource\Inventory\Grid\StockReportCollection</item>
+                <item name="omnyfy_vendor_vendor_type_listing_data_source" xsi:type="string">Omnyfy\Vendor\Model\Resource\VendorType\Grid\Collection</item>
+                <item name="omnyfy_vendor_vendor_listing_data_source" xsi:type="string">Omnyfy\Vendor\Model\Resource\Vendor\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="Omnyfy\Vendor\Model\Entity\Vendor\Attribute\Group\AttributeMapperInterface"
+                type="Omnyfy\Vendor\Model\Entity\Vendor\Attribute\Group\AttributeMapper" />
+
+    <preference for="Omnyfy\Vendor\Model\Entity\Location\Attribute\Group\AttributeMapperInterface"
+                type="Omnyfy\Vendor\Model\Entity\Location\Attribute\Group\AttributeMapper" />
+    <preference for="Omnyfy\Vendor\Model\Indexer\Vendor\Flat\Table\BuilderInterface" type="Omnyfy\Vendor\Model\Indexer\Vendor\Flat\Table\Builder"/>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Omnyfy\Vendor\Api\Data\VendorInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">omnyfy_vendor_vendor_entity</item>
+                    <item name="eavEntityType" xsi:type="string">omnyfy_vendor_vendor</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                    <item name="entityContext" xsi:type="array">
+                        <item name="store" xsi:type="string">Magento\Store\Model\StoreScopeProvider</item>
+                    </item>
+                </item>
+                <item name="Omnyfy\Vendor\Api\Data\LocationInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">omnyfy_vendor_location_entity</item>
+                    <item name="eavEntityType" xsi:type="string">omnyfy_vendor_location</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                    <item name="entityContext" xsi:type="array">
+                        <item name="store" xsi:type="string">Magento\Store\Model\StoreScopeProvider</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\User\Controller\Adminhtml\User\Save">
+        <plugin name="omnyfy_vendor_user_save" type="Omnyfy\Vendor\Plugin\UserSavePlugin" sortOrder="10"/>
+    </type>
+
+    <preference for="Magento\Catalog\Controller\Adminhtml\Product\MassStatus" type="Omnyfy\Vendor\Controller\Adminhtml\Product\MassStatus" />
+
+    <type name="Magento\Catalog\Helper\Product\Edit\Action\Attribute">
+        <plugin name="omnyfy_product_attribute_mass" type="Omnyfy\Vendor\Plugin\Product\ProductMassAttribute" sortOrder="99" />
+    </type>
+
+    <preference for="Omnyfy\Vendor\Api\ShippingMessagesRepositoryInterface"
+                type="Omnyfy\Vendor\Model\ShippingMessages"/>
+
+</config>

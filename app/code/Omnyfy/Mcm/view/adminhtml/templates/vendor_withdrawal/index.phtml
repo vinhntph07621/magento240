@@ -1,0 +1,37 @@
+<?php
+$totalEarning = $block->getTotalEarning();
+$totalEarningCurrentMonth = $block->getTotalEarningCurrentMonth();
+$widthdrawalsData = $block->getWithdrawalsPayoutReceived();
+$withdrawalAmount = $block->getWithdrawalAmount();
+$ewalletAvailableBalance = $block->ewalletAvailableBalance();
+//echo "<pre>";
+//print_r($block->getEarningLastUpdated());
+//die;
+?>
+<div class="withdrawal-tile">
+    <div class="tile-row">
+        <div class="tile-title"><strong>Lifetime Withdrawal</strong></div>
+        <div class="tile-updated"><?php echo $block->getWithdrawalLastUpdated() ? 'Last Updated: ' . $block->getWithdrawalLastUpdated() : ''; ?></div>
+    </div>
+    <div class="tile-row">
+        <div class="tile-withdrawal-col">
+            <div class="font-size-1r">Total Earnings</div>
+            <div class="tile-currency"><?php echo $block->escapeHtml($block->currency(isset($totalEarning['total_balance_owing']) ? $totalEarning['total_balance_owing'] : 0)); ?></div>
+        </div>
+        <div class="tile-withdrawal-col">
+            <div class="font-size-1r">Payout Received</div>
+            <div class="tile-currency"><?php echo $block->escapeHtml($block->currency(isset($widthdrawalsData['payout_amount']) ? $widthdrawalsData['payout_amount'] : 0)); ?></div>
+
+        </div>
+        <div class="tile-withdrawal-col">
+            <div class="font-size-1r">Total Withdrawn</div>
+            <div class="tile-currency"><?php echo $block->escapeHtml($block->currency(isset($withdrawalAmount['withdrawal_amount']) ? $withdrawalAmount['withdrawal_amount'] : 0)); ?></div>
+        </div>
+        <div class="tile-withdrawal-col">
+            <div class="font-size-1r">Available Balance</div>
+            <div class="tile-currency"><?php echo $block->escapeHtml($block->currency(isset($ewalletAvailableBalance['ewallet_balance']) ? $ewalletAvailableBalance['ewallet_balance'] : 0)); ?></div>
+        </div>
+    </div>
+
+</div>
+<div class="clear-both"></div>

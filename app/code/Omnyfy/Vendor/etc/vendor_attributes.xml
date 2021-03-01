@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Omnyfy_Vendor:etc/vendor_attributes.xsd">
+    <group name="vendor">
+        <attribute name="name"/>
+        <attribute name="status"/>
+        <attribute name="address"/>
+        <attribute name="phone"/>
+        <attribute name="email"/>
+        <attribute name="description"/>
+        <attribute name="created_at"/>
+    </group>
+    <group name="unassignable">
+        <attribute name="logo"/>
+        <attribute name="banner"/>
+        <attribute name="shipping_policy"/>
+        <attribute name="return_policy"/>
+        <attribute name="payment_policy"/>
+        <attribute name="marketing_policy"/>
+        <attribute name="fax"/>
+        <attribute name="abn"/>
+    </group>
+</config>

@@ -1,0 +1,78 @@
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!-- ko ifnot: isItemsBlockExpanded() -->
+<div class="block items-in-cart" data-bind="mageInit: {'collapsible':{'openedState': 'active'}}">
+    <div class="title" data-role="title">
+        <strong role="heading"><span data-bind="text: getItemsQty()"></span>
+            <!-- ko if: getItemsQty() == 1 -->
+            <!-- ko i18n: 'Item in Cart' --><!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: getItemsQty() > 1 -->
+            <!-- ko i18n: 'Items in Cart' --><!-- /ko -->
+            <!-- /ko -->
+        </strong>
+    </div>
+    <div class="content minicart-items" data-role="content">
+        <div class="minicart-items-wrapper overflowed">
+            <ol class="minicart-items">
+                <!-- ko foreach: {data: getLocations(), as: 'loc1'} -->
+                <li><div><span data-bind="text: loc1.vendor_name"/> - <span data-bind="text: loc1.location_name"/></div></li>
+                <!-- ko foreach: {data: $parent.getItems(), as: 'item'} -->
+
+                <!-- ko if: loc1.entity_id == $parents[1].getLocationId(item.item_id) -->
+                <li class="product-item">
+                    <div class="product">
+                        <!-- ko foreach: {data:$parents[1].elems(), as: 'elem'} -->
+                        <span data-bind="text: console.log(elem)"/>
+                        <!-- ko template: getTemplate() --><!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                </li>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+            </ol>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if: isItemsBlockExpanded() -->
+<div class="block items-in-cart" data-bind="mageInit: {'collapsible':{'openedState': 'active', 'active': true}}">
+    <div class="title" data-role="title">
+        <strong role="heading"><span data-bind="text: getItemsQty()"></span>
+            <!-- ko if: getItemsQty() == 1 -->
+            <!-- ko i18n: 'Item in Cart' --><!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: getItemsQty() > 1 -->
+            <!-- ko i18n: 'Items in Cart' --><!-- /ko -->
+            <!-- /ko -->
+        </strong>
+    </div>
+    <!-- ko foreach: {data:getLocations(), as: 'loc2'} -->
+    <div class="title">
+        <strong><span data-bind="text: loc2.vendor_name"/> - <span data-bind="text: loc2.location_name"/></strong>
+    </div>
+    <div class="content minicart-items" data-role="content">
+        <div class="minicart-items-wrapper overflowed">
+            <ol class="minicart-items">
+                <!-- ko foreach: {data:$parent.getItems(), as: 'item'} -->
+                <!-- ko if: $parents[1].getLocationId(item.item_id) == loc2.entity_id -->
+                <li class="product-item">
+                    <div class="product">
+                        <!-- ko foreach: $parents[1].elems() -->
+                        <!-- ko template: getTemplate() --><!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                </li>
+                <!-- /ko -->
+                <!-- /ko -->
+            </ol>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->

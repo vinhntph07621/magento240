@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">omnyfy_mcm_pending_payout_view.omnyfy_mcm_pending_payout_view_data_source</item>
+            <item name="deps" xsi:type="string">omnyfy_mcm_pending_payout_view.omnyfy_mcm_pending_payout_view_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Payout Details</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+            <item name="navContainerName" xsi:type="string">left</item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">omnyfy_mcm_pending_payout_view</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Omnyfy\Mcm\Block\Adminhtml\Edit\BackButton</item>
+        </item>
+    </argument>
+    <dataSource name="omnyfy_mcm_pending_payout_view_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Omnyfy\Mcm\Ui\DataProvider\PendingPayout\View\PendingPayoutViewDataProvider</argument>
+            <argument name="name" xsi:type="string">omnyfy_mcm_pending_payout_view_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">vendor_id</argument>
+            <argument name="requestFieldName" xsi:type="string">vendor_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="filter_url_params" xsi:type="array">
+                        <item name="vendor_id" xsi:type="string">*</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="payout_orders">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Orders Included in Payout </item>
+                <item name="additionalClasses" xsi:type="string">payout-orders</item>
+            </item>
+        </argument>
+        <container name="payout_orders_container" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">200</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Omnyfy\Mcm\Block\Adminhtml\PendingPayouts\View\Tab\PayoutOrders</argument>
+            </htmlContent>
+            <insertListing name="payout_orders">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="autoRender" xsi:type="boolean">true</item>                    
+                        <item name="dataScope" xsi:type="string">omnyfy_mcm_pending_payout_payout_order_listing</item>
+                        <item name="externalProvider" xsi:type="string">omnyfy_mcm_pending_payout_payout_order_listing.omnyfy_mcm_pending_payout_payout_order_listing_data_source</item>
+                        <item name="ns" xsi:type="string">omnyfy_mcm_pending_payout_payout_order_listing</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="vendor_id" xsi:type="string">${ $.provider }:data.vendor_id</item>
+                        </item>
+                        <item name="exports" xsi:type="array">
+                            <item name="vendor_id" xsi:type="string">${ $.externalProvider }:params.vendor_id</item>
+                        </item>
+                    
+                    </item>
+                </argument>
+            </insertListing>
+        </container>        
+    </fieldset>
+    <fieldset name="pending_orders">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Pending Orders</item>
+                <item name="additionalClasses" xsi:type="string">payout-orders</item>
+            </item>
+        </argument>
+        <container name="pending_orders_container" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">200</item>
+                </item>
+            </argument>
+            <htmlContent name="pending_order_html_content">
+                <argument name="block" xsi:type="object">Omnyfy\Mcm\Block\Adminhtml\PendingPayouts\View\Tab\PendingOrders</argument>
+            </htmlContent>
+            <insertListing name="pending_orders">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="autoRender" xsi:type="boolean">true</item>                    
+                        <item name="dataScope" xsi:type="string">omnyfy_mcm_pending_payout_pending_order_listing</item>
+                        <item name="externalProvider" xsi:type="string">omnyfy_mcm_pending_payout_pending_order_listing.omnyfy_mcm_pending_payout_pending_order_listing_data_source</item>
+                        <item name="ns" xsi:type="string">omnyfy_mcm_pending_payout_pending_order_listing</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="vendor_id" xsi:type="string">${ $.provider }:data.vendor_id</item>
+                        </item>
+                        <item name="exports" xsi:type="array">
+                            <item name="vendor_id" xsi:type="string">${ $.externalProvider }:params.vendor_id</item>
+                        </item>
+                    
+                    </item>
+                </argument>
+            </insertListing>
+        </container>        
+    </fieldset>        
+</form>

@@ -1,0 +1,112 @@
+<?php
+/* @var \Omnyfy\VendorSignUp\Block\Adminhtml\SignUp $block*/
+$signUpData = $block->getSignUp();
+$contentExtendAttribute = $block->getAttributeVendorHtml($signUpData);
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$countryData = $objectManager->get('\Magento\Directory\Model\CountryFactory');
+?>
+<?php if($signUpData):?>
+    <fieldset class="fieldset admin__fieldset " id="enquiry_information">
+        <legend class="admin__legend legend">
+            <span><?php echo __("Vendor Information"); ?></span>
+        </legend>
+        <hr class="page-separator">
+        <div class="row row-gutter">
+            <div class="col-m-12">
+                <h2><strong><?php echo __("Application #") ?><?php echo __($signUpData->getId()) ?></strong></h2>
+
+                <table class="admin__table-secondary">
+                    <tbody>
+                        <tr>
+                            <th><?php echo __("Status")?></th>
+                            <td>
+								<?php if($signUpData->getStatus()=='1'){
+									$vendorUrl = $this->getUrl('omnyfy_vendor/vendor/edit', ['id' => $block->getVendorId()]);?>
+									 <?php echo $block->getStatusLabel($signUpData->getStatus()) ?><a href="<?php echo $vendorUrl?>"> (view vendor profile)</a>
+								<?php } else{?>
+									<?php echo $block->getStatusLabel($signUpData->getStatus()) ?>
+								<?php }?>
+							</td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __("First Name")?></th>
+                            <td><?php echo __($signUpData->getFirstName()) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __("Last Name")?></th>
+                            <td><?php echo __($signUpData->getLastName()) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __("Date of Birth")?></th>
+                            <td><?php echo __($block->getDateWithFormat($signUpData->getDob())) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __("Business Name")?></th>
+                            <td><?php echo __($signUpData->getBusinessName()) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __("Business Address")?></th>
+                            <td><?php echo __($signUpData->getBusinessAddress()) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __("City")?></th>
+                            <td><?php echo __($signUpData->getCity()) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __("State")?></th>
+                            <td><?php echo __($signUpData->getState()) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __("Country")?></th>
+                            <td><?php echo $countryData->create()->loadByCode($signUpData->getCountry())->getName()?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __("Postcode")?></th>
+                            <td><?php echo __($signUpData->getPostcode()) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __("Contact Number")?></th>
+                            <td><?php echo '+'.__($signUpData->getCountryCode()).__($signUpData->getTelephone()) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __("Email")?></th>
+                            <td><?php echo __($signUpData->getEmail()) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __("Legal Entity Name")?></th>
+                            <td><?php echo __($signUpData->getLegalEntity()) ?></td>
+                        </tr>
+                        <?php /* <tr>
+                            <th><?php echo __("Government Number")?></th>
+                            <td><?php echo __($signUpData->getGovernmentNumber()) ?></td>
+                        </tr> */ ?>
+                        <tr>
+                            <th><?php echo __("Tax Number")?></th>
+                            <td><?php echo __($signUpData->getTaxNumber()).' '.__($signUpData->getAbn()) ?></td>
+                        </tr>
+						<tr>
+                            <th><?php echo __("Business Description")?></th>
+                            <td><?php echo __($signUpData->getDescription()) ?></td>
+                        </tr>
+                        <?= $contentExtendAttribute ?>
+                        <?php /* $extraInfo = $signUpData->getExtraInfoAsArray();
+                        foreach($extraInfo  as $k => $v) {
+                            ?><tr>
+                            <th><?php echo $k;?></th>
+                            <td><?php echo (is_array($v) ? implode(',', $v) : $v);?></td>
+                        </tr><?php
+                        } */
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </fieldset>
+	<script>
+		require(['jquery'], function ($) {
+			$('.show-event-loader').click(function () {
+				$('body').trigger('processStart');
+			});
+		});
+	</script>	
+<?php endif; ?>

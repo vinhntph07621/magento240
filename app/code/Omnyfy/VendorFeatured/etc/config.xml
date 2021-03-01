@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <omnyfy_vendor_featured>
+            <vendor_featured>
+                <is_enabled>1</is_enabled>
+                <is_tag_enabled>1</is_tag_enabled>
+            </vendor_featured>
+        </omnyfy_vendor_featured>
+    </default>
+</config>

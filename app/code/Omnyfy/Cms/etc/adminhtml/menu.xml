@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Omnyfy_Cms::elements" title="CMS" module="Omnyfy_Cms" parent="Magento_Backend::content" sortOrder="10"  resource="Omnyfy_Cms::elements"/>
+
+        <add id="Omnyfy_Cms::article" title="Articles" module="Omnyfy_Cms" parent="Omnyfy_Cms::elements" sortOrder="10" action="cms/article/" resource="Omnyfy_Cms::article"/>
+		
+        <add id="Omnyfy_Cms::tool_template" title="Tools and Templates" module="Omnyfy_Cms" parent="Omnyfy_Cms::elements" sortOrder="30" action="cms/tool_template/" resource="Omnyfy_Cms::toolTemplate"/>
+
+        <add id="Omnyfy_Cms::category" title="Categories" module="Omnyfy_Cms" parent="Omnyfy_Cms::elements" sortOrder="20" action="cms/category/edit" resource="Omnyfy_Cms::category"/>
+               
+        <add id="Omnyfy_Cms::user_type" title="Personalisation" module="Omnyfy_Cms" parent="Magento_Backend::stores_attributes" sortOrder="60" action="cms/user_type/" resource="Omnyfy_Cms::userType"/>
+        
+        <add id="Omnyfy_Cms::config_cms" title="Configuration" module="Omnyfy_Cms" parent="Omnyfy_Cms::elements" sortOrder="50" action="adminhtml/system_config/edit/section/mfcms/" resource="Omnyfy_Cms::config_cms"/>
+        
+        <add id="Omnyfy_Cms::country_industry" title="Countries and Industries" module="Omnyfy_Cms" parent="Magento_Backend::content" sortOrder="20"  resource="Omnyfy_Cms::country_industry" /> <!---->
+        
+        <add id="Omnyfy_Cms::country" title="Countries" module="Omnyfy_Cms" parent="Omnyfy_Cms::country_industry" sortOrder="30" action="cms/country/" resource="Omnyfy_Cms::country" />
+        
+        <add id="Omnyfy_Cms::industry" title="Industries" module="Omnyfy_Cms" parent="Omnyfy_Cms::country_industry" sortOrder="50" action="cms/industry/" resource="Omnyfy_Cms::industry" />
+        
+    </menu>
+</config>

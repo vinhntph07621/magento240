@@ -1,0 +1,49 @@
+<?php
+/** @var $block Omnyfy\Cms\Block\Homepage\Blog */
+$latestBlogItems = $block->getLatestArticles();
+$imageHelper = $this->helper('Magento\Cms\Helper\Wysiwyg\Images')->getBaseUrl();
+
+/** @var $cmsHelper Omnyfy\Cms\Helper\Data'*/
+$cmsHelper = $this->helper('Omnyfy\Cms\Helper\Data');
+$cmsUrl = $cmsHelper->getConfig('mfcms/permalink/route');
+?>
+<div class="block tile">
+    <div class="container text-center">
+        <ul class="tile-articles-wrapper">
+            <?php foreach ($latestBlogItems as $latestBlogItem) { ?>
+                <?php $postCategories = $latestBlogItem->getParentCategories(); ?>
+                <li class="tile-article-wrapper">
+                    <div class="tile-article">
+                        <a href="<?php echo $latestBlogItem->getUrl(); ?>" class="tile-image-link">
+                            <img src="<?php echo $imageHelper . $latestBlogItem->getFeaturedImg(); ?>" alt="<?= $latestBlogItem->getTitle(); ?>" class="tile-image" />
+                        </a>
+                        <div class="tile-article-content">
+                            <h4 class="text-center tile-article-title title"><a href="<?php echo $latestBlogItem->getUrl(); ?>" class="title-link"><?php echo $latestBlogItem->getTitle(); ?></a></h4>
+                            <div class="article-published">
+                                <div class="author">by <span class="author-name"><?php echo $latestBlogItem->getAuthor()->getName(); ?></span></div>
+                                <div class="date"><?php echo date("F j, Y", strtotime($latestBlogItem->getPublishTime()));?></div>
+                            </div>
+                            <?php $postCategories = $latestBlogItem->getParentCategories(); ?>
+                            <?php if (count($postCategories) > 0): ?>
+                                <div class="cms-tags-list">
+                                    <?php foreach ($postCategories as $category) { ?>
+                                        <?php if ($category->getCategoryId() != 1) { ?>
+                                            <a class="article-tag" href="/<?= $category->getUrl()?>"><?php echo $category->getTitle(); ?></a>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </div>
+                            <?php endif ?>
+                            <div class="description"><?php echo mb_strimwidth($latestBlogItem->getMetaDescription(), 0, 120, "..."); ?></div>
+                        </div>
+                        <div class="tile-article-footer">
+                            <a class="tile-article-read-more" href="<?php echo $latestBlogItem->getUrl(); ?>"><?= __('Read More')?></a>
+                        </div>
+                    </div>
+                </li>
+            <?php } ?>
+        </ul>
+        <div class="blog-view-all-wrapper">
+            <a class="view-all action primary" href="/<?= $cmsUrl ?>"><?= __('View all') ?></a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+<?php
+/**
+ * @var $block \Omnyfy\VendorSearch\Block\Search\Result
+ */
+?>
+
+<?php $filters = $block->getFilters() ?>
+<?php if (!empty($filters)): ?>
+    <div class="block filter" data-collapsible="true">
+        <div class="block-title filter-title" >
+            <strong data-role="title"><?= $block->escapeHtml(__('Shop By')) ?></strong>
+        </div>
+
+        <div class="block-content filter-content">
+
+            <?php $activeFilters = $block->getActiveFilters() ?>
+            <?php if (!empty($activeFilters)): ?>
+                <div class="filter-current" data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false }}'>
+                    <strong class="block-subtitle filter-current-subtitle"
+                            role="heading"
+                            aria-level="2"
+                            data-role="title"
+                            data-count="<?php echo count($activeFilters); ?>"><?php echo __('Now Shopping by') ?></strong>
+                    <ol class="items">
+                        <?php foreach ($activeFilters as $_filter): ?>
+                            <li class="item">
+                                <span class="filter-label"><?php echo $block->escapeHtml(__($_filter["filterName"])); ?></span>
+                                <span class="filter-value"><?php echo $block->stripTags($_filter["label"]) ?></span>
+                                <?php
+                                $clearLinkUrl = $_filter["clearLinkUrl"];
+                                $currentFilterName = $block->escapeHtml(__($_filter["filterName"])) . " " . $block->stripTags($_filter["label"]);
+                                if ($clearLinkUrl):
+                                    ?>
+                                    <a class="action remove"
+                                       title="<?php echo $block->escapeHtml($_filter["clearLinkText"]) ?>"
+                                       href="<?php echo $clearLinkUrl ?>">
+                                        <span><?php echo $block->escapeHtml($_filter["clearLinkText"]) ?></span>
+                                    </a>
+                                <?php else: ?>
+                                    <a class="action remove" href="<?php echo $clearLinkUrl ?>"
+                                       title="<?php echo $block->escapeHtml(__('Remove')) . " " . $currentFilterName;?>">
+                                        <span><?php echo __('Remove This Item') ?></span>
+                                    </a>
+                                <?php endif; ?>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                </div>
+
+                <div class="block-actions filter-actions">
+                    <a href="/vendorsearch/result/" class="action clear filter-clear"><span><?= $block->escapeHtml(__('Clear All')) ?></span></a>
+                </div>
+            <?php endif; ?>
+            <?php $wrapOptions = false; ?>
+            <?php foreach ($block->getFilters() as $filter) : ?>
+        <?php if (!$wrapOptions) : ?>
+            <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= $block->escapeHtml(__('Filters')) ?></strong>
+            <dl class="filter-options" id="narrow-by-list" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
+                <?php $wrapOptions = true;
+                endif; ?>
+                <?php if ($filter->getItemsCount()) :
+                    $filterName = $filter->getName();
+                    $filterCode = $filter->getAttributeModel()->getData('attribute_code');
+                    $filterItems = $filter->getItems();
+                    $filterRequestVar = $filter->getRequestVar(); ?>
+                <div data-role="collapsible" class="filter-options-item">
+                    <div role="heading" aria-level="3" class="filter-options-title" data-role="title"><?= $block->escapeHtml(__($filterName)) ?></div>
+                    <div class="filter-options-content" data-role="content">
+                        <form data-amshopby-filter="<?= /* @noEscape */ $filterCode; ?>"
+                              data-amshopby-filter-request-var="<?= /* @noEscape */ $filterRequestVar ?>">
+                        <ul class="items am-filter-items-<?= /* @noEscape */ $filterCode ?> am-labels-folding">
+                            <?php foreach ($filterItems as $item): ?>
+                            <li class="item" data-label="<?= $item->getLabel() ?>">
+                                <a class="amshopby-filter-parent am_shopby_link<?= $item->isSelected() ? '_selected' : ''?>" href="<?php echo $this->escapeUrl($item->getUrl()) ?>" forseload="">
+                                    <input name="amshopby[<?= $filterRequestVar ?>][<?= $item->getValue() ?>]" value="<?= $item->getValue() ?>"
+                                           type="checkbox" <?= $item->isSelected() ? 'checked="checked"' : '' ?>>
+                                    <span class="label"><?= $item->getLabel() ?></span>
+                                    <span class="count"><?= $item->getCount() ?></span>
+                                </a>
+                            </li>
+                            <?php endforeach ?>
+                        </ul>
+                        </form>
+                    </div>
+                </div>
+                <?php endif; ?>
+                <?php endforeach; ?>
+                <?php if ($wrapOptions) : ?>
+            </dl>
+        <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>
+<script>
+    require(['jquery', "jquery/ui"],
+    function ($) {
+        $('.block.filter').attr('data-mage-init', '{' +
+            '"collapsible":{' +
+                '"openedState": "active", ' +
+                '"collapsible": true, ' +
+                '"active": false, ' +
+                '"collateral": { ' +
+                    '"openedState": "filter-active", ' +
+                    '"element": "body" ' +
+                '}' +
+            '}' +
+        '}');
+    })
+</script>

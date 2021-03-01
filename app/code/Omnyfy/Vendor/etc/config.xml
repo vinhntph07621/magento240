@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <omnyfy_vendor>
+            <vendor>
+                <qty_check_mode>1</qty_check_mode>
+                <is_sku_sharing>0</is_sku_sharing>
+                <is_admin_across>1</is_admin_across>
+                <is_admin_see_all_sku>0</is_admin_see_all_sku>
+                <show_vendor_bind>0</show_vendor_bind>
+                <bind_include_warehouse>1</bind_include_warehouse>
+                <invoice_by>1</invoice_by>
+                <flat_max_index_count>64</flat_max_index_count>
+                <flat_vendor>1</flat_vendor>
+                <flat_location>1</flat_location>
+                <include_mo_products>0</include_mo_products>
+                <readonly_mo_products>1</readonly_mo_products>
+                <show_location_priority>0</show_location_priority>
+                <qty_active_vendor_only>0</qty_active_vendor_only>
+                <qty_active_location_only>0</qty_active_location_only>
+                <checkout_shipping_message_enable>0</checkout_shipping_message_enable>
+            </vendor>
+        </omnyfy_vendor>
+    </default>
+</config>

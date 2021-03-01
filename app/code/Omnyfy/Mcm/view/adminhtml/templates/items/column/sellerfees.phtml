@@ -1,0 +1,12 @@
+<?php
+
+/** @see \Omnyfy\Mcm\Block\Adminhtml\Items\Column\SellerFees */
+?>
+<?php if ($_item = $block->getItem()): ?>
+<?php $_sellerFee = $block->getBaseSellerFees($_item);
+if (!empty($_sellerFee)) {
+    echo $block->displayPrices($_sellerFee, $_sellerFee * $block->getBaseToOrderRate());
+}
+?>
+<?php endif; ?>
+

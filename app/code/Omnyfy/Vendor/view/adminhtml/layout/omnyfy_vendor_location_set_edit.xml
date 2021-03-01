@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <container name="adminhtml.location.attribute.set.edit.wrapper" htmlTag="div" htmlClass="admin__scope-old"><!-- @todo ui: remove arguments within .admin__scope-old -->
+                <block class="Omnyfy\Vendor\Block\Adminhtml\Location\Attribute\Set\Main" name="adminhtml.location.set.edit" template="vendor/attribute/set/main.phtml"/>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

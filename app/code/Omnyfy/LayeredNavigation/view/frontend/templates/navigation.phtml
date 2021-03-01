@@ -1,0 +1,35 @@
+<?php /* @var $block \Omnyfy\LayeredNavigation\Block\Navigation */ ?>
+
+<div class="block filter" id="layered-filter-block" data-mage-init='{"Omnyfy_LayeredNavigation/js/filter":{}}'>
+    <?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
+    <div class="block-title filter-title" data-count="<?php echo $filtered; ?>">
+        <strong data-role="title"><?php echo __('Shop By') ?></strong>
+    </div>
+    <div class="block-content filter-content">
+        <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?php echo __('Shopping Options') ?></strong>
+        <div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": <?php echo json_encode(range(0, count($block->getFilters()))); ?>, "multipleCollapsible": true}}'>
+        <?php foreach ($block->getFilters() as $filter): ?>
+        <?php if ($filter->getItemsCount()): ?>
+            <div data-role="collapsible" class="filter-options-item allow active">
+                <div data-role="title" class="filter-options-title"><?php echo __($filter->getName()) ?></div>
+                <div data-role="content">
+                    <div class="filter-options-content"><?php echo $block->getChildBlock('renderer')->render($filter); ?></div>
+                    <div class="filter-actions">
+                        <a class="action clear filter-clear" href="<?php echo $filter->getClearLinkUrl(); ?>"><?php echo $filter->getClearLinkText(); ?></a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php endforeach; ?>
+        </div>
+
+    <?php if (count($block->getLayer()->getCollection()) == 0): ?>
+        <?php echo $block->getChildHtml('state') ?>
+    <?php endif; ?>
+    <?php if ($block->getLayer()->getState()->getFilters()): ?>
+        <div class="block-actions filter-actions">
+            <a href="<?php echo $block->getClearUrl() ?>" class="action clear filter-clear"><span><?php echo __('Clear all filters') ?></span></a>
+        </div>
+    <?php endif; ?>
+    </div>
+</div>

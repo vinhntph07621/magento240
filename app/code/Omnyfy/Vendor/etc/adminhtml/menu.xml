@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Omnyfy_Vendor::base" title="Marketplace Management" translate="title" module="Omnyfy_Vendor" sortOrder="50" resource="Omnyfy_Vendor::base"/>
+        <add id="Omnyfy_Vendor::vendor" title="Business and Location" translate="title" module="Omnyfy_Vendor" parent="Omnyfy_Vendor::base" sortOrder="10" resource="Omnyfy_Vendor::vendor"/>
+        <add id="Omnyfy_Vendor::vendors" title="Vendor Profile" translate="title" module="Omnyfy_Vendor" parent="Omnyfy_Vendor::vendor" sortOrder="10" dependsOnModule="Omnyfy_Vendor" action="omnyfy_vendor/vendor" resource="Omnyfy_Vendor::vendors"/>
+        <add id="Omnyfy_Vendor::locations" title="Manage Locations and Warehouses" translate="title" module="Omnyfy_Vendor" parent="Omnyfy_Vendor::vendor" sortOrder="20" dependsOnModule="Omnyfy_Vendor" action="omnyfy_vendor/location" resource="Omnyfy_Vendor::locations"/>
+        <add id="Omnyfy_Vendor::stock_report" title="Stock Report by Location" translate="title" module="Omnyfy_Vendor" parent="Magento_Reports::report_products" sortOrder="30" dependsOnModule="Omnyfy_Vendor" action="omnyfy_vendor/location/report" resource="Omnyfy_Vendor::stock_report"/>
+        <add id="Omnyfy_Vendor::vendor_stores" title="Vendor Frontend Store View" translate="title" module="Omnyfy_Vendor" parent="Omnyfy_Vendor::vendor" sortOrder="35" dependsOnModule="Omnyfy_Vendor" action="omnyfy_vendor/vendor_store" resource="Omnyfy_Vendor::vendor_stores"/>
+
+        <add id="Omnyfy_Vendor::vendor_type" title="Vendor Type" translate="title" module="Omnyfy_Vendor" parent="Omnyfy_Vendor::base" sortOrder="40" resource="Omnyfy_Vendor::vendor_types"/>
+        <add id="Omnyfy_Vendor::vendor_types" title="Vendor Types" translate="title" module="Omnyfy_Vendor" parent="Omnyfy_Vendor::vendor_type" sortOrder="50" dependsOnModule="Omnyfy_Vendor" action="omnyfy_vendor/vendor_type" resource="Omnyfy_Vendor::vendor_types"/>
+        <add id="Omnyfy_Vendor::vendor_attributes" title="Vendor Attributes" translate="title" module="Omnyfy_Vendor" parent="Omnyfy_Vendor::vendor_type" sortOrder="60" dependsOnModule="Omnyfy_Vendor" action="omnyfy_vendor/vendor_attribute" resource="Omnyfy_Vendor::vendor_attributes"/>
+        <add id="Omnyfy_Vendor::vendor_attribute_set" title="Vendor Attribute Sets" translate="title" module="Omnyfy_Vendor" parent="Omnyfy_Vendor::vendor_type" sortOrder="70" dependsOnModule="Omnyfy_Vendor" action="omnyfy_vendor/vendor_set" resource="Omnyfy_Vendor::vendor_attribute_set"/>
+        <add id="Omnyfy_Vendor::location_attributes" title="Location Attributes" translate="title" module="Omnyfy_Vendor" parent="Omnyfy_Vendor::vendor_type" sortOrder="80" dependsOnModule="Omnyfy_Vendor" action="omnyfy_vendor/location_attribute" resource="Omnyfy_Vendor::location_attributes"/>
+        <add id="Omnyfy_Vendor::location_attribute_set" title="Location Attribute Sets" translate="title" module="Omnyfy_Vendor" parent="Omnyfy_Vendor::vendor_type" sortOrder="90" dependsOnModule="Omnyfy_Vendor" action="omnyfy_vendor/location_set" resource="Omnyfy_Vendor::location_attribute_set"/>
+    </menu>
+</config>

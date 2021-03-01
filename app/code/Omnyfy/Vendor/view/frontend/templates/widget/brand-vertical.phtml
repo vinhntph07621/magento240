@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © Omnyfy, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * Author: Kateryna Bieliaieva
+ * Date: 17/8/2020
+ */
+
+
+/** @var \Omnyfy\Vendor\Block\Widget\ProductVendor $block */
+
+$vendor = $block->getVendor();
+
+if ($vendor):
+    $logo = $vendor->getLogo();
+    $label_text = $block->escapeHtml($block->getData('label_text'));
+    $buttonText = $block->escapeHtml($block->getData('view_button_text'));
+    ?>
+    <div class="product-vendor vendor vertical">
+        <a href="<?php echo $block->getVendorUrl($vendor);?>" title="<?php echo $vendor->getName();?>">
+
+            <?php if (!empty($logo)): ?>
+                <img class="vendor-logo" src="<?php echo $block->getLogoUrl($vendor);?>" alt="<?php echo $vendor->getName();?>"/>
+            <?php endif; ?>
+
+            <div class="vendor-title">
+                <?= $label_text ? $label_text : __('Sold by') ?>
+            </div>
+
+            <div class="vendor-name">
+                <?= $vendor->getName() ?>
+            </div>
+            <span class="vendor-button"><?= $buttonText ? $buttonText : __('View profile 1') ?></span>
+        </a>
+    </div>
+
+<?php endif; ?>

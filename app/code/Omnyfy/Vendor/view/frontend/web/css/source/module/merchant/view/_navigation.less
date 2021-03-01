@@ -1,0 +1,216 @@
+// /**
+//  * Copyright © Omnyfy, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+
+//
+//  Variables
+//  ---------------------------------------------
+@vendor-navigation-wrapper__position: relative;
+@vendor-navigation-wrapper__height: @vendor-nav-item__padding-top + @vendor-nav-item__padding-bottom + @vendor-nav-item__line-height;
+@vendor-navigation-wrapper__margin: 0 0 @vendor-navigation-wrapper__height;
+
+@vendor-navigation__height: @vendor-navigation-wrapper__height;
+@vendor-navigation__position: absolute;
+@vendor-navigation__top: 0;
+@vendor-navigation__left: 0;
+@vendor-navigation__width: 100%;
+@vendor-navigation__background: @page__background-color;
+@vendor-navigation__z-index: 1000;
+
+@vendor-navigation__docked__position: fixed;
+@vendor-navigation__docked__border-bottom: @navigation-level0-item__border;
+
+@vendor-navigation-container__display: flex;
+
+@vendor-nav-list__display: flex;
+@vendor-nav-list__margin: 0;
+@vendor-nav-list__padding: 0;
+@vendor-nav-list-li__margin: 0;
+@vendor-nav-list-li__padding: 0;
+
+@vendor-nav-item__display: block;
+@vendor-nav-item__font-family: @button__font-family;
+@vendor-nav-item__font-size: @button__font-size;
+@vendor-nav-item__font-weight: @button__font-weight;
+@vendor-nav-item__line-height: @button__line-height;
+
+// padding is used to calculate navigation height, that is why it is set as separate values
+@vendor-nav-item__padding-top: @indent__base;
+@vendor-nav-item__padding-right: @indent__l;
+@vendor-nav-item__padding-bottom: @indent__base;
+@vendor-nav-item__padding-left: @indent__l;
+@vendor-nav-item__padding: @vendor-nav-item__padding-top @vendor-nav-item__padding-right @vendor-nav-item__padding-bottom @vendor-nav-item__padding-left;
+
+@vendor-nav-item__color__link: @text__color;
+@vendor-nav-item__color__hover: @text__color;
+@vendor-nav-item__color__active: @text__color;
+@vendor-nav-item__color__visited: @text__color;
+@vendor-nav-item__text-decoration: none;
+@vendor-nav-item__text-decoration__hover: none;
+@vendor-nav-item__font-weight__active: bold;
+
+@scroll-to__display: flex;
+@scroll-to-icon: @icon-arrow-down-thin; //'\e626'
+@scroll-to-icon__font-family: @icons__font-name; //'icons-blank-theme'
+@scroll-to-icon__margin: 0 @indent__s 0 0;
+@scroll-to__text-transform: uppercase;
+@scroll-to__letter-spacing: 0.75;
+@scroll-to__font-family: @button__font-family;
+@scroll-to__font-size: @button__font-size;
+@scroll-to__font-weight: @button__font-weight;
+@scroll-to__line-height: @button__line-height;
+@scroll-to__white-space: nowrap;
+@scroll-to-span__display: none;
+@scroll-to-span__display__tablet: inline-block;
+
+
+//
+//    Common
+//--------------------------------------
+
+& when (@media-common = true) {
+	.vendor-navigation-wrapper {
+		position: @vendor-navigation-wrapper__position;
+		height: @vendor-navigation-wrapper__height;
+		margin: @vendor-navigation-wrapper__margin;
+	}
+
+	.vendor-navigation {
+		position: @vendor-navigation__position;
+		top: @vendor-navigation__top;
+		left: @vendor-navigation__left;
+		width: @vendor-navigation__width;
+		height: @vendor-navigation__height;
+		background: @vendor-navigation__background;
+		z-index: @vendor-navigation__z-index;
+
+		.container {
+			display: @vendor-navigation-container__display;
+			width: 100%;
+			margin: auto;
+			border-bottom: @vendor-navigation__docked__border-bottom;
+		}
+
+		nav {
+			width: calc(~'100% - 10px - ' @vendor-nav-item__padding-right + @vendor-nav-item__padding-left);
+		}
+	}
+
+	.scroll-to {
+		display: @scroll-to__display;
+		text-transform: @scroll-to__text-transform;
+		letter-spacing: @scroll-to__letter-spacing;
+		font-family: @scroll-to__font-family;
+		font-size: @scroll-to__font-size;
+		font-weight: @scroll-to__font-weight;
+		line-height: @scroll-to__line-height;
+		padding: @vendor-nav-item__padding-top @vendor-nav-item__padding-right @vendor-nav-item__padding-bottom 0;
+		white-space: @scroll-to__white-space;
+
+		span {
+			display: @scroll-to-span__display;
+			margin-left: 8px;
+		}
+	}
+
+	.vendor-nav-list {
+		display: @vendor-nav-list__display;
+		margin: @vendor-nav-list__margin;
+		padding: @vendor-nav-list__padding;
+		max-width: 100%;
+		width: 100%;
+
+		&.scroll {
+			display: flex;
+			flex-wrap: nowrap;
+			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
+			-ms-overflow-style: -ms-autohiding-scrollbar;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
+
+		li {
+			margin: @vendor-nav-list-li__margin;
+			padding: @vendor-nav-list-li__padding;
+		}
+
+		a {
+			display: @vendor-nav-item__display;
+			font-family: @vendor-nav-item__font-family;
+			font-size: @vendor-nav-item__font-size;
+			font-weight: @vendor-nav-item__font-weight;
+			line-height: @vendor-nav-item__line-height;
+			padding: @vendor-nav-item__padding;
+
+			&:link {
+				color: @vendor-nav-item__color__link;
+				text-decoration: @vendor-nav-item__text-decoration;
+			}
+
+			&:hover {
+				color: @vendor-nav-item__color__hover;
+				text-decoration: @vendor-nav-item__text-decoration__hover;
+			}
+
+			&:active {
+				color: @vendor-nav-item__color__hover;
+				text-decoration: @vendor-nav-item__text-decoration__hover;
+			}
+
+			&:visited {
+				color: @vendor-nav-item__color__visited;
+				text-decoration: @vendor-nav-item__text-decoration;
+			}
+
+			&.active {
+				color: @vendor-nav-item__color__active;
+				font-weight: @vendor-nav-item__font-weight__active;
+			}
+		}
+	}
+
+	.sub-header-docked {
+		.vendor-navigation {
+			position: @vendor-navigation__docked__position;
+			border-bottom: @vendor-navigation__docked__border-bottom;
+
+			.container {
+				padding: 0 @layout-indent__width;
+				box-sizing: border-box;
+				border-bottom: 0;
+			}
+		}
+	}
+}
+
+
+
+//
+//    Tablet
+//--------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+	.scroll-to {
+		span {
+			display: @scroll-to-span__display__tablet;
+		}
+	}
+}
+
+
+//
+//    Desktop
+//--------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+	.vendor-navigation {
+		.container {
+			padding: 0;
+			max-width: 1280px;
+		}
+	}
+}

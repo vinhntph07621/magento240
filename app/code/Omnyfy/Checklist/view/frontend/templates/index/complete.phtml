@@ -1,0 +1,28 @@
+<?php if ($block->isLoggedIn()) { ?>
+    <?php if($block->isChecklistEnable()) {?>
+        <?php $percentage = $block->percentageComplete()?>
+        <?php if ($percentage == 100) { ?>
+            <div id="well-done-block" class="container bg-white block-container">
+        <?php }else{ ?>
+            <div id="well-done-block" class="container bg-white block-container" style="display:none">
+        <?php } ?>
+
+            <div class="narrow-container">
+                <div class="section-desc text-left text-dark">
+                    <h2 class="section-header"><?php echo __("Well done!") ?></h2>
+                </div>
+
+                <div class="complete-desc-row">
+                    <div class="desc">
+                        <p class="heading">Now, have your readiness checklist reviewed by a professional export coach</p>
+                        <p>Book an appointment with an export coach to review and provide profesional guidance on your business plan. </p>
+                    </div>
+                    <div class="action">
+                        <a href="<?php echo $block->getServiceProviderSearchUrl() ?>" class="btn btn-white btn-lg">Book an appointment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+<?php } ?>
+

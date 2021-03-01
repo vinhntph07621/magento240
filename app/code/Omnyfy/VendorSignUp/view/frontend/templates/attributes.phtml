@@ -1,0 +1,15 @@
+<?php
+/**
+ * Project: Multi Vendor
+ * User: jing
+ * Date: 2019-08-02
+ * Time: 15:21
+ */
+/** @var $block \Omnyfy\VendorSignUp\Block\SignUp\Attributes */
+$attributes = $block->getVendorAttributes();
+
+foreach($attributes as $attribute) {
+    echo $block->getAttributeHtml($attribute);
+}
+
+echo $block->getChildHtml();

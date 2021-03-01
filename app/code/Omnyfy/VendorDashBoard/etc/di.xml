@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="omnyfy_vendordashboard_dashboard_grid_data_source" xsi:type="string">Omnyfy\VendorDashBoard\Model\ResourceModel\DashBoard\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\VendorDashBoard\Model\ResourceModel\DashBoard\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mst_dashboard_board</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\VendorDashBoard\Model\ResourceModel\DashBoard\Collection</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_dashboard_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_dashboard_collection</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="generate" xsi:type="object">Omnyfy\VendorDashBoard\Command\Generate</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

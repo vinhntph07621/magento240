@@ -1,0 +1,9 @@
+<script>
+    require([
+        "prototype"
+    ], function () {
+        window.locationUrl = '<?= /** @noEscape */ $block->getUrl('/locations/index')?>';
+        window.tagUrl = '<?= /** @noEscape */ $block->getUrl('/locations/index')?>';
+        window.vendorFeaturedId = '<?= /** @noEscape */ $block->getRequest()->getParam('vendor_featured_id') ?>';
+    });
+</script>

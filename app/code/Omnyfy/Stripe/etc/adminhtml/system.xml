@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="omnyfy" sortOrder="999" translate="label">
+			<label>omnyfy</label>
+		</tab>
+		<section id="stripe_config" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="11" translate="label">
+			<label>Stripe Config</label>
+			<tab>omnyfy</tab>
+			<resource>Omnyfy_VendorSearch::config_omnyfy_vendorsearch</resource>
+			<group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>General</label>
+				<field id="client_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Client ID</label>
+					<comment/>
+				</field>
+				<field id="connect_account_webhook_siging_secret" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="obscure">
+					<label>Connect Account Webhook Signing secret</label>
+					<comment/>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

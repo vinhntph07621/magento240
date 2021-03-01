@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Omnyfy_VendorAuth::access" sortOrder="10" title="Vendor Auth">
+					<resource id="Omnyfy_VendorAuth::denied_index" sortOrder="10" title="Vendor Auth Access Denied Page"/>
+					<resource id="Omnyfy_VendorAuth::log" sortOrder="10" title="Vendor Auth Log" />
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">customersegment_segment_compare.customersegment_segment_compare_data_source</item>
+            <item name="deps" xsi:type="string">customersegment_segment_compare.customersegment_segment_compare_data_source</item>
+        </item>
+
+        <item name="spinner" xsi:type="string">listing</item>
+
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Mirasvit\CustomerSegment\Ui\Segment\Form\Control\BackButton</item>
+        </item>
+    </argument>
+
+    <dataSource name="customersegment_segment_compare_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mirasvit\CustomerSegment\Ui\Segment\Compare\DataProvider</argument>
+            <argument name="name" xsi:type="string">customersegment_segment_compare_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">segment_id</argument>
+            <argument name="requestFieldName" xsi:type="string">segment_id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <container name="listing" class="Mirasvit\CustomerSegment\Ui\Segment\Compare\ListingComponent">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">Mirasvit_CustomerSegment/segment/compare/listing</item>
+                <item name="component" xsi:type="string">Mirasvit_CustomerSegment/js/segment/compare/listing</item>
+            </item>
+        </argument>
+    </container>
+</listing>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Omnyfy\Core\Api\Data\SimpleParameterSearchInterface" type="\Omnyfy\Core\Api\SimpleParameterSearch" />
+    <preference for="Omnyfy\Core\Api\Data\LocationSimpleParameterSearchInterface" type="\Omnyfy\Core\Api\SimpleParameterSearch" />
+    <preference for="Magento\Ui\Component\Form\Element\DataType\Date" type="\Omnyfy\Core\Ui\Component\Form\Element\DataType\Date"/>
+<!--    <preference for="Magento\Framework\Mail\Template\TransportBuilder" type="\Omnyfy\Core\Model\Mail\TransportBuilder" />-->
+    <type name="Magento\Framework\Webapi\ServiceOutputProcessor">
+        <plugin name="omnyfy_service_output_processor" type="Omnyfy\Core\Plugin\ServiceOutputProcessor" sortOrder="100"/>
+    </type>
+    <type name="Magento\Customer\Model\Registration">
+        <plugin name="OmnyfyCustomerRegistrationCheck" type="Omnyfy\Core\Plugin\Registration" />
+    </type>
+
+    <type name="Magento\Webapi\Controller\Rest">
+        <plugin name="OmnyfyRestApiLog" type="Omnyfy\Core\Plugin\RestApiLog" sortOrder="100" />
+    </type>
+    <type name="Magento\Framework\Webapi\Rest\Response">
+        <plugin name="OmnyfyRestResponseLog" type="Omnyfy\Core\Plugin\RestResponseLog" sortOrder="100" />
+    </type>
+<!--    <preference for="Magento\Framework\Mail\MailMessageInterface" type="Omnyfy\Core\Model\Mail\Message" />-->
+<!--    <preference for="Magento\Framework\Mail\MessageInterface" type="Omnyfy\Core\Model\Mail\Message" />-->
+</config>

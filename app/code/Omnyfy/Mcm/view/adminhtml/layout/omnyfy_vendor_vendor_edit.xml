@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="admin-2columns-left">
+    <update handle="omnyfy_vendor_vendor_edit"/>
+    <head>
+        <css src="Omnyfy_Mcm::css/mcm_admin.css"/>
+        <link src="Omnyfy_Mcm::js/form/components/choose_bank_acc_type.js"/>
+    </head>
+    <body>
+        <referenceContainer name="left">
+            <referenceBlock name="omnyfy_vendor_vendor_edit_tabs">
+                <block class="Omnyfy\Mcm\Block\Adminhtml\Vendor\Edit\Tab\BankAccountInfo" name="omnyfy_vendor_vendor_edit_tab_bank_account_info" ifconfig="omnyfy_mcm/general/include_kyc"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mcm_bank_account_info</argument>
+                    <argument name="block" xsi:type="string">omnyfy_vendor_vendor_edit_tab_bank_account_info</argument>
+                </action>
+            </referenceBlock>
+        </referenceContainer>
+    </body>
+</page>

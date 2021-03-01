@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/postcode" method="GET">
+        <service class="Omnyfy\Postcode\Api\PostcodeRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/postcode/id/:postcode_id" method="GET">
+        <service class="Omnyfy\Postcode\Api\PostcodeRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/postcode/list_by_keyword" method="GET">
+        <service class="Omnyfy\Postcode\Api\PostcodeRepositoryInterface" method="getListByKeyword"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/postcode/closest" method="GET">
+        <service class="Omnyfy\Postcode\Api\PostcodeRepositoryInterface" method="getClosest"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+</routes>

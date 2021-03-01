@@ -1,0 +1,55 @@
+<?php $totalPayoutsPending = $block->getTotalPayouts();
+$totalReadyToPay = $block->getLastPayouts();
+//echo "<pre>";
+//print_r($block->getPendingPayoutLastUpdated());
+//die;
+?>
+
+<div>
+    <div class="payout-tile">
+        <div class="tile-row">
+            <div class="tile-title"><strong>Lifetime Payout</strong></div>
+            <div class="tile-updated"><?php echo $block->getPayoutLastUpdated() ? 'Last Updated: ' .$block->getPayoutLastUpdated():''; ?></div>
+        </div>
+        <div class="width100p">
+            <div class="tile-first-col">
+                <div class="font-size-1r">Total </div>
+                <div class="tile-currency"><?php echo $block->escapeHtml($block->currency($totalPayoutsPending['payout_amount_vph'])); ?></div>
+
+            </div>
+            <div class="tile-2nd-col">
+                <div class="font-size-1r">Net Amount </div>
+                <div class="tile-currency"><?php echo $block->escapeHtml($block->currency($totalPayoutsPending['total_net_amount'])); ?></div>
+            </div>
+            <div style="float:left; width:22%">
+                <div class="font-size-1r">Taxes </div>
+                <div class="tile-currency"><?php echo $block->escapeHtml($block->currency($totalPayoutsPending['total_payout_amount_tax'])); ?> </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="tile-separator">
+        &nbsp;
+    </div>
+    <div class="payout-tile">
+        <div class="tile-row">
+            <div class="tile-title"><strong>Last Payout</strong></div>
+            <div class="tile-updated"><?php echo $block->getPayoutLastUpdated() ? 'Last Updated: '. $block->getPayoutLastUpdated(): ''; ?></div>
+        </div>
+        <div class="width100p">
+            <div class="tile-first-col">
+                <div class="font-size-1r">Total </div>
+                <div class="tile-currency"><?php echo $block->escapeHtml($block->currency($totalReadyToPay['payout_amount_vph'])); ?></div>
+
+            </div>
+            <div class="tile-2nd-col">
+                <div class="font-size-1r">Net Amount </div>
+                <div class="tile-currency"><?php echo $block->escapeHtml($block->currency($totalReadyToPay['total_net_amount'])); ?></div>
+            </div>
+            <div class="tile-3rd-col">
+                <div class="font-size-1r">Taxes </div>
+                <div class="tile-currency"><?php echo $block->escapeHtml($block->currency($totalReadyToPay['total_payout_amount_tax'])); ?></div>
+            </div>
+        </div>
+    </div>
+</div>

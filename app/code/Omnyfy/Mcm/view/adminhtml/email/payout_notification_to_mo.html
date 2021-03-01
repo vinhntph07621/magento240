@@ -1,0 +1,16 @@
+<!--@subject You have processed a new payout  @-->
+{{template config_path="design/email/header_template"}} <!-- pathe of template header-->
+ 
+<table>
+    <tr class="email-intro">
+        <td valign="top">
+			<p>You have processed a new payout.</p>
+            <p>You have processed a new payout.</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;{{trans "Payout Amount: %amt" amt=$amount}}</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;{{trans "Payout Reference ID: %ref_id" ref_id=$reference_id}}</p>
+            <p><span><a href="{{var payout_history_link|escape}}">Click here</a></a></span> to view your payout history.</p>
+        </td>
+    </tr>
+</table>
+ 
+{{template config_path="design/email/footer_template"}} <!--footer of template-->

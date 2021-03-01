@@ -1,0 +1,155 @@
+<?php
+$categoryCollection = $this->getTopicCategoryCollection();
+$_categoryCollection = $this->getCollection($categoryCollection);
+?>
+
+<h2 class="page-title"><?php echo __('Search results for')?> "<?php echo $this->getRequest()->getParam('article-search'); ?>"</h2>
+
+<section class="bg-green after-header">
+    <div class="container">
+        <div class="search-article-module">
+            <form action="<?php echo $this->getUrl('cms/index/search') ?>" method="get" id="searchFrm">
+                <input type="hidden" name="ut" value="<?php echo $this->getRequest()->getParam('ut'); ?>" id="userType"/>
+                <div class="tracking-field-wrapper">
+                    <div class="field tracking-field-container">
+                        <label class="sr-only" for="article-search-field"><?= __('Please enter your tracking number')?></label>
+                        <div class="control input-field">
+                            <input type="text" autocomplete="off" name="article-search" class="tracking-field form-control" id="article-search-field" placeholder="<?= __('Start typing to search blog')?>">
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button id="export-guide-search" type="submit" class="action primary tracking-button"><?= __('Search')?></button>
+                    </div>
+                <div id="articleList"></div>
+            </form>
+        </div>
+    </div>
+</section>
+<?php if ($_categoryCollection->getSize() > 0) : ?>
+<section class="results-section blog-categories-list">
+    <div class="container">
+        <?php $keyword = $this->getRequest()->getParam('article-search'); ?>
+        <div class="toolbar">
+            <p class="toolbar-amount">
+        <?php if ($this->getRequest()->getParam('article-search')): ?>
+            <?php echo $_categoryCollection->getSize(); ?> <?= __('items found for')?> "<?php echo $block->escapeHtml($this->getRequest()->getParam('article-search')); ?>"
+        <?php else: ?>
+            <?php echo $_categoryCollection->getSize(); ?> <?= __('items found')?>
+        <?php endif ?>
+            </p>
+        </div>
+        <ul class="tile-articles-wrapper">
+            <?php $i=1;
+            $customCondition = null;
+            $cls = null;
+            foreach ($_categoryCollection as $_category): ?>
+                <?php
+                if($i>3){
+                    $customCondition = ' style="display:none;"';
+                }
+                if($i>1){
+                    $cls = ' moreBox';
+                }
+                $title = $_category->getTitle();
+                if (strlen($_category->getContent()) > 200) {
+                    $content = strip_tags(substr($_category->getContent(), 0, 200)) . '...';
+                } else {
+                    $content = strip_tags($_category->getContent());
+                }
+                if ($keyword) {
+                    $title = preg_replace("/\w*?$keyword\w*/i", "<strong>$0</strong>", $title);
+                    $content = preg_replace("/\w*?$keyword\w*/i", "<strong>$0</strong>", $content);
+                }
+                $_articleUrl = $_category->getArticleUrl();
+                $_articleName = $block->escapeHtml($_category->getTitle(), null, true);
+                ?>
+
+                <li class="tile-article-wrapper<?php echo $cls?>" <?php echo $customCondition?>>
+                    <div class="tile-article">
+                        <?php if ($featuredImage = $_category->getFeaturedImage()):  ?>
+                            <a href="<?php echo $_articleUrl?>" class="tile-image-link">
+                                <img alt="<?php echo $_articleName?>" src="<?php echo $featuredImage?>" class="tile-image">
+                            </a>
+                        <?php endif ?>
+                        <div class="tile-article-content">
+                            <h4 class="text-center tile-article-title title"><a href="<?php echo $_articleUrl?>" class="title-link"><?php echo $_articleName?></a></h4>
+                            <div class="article-published">
+                                <div class="author">by <span class="author-name"><?php echo $_category->getAuthor()->getName(); ?></span></div>
+                                <div class="date"><?php echo date("F j, Y", strtotime($_category->getPublishTime()));?></div>
+                            </div>
+                            <?php $postCategories = $_category->getParentCategories(); ?>
+                            <?php if (count($postCategories) > 0): ?>
+                                <div class="cms-tags-list">
+                                    <?php foreach ($postCategories as $category) { ?>
+                                        <?php if ($category->getCategoryId() != 1) { ?>
+                                            <a class="article-tag" href="/<?= $category->getUrl()?>"><?php echo $category->getTitle(); ?></a>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </div>
+                            <?php endif ?>
+                            <div class="description"><?php echo mb_strimwidth($_category->getMetaDescription(), 0, 120, "..."); ?></div>
+                        </div>
+                        <div class="tile-article-footer">
+                            <a class="tile-article-read-more" href="<?php echo $_articleUrl?>"><?= __('Read More')?></a>
+                        </div>
+                    </div>
+                </li>
+                <?php $i++;
+            endforeach; ?>
+        </div>
+        <?php if($_categoryCollection->getSize()>10){?>
+            <div class="actions">
+                <button class="loadMore" id="loadMore">
+                   <?= __('Load next 10 results')?>
+                </button>
+            </div>
+        <?php }?>
+</section>
+        <?php else: ?>
+            <section class="results-section">
+                <div class="container">
+                    <div class="search-result-container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <?php if ($this->getRequest()->getParam('article-search')) { ?>
+                                    <h2 class="float-heading">0 items found for "<?php echo $block->escapeHtml($this->getRequest()->getParam('article-search')); ?>"</h2>
+                                <?php } else { ?>
+                                    <h2 class="float-heading">0 items found</h2>
+                                <?php } ?>
+                                <div class="no-results-tile">
+                                    <img src="<?php echo $this->getViewFileUrl('Omnyfy_Cms::images/search.png') ?>" class="search-symbol" alt="image description" title="image description">
+                                    <p class="title">No results found</p>
+                                    <p>Please check your search term and spelling and try again.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <?php endif; ?>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        jQuery(document).ready(function ($) {
+
+            jQuery("#articleList").on('click', 'li', function ($) {
+                jQuery('#article-search').val(jQuery(this).text());
+                jQuery('#articleList').fadeOut();
+            });
+
+            jQuery(".moreBox").slice(0, 9).show();
+            if (jQuery(".articleBox:hidden").length != 0) {
+                jQuery("#loadMore").show();
+            }
+            jQuery("#loadMore").on('click', function (e) {
+                e.preventDefault();
+                jQuery(".moreBox:hidden").slice(0, 10).slideDown();
+                if (jQuery(".moreBox:hidden").length == 0) {
+                    jQuery("#loadMore").fadeOut('slow');
+                }
+            });
+
+        });
+    });
+</script>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		<referenceContainer name="head.additional">
+			<block class="Omnyfy\Core\Block\Template" name="googlemaps.api" template="Omnyfy_Core::google_maps_api.phtml" />
+			<block class="Magento\Framework\View\Element\Template" name="signup_js" template="Omnyfy_VendorSignUp::js.phtml" after="googlemaps.api"/>
+		</referenceContainer>
+		<referenceBlock name="page.main.title" remove="true"/>
+		<referenceBlock name="vendor.signup" remove="true" />
+		<referenceContainer name="page.top">
+			<block class="Magento\Cms\Block\Block" as="become.vendor" name="become_vendor">
+				<arguments>
+					<argument name="block_id" xsi:type="string">become_vendor</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+
+		<referenceContainer name="sidebar.additional">
+			<container name="signup.sidebar" htmlTag="div" htmlId="vendor-sign-wrapper">
+				<block class="Magento\Cms\Block\Block" as="steps.vendor" name="steps_vendor">
+					<arguments>
+						<argument name="block_id" xsi:type="string">steps_vendor</argument>
+					</arguments>
+				</block>
+			</container>
+		</referenceContainer>
+
+        <referenceContainer name="content">
+			<block class="Omnyfy\VendorSignUp\Block\SignUp\Form" name="vendor.signup.form" template="Omnyfy_VendorSignUp::signup/form.phtml">
+				<block class="Omnyfy\VendorSignUp\Block\SignUp\Attributes" name="vendor_attributes" as="vendor_attributes"
+					   template="Omnyfy_VendorSignUp::attributes.phtml"/>
+			</block>
+        </referenceContainer>
+
+		<referenceBlock name="sale.reorder.sidebar" remove="true"/>
+    </body>
+</page>

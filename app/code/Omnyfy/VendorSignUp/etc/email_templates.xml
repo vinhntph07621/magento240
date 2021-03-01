@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="omnyfy_vendorsignup_vendor_signup_customer_template" label="Receive Vendor Signup Notification - Customer" file="new_vendor_signup.html" type="html" module="Omnyfy_VendorSignUp" area="frontend"/>
+    <template id="omnyfy_vendorsignup_vendor_signup_template" label="Receive Vendor Signup Notification - Admin" file="new_vendor_signup_admin.html" type="html" module="Omnyfy_VendorSignUp" area="frontend"/>
+    <template id="omnyfy_vendorsignup_vendor_signup_approve_template" label="Approve Signup Notification - Vendor" file="vendor_signup_approve.html" type="html" module="Omnyfy_VendorSignUp" area="frontend"/>
+    <template id="omnyfy_vendorsignup_vendor_signup_reject_template" label="Reject Signup Notification - Vendor" file="vendor_signup_reject.html" type="html" module="Omnyfy_VendorSignUp" area="frontend"/>
+</config>

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">omnyfy_vendorsignup_signup_form.omnyfy_vendorsignup_signup_form_data_source</item>
+            <item name="deps" xsi:type="string">omnyfy_vendorsignup_signup_form.omnyfy_vendorsignup_signup_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Template Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">omnyfy_vendorsignup_signup_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Omnyfy\VendorSignUp\Block\Adminhtml\Edit\BackButton</item>
+			<!-- <item name="delete" xsi:type="string">Omnyfy\VendorSignUp\Block\Adminhtml\Edit\DeleteButton</item>
+			<item name="reject" xsi:type="string">Omnyfy\VendorSignUp\Block\Adminhtml\Edit\RejectButton</item>
+			<item name="approve" xsi:type="string">Omnyfy\VendorSignUp\Block\Adminhtml\Edit\ApproveButton</item> -->
+            <item name="save" xsi:type="string">Omnyfy\VendorSignUp\Block\Adminhtml\Edit\SaveButton</item>
+        </item>
+    </argument>
+    <dataSource name="omnyfy_vendorsignup_signup_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Omnyfy\VendorSignUp\Ui\DataProvider\SignUp\Form\SignUpDataProvider</argument>
+            <argument name="name" xsi:type="string">omnyfy_vendorsignup_signup_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="omnyfy_vendorsignup/signup/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+            </item>
+        </argument>
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">10</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </field>
+		<field name="first_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">20</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">First Name</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">first_name</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+		<field name="last_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">30</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">Last Name</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">last_name</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+		<field name="dob">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">40</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">Date of Birth</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="dataScope" xsi:type="string">dob</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+					<item name="options" xsi:type="array">
+						<item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+						<item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+						<item name="showsTime" xsi:type="boolean">false</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+		<field name="business_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">50</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">Businees Name</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">business_name</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+		<field name="business_address">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">60</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">Business Address</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">business_address</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+		<field name="city">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">70</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">City</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">city</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+		<field name="state">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">80</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">State</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">state</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+		<field name="country">
+            <argument name="data" xsi:type="array">
+				<item name="options" xsi:type="object">Magento\Directory\Model\Config\Source\Country</item>
+				<item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">90</item>
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" xsi:type="string" translate="true">Country</item>
+					<item name="formElement" xsi:type="string">select</item>
+					<item name="source" xsi:type="string">store</item>
+					<item name="component" xsi:type="string">Magento_Ui/js/form/element/country</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+        </field>
+		<field name="postcode">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">100</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">Postcode</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">postcode</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+		<field name="country_code">
+			<argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Omnyfy\VendorSignUp\Model\Source\CountryCodeList</item>
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">110</item>
+                    <item name="dataType" xsi:type="string">text</item>
+					<item name="component" xsi:type="string">Magento_Ui/js/form/element/country</item>
+                    <item name="label" xsi:type="string" translate="true">Country Code</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">country_code</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+					<item name="additionalClasses" xsi:type="array">
+						<item name="country-section-field" xsi:type="boolean">true</item>
+					</item>
+                </item>
+            </argument>
+        </field>
+		<field name="telephone">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">120</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">Contact Number</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">telephone</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+						<item name="validate-digits" xsi:type="boolean">true</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+		<field name="email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">130</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">Email</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="id" xsi:type="string">dotest</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">email</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+						<item name="validate-email" xsi:type="boolean">true</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+		<field name="legal_entity">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">140</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">Legal Entity</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">legal_entity</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+		<field name="tax_number">
+			<argument name="data" xsi:type="array">
+				<item name="options" xsi:type="object">Omnyfy\VendorSignUp\Model\Source\TaxName</item>
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">150</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Tax Name</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">tax_number</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+					<item name="additionalClasses" xsi:type="array">
+						<item name="tax-number-field" xsi:type="boolean">true</item>
+					</item>
+                </item>
+            </argument>
+        </field>
+		<field name="abn">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">160</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">Tax Number</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">abn</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+		<field name="description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">170</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+					<item name="label" xsi:type="string" translate="true">Business Description</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="dataScope" xsi:type="string">description</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+            </argument>
+        </field>
+    </fieldset>    
+</form>

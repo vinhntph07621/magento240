@@ -1,0 +1,16 @@
+<div class="data-grid-cell-content cs-segment-grid-cells__info">
+    <strong html="$col.getLabel($row()).title"/>
+
+    <div class="relative-size">
+
+        <div class="bar" data-bind="foreach: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]">
+            <span data-bind="css: { _fill: ($index() * 4 < $col.getLabel($row()).percentSize) }"></span>
+        </div>
+
+        <div class="numbers">
+            <span html="$col.getLabel($row()).size"/> <sup><span html="$col.getLabel($row()).percentSize"/>%</sup>
+        </div>
+    </div>
+
+    <div class="conditions" html="$col.getLabel($row()).conditions"/>
+</div>

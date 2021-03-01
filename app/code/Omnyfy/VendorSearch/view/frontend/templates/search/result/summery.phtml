@@ -1,0 +1,23 @@
+<?php
+/**
+ * @var $block Omnyfy\VendorSearch\Block\Search\Result
+ */
+?>
+<div class="toolbar toolbar-vendors">
+    <p class="toolbar-amount" id="toolbar-amount">
+        <span class="toolbar-number"><?php echo $block->getSearchCount() ?></span>
+        <?= $block->getSearchCount() == 1 ? __('Vendor') : __('Vendors') ?>
+    </p>
+    <div class="toolbar-sorter sorter">
+        <label class="sorter-label" for="sorter">
+            <span class="fas fa-sort-amount-up"></span>Sort By
+        </label>
+        <select id="sorter" data-role="sorter" class="sorter-options">
+            <?php $sort = $block->getSortOrder()?>
+            <?php if ($block->isDistance()): ?>
+                <option value="distance" <?php echo $sort == "distance"?"selected":"" ?>> <?= __('Distance') ?> </option>
+            <?php endif; ?>
+            <option value="name" <?php echo $sort == "name"?"selected":"" ?>> <?= __('Name') ?> </option>
+        </select>
+    </div>
+</div>

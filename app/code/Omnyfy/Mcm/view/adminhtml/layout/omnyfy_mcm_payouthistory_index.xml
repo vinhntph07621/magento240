@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Omnyfy_Mcm::css/mcm_admin.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Omnyfy\Mcm\Block\Adminhtml\PayoutHistory\Index" name="omnyfy_mcm_payout_history_index"/>
+            <uiComponent name="omnyfy_mcm_vendor_main_payout_history_listing"/>
+        </referenceContainer>
+    </body>
+</page>

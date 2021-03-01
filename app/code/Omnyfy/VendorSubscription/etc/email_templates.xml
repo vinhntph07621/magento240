@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="omnyfy_subscription_general_cancel_template_admin" label="Vendor Cancelled Subscription Notification - Admin" file="cancel_admin.html" type="html" module="Omnyfy_VendorSubscription" area="adminhtml"/>
+    <template id="omnyfy_subscription_general_cancel_template_vendor" label="Vendor Cancelled Subscription Notification - Vendor" file="cancel_vendor.html" type="html" module="Omnyfy_VendorSubscription" area="adminhtml"/>
+</config>

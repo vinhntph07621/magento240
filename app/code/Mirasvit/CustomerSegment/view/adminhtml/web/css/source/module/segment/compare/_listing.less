@@ -1,0 +1,136 @@
+.mst-segment-compare__listing {
+
+    .table {
+        .row {
+            display: flex;
+
+            .segment, .size {
+                border: 1px solid #e3e3e3;
+                margin-left: -1px;
+                margin-top: -1px;
+            }
+
+            .segment {
+                flex-grow: 1;
+                flex-basis: 0;
+                width: 1%;
+                font-size: 1.4rem;
+                padding: 1rem;
+                background: #f8f8f8;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .size {
+                flex-grow: 1;
+                flex-basis: 0;
+                width: 1%;
+                text-align: center;
+                padding: 1rem;
+
+                i {
+                    font-style: normal;
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+
+    .list {
+        display: flex;
+        margin-bottom: 3rem;
+
+        .segment {
+            flex-grow: 1;
+            flex-basis: 0;
+            width: 1%;
+            margin-right: .2rem;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            > .title {
+                text-align: center;
+                font-size: 1.4rem;
+                font-weight: 600;
+                padding: 1rem;
+                color: #fff;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            > .size {
+                padding: 1rem;
+                text-align: center;
+                font-weight: 600;
+                font-size: 2rem;
+            }
+
+            .reports {
+                margin-top: 2rem;
+
+                .report {
+                    border-top: 1px dashed #e3e3e3;
+
+                    > .label {
+                        text-align: center;
+                        font-size: 1.4rem;
+                        padding: 1rem;
+                        background: #f8f8f8;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+
+                    > .value {
+                        padding: 1rem;
+                        text-align: center;
+                        font-weight: 600;
+                        font-size: 2rem;
+                    }
+                }
+            }
+
+            &:nth-child(1) {
+                > .title {
+                    background: #5DD155;
+                }
+                > .size {
+                    color: #5DD155;
+                }
+
+                .report  > .value {
+                    color: #5DD155;
+                }
+            }
+
+            &:nth-child(2) {
+                > .title {
+                    background: #FF6A53;
+                }
+                > .size {
+                    color: #FF6A53;
+                }
+                .report  > .value {
+                    color: #FF6A53;
+                }
+            }
+
+            &:nth-child(3) {
+                > .title {
+                    background: #84BDE9;
+                }
+                > .size {
+                    color: #84BDE9;
+                }
+                .report  > .value {
+                    color: #84BDE9;
+                }
+            }
+
+        }
+    }
+}

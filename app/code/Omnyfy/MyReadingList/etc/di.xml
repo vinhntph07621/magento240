@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Omnyfy\MyReadingList\Api\ReadingListRepositoryInterface" type="Omnyfy\MyReadingList\Model\ReadingListRepository"/>
+	<preference for="Omnyfy\MyReadingList\Api\Data\ReadingListInterface" type="Omnyfy\MyReadingList\Model\ReadingList"/>
+	<preference for="Omnyfy\MyReadingList\Api\Data\ReadingListSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+</config>

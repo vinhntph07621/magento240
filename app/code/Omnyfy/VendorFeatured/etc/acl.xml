@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Omnyfy_VendorFeatured::vendor_featured" sortOrder="10" title="vendor_featured">
+					<resource id="Omnyfy_VendorFeatured::vendor_featured_save" sortOrder="10" title="Save vendor_featured"/>
+					<resource id="Omnyfy_VendorFeatured::vendor_featured_delete" sortOrder="20" title="Delete vendor_featured"/>
+					<resource id="Omnyfy_VendorFeatured::vendor_featured_update" sortOrder="30" title="Update vendor_featured"/>
+					<resource id="Omnyfy_VendorFeatured::vendor_featured_view" sortOrder="40" title="View vendor_featured"/>
+				</resource>
+				<resource id="Omnyfy_VendorFeatured::vendor_tag" sortOrder="10" title="vendor_tag">
+					<resource id="Omnyfy_VendorFeatured::vendor_tag_save" sortOrder="10" title="Save vendor_tag"/>
+					<resource id="Omnyfy_VendorFeatured::vendor_tag_delete" sortOrder="20" title="Delete vendor_tag"/>
+					<resource id="Omnyfy_VendorFeatured::vendor_tag_update" sortOrder="30" title="Update vendor_tag"/>
+					<resource id="Omnyfy_VendorFeatured::vendor_tag_view" sortOrder="40" title="View vendor_tag"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

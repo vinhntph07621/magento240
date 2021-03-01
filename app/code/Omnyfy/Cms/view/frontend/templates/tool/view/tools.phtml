@@ -1,0 +1,46 @@
+<?php $toolsCollection = $block->getCollection();?>
+<?php if($toolsCollection->getSize()>0):?>
+	<h2 class="light-header"><?php echo __('Tools')?></h2>
+	<div class="row flex-row mb-30">
+		<?php foreach($toolsCollection as $tool):?>
+			<div class="col-xs-12 col-sm-6 col-md-4">
+				<div class="tools-tile">
+					<div class="tile-content">
+						<div class="top-row">
+							<div class="tile-image">
+								<?php if($tool->getIcon()){
+									$imgUrl = $block->getLogoUrl($tool->getIcon());
+								} else{
+									$imgUrl = $this->getViewFileUrl("Omnyfy_Cms::images/topic-icon01.png");
+								}?>
+								<img src="<?php echo $imgUrl;?>" title="<?php echo $tool->getTitle()?>">
+							</div>
+							<div class="heading"><?php echo $tool->getTitle()?></div>
+						</div>
+						<div class="brief">
+							<p><?php echo $this->stripTags($tool->getShortDescription())?></p>
+						</div>
+					</div>
+					<div class="tile-footer">
+						<?php if($tool->getLinkType()){?>
+							<a href="<?php echo $this->stripTags($tool->getLink())?>" target="_blank" class="link-bottom arrow-link">
+								<span class="arrow icon-angle-right"></span>
+								<?php echo __('Learn more')?>
+							</a>
+						<?php } else{?>
+							<?php if($block->isLoggedIn()){?>
+								<a href="<?php echo $block->getToolUrl($tool->getUploadTemplate())?>" download target="_blank" class="btn btn-dark-green">
+									<?php echo __('Download tool')?>
+								</a>
+							<?php } else{ ?>
+								<a href="<?php echo $block->getLoginUrl()?>" class="btn btn-dark-green reg-gate">
+									<?php echo __('Download tool')?>
+								</a>
+							<?php }?>
+						<?php }?>
+					</div>
+				</div>
+			</div>
+		<?php endforeach;?>
+	</div>
+<?php endif;?>

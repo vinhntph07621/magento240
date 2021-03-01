@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="cms_default"/>
+    <update handle="cms_article_list"/>
+    <body>
+		<attribute name="class" value="tier-one"/>
+		<referenceContainer name="sidebar.additional" remove="true" />
+        <referenceContainer name="content">
+			<container name="main-category-container" htmlTag="div" htmlClass="wrapper-body bg-light-grey" before="-">
+				<block class="Omnyfy\Cms\Block\Category\View" cacheable="false" name="cms.articles.list" template="article/list.phtml"/>
+			</container>
+        </referenceContainer>
+    </body>
+</page>

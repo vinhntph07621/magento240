@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="omnyfy_subscription_invoice_succeeded">
+        <observer name="omnyfy_subscription_observer_invoice_success" instance="Omnyfy\VendorSubscription\Observer\SubscriptionInvoiceSuccess" />
+    </event>
+    <event name="omnyfy_subscription_invoice_failed">
+        <observer name="omnyfy_subscription_observer_invoice_fail" instance="Omnyfy\VendorSubscription\Observer\SubscriptionInvoiceFail" />
+    </event>
+    <event name="omnyfy_subscription_cancel_succeeded">
+        <observer name="omnyfy_subscription_observer_cancel_success" instance="Omnyfy\VendorSubscription\Observer\SubscriptionCancelSuccess" />
+    </event>
+    <event name="omnyfy_subscription_updated">
+        <observer name="omnyfy_subscription_observer_update" instance="Omnyfy\VendorSubscription\Observer\SubscriptionUpdate" />
+    </event>
+    <event name="omnyfy_subscription_deleted">
+        <observer name="omnyfy_subscription_observer_delete" instance="Omnyfy\VendorSubscription\Observer\SubscriptionDelete" />
+    </event>
+    <event name="omnyfy_enquiry_enquiries_save_before">
+        <observer name="omnyfy_subscription_observer_restrict_enquiry" instance="Omnyfy\VendorSubscription\Observer\Restrict\Enquiry" />
+    </event>
+    <event name="omnyfy_enquiry_enquiries_save_after">
+        <observer name="omnyfy_subscription_observer_restrict_enquiry" instance="Omnyfy\VendorSubscription\Observer\Restrict\Enquiry" />
+    </event>
+    <event name="omnyfy_enquiry_enquiries_delete_after">
+        <observer name="omnyfy_subscription_observer_restrict_enquiry" instance="Omnyfy\VendorSubscription\Observer\Restrict\Enquiry" />
+    </event>
+    <event name="omnyfy_rfq_save_before">
+        <observer name="omnyfy_subscription_observer_restrict_request_for_quote" instance="Omnyfy\VendorSubscription\Observer\Restrict\RequestForQuote" />
+    </event>
+    <event name="omnyfy_rfq_save_after">
+        <observer name="omnyfy_subscription_observer_restrict_request_for_quote" instance="Omnyfy\VendorSubscription\Observer\Restrict\RequestForQuote" />
+    </event>
+    <event name="omnyfy_rfq_delete_after">
+        <observer name="omnyfy_subscription_observer_restrict_request_for_quote" instance="Omnyfy\VendorSubscription\Observer\Restrict\RequestForQuote" />
+    </event>
+</config>

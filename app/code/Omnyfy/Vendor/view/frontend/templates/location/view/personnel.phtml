@@ -1,0 +1,32 @@
+<?php /* echo '<pre>';
+print_r($block->getProviderCollection()->getData());
+echo '</pre>'; */
+/* $providerCollection = $block->getProviderCollection()->getData();
+echo $providerCollection->getSize().'---';
+echo $providerCollection->getStatus(); */
+$providerCollection = $block->getProviderCollection();
+?>
+<?php if($providerCollection->getSize()){?>
+<div class="profile-block anchor-target" id="personnel">
+	<div class="block-title">
+		<?php echo __('Personnel')?>
+	</div>
+	<div class="block-body">
+		<div class="tiles-wrapper">
+			<?php foreach($providerCollection as $provider):?>
+				<?php if($provider->getStatus()){?>
+					<div class="personnel-tile-container">
+						<a href="#" class="personnel-tile">
+							<div class="tile-image-container">
+								<img src="<?php echo $block->getPhotoUrl($provider->getPhoto())?><?php #echo $this->getViewFileUrl('Omnyfy_Vendor::images/default-user.png') ?>">
+							</div>
+							<span class="name"><?php echo $provider->getFirstName().' '.$provider->getLastName()?></span>
+							<span class="title"><?php echo $provider->getQualifications()?></span>
+						</a>
+					</div>
+				<?php }?>
+			<?php endforeach;?>	
+		</div>
+	</div>
+</div>
+<?php }?>

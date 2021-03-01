@@ -1,0 +1,15 @@
+.admin__field-complex-title span.label {
+    display: none;
+}
+
+.admin__field-complex .admin__field-complex-content {
+    display: none;
+}
+
+fieldset.admin__fieldset .message.message-notice.notice {
+    display: none;
+}
+
+body.omnyfy-checklist-checklistdocuments-index tr.data-grid-filters {
+    display: none;
+}

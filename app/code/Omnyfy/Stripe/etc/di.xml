@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Omnyfy\VendorSignUp\Helper\GatewayInterface" type="\Omnyfy\Stripe\Helper\Gateway" />
+    <type name="Omnyfy\Mcm\Ui\DataProvider\VendorEarnings\Grid\VendorEarningDataProvider">
+        <plugin name="vendor_earnings_grid_group_collection_plugin" type="Omnyfy\Stripe\Plugin\VendorEarningDataProvider" />
+    </type>
+</config>

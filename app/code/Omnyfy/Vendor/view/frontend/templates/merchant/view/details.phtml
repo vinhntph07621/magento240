@@ -1,0 +1,89 @@
+<?php
+/**
+ * Copyright © Omnyfy, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Vendor view template
+ *
+ * @var $block \Omnyfy\Vendor\Block\Vendor\View
+ */
+$vendor = $block->getVendor();
+$vendorAttributesObject = $block->loadVendorAttributes();
+$vendorAllAttributes = $vendorAttributesObject->getData();
+$shouldDisplayDetails = false;
+$vendorAttributesToDisplay = [];
+//attributesToDisplay are defined in layout and can be overridden in theme
+if (count($block->getAttributesToDisplay()) > 0) {
+    foreach($block->getAttributesToDisplay() as $key => $val) {
+        if ($block->shouldDisplayAttribute($key)) {
+            $vendorAttributesToDisplay[$key] = $val;
+        }
+    }
+}
+
+$excludeFields =
+    ['status',
+    'entity_id',
+    'name',
+    'email',
+    'attribute_set_id',
+    'type_id',
+    'description',
+    'shipping_policy',
+    'return_policy',
+    'payment_policy',
+    'marketing_policy',
+    'updated_at',
+    'created_at'];
+
+//displayAll are defined in layout and can be overridden in theme
+if ($block->getDisplayAll() === true) {
+    foreach ($vendorAllAttributes as $attributeKey => $attributeValue) {
+        if (!in_array($attributeKey, $excludeFields)
+            && !in_array($attributeKey, array_keys($vendorAttributesToDisplay))) {
+
+            if ($block->shouldDisplayAttribute($attributeKey)) {
+                $vendorAttributesToDisplay[$attributeKey] = $attributeValue;
+            }
+        }
+    }
+}
+
+if (count($vendorAttributesToDisplay) > 0 ) {
+    $shouldDisplayDetails = true;
+}
+
+if ($shouldDisplayDetails): ?>
+
+    <section id="details" class="vendor-details active">
+        <div class="container">
+            <h2><?= __("Details") ?></h2>
+            <div class="vendor-attributes-panel">
+                <?php foreach ($vendorAttributesToDisplay as $vendorAttributeKey => $vendorAttributeValue) : ?>
+                <?php if ($block->isAttributeMultiselect($vendorAttributeKey)): ?>
+                    <div class="detail-item">
+                        <span class="title">
+                            <?php echo $block->getAttributeLabel($vendorAttributeKey); ?>
+                        </span>
+                        <ul class="vendor-tags-list">
+                            <?php foreach ($block->getMultiSelectValues($vendorAttributeKey) as $multiselectValue): ?>
+                            <li class="vendor-tag"><?php echo $multiselectValue; ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php else: ?>
+                    <div class="detail-item">
+                        <span class="title">
+                            <?php echo $block->getAttributeLabel($vendorAttributeKey); ?>
+                        </span>
+                        <p><?php echo $block->getAttributeValue($vendorAttributeKey); ?></p>
+                    </div>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+
+<?php endif; ?>

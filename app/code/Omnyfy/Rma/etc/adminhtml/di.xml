@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- filter Rma recods per vendor id -->
+    <preference for="Mirasvit\Rma\Model\ResourceModel\Rma\Grid\Collection" type="Omnyfy\Rma\Model\ResourceModel\Rma\Grid\Collection" />
+
+    <!-- Moved template files related to Omnyfy_Rma module -->
+    <preference for="Mirasvit\Rma\Block\Adminhtml\Rma\Edit\Form" type="Omnyfy\Rma\Block\Adminhtml\Rma\Edit\Form" />
+
+    <!-- Change RMA owner from dropdown to disable text field and make sure its assign to the Vendor Admin User -->
+    <preference for="Mirasvit\Rma\Block\Adminhtml\Rma\Edit\Form\GeneralInfo" type="Omnyfy\Rma\Block\Adminhtml\Rma\Edit\Form\GeneralInfo" />
+
+    <!-- Removed Credit memo on vendor admin and Exchange order for all admin -->
+    <preference for="Mirasvit\Rma\Block\Adminhtml\Rma\Edit" type="Omnyfy\Rma\Block\Adminhtml\Rma\Edit" />
+
+    <!-- filter Return address recods per vendor id -->
+    <preference for="Mirasvit\Rma\Model\ResourceModel\Address\Grid\Collection" type="Omnyfy\Rma\Model\ResourceModel\Address\Grid\Collection" />
+
+    <!-- Filter Return address per vendor when Editing RMA -->
+    <type name="\Mirasvit\Rma\Model\ResourceModel\Address\Collection">
+        <plugin name="addVendorIdBeforeSave" type="Omnyfy\Rma\Plugin\Model\ResourceModel\Address\Collection" sortOrder="1" />
+    </type>
+</config>

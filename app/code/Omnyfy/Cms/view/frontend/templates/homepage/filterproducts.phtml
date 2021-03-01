@@ -1,0 +1,78 @@
+<?php
+/** @var $block Omnyfy\Cms\Block\Homepage\FilterProducts */
+?>
+<div class="filter-products">
+    <form id="filter_products_form" action="#" method="post">
+        <div class="filter-field">
+            <label for="primary_category">Choose a Category</label>
+            <select name="primary_category" id="primary_category">
+                <option value="">Choose a Category</option>
+                <?php foreach ($block->getCategoriesByLevel(2) as $category) : ?>
+                    <option value="<?php echo $category->getUrl() ?>" data-category-id="<?php echo $category->getId() ?>"><?php echo $category->getName() ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="filter-field">
+            <label for="sub_category">Select Sub Category</label>
+            <select name="sub_category" id="sub_category" disabled>
+                <option value="">Sub Category</option>
+            </select>
+        </div>
+        <button type="submit" class="action primary">Search</button>
+    </form>
+</div>
+
+<script type="text/javascript">
+    require([
+        "jquery"
+    ], function ($) {
+        'use strict';
+
+        function getCategories(categoryId) {
+            let url = "<?php echo $block->getAjaxUrl() ?>";
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "json",
+                data: {
+                    category_id : categoryId,
+                },
+                showLoader: true,
+                cache: false,
+                success: function (response) {
+                    let subCategoryDropdown = $('#sub_category');
+                    if (response.success) {
+                        let categories = response.categories;
+                        let options = "";
+                        $.each(categories,function(key,value){
+                            options += '<option value="' +value.url+ '">' +value.name+ '</option>';
+                        });
+                        subCategoryDropdown.empty();
+                        subCategoryDropdown.append(options);
+                    }
+                }
+            });
+        }
+
+        $('#primary_category').on('change', function (e) {
+            let Form = $('#filter_products_form');
+            if ($(this).val()) {
+                getCategories($('#primary_category option:selected').attr("data-category-id"));
+                $('#sub_category').prop("disabled", false);
+                Form.attr('action', $(this).val());
+            }else {
+                Form.attr('action', '#');
+                $('#sub_category').empty().append('<option value="">Select Sub Category</option>');
+            }
+        });
+
+        $('#sub_category').on('change', function (e) {
+            let Form = $('#filter_products_form');
+            if ($(this).val()) {
+                Form.attr('action', $(this).val());
+            }else {
+                Form.attr('action', $('#primary_category').val());
+            }
+        })
+    });
+</script>

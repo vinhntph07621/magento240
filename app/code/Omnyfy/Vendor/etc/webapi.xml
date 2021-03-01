@@ -1,0 +1,245 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/vendors" method="GET">
+        <service class="Omnyfy\Vendor\Api\VendorRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/vendors" method="POST">
+        <service class="Omnyfy\Vendor\Api\VendorRepositoryInterface" method="save" />
+        <resources>
+            <resource ref="Omnyfy_Vendor::vendors" />
+        </resources>
+    </route>
+
+    <route url="/V1/vendors/types" method="GET">
+        <service class="Omnyfy\Vendor\Api\VendorTypeRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/vendors/types/:vendor_type_id" method="GET">
+        <service class="Omnyfy\Vendor\Api\VendorTypeRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/vendors/id/:vendor_id" method="GET">
+        <service class="Omnyfy\Vendor\Api\VendorRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/vendors/id/:vendor_id" method="PUT">
+        <service class="Omnyfy\Vendor\Api\VendorRepositoryInterface" method="save" />
+        <resources>
+            <resource ref="Omnyfy_Vendor::vendors" />
+        </resources>
+    </route>
+    <route url="/V1/vendors/id/:vendor_id" method="DELETE">
+        <service class="Omnyfy\Vendor\Api\VendorRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/vendors/attributes" method="GET">
+        <service class="Omnyfy\Vendor\Api\VendorAttributeRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/vendors/attributes/:attribute_code" method="GET">
+        <service class="Omnyfy\Vendor\Api\VendorAttributeRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/vendors/attribute-sets/:attribute_set_id/attributes" method="GET">
+        <service class="Omnyfy\Vendor\Api\VendorAttributeManagementInterface" method="getAttributes"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/locations" method="GET">
+        <service class="Omnyfy\Vendor\Api\LocationRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/locations_mini" method="GET">
+        <service class="Omnyfy\Vendor\Api\LocationRepositoryInterface" method="getListVendorWarehouse"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/locations" method="POST">
+        <service class="Omnyfy\Vendor\Api\LocationRepositoryInterface" method="save" />
+        <resources>
+            <resource ref="Omnyfy_Vendor::locations" />
+        </resources>
+    </route>
+
+    <route url="/V1/locations/id/:location_id" method="GET">
+        <service class="Omnyfy\Vendor\Api\LocationRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/locations/id/:location_id" method="PUT">
+        <service class="Omnyfy\Vendor\Api\LocationRepositoryInterface" method="save" />
+        <resources>
+            <resource ref="Omnyfy_Vendor::locations" />
+        </resources>
+    </route>
+    <route url="/V1/locations/id/:location_id" method="DELETE">
+        <service class="Omnyfy\Vendor\Api\LocationRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Omnyfy_Vendor::locations" />
+        </resources>
+    </route>
+
+    <route url="/V1/locations/list_by_keyword" method="GET">
+        <service class="Omnyfy\Vendor\Api\LocationRepositoryInterface" method="getListByKeyword"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/locations/attributes" method="GET">
+        <service class="Omnyfy\Vendor\Api\LocationAttributeRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/locations/attributes/:attribute_code" method="GET">
+        <service class="Omnyfy\Vendor\Api\LocationAttributeRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/locations/attribute-sets/:attribute_set_id/attributes" method="GET">
+        <service class="Omnyfy\Vendor\Api\LocationAttributeManagementInterface" method="getAttributes"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/vendors/bind" method="POST">
+        <service class="Omnyfy\Vendor\Api\BindRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+    <route url="/V1/stock/:product_id/:qty" method="GET">
+        <service class="Omnyfy\Vendor\Api\StockRepositoryInterface" method="getStockInfo"/>
+        <resources>
+            <resource ref="Omnyfy_Vendor::locations" />
+        </resources>
+    </route>
+
+    <route url="/V1/stock/check" method="POST">
+        <service class="Omnyfy\Vendor\Api\StockRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Omnyfy_Vendor::locations" />
+        </resources>
+    </route>
+
+    <route url="/V1/vendors/add_favourite_vendor" method="POST">
+        <service class="Omnyfy\Vendor\Api\BindFavouriteVendorRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+    <route url="/V1/vendors/remove_favourite_vendor/" method="POST">
+        <service class="Omnyfy\Vendor\Api\BindFavouriteVendorRepositoryInterface" method="delete"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+    <route url="/V1/location_product/:product_id" method="GET">
+        <service class="Omnyfy\Vendor\Api\LocationProductRepositoryInterface" method="getByProduct"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/location_product/:product_id" method="POST">
+        <service class="Omnyfy\Vendor\Api\LocationProductRepositoryInterface" method="createInventory"/>
+        <resources>
+            <resource ref="Omnyfy_Vendor::locations" />
+        </resources>
+    </route>
+
+    <route url="/V1/location_product/update/:product_id" method="POST">
+        <service class="Omnyfy\Vendor\Api\LocationProductRepositoryInterface" method="updateInventory"/>
+        <resources>
+            <resource ref="Omnyfy_Vendor::locations" />
+        </resources>
+    </route>
+
+    <route url="/V1/location_product/:product_id/location_id/:location_id" method="DELETE">
+        <service class="Omnyfy\Vendor\Api\LocationProductRepositoryInterface" method="removeRelation"/>
+        <resources>
+            <resource ref="Omnyfy_Vendor::locations" />
+        </resources>
+    </route>
+
+    <route url="/V1/vendor_product/:product_id" method="GET">
+        <service class="Omnyfy\Vendor\Api\VendorProductRepositoryInterface" method="getByProduct"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/vendor_product/:product_id/vendor_id/:vendor_id" method="POST">
+        <service class="Omnyfy\Vendor\Api\VendorProductRepositoryInterface" method="assignToVendor"/>
+        <resources>
+            <resource ref="Omnyfy_Vendor::vendors" />
+        </resources>
+    </route>
+
+    <route url="/V1/vendor_product/update/:product_id" method="POST">
+        <service class="Omnyfy\Vendor\Api\VendorProductRepositoryInterface" method="updateByProduct"/>
+        <resources>
+            <resource ref="Omnyfy_Vendor::vendors" />
+        </resources>
+    </route>
+
+    <route url="/V1/vendor_product/:product_id/vendor_id/:vendor_id" method="DELETE">
+        <service class="Omnyfy\Vendor\Api\VendorProductRepositoryInterface" method="removeRelation"/>
+        <resources>
+            <resource ref="Omnyfy_Vendor::vendors" />
+        </resources>
+    </route>
+
+    <route url="/V1/shipping_message/:type" method="GET">
+        <service class="Omnyfy\Vendor\Api\ShippingMessagesRepositoryInterface" method="getShippingConfig"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/shipping_threshold_vendor/:id" method="GET">
+        <service class="Omnyfy\Vendor\Api\ShippingMessagesRepositoryInterface" method="getVendorThreshold"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+</routes>

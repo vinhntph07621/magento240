@@ -1,0 +1,46 @@
+<div class="categories-side-col">
+    <div class="sidebar-actions">
+        <?php $rootUrl = $block->getAddRootButtonUrl();
+        $subUrl = $block->getAddSubButtonUrl();?>
+        <button id="add_root_cms_category_button" title="Add Root Topic" type="button" class="action-default scalable add" onclick="window.location.href = '<?php echo $rootUrl; ?>'" data-ui-id="add_root_cms_category_button">
+            <span>Add Root Topic</span>
+        </button>
+        <button id="add_sub_category_button" title="Add Subtopic" type="button" class="action-default scalable add" onclick="window.location.href = '<?php echo $subUrl; ?>'" data-ui-id="add_sub_category_button">
+            <span>Add Subtopic</span>
+        </button>
+    </div>
+    <div class="tree-holder">
+        <div id="tree-div" class="tree-wrapper">
+            <?php
+            $treeHtml = $block->getTreeArray();
+            ?>
+            <div id="jstree" data-role="resource-tree">
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    window.treeParent = '<?php echo $block->getParentId()?>';
+    require([
+        "jquery",
+        "jquery/ui",
+        'jstree'
+    ], function ($, ui, jstree) {
+        $('#jstree').hide();
+        $('#jstree > ul').html('<?php echo $treeHtml; ?>');
+        var tree = $('#jstree').jstree();
+        tree.on('loaded.jstree', function () {
+            var selected_node = '<?php /* @escapeNotVerified */ echo $block->getSelectedNode(); ?>';
+            if (selected_node) {
+                $("#jstree").jstree("select_node", $("<?php /* @escapeNotVerified */ echo $block->getSelectedNode(); ?>"));
+
+            }
+        });
+        $('#jstree').show();
+    });
+</script>
+<?php //endif;  ?>

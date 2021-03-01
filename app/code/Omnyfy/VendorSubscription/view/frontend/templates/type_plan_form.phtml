@@ -1,0 +1,57 @@
+<?php
+/**
+ * Project: Vendor Subscription
+ * User: jing
+ * Date: 2019-08-13
+ * Time: 13:35
+ */
+
+/** @var \Omnyfy\VendorSubscription\Block\Form\Type $block  */
+$vendorTypeId = $block->getData('vendor_type_id');
+
+$types = $block->loadVendorTypeCollection();
+$vendorType = $types->getItemById($vendorTypeId);
+
+if (empty($vendorType)) return;
+
+$plans = $block->loadPlanCollection($vendorTypeId);
+if (empty($plans)  || $plans->getSize()==0) return;
+
+?><div class="plan-tiers-row"><?php
+
+foreach($plans as $plan) {
+    $statusClass = $plan->getStatus() ? '' : ' disabled';
+    $promoClass = $plan->getPromoText() ? '' : ' no-text';
+    $price = $plan->getIsFree() ? 0.00 : $plan->getPrice();
+    ?><div class="tier-column<?php echo $statusClass?>">
+        <div class="tier-label<?php echo $promoClass;?>"><?php echo $plan->getPromoText();?></div>
+        <div class="tier-wrapper">
+            <div class="main-wrapper">
+                <div class="main-info">
+                    <h3 class="title"><?php echo $plan->getPlanName();?></h3>
+                    <div class="price-container">
+                        <span class="price"><?php echo $block->formatPrice($price, true, 0);?></span>
+                        <span class="unit"><?php echo $block->getIntervalTitle($plan->getInterval());?></span>
+                        <span class="hint"></span>
+                    </div>
+                </div>
+                <div class="feature-list">
+<?php
+$benefits = $block->parseBenefits($plan->getBenefits());
+foreach($benefits as $benefit) {
+?><div class="item"><?php echo $benefit;?></div>
+<?php
+}
+?>
+                </div>
+                <div class="desc"><?php echo $plan->getDescription();?></div>
+            </div>
+            <div class="actions">
+                <a href="<?php echo $block->getLinkUrl($vendorTypeId, $plan->getId(), $plan->getStatus());?>" class="btn btn-block btn-primary <?= $plan->getStatus() ? '' : 'disabled'?>"><?php echo $plan->getButtonLabel();?></a>
+            </div>
+        </div>
+    </div>
+<?php
+}
+?>
+</div>

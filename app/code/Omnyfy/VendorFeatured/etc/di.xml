@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Omnyfy\VendorFeatured\Api\VendorFeaturedRepositoryInterface" type="Omnyfy\VendorFeatured\Model\VendorFeaturedRepository"/>
+	<preference for="Omnyfy\VendorFeatured\Api\Data\VendorFeaturedInterface" type="Omnyfy\VendorFeatured\Model\VendorFeatured"/>
+	<preference for="Omnyfy\VendorFeatured\Api\Data\VendorFeaturedSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Omnyfy\VendorFeatured\Model\ResourceModel\VendorFeatured\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">omnyfy_vendorfeatured_vendor_featured</argument>
+			<argument name="resourceModel" xsi:type="string">Omnyfy\VendorFeatured\Model\ResourceModel\VendorFeatured\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="omnyfy_vendorfeatured_vendor_featured_grid_data_source" xsi:type="string">Omnyfy\VendorFeatured\Model\ResourceModel\VendorFeatured\Grid\Collection</item>
+				<item name="omnyfy_vendorfeatured_vendor_tag_grid_data_source" xsi:type="string">Omnyfy\VendorFeatured\Model\ResourceModel\VendorTag\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<preference for="Omnyfy\VendorFeatured\Api\VendorFeaturedTagRepositoryInterface" type="Omnyfy\VendorFeatured\Model\VendorFeaturedTagRepository"/>
+	<preference for="Omnyfy\VendorFeatured\Api\Data\VendorFeaturedTagInterface" type="Omnyfy\VendorFeatured\Model\VendorFeaturedTag"/>
+	<preference for="Omnyfy\VendorFeatured\Api\Data\VendorFeaturedTagSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<preference for="Omnyfy\VendorFeatured\Api\VendorTagRepositoryInterface" type="Omnyfy\VendorFeatured\Model\VendorTagRepository"/>
+	<preference for="Omnyfy\VendorFeatured\Api\Data\VendorTagInterface" type="Omnyfy\VendorFeatured\Model\VendorTag"/>
+	<preference for="Omnyfy\VendorFeatured\Api\Data\VendorTagSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Omnyfy\VendorFeatured\Model\ResourceModel\VendorTag\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">omnyfy_vendorfeatured_vendor_tag</argument>
+			<argument name="resourceModel" xsi:type="string">Omnyfy\VendorFeatured\Model\ResourceModel\VendorTag\Collection</argument>
+		</arguments>
+	</virtualType>
+</config>

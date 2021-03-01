@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sign_up_form_load_before">
+        <observer name="omnyfy_subscription_observer_form_load_before" instance="Omnyfy\VendorSubscription\Observer\SignUp\FormLoadBefore"/>
+    </event>
+    <event name="omnyfy_enquiry_form_is_enabled">
+        <observer name="omnyfy_subscription_observer_restrict_enquiry" instance="Omnyfy\VendorSubscription\Observer\Restrict\Enquiry" />
+    </event>
+    <event name="omnyfy_rfq_show_modal">
+        <observer name="omnyfy_subscription_observer_restrict_request_for_quote" instance="Omnyfy\VendorSubscription\Observer\Restrict\RequestForQuote" />
+    </event>
+</config>

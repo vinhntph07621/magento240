@@ -1,0 +1,35 @@
+<?php $checklist = $block->getChecklist();?>
+<?php if($checklist['checklist_status']) {?>
+    <?php $percentage = $block->percentageComplete()?>
+	<div class="info-tile-wrapper">
+		<div class="info-tile dark-tile">
+			<div class="tile-content">
+				<a href="<?php echo $block->getChecklistUrl()?>" class="title">Export Readiness Checklist<?php #echo $checklist['title'] ?></a>
+				<?php if($percentage){?>
+					<div class="progress-bar-container">
+						<div class="progress-bar" style="width: <?php echo $percentage;?>%;">
+						</div>
+					</div>
+					<div class="progress-info">
+						<?php echo $percentage;?><?php echo __("% complete")?>
+					</div>
+				<?php } else{?>
+					<p>You have not started your export readiness checklist.</p>
+				<?php }?>
+			</div>
+			<div class="link-container">
+				<?php if($percentage){?>
+					<a href="<?php echo $block->getChecklistUrl()?>" class="link-bottom arrow-link">
+						<span class="arrow icon-angle-right"></span>
+						<?php echo __("Continue editing my checklist")?>
+					</a>
+				<?php }else {?>
+					<a href="<?php echo $block->getChecklistUrl()?>" class="link-bottom arrow-link">
+						<span class="arrow icon-angle-right"></span>
+						<?php echo __("Get started")?>
+					</a>
+				<?php }	?>
+			</div>
+		</div>
+	</div>
+<?php } ?>

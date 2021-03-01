@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Omnyfy\Vendor\Ui\DataProvider\Inventory\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="inventory" xsi:type="array">
+                    <item name="class" xsi:type="string">Omnyfy\Vendor\Ui\DataProvider\Inventory\Form\Modifier\Products</item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Omnyfy\Vendor\Ui\DataProvider\Inventory\Form\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">Omnyfy\Vendor\Ui\DataProvider\Inventory\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Ui\DataProvider\Inventory\Form\Modifier\Products">
+        <arguments>
+            <argument name="scopeName" xsi:type="string">omnyfy_vendor_inventory_form.omnyfy_vendor_inventory_form</argument>
+        </arguments>
+    </type>
+
+    <preference for="Magento\User\Block\User\Edit\Tab\Main" type="Omnyfy\Vendor\Block\Adminhtml\User\Edit\Tab\Main" />
+
+    <virtualType name="Omnyfy\Vendor\Ui\DataProvider\Vendor\TypeForm\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="basic" xsi:type="array">
+                    <item name="class" xsi:type="string">Omnyfy\Vendor\Ui\DataProvider\Vendor\TypeForm\Modifier\Basic</item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Omnyfy\Vendor\Ui\DataProvider\Vendor\TypeForm">
+        <arguments>
+            <argument name="pool" xsi:type="object">Omnyfy\Vendor\Ui\DataProvider\Vendor\TypeForm\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Ui\DataProvider\Vendor\TypeForm\Modifier\Basic">
+        <arguments>
+            <argument name="scopeName" xsi:type="string">omnyfy_vendor_vendor_type_form.omnyfy_vendor_vendor_type_form</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Omnyfy\Vendor\Ui\DataProvider\Location\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="eav" xsi:type="array">
+                    <item name="class" xsi:type="string">Omnyfy\Vendor\Ui\DataProvider\Location\Form\Modifier\Eav</item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                </item>
+                <item name="system" xsi:type="array">
+                    <item name="class" xsi:type="string">Omnyfy\Vendor\Ui\DataProvider\Location\Form\Modifier\System</item>
+                    <item name="sortOrder" xsi:type="number">120</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Omnyfy\Vendor\Ui\DataProvider\Location\Form\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">Omnyfy\Vendor\Ui\DataProvider\Location\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Ui\DataProvider\Location\Form\Modifier\Eav">
+        <arguments>
+            <argument name="scopeName" xsi:type="string">omnyfy_vendor_location_form.omnyfy_vendor_location_form</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Ui\DataProvider\Location\Form\Modifier\System">
+        <arguments>
+            <argument name="scopeName" xsi:type="string">omnyfy_vendor_location_form.omnyfy_vendor_location_form</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Omnyfy\Vendor\Ui\DataProvider\Vendor\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="eav" xsi:type="array">
+                    <item name="class" xsi:type="string">Omnyfy\Vendor\Ui\DataProvider\Vendor\Form\Modifier\Eav</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="system" xsi:type="array">
+                    <item name="class" xsi:type="string">Omnyfy\Vendor\Ui\DataProvider\Vendor\Form\Modifier\System</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Omnyfy\Vendor\Ui\DataProvider\Vendor\Form\VendorDataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">Omnyfy\Vendor\Ui\DataProvider\Vendor\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Ui\DataProvider\Vendor\Form\Modifier\Eav">
+        <arguments>
+            <argument name="scopeName" xsi:type="string">omnyfy_vendor_vendor_form.omnyfy_vendor_vendor_form</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Ui\DataProvider\Vendor\Form\Modifier\System">
+        <arguments>
+            <argument name="scopeName" xsi:type="string">omnyfy_vendor_vendor_form.omnyfy_vendor_vendor_form</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Ui\DataProvider\Vendor\Form\Modifier\AttributeSet">
+        <arguments>
+            <argument name="scopeName" xsi:type="string">omnyfy_vendor_vendor_form.omnyfy_vendor_vendor_form</argument>
+        </arguments>
+    </type>
+
+
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="vendors" xsi:type="array">
+                    <item name="class" xsi:type="string">Omnyfy\Vendor\Ui\DataProvider\Product\Form\Modifier\Vendors</item>
+                    <item name="sortOrder" xsi:type="number">140</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Sales\Controller\Adminhtml\Invoice\View">
+        <plugin name="omnyfy_vendor_invoice_is_allow"
+                type="Omnyfy\Vendor\Plugin\Vendor\IsAllowInvoice" sortOrder="100" />
+    </type>
+    <type name="Magento\Sales\Controller\Adminhtml\Order\View">
+        <plugin name="omnyfy_vendor_order_is_allow"
+                type="Omnyfy\Vendor\Plugin\Vendor\IsAllowOrder" sortOrder="100" />
+    </type>
+    <type name="Magento\SalesRule\Controller\Adminhtml\Promo\Quote\Edit">
+        <plugin name="omnyfy_vendor_is_allow_edit_rule"
+                type="Omnyfy\Vendor\Plugin\Vendor\IsAllowEditRule" sortOrder="100" />
+    </type>
+    <type name="Magento\SalesRule\Model\Rule\DataProvider">
+        <plugin name="omnyfy_vendor_data_provider"
+                type="Omnyfy\Vendor\Plugin\SalesRule\DataProvider" sortOrder="100" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order">
+        <plugin name="omnyfy_vendor_plugin_order_backend"
+                type="Omnyfy\Vendor\Plugin\Sales\Model\OrderBackend" sortOrder="150"/>
+    </type>
+
+    <type name="Magento\Catalog\Controller\Adminhtml\Product\MassDelete">
+        <plugin name="omnyfy_vendor_plugin_product_mass_action"
+                type="Omnyfy\Vendor\Plugin\Product\MassAction" sortOrder="100"/>
+    </type>
+    <type name="Magento\Catalog\Controller\Adminhtml\Product\MassStatus">
+        <plugin name="omnyfy_vendor_plugin_product_mass_action"
+                type="Omnyfy\Vendor\Plugin\Product\MassAction" sortOrder="100"/>
+    </type>
+    <type name="Magento\Catalog\Controller\Adminhtml\Product\Action\Attribute\Edit">
+        <plugin name="omnyfy_vendor_plugin_product_mass_action"
+                type="Omnyfy\Vendor\Plugin\Product\MassAction" sortOrder="100"/>
+    </type>
+    <type name="Magento\Catalog\Controller\Adminhtml\Product\Action\Attribute\Save">
+        <plugin name="omnyfy_vendor_plugin_attribute_action"
+                type="Omnyfy\Vendor\Plugin\Product\AttributeAction" sortOrder="100"/>
+    </type>
+    <type name="Magento\Catalog\Controller\Adminhtml\Product\Save">
+        <plugin name="omnyfy_vendor_plugin_save_action"
+                type="Omnyfy\Vendor\Plugin\Product\SaveAction" sortOrder="100"/>
+    </type>
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Edit\Button\AddAttribute">
+        <plugin name="omnyfy_vendor_plugin_product_attribute_button"
+                type="Omnyfy\Vendor\Plugin\Product\AttributeButton" sortOrder="100"/>
+    </type>
+    <type name="Magento\ConfigurableProduct\Block\Adminhtml\Product\Edit\Button\Save">
+        <plugin name="omnyfy_vendor_plugin_product_button"
+                type="Omnyfy\Vendor\Plugin\Product\Button" sortOrder="100"/>
+    </type>
+
+    <type name="Omnyfy\Vendor\Controller\Adminhtml\Vendor\Attribute">
+        <arguments>
+            <argument name="attributeLabelCache" xsi:type="object">Magento\Framework\App\Cache\Type\Translate</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Vendor\Controller\Adminhtml\Location\Attribute">
+        <arguments>
+            <argument name="attributeLabelCache" xsi:type="object">Magento\Framework\App\Cache\Type\Translate</argument>
+        </arguments>
+    </type>
+
+    <preference for="Omnyfy\Vendor\Model\Vendor\Type\Locator\LocatorInterface"
+        type="\Omnyfy\Vendor\Model\Vendor\Type\Locator\RegistryLocator" />
+
+    <preference for="Omnyfy\Vendor\Model\Locator\LocatorInterface"
+        type="\Omnyfy\Vendor\Model\Locator\RegistryLocator" />
+    <preference for="Omnyfy\Vendor\Api\VendorAttributeGroupRepositoryInterface"
+                type="Omnyfy\Vendor\Model\VendorAttributeGroupRepository" />
+
+    <preference for="Omnyfy\Vendor\Model\Locator\LocationLocatorInterface"
+                type="\Omnyfy\Vendor\Model\Locator\LocationRegistryLocator" />
+    <preference for="Omnyfy\Vendor\Api\LocationAttributeGroupRepositoryInterface"
+                type="\Omnyfy\Vendor\Model\LocationAttributeGroupRepository" />
+    <preference for="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Websites"
+                type="\Omnyfy\Vendor\Ui\DataProvider\Product\Form\Modifier\Websites" />
+    <preference for="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Categories"
+                type="\Omnyfy\Vendor\Ui\DataProvider\Product\Form\Modifier\Categories" />
+
+    <virtualType name="omnyfyVendorImportSampleFiles" type="Magento\Framework\DataObject">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="omnyfy_vendor_inventory" xsi:type="string">Omnyfy_Vendor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Omnyfy\Vendor\Component\ComponentRegistrar">
+        <arguments>
+            <argument name="samples" xsi:type="object">omnyfyVendorImportSampleFiles</argument>
+        </arguments>
+    </type>
+    <virtualType name="sampleFile" type="Magento\ImportExport\Model\Import\SampleFileProvider">
+        <arguments>
+            <argument name="samples" xsi:type="array">
+                <item name="omnyfy_vendor_inventory" xsi:type="string">Omnyfy_Vendor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\ImportExport\Controller\Adminhtml\Import\Download">
+        <arguments>
+            <argument name="componentRegistrar" xsi:type="object">Omnyfy\Vendor\Component\ComponentRegistrar</argument>
+        </arguments>
+    </type>
+
+    <preference for="Magento\Indexer\Block\Backend\Grid\ItemsUpdater" type="Omnyfy\Vendor\Block\Backend\Grid\ItemsUpdater" />
+
+</config>

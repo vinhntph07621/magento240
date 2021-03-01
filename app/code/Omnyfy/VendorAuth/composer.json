@@ -1,0 +1,26 @@
+{
+    "name": "omnyfy/module-vendorauth",
+    "description": "Core: Authenticate the Vendor",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Mage2Gen",
+            "email": "info@mage2gen.com"
+        },
+        {
+            "name": "Sanjaya Wickramasinghe",
+            "email": "wmsanjaya@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Omnyfy\\VendorAuth\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

@@ -1,0 +1,84 @@
+<?php $helper = $this->helper('Magebees\Categories\Helper\Data'); ?>
+<?php $store_info = $helper->getStoreData(); ?>
+<div id="export_tabs_export_section_content" aria-labelledby="export_tabs_export_section" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false">
+    <div class="entry-edit form-inline">
+        <div id="result"></div><br/>
+        <fieldset id="export_form" class="fieldset admin__fieldset ">
+                <legend class="admin__legend legend">
+            <span>Export Categories CSV</span>
+        </legend><br>
+        <div class="entry-edit form-inline">
+            <div>
+                <label class="label admin__field-label">
+                    <span><b>Store View </b></span> &nbsp;&nbsp;
+                </label>
+                <select id="store_id" name="store_id" class="select admin__control-select">
+                    <?php  foreach ($store_info as $value) {
+                        if ($value['value']==0) { ?>
+                                                <option value="0"><?php echo $value['label']; ?></option>
+                                            <?php                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         } else { ?>
+                        <optgroup label="<?php echo $value['label']; ?>"></optgroup>
+                    <?php if (!empty($value['value'])) {
+                        foreach ($value['value'] as $option) { ?>
+                                                <option value="<?php echo $option['value']; ?>"><?php echo "&nbsp;&nbsp;&nbsp;&nbsp;".$option['label'];?></option>
+                                            <?php                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          }
+}
+}
+} ?>
+
+                </select>
+            </div>
+                <br><br>
+                <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>" />
+            <div>
+                <label class="label admin__field-label">
+                    <span><b>Export Sku </b></span> &nbsp;&nbsp;
+                </label>
+                <select title="Export Sku" name="product_sku" id="product_sku" class="select admin__control-select">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <div id="product_sku-note" class="note admin__field-note">Select Yes for export the product sku in export csv File.</div>  
+            </div>      
+        </div>
+    </div>
+</div>
+<?php $export_url = $block->getUrl('*/*/export'); ?>
+<script type="text/javascript">
+            
+function exportData(){
+    require([
+        'jquery',
+
+    ],
+     function(jQuery) {
+         
+        var store_id = jQuery( "#store_id" ).val();
+        jQuery('#store_id').on('change', function (e) {
+            var optionSelected = jQuery("option:selected", this);
+            store_id = this.value;
+        
+        });
+        var product_sku = jQuery( "#product_sku" ).val();
+        jQuery('#product_sku').on('change', function (e) {
+            var optionSelected = jQuery("option:selected", this);
+            product_sku = this.value;
+        
+        });
+        var exporturl = "<?php echo $block->getUrl('*/*/export');  ?>";
+        jQuery.ajax({
+                    url : exporturl,
+                    data: { store_id : store_id , product_sku:product_sku ,
+                            form_key: FORM_KEY,
+                        } ,
+                    dataType: 'json',
+                    type: 'post',
+                    showLoader:true,
+                    success: function(data){
+                        jQuery('#result').html(data);
+                    }
+                });
+        }
+    );
+}
+</script>

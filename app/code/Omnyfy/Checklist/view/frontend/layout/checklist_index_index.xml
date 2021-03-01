@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<title>Export Readiness Checklist</title>
+		<css src="Omnyfy_Checklist::css/checklist_index.css"/>
+	</head>
+	<body>
+		<referenceBlock name="page.main.title" remove="true" />
+		<referenceContainer name="content">
+			<container name="wrapper" htmlTag="div" htmlClass="wrapper-body bg-light-grey">
+				<container name="indication" htmlTag="section" htmlClass="indication-section bg-green with-tabs">
+					<container name="container" htmlTag="div" htmlClass="container">
+						<container name="narrow-container" htmlTag="div" htmlClass="narrow-container">
+							<container name="indication-banner" htmlTag="div" htmlClass="indication-banner">
+								<block class="Omnyfy\Checklist\Block\OmnyfyChecklist" name="index.bannerinfo" template="Omnyfy_Checklist::index/bannerinfo.phtml" cacheable="false"/>
+								<block class="Omnyfy\Checklist\Block\OmnyfyChecklist" name="index.completionrate" template="Omnyfy_Checklist::index/completionrate.phtml" cacheable="false"/>
+							</container>
+						</container>
+					</container>
+				</container>
+				<container name="tabs" htmlTag="section" htmlClass="tabs-section narrow-tabs mb-60">
+					<container name="navtabs" htmlTag="div" htmlClass="container nav-tabs-container">
+						<block class="Omnyfy\Checklist\Block\OmnyfyChecklist" name="index.navtabs" template="Omnyfy_Checklist::index/navtabs.phtml" cacheable="false"/>
+					</container>
+					<container name="containerbgwhite" htmlTag="div" htmlClass="container bg-white">
+						<container name="tab-content" htmlTag="div" htmlClass="tab-content">
+							<container name="tabpane" htmlTag="div" htmlClass="tab-pane active">
+								<container name="tabpane.narrowcontainer" htmlTag="div" htmlClass="narrow-container">
+									<container name="tabpane.checklist-wrapper" htmlTag="div" htmlClass="checklist-wrapper">
+										<block class="Omnyfy\Checklist\Block\OmnyfyChecklist" name="index.index" template="Omnyfy_Checklist::index/index.phtml" cacheable="false"/>
+									</container>
+								</container>
+							</container>
+						</container>
+					</container>
+				</container>
+				<container name="complete" htmlTag="section" htmlClass="status-panel mb-60">
+					<block class="Omnyfy\Checklist\Block\OmnyfyChecklist" name="index.complete" template="Omnyfy_Checklist::index/complete.phtml"/>
+				</container>
+			</container>
+			<block class="Magento\Cms\Block\Block" name="test">
+				<arguments>
+					<argument name="block_id" xsi:type="string">search-export</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+	</body>
+</page>

@@ -1,0 +1,72 @@
+// /**
+//  * Copyright © Omnyfy, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+
+//
+//  Variables
+//  ---------------------------------------------
+@vendor-details__margin: 0 0 @indent__base * 4;
+@vendor-attributes-panel__background: @panel__background-color;
+@vendor-attributes-panel__padding: @indent__l;
+@vendor-attributes-panel__display: block;
+@vendor-attributes-panel__display__tablet: flex;
+@vendor-attributes-panel__justify-content__tablet: space-between;
+
+@detail-item__border-bottom: @vendor-navigation__docked__border-bottom;
+@detail-item__margin: 0 0 @indent__base;
+@detail-item__padding: 0 0 @indent__s;
+
+@detail-item-title__font-size: @font-size__s;
+@detail-item-title__color: @text__color;
+@detail-item-title__font-weight: bold;
+@detail-item-title__margin: 0 0 @indent__xs;
+@detail-item-title__display: inline-block;
+
+//
+//    Common
+//--------------------------------------
+
+& when (@media-common = true) {
+
+	.vendor-details {
+		margin: @vendor-details__margin;
+	}
+
+	.vendor-attributes-panel {
+		background: @vendor-attributes-panel__background;
+		padding: @vendor-attributes-panel__padding;
+		display: @vendor-attributes-panel__display;
+	}
+
+	.detail-item {
+		border-bottom: @detail-item__border-bottom;
+		margin: @detail-item__margin;
+		padding: @detail-item__padding;
+
+		.title {
+			display: @detail-item-title__display;
+			font-size: @detail-item-title__font-size;
+			font-weight: @detail-item-title__font-weight;
+			color: @detail-item-title__color;
+			margin: @detail-item-title__margin;
+		}
+	}
+}
+
+
+
+//
+//    Tablet
+//--------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+	.vendor-attributes-panel {
+		display: @vendor-attributes-panel__display__tablet;
+		justify-content: @vendor-attributes-panel__justify-content__tablet;
+
+		> div {
+			width: calc(~'50% - '@indent__base);
+		}
+	}
+}

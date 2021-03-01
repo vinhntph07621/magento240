@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Omnyfy\VendorSubscription\Ui\DataProvider\Plan\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="main" xsi:type="array">
+                    <item name="class" xsi:type="string">Omnyfy\VendorSubscription\Ui\DataProvider\Plan\Form\Modifier\Main</item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Omnyfy\VendorSubscription\Ui\DataProvider\Plan\Form">
+        <arguments>
+            <argument name="pool" xsi:type="object">Omnyfy\VendorSubscription\Ui\DataProvider\Plan\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\VendorSubscription\Ui\DataProvider\Plan\Form\Modifier\Main">
+        <arguments>
+            <argument name="scopeName" xsi:type="string">omnyfy_subscription_plan_form.omnyfy_subscription_plan_form</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Omnyfy\VendorSubscription\Ui\DataProvider\Subscription\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="main" xsi:type="array">
+                    <item name="class" xsi:type="string">Omnyfy\VendorSubscription\Ui\DataProvider\Subscription\Form\Modifier\Main</item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Omnyfy\VendorSubscription\Ui\DataProvider\Subscription\Form">
+        <arguments>
+            <argument name="pool" xsi:type="object">Omnyfy\VendorSubscription\Ui\DataProvider\Subscription\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\VendorSubscription\Ui\DataProvider\Subscription\Form\Modifier\Main">
+        <arguments>
+            <argument name="scopeName" xsi:type="string">omnyfy_subscription_subscription_form.omnyfy_subscription_subscription_form</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Omnyfy\VendorSubscription\Ui\DataProvider\Subscription\Update\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="main" xsi:type="array">
+                    <item name="class" xsi:type="string">Omnyfy\VendorSubscription\Ui\DataProvider\Subscription\Update\Form\Modifier\Main</item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Omnyfy\VendorSubscription\Ui\DataProvider\Subscription\Update\Form">
+        <arguments>
+            <argument name="pool" xsi:type="object">Omnyfy\VendorSubscription\Ui\DataProvider\Subscription\Update\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\VendorSubscription\Ui\DataProvider\Subscription\Update\Form\Modifier\Main">
+        <arguments>
+            <argument name="scopeName" xsi:type="string">omnyfy_subscription_update_form.omnyfy_subscription_update_form</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Omnyfy\Vendor\Ui\DataProvider\Vendor\TypeForm\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="role_plan" xsi:type="array">
+                    <item name="class" xsi:type="string">Omnyfy\VendorSubscription\Ui\DataProvider\VendorType\Form\Modifier\RolePlan</item>
+                    <item name="sortOrder" xsi:type="number">120</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="Omnyfy\VendorSubscription\Model\Plan\Locator\LocatorInterface"
+                type="\Omnyfy\VendorSubscription\Model\Plan\Locator\RegistryLocator" />
+    <preference for="Omnyfy\VendorSubscription\Model\Subscription\Locator\LocatorInterface"
+                type="\Omnyfy\VendorSubscription\Model\Subscription\Locator\RegistryLocator" />
+    <preference for="Omnyfy\VendorSubscription\Model\Update\Locator\LocatorInterface"
+                type="\Omnyfy\VendorSubscription\Model\Update\Locator\RegistryLocator" />
+    <type name="Omnyfy\VendorSubscription\Controller\Adminhtml\Subscription\Edit">
+        <plugin name="omnyfy_subscription_subscription_is_allow"
+                type="Omnyfy\VendorSubscription\Plugin\Vendor\IsAllow" sortOrder="100" />
+    </type>
+
+    <type name="Magento\Catalog\Controller\Adminhtml\Product\NewAction">
+        <plugin name="omnyfy_subscription_admin_product_new"
+                type="Omnyfy\VendorSubscription\Plugin\Adminhtml\Product\NewAction" sortOrder="100"/>
+    </type>
+
+    <type name="Omnyfy\LandingPages\Controller\Adminhtml\Page\NewAction">
+        <plugin name="omnyfy_subscription_admin_landing_pages_new"
+                type="Omnyfy\VendorSubscription\Plugin\Adminhtml\LandingPages\NewAction" sortOrder="100"/>
+    </type>
+</config>

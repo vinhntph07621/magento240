@@ -1,0 +1,53 @@
+<?php
+/**
+ * Project: Multi Vendor M2.
+ * User: jing
+ * Date: 15/8/17
+ * Time: 8:33 AM
+ */
+$vendor = $block->getVendor();
+
+/** @var $favouriteHelper \Omnyfy\Vendor\Helper\FavouriteVendor */
+$favouriteHelper = $this->helper('Omnyfy\Vendor\Helper\FavouriteVendor');
+?>
+<div class="vendor-store">
+    <div class="container">
+        <div class="vendor-store-header">
+            <div class="vendor-store-info">
+                <?php if ($block->getLogoUrl()):?>
+                    <img src="<?php echo $block->getLogoUrl();?>" class="vendor-store-logo"/>
+                <?php endif; ?>
+                <h2 class="vendor-store-name"><?php echo __($vendor->getName());?></h2>
+            </div>
+            <div class="actions">
+                <?php if ($this->helper('Omnyfy\Vendor\Helper\Session')->isLoggedIn()): ?>
+                    <button
+                            class="favourite-add-btn <?= $favouriteHelper->isVendorSetFavourite($vendor->getEntityId()) ? 'hide' : ''?>"
+                            data-action-type="add"
+                            data-vendor-id="<?= $vendor->getEntityId(); ?>"
+                    ><?= __('Favourite')?>
+                    </button>
+
+                    <button
+                            class="favourite-remove-btn <?= $favouriteHelper->isVendorSetFavourite($vendor->getEntityId()) ? 'active' : 'hide'?>"
+                            data-action-type="remove"
+                            data-vendor-id="<?= $vendor->getEntityId(); ?>"
+                    ><?= __('Remove Favourite')?>
+                    </button>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require([
+        "Omnyfy_Vendor/js/favorite-vendor"
+    ], function(fv){
+        fv.init();
+    });
+</script>
+
+<?php echo $block->getChildHtml(); ?>
+
+

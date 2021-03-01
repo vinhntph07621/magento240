@@ -1,0 +1,57 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Omnyfy\VendorReview\Block\View $block */
+?>
+<?php if ($block->getVendorData()->getId()): ?>
+<div class="vendor-review">
+    <div class="page-title-wrapper">
+        <h1><?php /* @escapeNotVerified */ echo __('Review Details') ?></h1>
+    </div>
+    <div class="vendor-img-box">
+        <a href="<?php /* @escapeNotVerified */ echo $block->getVendorData()->getVendorUrl() ?>">
+            <?php echo $block->getImage($block->getVendorData(), 'vendor_base_image', ['class' => 'vendor-image'])->toHtml(); ?>
+        </a>
+        <?php if ($block->getRating() && $block->getRating()->getSize()): ?>
+          <p><?php /* @escapeNotVerified */ echo __('Average Customer Rating') ?>:</p>
+          <?php echo $block->getReviewsSummaryHtml($block->getVendorData()) ?>
+        <?php endif; ?>
+    </div>
+    <div class="details">
+        <h3 class="vendor-name"><?php echo $block->escapeHtml($block->getVendorData()->getName()) ?></h3>
+        <?php if ($block->getRating() && $block->getRating()->getSize()): ?>
+            <h4><?php /* @escapeNotVerified */ echo __('Vendor Rating:') ?></h4>
+            <div class="table-wrapper">
+                <table class="data-table review-summary-table">
+                    <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('Vendor Rating'); ?></caption>
+                    <?php foreach ($block->getRating() as $_rating): ?>
+                        <?php if ($_rating->getPercent()): ?>
+                            <tr>
+                                <td class="label"><?php echo __($block->escapeHtml($_rating->getRatingCode())) ?></td>
+                                <td class="value">
+                                    <div class="rating-box">
+                                        <div class="rating" style="width:<?php /* @escapeNotVerified */ echo ceil($_rating->getPercent()) ?>%;"></div>
+                                    </div></td>
+                            </tr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+        <?php endif; ?>
+        <p class="date"><?php /* @escapeNotVerified */ echo __('Vendor Review (submitted on %1):', $block->dateFormat($block->getReviewData()->getCreatedAt())) ?></p>
+        <p><?php echo nl2br($block->escapeHtml($block->getReviewData()->getDetail())) ?></p>
+    </div>
+    <div class="actions">
+        <div class="secondary">
+            <a class="action back" href="<?php /* @escapeNotVerified */ echo $block->getBackUrl() ?>">
+                <span><?php /* @escapeNotVerified */ echo __('Back to Vendor Reviews') ?></span>
+            </a>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">cms_industry_form.industry_form_data_source</item>
+            <item name="deps" xsi:type="string">cms_industry_form.industry_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Industry Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">cms_industry_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Omnyfy\Cms\Block\Adminhtml\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Omnyfy\Cms\Block\Adminhtml\Edit\DeleteButton</item>
+<!--            <item name="reset" xsi:type="string">Omnyfy\Cms\Block\Adminhtml\Edit\ResetButton</item>-->
+            <item name="save" xsi:type="string">Omnyfy\Cms\Block\Adminhtml\Edit\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">Omnyfy\Cms\Block\Adminhtml\Edit\SaveAndContinueButton</item>
+        </item>
+    </argument>
+    <dataSource name="industry_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Omnyfy\Cms\Ui\DataProvider\Industry\Form\IndustryDataProvider</argument>
+            <argument name="name" xsi:type="string">industry_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="cms/industry/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" />
+                <!--<item name="label" xsi:type="string">Profile Information</item>-->
+            </item>
+        </argument>
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <!--<item name="source" xsi:type="string">industry</item>-->
+                    <item name="dataScope" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Enable Industry</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+<!--                    <item name="source" xsi:type="string">status</item>-->
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </field>
+        <field name="industry_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Industry Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataScope" xsi:type="string">industry_name</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">50</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="introduction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Introduction</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="dataScope" xsi:type="string">introduction</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">1800</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+        <!-- <field name="identifier">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">URL Key</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">identifier</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">120</item>
+                </item>
+            </argument>
+        </field> -->
+    </fieldset>
+    <fieldset name="content">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string">Content</item>
+            </item>
+        </argument>
+        <field name="industry_category">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Omnyfy\Cms\Model\Config\Source\CategoryTree</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Industry General Information</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Omnyfy_Cms/js/components/new-category</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+					<item name="notice" xsi:type="string" translate="true"><![CDATA[Select a content topic you want to display on the General Information page for this industry profile.]]></item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">industry_category</item>
+                    <!-- <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item>  -->
+                </item>
+            </argument>
+        </field>
+        <field name="by_country">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Omnyfy\Cms\Model\Config\Source\CategoryTree</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">By Country</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Omnyfy_Cms/js/components/new-category</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+					<item name="notice" xsi:type="string" translate="true"><![CDATA[Select a content topic you want to display on the 'By country' page for this industry profile.]]></item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">by_country</item>
+                    <!-- <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item>  -->
+                </item>
+            </argument>
+        </field>
+		<!-- <field name="by_country">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Omnyfy\Cms\Model\Config\Source\CountryListIndustry</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">By Country</item>
+                    <item name="formElement" xsi:type="string">select</item>
+					<item name="notice" xsi:type="string" translate="true"><![CDATA[Select a content topic you want to display on the 'By country' page for this industry profile.]]></item>
+                    <item name="source" xsi:type="string">category</item>
+                    <item name="dataScope" xsi:type="string">by_country</item>
+                    <item name="default" xsi:type="string">0</item>
+                </item>	
+            </argument>
+        </field> -->
+    </fieldset>
+    <fieldset name="media">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string">Media Information</item>
+            </item>
+        </argument>
+        <field name="background_image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="dataScope" xsi:type="string">background_image</item>
+                    <item name="label" xsi:type="string" translate="true">Background Image</item>
+                    <item name="notice" xsi:type="string" translate="true"><![CDATA[Background image on the Industry Profile page. <br/>Allow image type: jpg, jpeg, gif, png. The image resolution should be 1000 x 500 pixels.]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                    <item name="allowedExtensions" xsi:type="string">jpg jpeg gif png</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="cms/industry_upload/backgroundImage"/>
+                    </item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="industry_profile_image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="dataScope" xsi:type="string">industry_profile_image</item>
+                    <item name="label" xsi:type="string" translate="true">Industry Profile image</item>
+                    <item name="notice" xsi:type="string" translate="true"><![CDATA[Industry profile image next to the industry introduction on the Industry Profile page. <br/>Allow image type: jpg, jpeg, gif, png. The image resolution should be 700 x 500 pixels.]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                    <item name="allowedExtensions" xsi:type="string">jpg jpeg gif png</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="cms/industry_upload/industryProfileImage"/>
+                    </item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">80</item>
+                    <!-- <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item> -->
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

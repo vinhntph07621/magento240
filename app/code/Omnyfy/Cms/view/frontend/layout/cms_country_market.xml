@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title" remove="true"/>
+		<!-- <attribute name="class" value="bg-light-grey"/> -->
+		<attribute name="class" value="wrapper-body"/>
+        <referenceContainer name="content">
+            <block class="Omnyfy\Cms\Block\Country\Market" name="country.market" template="Omnyfy_Cms::country/market.phtml">
+				<block class="Magento\Cms\Block\Block" as="market.finder.header" name="market_finder_header">
+					<arguments>
+						<argument name="block_id" xsi:type="string">market_finder_header</argument>
+					</arguments>
+				</block>
+            </block>
+			<block class="Omnyfy\Cms\Block\Country\Market\Industry" name="country.market.industry" template="Omnyfy_Cms::country/market/industry.phtml" />
+        </referenceContainer>
+    </body>
+</page>

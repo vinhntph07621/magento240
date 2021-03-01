@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Omnyfy\VendorAuth\Api\LogRepositoryInterface" type="Omnyfy\VendorAuth\Model\LogRepository"/>
+	<preference for="Omnyfy\VendorAuth\Api\Data\LogInterface" type="Omnyfy\VendorAuth\Model\Log"/>
+	<preference for="Omnyfy\VendorAuth\Api\Data\LogSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Omnyfy\VendorAuth\Model\ResourceModel\Log\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">omnyfy_vendorauth_log</argument>
+			<argument name="resourceModel" xsi:type="string">Omnyfy\VendorAuth\Model\ResourceModel\Log\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="omnyfy_vendorauth_log_grid_data_source" xsi:type="string">Omnyfy\VendorAuth\Model\ResourceModel\Log\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

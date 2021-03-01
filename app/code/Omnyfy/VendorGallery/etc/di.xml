@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Omnyfy\VendorGallery\Model\ResourceModel\Album\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_vendor_gallery_album</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_vendorgallery_album_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_vendorgallery_album_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\VendorGallery\Model\ResourceModel\Album</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="omnyfy_vendor_gallery_listing_data_source" xsi:type="string">Omnyfy\VendorGallery\Model\ResourceModel\Album\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,53 @@
+<?php
+/**
+ * Copyright © Omnyfy, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Cms article view template
+ *
+ * @var $block \Omnyfy\Cms\Block\Article\View
+ */
+?>
+<?php
+$_article = $this->getArticle();
+$_articleUrl = $_article->getArticleUrl();
+$_articleName = $block->escapeHtml($_article->getTitle(), null, true);
+?>
+<?php
+$url = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+$login_url = $this->getUrl('customer/account/login', array('referer' => base64_encode($url)));
+?>
+
+<section class="content-section">
+    <article class="article">
+        <img class="article-image" src="<?= $_article->getFeaturedImage() ?>" alt="<?= $_articleName?>" />
+        <h2 class="article-heading"><?php echo $_articleName ?></h2>
+        <div class="article-published">
+            <div class="author">by <span class="author-name"><?php echo $_article->getAuthor()->getName(); ?></span></div>
+            <div class="date"><?php echo $this->helper('\Omnyfy\Cms\Helper\Data')->getDateFormat($_article->getPublishTime()); ?></div>
+        </div>
+        <?php $postCategories = $_article->getParentCategories(); ?>
+        <div class="article-tags-wrapper">
+            <?php if (count($postCategories) > 0): ?>
+                <div class="cms-tags-list">
+                    <?php foreach ($postCategories as $category) { ?>
+                        <?php if ($category->getCategoryId() != 1) { ?>
+                            <a class="article-tag" href="/<?= $category->getUrl()?>"><?php echo $category->getTitle(); ?></a>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+            <?php endif ?>
+        </div>
+        <div class="description"><?php echo $block->getContent() ?></div>
+    </article>
+</section>
+<section class="related-posts-section">
+    <?php echo $block->getChildHtml('relatedarticles'); ?>
+</section>
+<section class="related-products-section">
+    <?php echo $block->getChildHtml('products'); ?>
+</section>
+

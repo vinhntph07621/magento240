@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      layout="admin-2columns-left">
+    <head>
+        <title>Manage Location</title>
+    </head>
+    <body>
+
+        <referenceContainer name="admin.scope.col.wrap" htmlClass="admin__old" />
+        <referenceContainer name="js">
+            <block class="Omnyfy\Core\Block\Adminhtml\Template" name="googlemaps.api" template="Omnyfy_Core::google_maps_api.phtml" />
+            <block class="Omnyfy\Core\Block\Adminhtml\Template" template="Omnyfy_Vendor::location/edit/js.phtml" name="edit_js" cacheable="false"/>
+        </referenceContainer>
+
+<!--
+        <referenceContainer name="left">
+            <block class="Omnyfy\Vendor\Block\Adminhtml\Location\Edit\Tabs" name="omnyfy_vendor_location_edit_tabs">
+                <block class="Omnyfy\Vendor\Block\Adminhtml\Location\Edit\Tab\Main" name="omnyfy_vendor_location_edit_tab_main"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">omnyfy_vendor_location_edit_tab_main</argument>
+                </action>
+
+                <action method="setActiveTab">
+                    <argument name="tabId" xsi:type="string">main_section</argument>
+                </action>
+            </block>
+        </referenceContainer>
+-->
+
+        <referenceContainer name="content">
+            <!--
+            <block class="Omnyfy\Vendor\Block\Adminhtml\Location\Edit" name="omnyfy_vendor_location_edit"/>
+            -->
+            <referenceBlock name="omnyfy_vendor_location_form">
+                <block class="Omnyfy\Vendor\Block\Adminhtml\Location\Edit\Tab\Main" name="omnyfy_vendor_location_edit_tab_main">
+                    <arguments>
+                        <argument name="tab_label" xsi:type="string" translate="true">Location Information</argument>
+                        <argument name="sort_order" xsi:type="number">10</argument>
+                    </arguments>
+                </block>
+            </referenceBlock>
+            <uiComponent name="omnyfy_vendor_location_form"/>
+        </referenceContainer>
+
+    </body>
+</page>
+  

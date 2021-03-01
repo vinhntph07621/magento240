@@ -1,0 +1,41 @@
+<?php
+/**
+ * @var $block \Omnyfy\VendorSearch\Block\Search\Block
+ */
+?>
+
+<form class="clearfix" action="<?php echo $block->getUrl("vendorsearch/result/*")?>" method="get">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="form-group">
+            <label class="title" for="service_type_id">I'm looking for...</label>
+            <select id="service_type_id" class="search-service-type form-control" name="type">
+                <?php if ($vendorTypes = $block->getVendorTypes()): ?>
+                    <?php if ($vendorTypes->count() > 0): ?>
+                        <?php foreach($vendorTypes as $type): ?>
+                            <?php if ($type->getId() == 2 || $type->getId() == 4):?>
+                                <option value="<?php echo $type->getId()?>"><?php echo __($type->getData("type_name"))?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="form-group">
+            <label class="title" for="postcode_field">in...</label>
+            <input type="text" data-role="value" class="text-field search-postcode-value" name="location" value="" placeholder="<?php echo __('Enter postcode'); ?>" >
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-xs-12 search-btn">
+        <div class="form-group">
+            <label class="title"></label>
+            <button type="submit" href="#" class="btn red-btn btn-primary">
+                <?php echo __("Search") ?>
+            </button>
+        </div>
+    </div>
+    <input type="hidden" name="distance" value="10">
+    <input type="hidden" name="sort" value="name">
+</form>

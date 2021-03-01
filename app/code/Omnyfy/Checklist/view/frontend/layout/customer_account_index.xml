@@ -1,0 +1,15 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		<move element="infotilesnew" destination="content" after="top.info.dashboard"/>
+		<referenceContainer name="content">
+			<container name="infotilesnew" htmlTag="div" htmlClass="info-tiles">
+				<!-- <block class="Omnyfy\Checklist\Block\Customer\RecentChecklist" name="omnyfy_checklist.customer" as="omnyfy_checklist.customer" template="Omnyfy_Checklist::customer/recent-checklist.phtml" cacheable="false"/> -->
+				<block class="Magento\Cms\Block\Block" name="export_readiness_checklist" cacheable="false">
+					<arguments>
+						<argument name="block_id" xsi:type="string">export_readiness_checklist</argument>
+					</arguments>
+				</block>
+			</container>
+		</referenceContainer>	
+    </body>
+</page>

@@ -1,0 +1,81 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/** @var $block \Omnyfy\VendorReview\Block\Customer\View */
+$vendor = $block->getVendorData();
+$vendorReviewHelper = $this->helper('Omnyfy\VendorReview\Helper\Vendor');
+$urlForm = $block->getVendorUrl($vendor->getId()) . '#reviews';
+$url = $block->getVendorUrl($vendor->getId());
+?>
+<?php if ($vendor->getId()): ?>
+<div class="customer-review view">
+    <div class="product-details">
+        <div class="product-media">
+            <a class="product-photo" href="<?php /* @escapeNotVerified */ echo $vendor->getVendorUrl() ?>">
+                <img class="product-image-photo" src="<?= $block->getImage($vendor->getId()) ?>" alt="">
+            </a>
+        </div>
+        <div class="vendor-info">
+            <h2 class="vendor-name"><?php echo $block->escapeHtml($vendor->getName()) ?></h2>
+            <?php if ($block->getRating() && $block->getRating()->getSize()): ?>
+                <span class="rating-average-label"><?php /* @escapeNotVerified */ echo __('Average Customer Rating:') ?></span>
+                <div class="rating-stars-container">
+                    <div class="rating-stars-wrapper star-lg product-reviews-summary">
+                        <div class="rating-stars">
+                            <span style="width: <?php echo $vendorReviewHelper->getStarSummary($vendor); ?>%;"></span>
+                        </div>
+                        <div class="reviews-actions">
+                            <a class="action view" href="<?php /* @escapeNotVerified */ echo $url ?>">
+                                <span itemprop="reviewCount"><?= $vendorReviewHelper->getReviewSummaryCount($vendor); ?></span>&nbsp;
+                                <span><?php /* @escapeNotVerified */ echo($block->getReviewsCount() == 1) ? __('Review') : __('Reviews') ?></span>
+                            </a>
+                            <a class="action add" href="<?php /* @escapeNotVerified */ echo $urlForm ?>">Add Your Review</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="review-details">
+        <?php if ($block->getRating() && $block->getRating()->getSize()): ?>
+            <div class="title">
+                <strong><?php /* @escapeNotVerified */ echo __('Your Review'); ?></strong>
+            </div>
+            <div class="customer-review-rating">
+                <?php foreach ($block->getRating() as $_rating): ?>
+                <?php if ($_rating->getPercent()): ?>
+                    <?php $rating = ceil($_rating->getPercent()) ?>
+                    <div class="rating-summary item">
+                        <span class="rating-label"><span><?php echo $block->escapeHtml($_rating->getVendorRatingCode()) ?></span></span>
+                        <div class="rating-result" title="<?php /* @escapeNotVerified */ echo $rating; ?>%">
+                            <span style="width:<?php /* @escapeNotVerified */ echo $rating; ?>%">
+                                <span><?php /* @escapeNotVerified */ echo $rating; ?>%</span>
+                            </span>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="review-title"><?php echo $block->escapeHtml($block->getReviewData()->getTitle()) ?></div>
+        <div class="review-content"><?php echo nl2br($block->escapeHtml($block->getReviewData()->getDetail())) ?></div>
+        <div class="review-date">
+            <?php /* @escapeNotVerified */ echo __('Submitted on %1', '<time class="date">' . $block->dateFormat($block->getReviewData()->getCreatedAt()) . '</time>') ?>
+        </div>
+    </div>
+</div>
+<div class="actions-toolbar">
+    <div class="secondary">
+        <a class="action back" href="<?php /* @escapeNotVerified */ echo $block->getBackUrl() ?>"><span><?php /* @escapeNotVerified */ echo __('Back to My Reviews') ?></span></a>
+    </div>
+</div>
+<?php endif; ?>

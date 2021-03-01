@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<event name="model_save_before">
+		<observer instance="Omnyfy\VendorAuth\Observer\Webapi\Model\SaveBefore" name="omnyfy_vendorauth_observer_webapi_model_savebefore_model_save_before"/>
+	</event>
+	<event name="model_delete_before">
+		<observer instance="Omnyfy\VendorAuth\Observer\Webapi\Model\DeleteBefore" name="omnyfy_vendorauth_observer_webapi_model_deletebefore_model_delete_before"/>
+	</event>
+</config>

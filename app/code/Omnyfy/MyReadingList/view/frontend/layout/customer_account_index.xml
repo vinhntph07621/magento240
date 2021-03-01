@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<move element="omnyfy_myreadinglist.customer" destination="infotilesnew" after="omnyfy_checklist.customer"/>
+	<body>
+		<referenceContainer name="content">
+			<block class="Omnyfy\MyReadingList\Block\Customer\MyReadingList" name="omnyfy_myreadinglist.customer" as="omnyfy_myreadinglist.customer" template="Omnyfy_MyReadingList::customer/myreadinglist.phtml" cacheable="false"/>
+		</referenceContainer>	
+	</body>
+</page>

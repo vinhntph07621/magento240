@@ -1,0 +1,21 @@
+<?php
+/** @var $block Omnyfy\Cms\Block\Article\View\ListProducts */
+?>
+<?php if ($block->canDisplay()): ?>
+<main id="products" class="page-main nav-target"><a id="contentarea" tabindex="-1"></a>
+
+    <div class="columns">
+        <div class="column main">
+            <div id="layer-product-list">
+                <div class="block-title title">
+                    <strong id="block-heading" role="heading" aria-level="2"><?php echo 'Related Products'; ?></strong>
+                </div>
+
+                <?php echo $block->getChildHtml();?>
+            </div>
+        </div>
+
+    </div>
+    <div class="page-separate"></div>
+</main>
+<?php endif; ?>

@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="omnyfy" translate="label" sortOrder="10">
+            <label>Omnyfy</label>
+        </tab>
+        <section id="omnyfy_vendor" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Vendor</label>
+            <tab>omnyfy</tab>
+            <resource>Omnyfy_Vendor::base</resource>
+            <group id="vendor" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Vendor Configuration</label>
+                <field id="qty_check_mode" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Qty Check Mode</label>
+                    <source_model>Omnyfy\Vendor\Model\Source\QtyCheckMode</source_model>
+                </field>
+                <field id="is_sku_sharing" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Products to Multiple Vendors</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If products can be assigned to multiple vendors, set to 'Yes'</comment>
+                </field>
+                <field id="is_admin_across" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Admin actions across vendors</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If Admin can assign products across vendors, set to 'Yes'</comment>
+                </field>
+                <field id="show_vendor_bind" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show vendor bind link in header</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="invoice_by" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Invoice By</label>
+                    <source_model>Omnyfy\Vendor\Model\Source\InvoiceBy</source_model>
+                </field>
+                <field id="flat_vendor" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable flat for vendor</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="flat_location" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable flat for location</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="mo_vendor_ids" translate="label" type="multiselect" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>MO Vendors</label>
+                    <source_model>Omnyfy\Vendor\Model\Config\Source\Vendors</source_model>
+                </field>
+                <field id="include_mo_products" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Include MO products in Vendor backend</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="vendor_type_ids" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Vendor Type Ids can see MO's product</label>
+                    <source_model>Omnyfy\Vendor\Model\Config\Source\VendorTypes</source_model>
+                    <depends>
+                        <field id="include_mo_products">1</field>
+                    </depends>
+                </field>
+                <field id="mo_abn" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>ABN of Marketplace Owner</label>
+                </field>
+                <field id="show_location_priority" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show Location priority in Location form</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="qty_active_vendor_only" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Only active vendor for inventory</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When check inventory, only active vendors will be included</comment>
+                </field>
+                <field id="qty_active_location_only" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Only active location for inventory</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When check inventory, only active locations will be included</comment>
+                </field>
+                <field id="calculate_shipping_by" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Calculate Shipping By</label>
+                    <source_model>Omnyfy\Vendor\Model\Source\CalculateShipping</source_model>
+                    <comment>Choose how the shipping is calculated during checkout</comment>
+                </field>
+                <field id="overall_pickup_location" translate="label" type="select" sortOrder="105" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Location used for overall cart pickup</label>
+                    <source_model>Omnyfy\Vendor\Model\Source\PickupLocations</source_model>
+                    <depends>
+                        <field id="calculate_shipping_by">overall_cart</field>
+                    </depends>
+                </field>
+                <field id="checkout_shipping_message_enable" translate="label" type="select" sortOrder="106" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Checkout shipping message enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enables a message in the shipping method section</comment>
+                </field>
+                <field id="checkout_shipping_message_content" translate="label" type="textarea" sortOrder="107" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checkout shipping message content</label>
+                </field>
+                <field id="order_webhook_endpoint" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order Webhook Endpoint</label>
+                    <comment>This endpoint can be used to push order data when a new order is placed or status is changed</comment>
+                </field>
+                <field id="order_complete_webhook_endpoint" translate="label" type="text" sortOrder="600" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Complete Order Webhook Endpoint</label>
+                    <comment>This endpoint can be used to push order data when an order is complete</comment>
+                </field>
+            </group>
+        </section>
+        <section id="omnyfy_vendor_permissions" translate="label" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Permissions</label>
+            <tab>omnyfy</tab>
+            <resource>Omnyfy_Vendor::base</resource>
+            <group id="vendor" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>User Permissions Configuration</label>
+                <field id="omnyfy_user_role_edit" translate="label" type="multiselect" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>User roles that can edit user vendor/store view</label>
+                    <source_model>Omnyfy\Vendor\Model\Config\Source\UserRoles</source_model>
+                </field>
+                <field id="omnyfy_no_user_role_restrictions" translate="label" type="multiselect" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>User roles that do not have restriction access</label>
+                    <source_model>Omnyfy\Vendor\Model\Config\Source\UserRolesValues</source_model>
+                </field>
+            </group>
+        </section>
+        <section id="omnyfy_vendor_shipping" translate="label" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Vendor Free Shipping</label>
+            <tab>omnyfy</tab>
+            <resource>Omnyfy_Vendor::base</resource>
+            <group id="vendor" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Vendor Free Shipping</label>
+                <field id="omnyfy_free_shipping_message_config" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Vendor Free Shipping Message</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enables a message in the shipping section</comment>
+                </field>
+                <field id="omnyfy_free_shipping_threshold" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Default Free Shipping Threshold</label>
+                    <comment>Used as threshold amount if not set in Vendor</comment>
+                    <depends>
+                        <field id="omnyfy_free_shipping_message_config">1</field>
+                    </depends>
+                </field>
+                <field id="atc_message_under" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Add to cart message if under threshold</label>
+                    <comment>Example: Spend [amount remaining] with [vendor name] to get free shipping</comment>
+                    <depends>
+                        <field id="omnyfy_free_shipping_message_config">1</field>
+                    </depends>
+                </field>
+                <field id="atc_message_reached" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Add to cart message if reached threshold</label>
+                    <comment>Example: Yay! You've scored free shipping with [vendor name]</comment>
+                    <depends>
+                        <field id="omnyfy_free_shipping_message_config">1</field>
+                    </depends>
+                </field>
+                <field id="sc_message_under" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Shopping cart message if under threshold</label>
+                    <comment>Example: Spend [amount remaining] to get free shipping</comment>
+                    <depends>
+                        <field id="omnyfy_free_shipping_message_config">1</field>
+                    </depends>
+                </field>
+                <field id="sc_message_reached" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Shopping cart message if threshold reached</label>
+                    <comment>Example: Spend [amount remaining] to get free shipping</comment>
+                    <depends>
+                        <field id="omnyfy_free_shipping_message_config">1</field>
+                    </depends>
+                </field>
+                <field id="sc_message_free" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Shopping cart message if reached free shipping</label>
+                    <depends>
+                        <field id="omnyfy_free_shipping_message_config">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

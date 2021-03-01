@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <referenceBlock name="order_items">
+                <block class="Omnyfy\Mcm\Block\Adminhtml\Items\Column\SellerFees" name="column_sellerfees"
+                       template="Omnyfy_Mcm::items/column/sellerfees.phtml" group="column"
+                       ifconfig="omnyfy_mcm/general/fees_management"/>
+                <block class="Omnyfy\Mcm\Block\Adminhtml\Items\Column\CategoryFees" name="column_categoryfees"
+                       template="Omnyfy_Mcm::items/column/categoryfees.phtml" group="column"
+                       ifconfig="omnyfy_mcm/general/fees_management"/>
+                <block class="Omnyfy\Mcm\Block\Adminhtml\Items\Column\CategoryRate" name="column_categoryrate"
+                       template="Omnyfy_Mcm::items/column/categoryrate.phtml" group="column"
+                       ifconfig="omnyfy_mcm/general/fees_management"/>
+                <block class="Omnyfy\Mcm\Block\Adminhtml\Items\Column\TaxOnFees" name="column_taxpercentageonfees"
+                       template="Omnyfy_Mcm::items/column/taxpercentageonfees.phtml" group="column"
+                       ifconfig="omnyfy_mcm/general/fees_management"/>
+                <action method="setTemplate">
+                    <argument name="template" xsi:type="helper" helper="Omnyfy\Mcm\Helper\Data::getTemplate">
+                        <param name="template">Omnyfy_Mcm::order/view/items.phtml</param>
+                        <param name="default">Omnyfy_Vendor::order/view/items.phtml</param>
+                    </argument>
+                </action>
+            </referenceBlock>
+            <referenceBlock name="order_tab_info">
+                <action method="setTemplate">
+                    <argument name="template" xsi:type="helper" helper="Omnyfy\Mcm\Helper\Data::getTemplate">
+                        <param name="template">Omnyfy_Mcm::order/view/tab/info.phtml</param>
+                        <param name="default">Magento_Sales::order/view/tab/info.phtml</param>
+                    </argument>
+                </action>
+                <block class="Omnyfy\Mcm\Block\Adminhtml\FeesTotals" name="fee_totals" template="order/fee_totals.phtml"
+                       ifconfig="omnyfy_mcm/general/fees_management"/>
+            </referenceBlock>
+        </referenceContainer>
+        <referenceContainer name="order_totals">
+            <block class="Omnyfy\Mcm\Block\Adminhtml\Sales\Totals" name="mcm_transaction_fee" ifconfig="omnyfy_mcm/general/fees_management"/>
+        </referenceContainer>
+    </body>
+</page>

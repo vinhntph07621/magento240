@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title" remove="true"/>
+		<attribute name="class" value="tier-one"/>
+		<attribute name="class" value="bg-light-grey"/>
+		<attribute name="class" value="wrapper-body"/>
+        <referenceContainer name="content">
+			<container name="main.section" htmlTag="div" htmlClass="main-section">
+				<block class="Omnyfy\Cms\Block\ToolTemplate" name="cms.tooltemplate" template="Omnyfy_Cms::tool/view.phtml">
+					<block class="Magento\Cms\Block\Block" as="tool.template.block" name="tool_template_header">
+						<arguments>
+							<argument name="block_id" xsi:type="string">tool_template_header</argument>
+						</arguments>
+					</block>
+				</block>
+				<container name="main.container" htmlTag="div" htmlClass="container">
+					<block class="Omnyfy\Cms\Block\ToolTemplate\Tools" after="cms.tooltemplate" name="cms.tooltemplate.tools" as="cms.tooltemplate.tools" template="Omnyfy_Cms::tool/view/tools.phtml" />
+					<block class="Omnyfy\Cms\Block\ToolTemplate\Templates" after="cms.tooltemplate.tools" name="cms.tooltemplate.templates" as="cms.tooltemplate.templates" template="Omnyfy_Cms::tool/view/templates.phtml" />
+				</container>	
+			</container>	
+        </referenceContainer>
+    </body>
+</page>

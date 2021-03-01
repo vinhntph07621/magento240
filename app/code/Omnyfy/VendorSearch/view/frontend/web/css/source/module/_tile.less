@@ -1,0 +1,290 @@
+// /**
+//  * Copyright © Omnyfy, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+
+//
+//  Variables
+//  ---------------------------------------------
+@vendor-details__margin: 0;
+@vendor-details__padding: 4px;
+
+@vendor-item-link__color: @text__color;
+@vendor-item-link__color__hover: @text__color;
+@vendor-item-link__text-decoration__hover: none;
+
+@vendor-items-grid__margins: @indent__l -@indent__s;
+@vendor-item-grid_padding: @indent__base;
+@vendor-item-list__margin: @indent__base 0;
+
+@vendor-item__width__xs: 100%/2;
+@vendor-item__width__s: 100%/3;
+@vendor-item__width__l: 100%/4;
+@vendor-item__width__xl: 100%/6;
+
+@vendor-attribute-list__margin: 0 0 @indent__xs 0;
+@vendor-attribute-list__padding: 0;
+
+@vendor-attribute__margin:  0;
+@vendor-attribute__padding: 0 0 @indent__xs 0;
+
+@vendor-attribute-label__display: block;
+@vendor-attribute-label__font_size: @font-size__s;
+@vendor-attribute-label__font_family: @font-family-name__base;
+@vendor-attribute-label__color: @text__color__muted;
+
+@vendor-attribute-value__display: block;
+@vendor-attribute-value__font_size: @font-size__base;
+@vendor-attribute-value__font_family: @font-family-name__base;
+@vendor-attribute-value__color: @text__color;
+
+@vendor-tags-list__display: flex;
+@vendor-tags-list__flex-wrap: wrap;
+@vendor-tags-list__margin:  0 0 @indent__xs 0;
+@vendor-tags-list__padding: 0;
+
+@vendor-tag__margin: 0 @indent__xs @indent__s 0;
+@vendor-tag__padding: @indent__xs @indent__base;
+@vendor-tag__border-radius: @button__border-radius;
+@vendor-tag__background-color: @ui-03;
+@vendor-tag__white-space: nowrap;
+
+@vendor-list-image__width: 144px;
+
+@toolbar-vendors__dislay: flex;
+@toolbar-vendors__justify_content: space-between;
+
+//
+//    Common
+//--------------------------------------
+
+& when (@media-common = true) {
+
+	.vendor-items.grid {
+		margin: @vendor-items-grid__margins;
+		display: flex;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+
+		.vendor-item {
+			padding: @vendor-item-grid_padding;
+			box-sizing: border-box;
+			width: @vendor-item__width__xs;
+
+			.vendor-item-photo {
+				position: relative;
+
+				&:after {
+					content: '';
+					display: block;
+					padding-bottom: 100%;
+				}
+
+				.photo-image {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					max-width: 100%;
+					max-height: 100%;
+				}
+			}
+		}
+	}
+
+	.vendor-items.list {
+		.vendor-item {
+			margin: @vendor-item-list__margin;
+
+			.vendor-item-info {
+				display: flex;
+			}
+
+			.vendor-item-photo {
+				width: @vendor-list-image__width;
+				margin-right: @indent__base;
+				padding-top: @indent__base;
+			}
+
+			.vendor-item-details {
+				width: calc(~"100% - " @vendor-list-image__width);
+			}
+		}
+	}
+
+	.vendor-item-link {
+		color: @vendor-item-link__color;
+		display: block;
+		height: 100%;
+
+		&:hover,
+		&:visited,
+		&:active {
+			text-decoration: @vendor-item-link__text-decoration__hover;
+			color: @vendor-item-link__color__hover;
+		}
+	}
+
+	.vendor-details {
+		margin: @vendor-details__margin;
+		padding: @vendor-details__padding;
+	}
+
+	.vendor-attributes-list,
+	.vendor-tags-list {
+		list-style: none;
+		margin: 0;
+	}
+
+	.vendor-attributes-list {
+		margin: @vendor-attribute-list__margin;
+		padding: @vendor-attribute-list__padding;
+	}
+
+	.vendor-attribute {
+		margin: @vendor-attribute__margin;
+		padding: @vendor-attribute__padding;
+	}
+
+	.vendor-attribute-label {
+		display: @vendor-attribute-label__display;
+		font-size: @vendor-attribute-label__font_size;
+		font-family: @vendor-attribute-label__font_family;
+		color: @vendor-attribute-label__color;
+	}
+
+	.vendor-attribute-value {
+		display: @vendor-attribute-value__display;
+		font-size: @vendor-attribute-value__font_size;
+		font-family: @vendor-attribute-value__font_family;
+		color: @vendor-attribute-value__color;
+	}
+
+	.vendor-tags-list {
+		display: @vendor-tags-list__display;
+		flex-wrap: @vendor-tags-list__flex-wrap;
+		margin: @vendor-tags-list__margin;
+		padding: @vendor-tags-list__padding;
+
+		.vendor-tag {
+			&:first-child {
+				margin-left: 0;
+			}
+		}
+	}
+
+	.vendor-tag {
+		margin: @vendor-tag__margin;
+		padding: @vendor-tag__padding;
+		border-radius: @vendor-tag__border-radius;
+		background-color: @vendor-tag__background-color;
+		white-space: @vendor-tag__white-space;
+	}
+
+	.vendor-footer {
+		text-align: right;
+	}
+
+	.vendor-description {
+		margin-bottom: @indent__s;
+	}
+
+	.vendor-view-link {
+		.lib-link-as-button();
+		.lib-button-primary();
+	}
+
+	.toolbar-vendors {
+		display: @toolbar-vendors__dislay;
+		justify-content: @toolbar-vendors__justify_content;
+
+		&:before,
+		&:after {
+			display: none;
+		}
+	}
+}
+
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+	.vendors-grid .vendor-item {
+		width: @vendor-item__width__s;
+	}
+
+	.page-vendors,
+	.page-layout-1column,
+	.page-layout-3columns,
+	.page-vendors.page-layout-1column,
+	.page-vendors.page-layout-3columns {
+		.vendors-grid {
+			.vendor-item {
+				width: @vendor-item__width__s;
+			}
+		}
+	}
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+	.page-vendors {
+		.vendors-grid {
+			.vendor-item {
+				width: @vendor-item__width__s;
+			}
+		}
+	}
+
+	.page-vendors.page-layout-1column {
+		.vendors-grid {
+			.vendor-item {
+				width: @vendor-item__width__l;
+			}
+		}
+	}
+
+	.page-vendors.page-layout-3columns {
+		.vendors-grid {
+			.vendor-item {
+				width: @vendor-item__width__xs;
+			}
+		}
+	}
+}
+
+//
+//    Desktop Large
+//--------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+
+	.page-vendors {
+		.vendors-grid {
+			.vendor-item {
+				width: @vendor-item__width__l;
+			}
+		}
+	}
+
+	.page-layout-1column {
+		.vendors-grid {
+			.vendor-item {
+				width: @vendor-item__width__xl;
+			}
+		}
+	}
+
+	.page-layout-3columns {
+		.vendors-grid {
+			.vendor-item {
+				width: @vendor-item__width__l;
+			}
+		}
+	}
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../module-report/src/ReportApi/etc/mst_report.xsd">
+    <table name="mst_customersegment_segment">
+        <column name="segment_id"
+                label="Segment"
+                type="select"
+                options="Mirasvit\CustomerSegment\Model\Config\Source\Segment"/>
+    </table>
+
+    <table name="mst_customersegment_segment_customer">
+        <pk name="segment_customer_id"/>
+
+        <fk name="segment_id" label="Segment ID" table="mst_customersegment_segment"/>
+        <fk name="customer_id" label="Customer ID" table="customer_entity"/>
+
+        <!-- in 'sales_by_segment' report only customers with orders are counted -->
+        <column name="customer_quantity"
+                fields="segment_customer_id"
+                type="qty"
+                expr="COUNT(DISTINCT %1)"
+                label="Number of Customers"/>
+
+        <column name="orders" label="Number of Orders" fields="sales_order.entity_id" type="qty"
+                expr="COUNT(DISTINCT %1)" tables="sales_order"/>
+    </table>
+
+    <relation name="mst_customersegment_segment_customer-sales_order" type="1n">
+        <leftTable>mst_customersegment_segment_customer</leftTable>
+        <rightTable>sales_order</rightTable>
+        <condition>%1.email=%2.customer_email</condition>
+    </relation>
+</config>

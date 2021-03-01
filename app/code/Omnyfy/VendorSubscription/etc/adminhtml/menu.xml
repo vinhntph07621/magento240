@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Omnyfy_VendorSubscription::base" title="Vendor Subscription" translate="title" module="Omnyfy_VendorSubscription" parent="Omnyfy_Vendor::base" dependsOnModule="Omnyfy_Vendor" sortOrder="100" resource="Omnyfy_VendorSubscription::base"/>
+        <add id="Omnyfy_VendorSubscription::plans" title="Subscription Plan" translate="title" module="Omnyfy_VendorSubscription" parent="Omnyfy_VendorSubscription::base" sortOrder="10" dependsOnModule="Omnyfy_Vendor" action="omnyfy_subscription/plan" resource="Omnyfy_VendorSubscription::plans"/>
+        <add id="Omnyfy_VendorSubscription::subscriptions" title="Subscriptions" translate="title" module="Omnyfy_VendorSubscription" parent="Omnyfy_VendorSubscription::base" sortOrder="20" dependsOnModule="Omnyfy_Vendor" action="omnyfy_subscription/subscription" resource="Omnyfy_VendorSubscription::subscriptions"/>
+        <!--
+        <add id="Omnyfy_VendorSubscription::histories" title="Subscription Histories" translate="title" module="Omnyfy_VendorSubscription" parent="Omnyfy_VendorSubscription::base" sortOrder="30" dependsOnModule="Omnyfy_Vendor" action="omnyfy_subscription/history" resource="Omnyfy_VendorSubscription::histories"/>
+        -->
+    </menu>
+</config>

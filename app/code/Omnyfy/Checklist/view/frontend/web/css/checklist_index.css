@@ -1,0 +1,69 @@
+div.message {
+    width: 100%;
+    color: #ffffff;
+    padding: 10px 5px;
+    margin-bottom: 10px;
+}
+
+a.checklist-article-link {
+    color: #009987;
+    padding-top: 10px;
+    display: inline-block;
+}
+
+.checkbox-style label {
+    float: left;
+    margin: 0px;
+}
+
+.alert {
+    border: 1px solid #00c1aa;
+    background-color: #cceed8;
+    color: #06783d;
+    border-left: 4px solid #06783d;
+    position: relative;
+    padding-right: 45px;
+    padding-left: 45px;
+}
+
+.alert .close {
+    float: none;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    border: 0;
+    background-color: transparent;
+    color: inherit;
+    opacity: 1;
+    margin-top: -16px;
+    height: 32px;
+    line-height: 30px;
+    padding: 0 12px;
+}
+
+.alert .symbol {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    margin-top: -15px;
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.alert a {
+    color: inherit !important;
+    text-decoration: underline;
+}
+
+.alert.error {
+    border-color: #cb868b;
+    background-color: #f8d1d4;
+    border-left-color: #dc1928;
+    color: #dc1928;
+}
+
+.icon-tick:before {
+    content: "\e919";
+}

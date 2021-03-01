@@ -1,0 +1,91 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Cms article info template
+ *
+ * @var $block \Omnyfy\Cms\Block\Article\Info
+ */
+?>
+
+<?php $_article = $block->getArticle() ?>
+<?php $om = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $om->get('Magento\Store\Model\StoreManagerInterface');
+$folderName = 'wysiwyg';
+$imgname = 'topic-icon01.png';
+$path = $folderName . '/' . $imgname;
+$imageName = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $path;
+?>
+
+<div class="col-sm-6 col-md-3">
+	<div class="topic-tile">
+		<div class="tile-body">
+			<div class="symbol-row">
+				<img alt="image description" src="<?php echo $imageName?>" class="tile-icon">
+			</div>
+			<div class="tile-content">
+				<a href="#" class="title"> Should I go overseas?</a>
+				<p>Use our export strategy template and readiness checklist to ensure you’ve got all your boxes ticked.</p>
+			</div>
+		</div>
+		<div class="tile-footer">
+			<a href="#">
+				<span class="icon-file2"></span>
+				 3 articles
+			</a>
+		</div>
+	</div>
+</div>
+<?php /* <div class="article-info clear">
+    <div class="item article-posed-date">
+        <span class="label"><?php echo __('Articleed:') ?></span>
+        <span class="value"><?php echo $_article->getPublishDate('F d, Y') ?></span>
+    </div>
+    <?php if ($_categoriesCount = $_article->getCategoriesCount()) { ?>
+    <div class="dash">|</div>
+    <div class="item article-categories">
+        <span class="label"><?php echo __('Categories:') ?></span>
+        <?php $n = 0; foreach($_article->getParentCategories() as $ct) { $n++; ?>
+            <a title="<?php echo $block->escapeHtml($ct->getTitle()) ?>" href="<?php echo $ct->getCategoryUrl() ?>">
+                <?php echo $block->escapeHtml($ct->getTitle()) ?>
+            </a>
+            <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
+        <?php } ?>
+    </div>
+    <?php } ?>
+    <?php if ($_tagsCount = $_article->getTagsCount()) { ?>
+    <div class="dash">|</div>
+    <div class="item article-categories">
+        <span class="label"><?php echo __('Tags:') ?></span>
+        <?php $n = 0; foreach($_article->getRelatedTags() as $tag) { $n++; ?>
+            <a title="<?php echo $block->escapeHtml($tag->getTitle()) ?>" href="<?php echo $tag->getTagUrl() ?>">
+                <?php echo $block->escapeHtml($tag->getTitle()) ?>
+            </a>
+            <?php if ($n != $_tagsCount) { ?>, <?php } ?>
+        <?php } ?>
+    </div>
+    <?php } ?>
+    <?php if ($block->authorEnabled()) { ?>
+        <?php if ($_author = $_article->getAuthor()) { ?>
+        <div class="dash">|</div>
+        <div class="item article-author">
+            <span class="label"><?php echo __('Author:') ?></span>
+            <span class="value">
+                <?php if ($authorPageEnabled = $block->authorPageEnabled()) { ?>
+                <a title="<?php echo $block->escapeHtml($_author->getTitle()) ?>" href="<?php echo $_author->getAuthorUrl() ?>">
+                <?php } ?>
+                    <?php echo $block->escapeHtml($_author->getTitle()) ?>
+                <?php if ($authorPageEnabled) { ?>
+                </a>
+                <?php } ?>
+            </span>
+        </div>
+        <?php } ?>
+    <?php } ?>
+</div> */ ?>

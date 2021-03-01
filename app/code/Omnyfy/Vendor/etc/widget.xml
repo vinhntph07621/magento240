@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+	<widget class="Omnyfy\Vendor\Block\Widget\ProductVendor" id="omnyfy_vendor_productvendor">
+		<label>ProductVendor</label>
+		<description>ProductVendor</description>
+		<parameters>
+			<parameter name="label_text" sort_order="10" visible="true" xsi:type="text">
+				<label>Widget title</label>
+				<value>Sold by</value>
+			</parameter>
+			<parameter name="view_button_text" sort_order="20" visible="true" xsi:type="text">
+				<label>View button text</label>
+				<value>View profile</value>
+			</parameter>
+			<parameter name="template" xsi:type="select" visible="true">
+				<options>
+					<option name="horizontal" value="widget/brand-horizontal.phtml"
+							selected="true">
+						<label translate="true">Vendor horizontal Template</label>
+					</option>
+					<option name="vertical" value="widget/brand-vertical.phtml">
+						<label translate="true">Vendor vertical Template</label>
+					</option>
+				</options>
+			</parameter>
+		</parameters>
+	</widget>
+</widgets>

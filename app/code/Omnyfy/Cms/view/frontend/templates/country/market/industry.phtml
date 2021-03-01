@@ -1,0 +1,27 @@
+<section class="block-section bg-light-grey results-industry" style="display: none;">
+	<div class="container">
+		<div class="row flex-row">
+			<?php foreach($block->getIndustryCollection() as $industry):?>
+				<div class="col-sm-6 col-md-4 col-xs-12 industry-tile-wrapper" id="industry-<?php echo $industry->getId()?>">
+					<div class="industry-tile">
+						<a href="<?php echo $industry->getIndustryUrl();?>" class="name"><?php echo $industry->getIndustryName();?></a>
+						<a href="<?php echo $industry->getIndustryUrl();?>" class="overview"><?php echo __('Overview')?></a>
+						<?php $categoriesByCountry = $block->getChildCategories($industry->getByCountry());
+						foreach($categoriesByCountry as $categories):
+						$category = $block->getCategory($categories);?>
+							<ul class="bullet-list">
+								<?php if($block->getArticleCollection($categories)){?>
+									<li>
+										<a href="<?php echo $industry->getIndustryUrl().'tab/country/categoryid/'.$categories.'/'?>">
+											<?php echo $category->getTitle()?>
+										</a>
+									</li>
+								<?php }?>
+							</ul>
+						<?php endforeach;?>
+					</div>
+				</div>
+			<?php endforeach;?>	
+		</div>
+	</div>
+</section>

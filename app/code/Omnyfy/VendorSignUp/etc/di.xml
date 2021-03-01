@@ -1,0 +1,22 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="omnyfy_vendorsignup_signup_listing_data_source" xsi:type="string">Omnyfy\VendorSignUp\Model\ResourceModel\SignUp\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+	<type name="Omnyfy\VendorSignUp\Model\ResourceModel\SignUp\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_vendor_signup</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_vendorsignup_signup_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_vendorsignup_signup_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\VendorSignUp\Model\ResourceModel\SignUp\Collection</argument>
+        </arguments>
+    </type>
+    <!--
+	<type name="Omnyfy\Vendor\Model\Vendor">
+        <plugin name="add_vendorsignup_kyc_info" type="Omnyfy\VendorSignUp\Plugin\Vendor\Model\Vendor" sortOrder="100" />
+    </type>
+    -->
+</config>

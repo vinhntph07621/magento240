@@ -1,0 +1,28 @@
+<?php $collection = $block->getBookMarkedCollection();?>
+<?php $blockObj = $block->getLayout()->createBlock('Omnyfy\MyReadingList\Block\ReadingList');?>
+<div class="info-tile-wrapper">
+	<div class="info-tile dark-tile">
+		<div id="message" style="display:none"></div>
+		<div class="tile-content link-container">
+			<a href="<?php echo $this->getUrl('readinglist/index/index');?>" class="title"><?php echo __('My Reading List')?></a>
+			<?php if($collection->getSize()):?>
+				<div class="read-list">
+					<?php foreach($collection as $article):?>
+						<div class="list-item" id="article-<?php echo $article->getArticleId() ?>">
+							<a href="<?php echo $this->getUrl('cms/article/'.$article['url-key'])?>" class="link"><?php echo $article->getTopic()?></a>
+							<?php /* <a class="remove-btn mark-btn" data-articleid="<?php echo $article->getArticleId() ?>">Remove</a> */ ?>
+						</div>
+					<?php endforeach;?>
+				</div>
+			<?php else:?>
+				<p><?php echo __('You have no articles in your reading list.')?></p>
+			<?php endif; ?>
+		</div>
+		<div class="link-container">
+			<a href="<?php echo $this->getUrl('learning-resources');?>" class="link-bottom arrow-link">
+				<span class="arrow icon-angle-right"></span>
+				<?php echo __('Browse the learn section')?> 
+			</a>
+		</div>
+	</div>
+</div>

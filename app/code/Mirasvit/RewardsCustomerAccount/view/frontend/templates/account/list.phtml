@@ -1,0 +1,44 @@
+<?php
+/** @var \Mirasvit\RewardsCustomerAccount\Block\Account\Listing $block */
+$collection = $block->getTransactionCollection();
+$earnRules = $block->getDisplayEarnRules();
+$spendRules = $block->getDisplaySpendRules();
+?>
+<div class="block block-rewards-account-summary order-details-items">
+    <div class="block-title">
+        <?= $block->getChildHtml('rewards.page.main.title'); ?>
+        <strong><?= __('Points Summary') ?></strong>
+    </div>
+
+    <div class="block-content">
+        <p><?= __('You have <b>%1</b> in your account.', $this->helper('Mirasvit\Rewards\Helper\Data')->formatPoints($block->getBalancePoints())); ?></p>
+        <p><?= $block->getChildHtml('rewards.notification') ?></p>
+    </div>
+
+    <?php if ($earnRules->count()): ?>
+    <div class="block-title earn subtitle">
+        <strong><?= __('How to earn points') ?></strong>
+    </div>
+    <div class="block-content">
+        <ul>
+            <?php foreach ($earnRules as $rule): ?>
+                <li><?= $rule->getFrontName(); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
+
+    <?php if ($spendRules->count()): ?>
+    <div class="block-title spend subtitle">
+        <strong><?= __('Spend points and receive discounts') ?></strong>
+    </div>
+    <div class="block-content">
+        <ul>
+            <?php foreach ($spendRules as $rule): ?>
+                <li><?= $rule->getFrontName(); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
+</div>
+

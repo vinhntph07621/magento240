@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="omnyfy" translate="label" sortOrder="100">
+            <label>Omnyfy</label>
+        </tab>
+        <section id="omnyfy_vendorsignup" translate="label" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Vendor Sign Up</label>
+            <tab>omnyfy</tab>
+            <resource>Omnyfy_VendorSignUp::omnyfy_vendorsignup_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Vendor Sign Up</label>
+                <field id="enabled" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="return_url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Return Url for error of fail</label>
+                </field>
+                <field id="success_url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Success Page after sign up</label>
+                </field>
+			</group>
+			<group id="vendor_signup" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>New Vendor SignUp Admin</label>
+                <field id="template" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[<br>Receive a new Vendor Signup</b>]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment model="Omnyfy\VendorSignUp\Model\VendorSignUpComment"/>
+                </field>
+                <field id="cc" translate="label" type="text" sortOrder="10" showInDefault="10" showInWebsite="1" showInStore="1">
+                    <label>Email Copy (CC) to</label>
+                    <comment>Add multiple email separated by a comma</comment>
+                </field>
+            </group>
+			<group id="vendor_signup_customer" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>New Vendor SignUp Vendor</label>
+                <field id="template" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[<br>Send a new email confirmation - Customer]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="sent_from" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sent From</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="cc" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Copy (CC) to</label>
+                    <comment>Add multiple email separated by a comma</comment>
+                </field>
+            </group>
+			<group id="vendor_signup_approve" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Approve Signup Notification - Vendor</label>
+                <field id="template" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[<br>Send a approve email - Vendor]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="sent_from" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sent From</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="cc" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Copy (CC) to</label>
+                    <comment>Add multiple email separated by a comma</comment>
+                </field>
+            </group>
+			<group id="vendor_signup_reject" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Reject Signup Notification - Vendor</label>
+                <field id="template" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[<br>Send a reject email - Vendor]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="sent_from" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sent From</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="cc" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Copy (CC) to</label>
+                    <comment>Add multiple email separated by a comma</comment>
+                </field>
+            </group>
+			<group id="google_captcha" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Google Re-Captcha Details</label>
+                <field id="site_key" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Site Key</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

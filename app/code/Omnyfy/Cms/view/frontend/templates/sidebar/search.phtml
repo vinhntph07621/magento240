@@ -1,0 +1,45 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Cms sidebar search form template
+ *
+ * @var $block \Omnyfy\Cms\Block\Sidebar\Search
+ */
+?>
+
+<div class="widget block cms-search" data-bind="scope: 'cms-search'">
+	<div class="block-content">
+		<form class="form" id="cms_search_mini_form" action="<?php echo $block->getFormUrl() ?>" method="get">
+            <div class="field search">
+                <label class="label" for="cms_search">
+                    <span><?php echo __('Search') ?></span>
+                </label>
+                <div class="control">
+                    <input id="cms_search" type="text" name="q" value="<?php echo $block->escapeHtml($block->getQuery()) ?>" placeholder="<?php echo __('Search articles here...') ?>" class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off">
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit" onclick="return goCmsSearch(this);" title="<?php echo __('Search') ?>" class="action search">
+                    <span><?php echo __('Search') ?></span>
+                </button>
+            </div>
+        </form>
+	</div>
+</div>
+<script type="text/javascript">
+	function goCmsSearch(e)
+	{
+		var value = document.getElementById('cms_search').value;
+		if (value) {
+			window.location = e.form.action + value + '/';
+		}
+		return false;
+	}
+</script>

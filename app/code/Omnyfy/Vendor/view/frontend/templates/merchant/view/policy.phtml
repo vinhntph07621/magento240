@@ -1,0 +1,60 @@
+<?php
+/**
+ * Copyright © Omnyfy, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Vendor view template
+ *
+ * @var $block \Omnyfy\Vendor\Block\Vendor\View
+ */
+$vendor = $block->getVendor();
+$showPolicies = false;
+$policies = ['shipping_policy',
+    'return_policy',
+    'payment_policy',
+    'marketing_policy'
+];
+$policyContents = [];
+
+foreach($policies as $p) {
+    $attribute = $vendor->getResource()->getAttribute($p);
+    if ($attribute->getData('is_visible_on_front')) {
+        $policyContents[$p]['content']  = $vendor->getData($p);
+        $policyContents[$p]['label']    = $block->getAttributeLabel($p);
+    }
+}
+
+foreach($policyContents as $policy) {
+    if ($policy['content'] != null) {
+        $showPolicies = true;
+    }
+}
+?>
+<?php if ($showPolicies): ?>
+<section class="policy-section" id="policy">
+    <div class="container">
+        <h2 class="section-header"><?= __("Store Policy") ?></h2>
+        <div class="policies" data-mage-init='{"accordion":{"active": "0", "openedState": "active"}}'>
+            <ul class="policies-list">
+                <?php $i = 0; ?>
+                <?php foreach ($policyContents as $policy) : ?>
+                <?php if ($policy['content'] != null): ?>
+                    <li class="policy-item item">
+                        <div class="policy-title-wrapper <?php echo (0==$i) ? ' active' : '';?>" data-role="collapsible">
+                            <span data-role="trigger" class="policy-title"><?= $policy['label'] ?></span>
+                        </div>
+                        <div data-role="content" class="policy-content">
+                            <article class="policy-article">
+                                <?= $policy['content'] ?>
+                            </article>
+                        </div>
+                    </li>
+                    <?php $i++; ?>
+                    <?php endif ?>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+</section>
+<?php endif ?>

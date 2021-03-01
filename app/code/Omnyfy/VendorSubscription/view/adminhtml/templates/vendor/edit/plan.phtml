@@ -1,0 +1,20 @@
+<?php
+/**
+ * Project: Vendor Subscription
+ * User: jing
+ * Date: 10/9/19
+ * Time: 4:27 pm
+ */
+?>
+<div class="admin__field field field-plan_id required _required">
+    <label class="label admin__field-label"><span><?php echo __('Subscription Plan')?></span></label>
+    <div class="admin__field-control control">
+        <table class="data-table">
+            <tr>
+                <td><?php echo $block->getPlanName();?></td>
+                <td><?php echo $block->getButtonHtml();?></td>
+            </tr>
+        </table>
+    </div>
+</div>
+ 

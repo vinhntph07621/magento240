@@ -1,0 +1,60 @@
+<?php
+if ($this->getWithdrawalId()) {
+    $withdrawalData = $this->getVendorWithdrawalHistory();
+    $bankInfo = $this->getVendorBankAccount();
+    ?>
+    <section class="admin__page-section order-view-account-information">
+        <div class="admin__page-section-content">
+            <div class="admin__page-section-item order-information">
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?php echo $block->escapeHtml(__('Withdrawal Information')) ?></span>
+                </div>
+                <div class="admin__page-section-item-content">
+                    <table class="admin__table-secondary order-information-table">
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('ID')) ?> </th>
+                            <td><?php echo $block->escapeHtml($block->getWithdrawalId()) ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Transaction Reference ID')) ?></th>
+                            <td><?php echo isset($withdrawalData['refrence_id']) ? $block->escapeHtml($withdrawalData['refrence_id']) : '' ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Withdrawal Date/Time')) ?></th>
+                            <td><?php echo isset($withdrawalData['withdrawal_date']) ? $block->getDateWithFormat($block->escapeHtml($withdrawalData['withdrawal_date'])) : '' ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Amount')) ?></th>
+                            <td><?php echo isset($withdrawalData['withdrawal_amount']) ? $block->currency($block->escapeHtml($withdrawalData['withdrawal_amount'])) : '' ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="admin__page-section-item order-account-information">
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?php echo $block->escapeHtml(__('Bank Account Information')) ?></span>
+                </div>
+                <div class="admin__page-section-item-content">
+                    <table class="admin__table-secondary order-account-information-table">
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Account Name')) ?></th>
+                            <td><?php echo isset($bankInfo['account_name']) ? $block->escapeHtml($bankInfo['account_name']) : '' ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Bank')) ?></th>
+                            <td><?php echo isset($bankInfo['bank_name']) ? $block->escapeHtml($bankInfo['bank_name']) : '' ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('BSB Number')) ?></th>
+                            <td><?php echo isset($bankInfo['bsb']) ? $block->escapeHtml($bankInfo['bsb']) : '' ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Account Number')) ?></th>
+                            <td><?php echo isset($bankInfo['account_number']) ? $block->escapeHtml($bankInfo['account_number']) : '' ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php } ?>

@@ -1,0 +1,21 @@
+<label class="admin__form-field-label" data-bind="attr: {for: 'admin__customer-segment-filter'}" for="admin__customer-segment-filter">
+    <span data-bind="text: label"></span>
+</label>
+<div class="admin__action-dropdown-wrap report__toolbar-store reports__dropdown"
+     data-bind="collapsible">
+    <button class="admin__action-dropdown"
+            id="admin__customer-segment-filter"
+            type="button"
+            aria-haspopup="true"
+            data-bind="toggleCollapsible, css: {_active: $collapsible.opened}">
+        <span class="admin__action-dropdown-text" data-bind="text: current"></span>
+    </button>
+
+    <ul class="admin__action-dropdown-menu">
+        <!-- ko foreach: { data: segments, as: 'segment' } -->
+        <li>
+            <span data-bind="text: segment.label, click: $parent.onChangeSegment"></span>
+        </li>
+        <!-- /ko -->
+    </ul>
+</div>

@@ -1,0 +1,40 @@
+// /**
+//  * Copyright © Omnyfy, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  ---------------------------------------------
+@rate-list__list-style: none;
+@rate-list__margin: 0;
+@rate-list__padding: 0 0 0 @indent__base;
+
+@carrier-title__font-weight: bold;
+@carrier-method__font-weight: normal;
+@carrier-amount__font-weight: bold;
+
+//
+//    Common
+//--------------------------------------
+
+& when (@media-common = true) {
+
+	.rate-list {
+		list-style: @rate-list__list-style;
+		margin: @rate-list__margin;
+		padding: @rate-list__padding;
+	}
+
+	.carrier-title {
+		font-weight: @carrier-title__font-weight;
+	}
+
+	.carrier-method {
+		font-weight: @carrier-method__font-weight;
+	}
+
+	.carrier-amount {
+		font-weight: @carrier-amount__font-weight;
+	}
+}

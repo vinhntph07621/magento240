@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-right" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="sidebar.additional">
+            <block class="Omnyfy\Cms\Block\Sidebar" name="cms.sidebar" template="sidebar.phtml">
+                <block class="Omnyfy\Cms\Block\Sidebar\Search" name="cms.sidebar.search" template="sidebar/search.phtml" />
+                <block class="Omnyfy\Cms\Block\Sidebar\Categories" name="cms.sidebar.category" template="sidebar/categories.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+                <block class="Omnyfy\Cms\Block\Sidebar\Recent" name="cms.sidebar.recent" template="sidebar/recent.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+                <block class="Omnyfy\Cms\Block\Sidebar\Archive" name="cms.sidebar.archive" template="sidebar/archive.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+                <block class="Omnyfy\Cms\Block\Sidebar\TagClaud" name="cms.sidebar.tagclaud" template="sidebar/tag_claud.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+                <block class="Omnyfy\Cms\Block\Sidebar\Rss" name="cms.sidebar.rss" template="sidebar/rss.phtml">
+                    <action method="setCacheLifetime">
+                        <argument name="time" xsi:type="string">86400</argument>
+                    </action>
+                </block>
+            </block>
+            <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+            <referenceBlock name="wishlist_sidebar" remove="true"/>
+        </referenceContainer>
+    </body>
+</page>

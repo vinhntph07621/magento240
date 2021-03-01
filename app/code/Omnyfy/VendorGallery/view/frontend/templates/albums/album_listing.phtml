@@ -1,0 +1,37 @@
+<?php
+$albumCollection = $block->getAlbumCollection();
+?>
+<section id="gallery" class="album-section">
+    <div class="container">
+        <h2 class="gallery-title"><?php echo $block->getTitle() ?></h2>
+        <div class="gallery-container">
+            <?php foreach($albumCollection as $item): ?>
+            <?php $albumUrl = $block->getUrl('vendor_gallery/album/view', ['id' => $item->getData('entity_id')]); ?>
+                <div class="album">
+                    <div class="album-item">
+                        <div class="album-thumbnail">
+                            <a href="<?= $albumUrl ?>">
+                                <img src="<?= $item->getThumbnailUrl() ?>" alt="<?= $item->getData('name') ?>">
+                            </a>
+                        </div>
+                        <div class="album-content">
+                            <div class="top-area">
+                                <div class="album-name">
+                                    <h3><a href="<?= $albumUrl ?>"><?= $item->getData('name') ?></a></h3>
+                                </div>
+                                <div class="album-description">
+                                    <?= $item->getData('description') ?>
+                                </div>
+                            </div>
+                            <div class="bottom-area">
+                                <div class="album-url">
+                                    <a href="<?= $albumUrl ?>"><?php echo __('Read More')?></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>

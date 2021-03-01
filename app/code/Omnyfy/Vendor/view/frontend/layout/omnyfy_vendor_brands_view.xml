@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		<attribute name="class" value="omnyfy-vendor-merchant-view"/>
+        <referenceBlock name="page.main.title" remove="true"/>
+        <referenceContainer name="page.wrapper">
+            <block class="Omnyfy\Vendor\Block\Vendor\View" name="merchant.banner" template="Omnyfy_Vendor::merchant/hero-banner.phtml" before="main.content"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Omnyfy\Vendor\Block\Vendor\View" name="merchant" template="Omnyfy_Vendor::merchant/view.phtml">
+                <!-- use "vendor additional info" to add information to vendor header -->
+                <container name="vendor.additional.info"></container>
+                <!-- use "vendor actions" to add buttons or links to vendor header -->
+                <container name="vendor.actions"></container>
+                <block class="Magento\Framework\View\Element\Template" name="vendor.navigation" template="Omnyfy_Vendor::merchant/view/navigation.phtml">
+                    <block name="vendor.navigation.menu" class="Magento\Framework\View\Element\Html\Links">
+                        <arguments>
+                            <argument name="css_class" xsi:type="string">vendor-nav-list</argument>
+                        </arguments>
+                        <block name="vendor.navigation.details" class="Omnyfy\Vendor\Block\Vendor\View\DetailsLink">
+                            <arguments>
+                                <argument name="css_class" xsi:type="string">vendor-nav-item</argument>
+                                <argument name="path" xsi:type="string">#details</argument>
+                                <argument name="label" xsi:type="string">Details</argument>
+                            </arguments>
+                        </block>
+                        <block name="vendor.navigation.overview" class="Omnyfy\Core\Block\Element\Html\Link\PageSectionLink">
+                            <arguments>
+                                <argument name="css_class" xsi:type="string">vendor-nav-item</argument>
+                                <argument name="path" xsi:type="string">#overview</argument>
+                                <argument name="label" xsi:type="string">Overview</argument>
+                            </arguments>
+                        </block>
+                        <block name="vendor.navigation.products" class="Omnyfy\Core\Block\Element\Html\Link\PageSectionLink">
+                            <arguments>
+                                <argument name="css_class" xsi:type="string">vendor-nav-item</argument>
+                                <argument name="path" xsi:type="string">#products</argument>
+                                <argument name="label" xsi:type="string">Products</argument>
+                            </arguments>
+                        </block>
+                        <block name="vendor.navigation.policy" class="Omnyfy\Vendor\Block\Vendor\View\PoliciesLink">
+                            <arguments>
+                                <argument name="css_class" xsi:type="string">vendor-nav-item</argument>
+                                <argument name="path" xsi:type="string">#policy</argument>
+                                <argument name="label" xsi:type="string">Policies</argument>
+                            </arguments>
+                        </block>
+                    </block>
+                </block>
+
+                <container name="vendor.sections">
+                    <block class="Omnyfy\Vendor\Block\Vendor\View" name="details" template="Omnyfy_Vendor::merchant/view/details.phtml">
+                        <arguments>
+                            <argument name="display_all" xsi:type="boolean">true</argument><!-- if false, displays only attributes from attributes_to_display argument -->
+                            <argument name="attributes_to_display" xsi:type="array">
+                                <item name="vendor_tags_values" xsi:type="string">vendor_tags_values</item>
+                            </argument>
+                        </arguments>
+                    </block>
+                    <block class="Omnyfy\Vendor\Block\Vendor\View" name="overview" template="Omnyfy_Vendor::merchant/view/overview.phtml"/>
+                    <block class="Omnyfy\Vendor\Block\Vendor\View" name="products" template="Omnyfy_Vendor::merchant/view/products.phtml">
+                        <block class="Omnyfy\Vendor\Block\Vendor\ListProduct" name="vendor.products.list" as="product_list" template="Magento_Catalog::product/list.phtml">
+                            <container name="category.product.list.additional" as="additional" />
+                            <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                                <block class="Magento\Framework\View\Element\Template" as="default"/>
+                            </block>
+                            <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                                <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                            </block>
+                            <action method="setToolbarBlockName">
+                                <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                            </action>
+                        </block>
+                    </block>
+                    <block class="Omnyfy\Vendor\Block\Vendor\View\Policy" name="store_policy" template="Omnyfy_Vendor::merchant/view/policy.phtml"/>
+                </container>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\Catalog\Block\Navigation" name="catalog.leftnav" before="-" template="navigation/left.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

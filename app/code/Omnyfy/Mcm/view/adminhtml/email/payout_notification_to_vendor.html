@@ -1,0 +1,14 @@
+<!--@subject You have been paid by {{config path="general/store_information/name"}}  @-->
+{{template config_path="design/email/header_template"}} <!-- pathe of template header-->
+ 
+<table>
+    <tr class="email-intro">
+        <td valign="top">
+			<p>{{trans "Hi %vname," vname=$vendor_name}}</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;{{trans "You have been paid %amt by " amt=$amount}}{{config path="general/store_information/name"}}</p> 
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;<span>Please <a href="{{var payout_history_link|escape}}">Click here</a></a></span> to view the payout details.</p>
+		</td>
+    </tr>
+</table>
+ 
+{{template config_path="design/email/footer_template"}} <!--footer of template-->

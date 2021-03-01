@@ -1,0 +1,229 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**  @var \Magento\Checkout\Block\Cart $block  */
+?>
+
+
+<?php $mergedCells = ($this->helper('Magento\Tax\Helper\Data')->displayCartBothPrices() ? 2 : 1); ?>
+<?php echo $block->getChildHtml('form_before') ?>
+<form action="<?php /* @escapeNotVerified */ echo $block->getUrl('checkout/cart/updatePost') ?>"
+          method="post"
+          id="form-validate"
+          data-mage-init='{"validation":{
+            "ignore": ".data-val-ignore"
+          }}'
+          class="form form-cart">
+    <?php echo $block->getBlockHtml('formkey'); ?>
+
+<?php
+/** @var \Omnyfy\Vendor\Helper\Data $vendorHelper */
+$vendorHelper = $this->helper('Omnyfy\Vendor\Helper\Data');
+$shippingHelper = $this->helper('Omnyfy\Vendor\Helper\Shipping');
+$vProductHelper = $this->helper('Omnyfy\Vendor\Helper\Product');
+$shippings = [];
+$shippingMethods = $shippingHelper->getShippingMethods();
+foreach($shippingMethods as $shippingMethod){
+    $shippings[] = $shippingMethod; 
+}
+$shippingCalculation = $shippingHelper->getCalculateShippingBy();
+if ($shippingCalculation == 'overall_cart') {
+    $shippingPickupLocation = $shippingHelper->getShippingConfiguration('overall_pickup_location');
+}
+$locations = $vendorHelper->getLocationsInfo($block->getItems());
+$bookingOnlyLocationIds = $vendorHelper->getBookingLocationIds($block->getItems()); ?>
+
+<?php foreach($locations as $location) { ?>
+    <div class="vendor-wrapper">
+        <div class="header-row">
+            <div class="name">
+                <!-- Marchant name -->
+                <?php echo $location->getVendorName();?>
+            </div>
+
+            <?php if ($shippingHelper->getFreeShippingMessageConfig()): ?>
+                <?php
+                    $vendor = $vProductHelper->getVendor($location->getVendorId());
+                    if (!empty($vendor->getVfreeShippingThreshold())) {
+                        $threshold = $vendor->getVfreeShippingThreshold();
+                    } else {
+                        $threshold = $shippingHelper->getFreeShippingThreshold();
+                    }
+                ?>
+                <div id="vendor-fsm-<?= $location->getId()?>" class="vendor-free-shipping-message"
+                     data-location="<?= $location->getId()?>"
+                     data-vendor="<?= $location->getVendorName() ?>"
+                >
+                    <?= __('Loading...') ?>
+                </div>
+                <script type="text/x-magento-init">
+                    {
+                        ".vendor-free-shipping-message": {
+                            "Omnyfy_Vendor/js/view/cart/vendor-free-shipping-message": {
+                                "locationId": "<?= $location->getId()?>",
+                                "threshold": "<?= $threshold ?>",
+                                "messageUnderThreshold": "<?= $shippingHelper->getShoppingCartMessageUnder() ?>",
+                                "messageThresholdReached": "<?= $shippingHelper->getShoppingCartMessageReached() ?>"
+
+                            }
+                        }
+                    }
+                </script>
+            <?php endif ?>
+        </div>
+        <div class="cart table-wrapper<?php echo $mergedCells == 2 ? ' detailed' : ''; ?>">
+            <!-- <table id="shopping-cart-table" -->
+            <table
+                   class="cart items data table"
+                   data-mage-init='{"shoppingCart":{"emptyCartButton": "action.clear",
+                   "updateCartActionContainer": "#update_cart_action_container"}}'>
+                <caption role="heading" aria-level="2" class="table-caption"><?php /* @escapeNotVerified */ echo __('Shopping Cart Items') ?></caption>
+                <thead>
+                    <tr>
+                        <th class="col item" scope="col"><span><?php /* @escapeNotVerified */ echo __('Item') ?></span></th>
+                        <th class="col price" scope="col"><span><?php /* @escapeNotVerified */ echo __('Price') ?></span></th>
+                        <th class="col qty" scope="col"><span><?php /* @escapeNotVerified */ echo __('Qty') ?></span></th>
+                        <th class="col subtotal" scope="col"><span><?php /* @escapeNotVerified */ echo __('Subtotal') ?></span></th>
+                    </tr>
+                </thead>
+                <?php foreach ($block->getItems() as $_item): ?>
+                        <?php if ($_item->getLocationId() == $location->getId()) :?>
+                            <?php echo $block->getItemHtml($_item) ?>
+                        <?php endif; ?>
+                <?php endforeach ?>
+            </table>
+        </div>
+
+
+        <?php if (!in_array($location->getId(), $bookingOnlyLocationIds)) { ?>
+            <?php if ($shippingCalculation != 'overall_cart'): ?>
+                <?php // add the check for overall shipping configuration ?>
+                <div id="rate-container-<?php echo intval($location->getVendorId()).'-'.intval($location->getId());?>" class="rate-container" data-bind="scope:'rates-list-<?php echo intval($location->getVendorId()).'-'.intval($location->getId());?>'">
+                    <?php if ($shippingHelper->getCheckoutShippingMessageEnable() == 1 && $shippingHelper->getShippingMessageContent() != null && count($shippings) > 0){ ?>
+                    <div class="allshippingMessageCart" data-bind="visible: messageVisible" style="display:none;">
+                        <?= $shippingHelper->getShippingMessageContent() ?>
+                    </div>
+                    <?php } ?>
+
+                    <div class="shippingNotesCart" data-bind="visible: shippingNotesVisible" style="display:none;">
+                        <span data-bind="text: shippingNotes" />
+                    </div>
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                    <script type="text/x-magento-init">
+                            {
+                                "#rate-container-<?php echo intval($location->getVendorId()).'-'.intval($location->getId());?>": {
+                                    "Magento_Ui/js/core/app": {
+                                        "components": {
+                                            "rates-list-<?php echo intval($location->getVendorId()).'-'.intval($location->getId());?>": {
+                                                "component": "Omnyfy_Vendor/js/view/cart/shipping-rates",
+                                                "config": {
+
+                                                },
+                                                "vendorName": "<?php $location->getVendorName()?>",
+                                                "vendorId": <?php echo intval($location->getVendorId());?>,
+                                                "locationName": "<?php echo $location->getLocationName() ?>",
+                                                "locationId": <?php echo intval($location->getId()) ?>
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                    </script>
+                </div>
+            <?php endif; ?>
+        <?php } ?>
+    </div>
+<?php } ?>
+<?php if ($shippingCalculation == 'overall_cart' && !empty($shippingPickupLocation)) { ?>
+    <?php $locationsPickup = $vendorHelper->getLocationsByIds($shippingPickupLocation); ?>
+    <?php foreach($locationsPickup as $location): ?>
+            <div class="vendor-wrapper">
+            <div class="header-row">
+                <div class="name">
+                    <!-- Marchant name -->
+                    <?php echo $location->getVendorName();?>
+                </div>
+
+                <div class="location">
+                    <!-- Location name -->
+                    <?php echo $location->getLocationName(); ?>
+                </div>
+            </div>
+            <div class="cart table-wrapper<?php echo $mergedCells == 2 ? ' detailed' : ''; ?>">
+                <!-- <table id="shopping-cart-table" -->
+            </div>
+
+            <?php if (!in_array($location->getId(), $bookingOnlyLocationIds)) { ?>
+
+                <?php // add the check for overall shipping configuration ?>
+            <div id="rate-container-<?php echo intval($location->getVendorId()).'-'.intval($location->getId());?>" class="rate-container" data-bind="scope:'rates-list-<?php echo intval($location->getVendorId()).'-'.intval($location->getId());?>'">
+                <?php if ($shippingHelper->getCheckoutShippingMessageEnable() == 1 && $shippingHelper->getShippingMessageContent() != null && count($shippings) > 0){ ?>
+                <div class="allshippingMessageCart" data-bind="visible: messageVisible" style="display:none;">
+                    <?= $shippingHelper->getShippingMessageContent() ?>
+                </div>
+                <?php } ?>
+
+                <div class="shippingNotesCart" data-bind="visible: shippingNotesVisible" style="display:none;">
+                    <span data-bind="text: shippingNotes" />
+                </div>
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <script type="text/x-magento-init">
+                        {
+                            "#rate-container-<?php echo intval($location->getVendorId()).'-'.intval($location->getId());?>": {
+                                "Magento_Ui/js/core/app": {
+                                    "components": {
+                                        "rates-list-<?php echo intval($location->getVendorId()).'-'.intval($location->getId());?>": {
+                                            "component": "Omnyfy_Vendor/js/view/cart/shipping-rates",
+                                            "config": {
+
+                                            },
+                                            "vendorName": "<?php $location->getVendorName()?>",
+                                            "vendorId": <?php echo intval($location->getVendorId());?>,
+                                            "locationName": "<?php echo $location->getLocationName() ?>",
+                                            "locationId": <?php echo intval($location->getId()) ?>
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                </script>
+            </div>
+            <?php } ?>
+        </div>
+    <?php endforeach; ?>
+<?php } ?>
+    <div class="cart main actions">
+        <?php if ($block->getContinueShoppingUrl()): ?>
+            <a class="action continue"
+               href="<?php echo $block->escapeUrl($block->getContinueShoppingUrl()) ?>"
+               title="<?php echo $block->escapeHtml(__('Continue Shopping')); ?>">
+                <span><?php /* @escapeNotVerified */ echo __('Continue Shopping') ?></span>
+            </a>
+        <?php endif; ?>
+        <button type="submit"
+                name="update_cart_action"
+                data-cart-empty=""
+                value="empty_cart"
+                title="<?php echo $block->escapeHtml(__('Clear Shopping Cart')); ?>"
+                class="action clear" id="empty_cart_button">
+            <span><?php /* @escapeNotVerified */ echo __('Clear Shopping Cart'); ?></span>
+        </button>
+        <button type="submit"
+                name="update_cart_action"
+                data-cart-item-update=""
+                value="update_qty"
+                title="<?php echo $block->escapeHtml(__('Update Shopping Cart')); ?>"
+                class="action update">
+            <span><?php /* @escapeNotVerified */ echo __('Update Shopping Cart'); ?></span>
+        </button>
+        <input type="hidden" value="" id="update_cart_action_container" data-cart-item-update=""/>
+    </div>
+</form>
+<?php echo $block->getChildHtml('checkout.cart.order.actions') ?>
+<?php echo $block->getChildHtml('shopping.cart.table.after'); ?>
+

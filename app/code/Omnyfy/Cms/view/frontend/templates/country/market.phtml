@@ -1,0 +1,222 @@
+<?php echo $this->getChildHtml('market.finder.header');?>
+<?php $blockObj = $block->getLayout()->createBlock('Omnyfy\Cms\Block\Country\Market\Industry');?>
+<section class="finder-header">
+	<div class="container">
+		<div class="section-desc">
+			<h1 class="section-header"><?php echo __('Export markets finder')?></h1>
+		</div>
+	</div>
+</section>
+<section class="world-map-section bg-light-grey">
+	<div class="bg-white">
+		<div class="container">
+			<div class="world-map-wrapper">
+				<div class="world-map-container">
+					<img src="<?php echo $this->getViewFileUrl('Omnyfy_Cms::images/world-map.png')?>" class="world-map">
+
+					<div class="pins-container">
+						<?php foreach($block->getCountryCollection() as $country):?>
+							<div class="pin-wrapper" data-country-id="<?php echo $country->getId()?>" style="left: <?php echo $block->getMapPosition($country->getPositionLeft(),936)?>; bottom: <?php echo $block->getMapPosition($country->getPositionBottom(),444)?>;">
+								<div title="<?php echo $country->getCountryName()?>" class="pin">
+									<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 25 35.26"><defs><style>.cls-1{fill:#2e2a25;stroke:#fff;stroke-miterlimit:10;}.cls-2{fill:#fff;}</style></defs><title><?php echo $country->getCountryName()?></title><path class="cls-1" d="M898,173.46a12,12,0,0,1,12,12c0,8.42-12,22-12,22s-12-13.58-12-22A12,12,0,0,1,898,173.46Z" transform="translate(-885.5 -172.96)"/><circle class="cls-2" cx="12.5" cy="12.58" r="5"/></svg>
+								</div>
+								<a href="<?php echo $block->getCountryUrl($country->getId())?>" class="country-link"><?php echo $country->getCountryName()?></a>
+							</div>
+						<?php endforeach;?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="search-section finder-search bg-white">
+	<div class="container">
+		<div class="search-module">
+			<label class="search-label">Find market opportunities by Country or Industry</label>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group field-col field-col-left">
+						<label class="hidden" for="select01">
+							Type
+						</label>
+						<div class="select-style select-xl-desktop color-opposite">
+							<select class="form-control input-lg" id="select-finder-type">
+								<option value="country">By Country</option>
+								<option value="industry">By Industry</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6" id="country-type">
+					<div class="form-group field-col field-col-right">
+						<label class="hidden" for="select02">
+							Country
+						</label>
+						<div class="select-style select-xl-desktop">
+							<select class="form-control input-lg" id="select-country">
+								<option value="">Select country</option>
+								<?php foreach($block->getCountryCollection() as $country):?>
+									<option value="<?php echo $country->getId()?>"><?php echo $country->getCountryName()?></option>
+								<?php endforeach;?>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6" id="industry-type" style="display:none;">
+					<div class="form-group field-col field-col-right">
+						<label class="hidden" for="select02">
+							Industry
+						</label>
+						<div class="select-style select-xl-desktop">
+							<select class="form-control input-lg" id="select-industry">
+								<option value="">Select industry</option>
+								<?php foreach($block->getIndustryCollection() as $industry):?>
+									<option value="<?php echo $industry->getId()?>"><?php echo $industry->getIndustryName()?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group field-col">
+						<button class="btn btn-lg btn-xl-desktop btn-green btn-block" id="profile-page">Search</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="block-section bg-light-grey results-country">
+	<div class="container">
+		<div class="row flex-row">
+			<?php foreach($block->getCountryCollection() as $country):?>
+				<?php $industryCategories = $block->getIndustryCategories($country->getIndustryInfoCategory());?>
+				<?php $flag = false;
+				foreach($industryCategories as $industry):
+				$category = $block->getCategory($industry);?>
+					<?php if($blockObj->getArticleCollection($industry)){?>
+						<?php $flag = true; 
+						break;?>
+					<?php }?>
+				<?php endforeach;?>
+				<div class="col-sm-6 col-md-3 country-tile-wrapper" id="country-<?php echo $country->getId()?>">
+					<div class="country-tile">
+						<a href="<?php echo $block->getCountryUrl($country->getId())?>" class="top">
+							<div class="flag">
+								<img src="<?php echo $block->getLogoUrl($country->getFlagImage());?>">
+							</div>
+							<span class="name">
+								<?php echo $country->getCountryName()?>
+							</span>
+						</a>
+						<div class="banner">
+							<img src="<?php echo $block->getResizedImage($country->getBannerImage(),261,113);?>">
+						</div>
+						<div class="tile-content">
+							<?php if($industryCategories && $flag){?>
+								<span class="title">Industries</span>
+									<ul class="bullet-list">
+										<?php foreach($industryCategories as $industry):
+										$category = $block->getCategory($industry);?>
+											<?php if($blockObj->getArticleCollection($industry)){?>
+												<li>
+													<a href="<?php echo $block->getCountryUrl($country->getId())?>tab/industry">
+														<?php echo $category->getTitle();?> 
+													</a>
+												</li>
+											<?php }?>
+										<?php endforeach;?>
+									</ul>
+							<?php }?>
+						</div>
+						<div class="link-container">
+							<a href="<?php echo $block->getCountryUrl($country->getId())?>" class="link-bottom arrow-link">
+								<span class="arrow icon-angle-right"></span>
+								Learn more
+							</a>
+						</div>
+					</div>
+				</div>
+			<?php endforeach;?>	
+		</div>
+	</div>
+</section>
+<?php echo $this->getChildHtml('country.market.industry');?>
+<script type="text/javascript">
+	require(['jquery'],function($){
+		/* $('#profile-page').on('click', function() {
+			var page_type = $("#select-finder-type").val();
+			if(page_type == 'country'){
+				if($("#select-country").val()){
+					var country_url = '<?php echo $this->getUrl()?>cms/country/view/id/'+$("#select-country").val();
+					$(location).attr('href', country_url);
+				}
+			}
+		}); */	
+		$("#select-finder-type").val('country');
+		$('#profile-page').on('click', function() {
+			var page_type = $("#select-finder-type").val();
+			if(page_type == 'country'){
+				var country_id = $('select#select-country').val();
+				$("#select-country option").each(function(){
+					if(country_id){
+						if($(this).val() == country_id){
+							$("#country-"+$(this).val()).show();
+						} else{
+							$("#country-"+$(this).val()).hide();
+						}
+					} else{
+						$("#country-"+$(this).val()).show();
+					}
+				});
+			}
+			if(page_type == 'industry'){
+				var industry_id = $('select#select-industry').val();
+				$("#select-industry option").each(function(){
+					if(industry_id){
+						if($(this).val() == industry_id){
+							$("#industry-"+$(this).val()).show();
+						} else{
+							$("#industry-"+$(this).val()).hide();
+						}
+					} else{
+						$("#industry-"+$(this).val()).show();
+					}
+				});
+			}	
+		});
+		$("#select-finder-type").on("change", function(){
+			if($(this).val() == "country" ) {
+				$('select#select-industry').val('');
+				$(".industry-tile-wrapper").show();
+			}	
+			if($(this).val() == "industry" ) {
+				$('select#select-country').val('');
+				$(".country-tile-wrapper").show();
+				$(".pins-container .pin-wrapper").removeClass("active");
+			}	
+			var newtaburl = '<?php echo $this->getUrl('cms/country/market')?>page/'+$(this).val();
+			window.history.pushState("updateurl", "searchURl", newtaburl);
+		});	
+		<?php if($pageUrl = $block->escapeHtml($this->getRequest()->getParam('page'))) {?>
+			$("#select-finder-type").val('<?php echo $pageUrl?>');
+			if('<?php echo $pageUrl?>' == "industry" ) {
+				$(".results-country").hide();
+				$(".results-industry").show();
+				$("#country-type").hide();
+				$("#industry-type").show();
+				
+				$(".world-map-section").slideUp(function(){
+					$(".world-map-section").hide();
+				});
+			}
+			if('<?php echo $pageUrl?>' == "country" ) {
+				$(".results-country").show();
+				$(".results-industry").hide();
+				$("#country-type").show();
+				$("#industry-type").hide();
+				$(".world-map-section").slideDown();
+			}
+		<?php }?>
+	});
+</script>	

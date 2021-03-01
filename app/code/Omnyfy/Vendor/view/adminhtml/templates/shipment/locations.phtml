@@ -1,0 +1,39 @@
+<?php
+/**
+ * Project: Multi Vendor M2.
+ * User: jing
+ * Date: 29/6/17
+ * Time: 10:04 AM
+ */
+?>
+<form id="location_form" method="post" action="<?php /* @escapeNotVerified */ echo $block->getSaveUrl() ?>">
+    <?php echo $block->getBlockHtml('formkey')?>
+    <input type="hidden" name="order_id" value="<?php echo $block->getOrder()->getId();?>"/>
+    <div class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title"><?php /* @escapeNotVerified */ echo __('Jing Test') ?></span>
+        </div>
+        <div class="admin__page-section-content">
+            <?php
+$locations = $block->getLocations();
+$groupedItems = $block->getGroupedItems();
+foreach($locations as $location) {
+    ?><div class="">
+                <?php echo $location->getName();?>
+            </div>
+            <div>
+                <input type="radio" name="location_id" value="<?php echo $location->getId();?>" />
+                <?php if (isset($groupedItems[$location->getId()])) {
+                    $items = $groupedItems[$location->getId()];
+                    foreach($items as $item) {
+
+                        ?><input type="hidden" name="shipment[items][<?php echo $item->getId();?>]" value="<?php echo $item->getQtyToShip();?>" /><?php
+                    }
+                }
+
+                    ?><?php
+}
+?>
+        </div>
+    </div>
+</form>

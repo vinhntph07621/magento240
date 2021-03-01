@@ -1,0 +1,11 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Configure Mirasvit Menu -->
+    <type name="Mirasvit\Core\Block\Adminhtml\Menu">
+        <arguments>
+            <argument name="menu" xsi:type="array">
+                <item name="customersegment" xsi:type="object">Mirasvit\CustomerSegment\Block\Adminhtml\Menu</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

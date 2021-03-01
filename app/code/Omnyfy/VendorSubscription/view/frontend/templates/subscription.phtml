@@ -1,0 +1,101 @@
+<?php
+/**
+ * Project: Vendor Subscription
+ * User: jing
+ * Date: 2019-08-01
+ * Time: 16:13
+ */
+
+/** @var \Omnyfy\VendorSubscription\Block\Form\Basic $block */
+?><div class="group-item payment-field" id="subscription">
+    <div class="control-wrapper"><?php
+
+$plan = $block->getPlan();
+$planRoleId = $block->getPlanRoleId();
+if (empty($plan)) {
+    ?><input type="hidden" name="is_free" id="is_free" value="1"/><?php
+}
+else {
+    if (!empty($plan) && !$plan->getIsFree()) {
+        ?><label>Subscription</label><?php
+    }
+    ?>
+    <input type="hidden" name="is_free" id="is_free" value="<?php echo intval($plan->getIsFree())?>"/><?php
+}
+
+
+//Even all plans are free for this type, still need plan_id and role_id
+$roleIds = $block->getRoleIdsMap();
+$freePlans = [];
+
+?><div class="subscription-wrapper"><?php
+
+if (!empty($planRoleId)) {
+    ?><input type="hidden" name="plan_role_id" id="plan_role_id" value="<?php echo $planRoleId; ?>" /><?php
+}
+else {
+?>
+<div class="field required">
+    <label for="plan_id" class="label"><span>Plan</span></label>
+    <div class="control">
+        <select name="plan_role_id" class="input-select" data-validate="{required:true}" aria-required="true" id="plan_role_id">
+            <option>Please select</option>
+            <?php foreach($block->getPlanCollection() as $plan) {
+                    if (!array_key_exists($plan->getId(), $roleIds)) {
+                        continue;
+                    }
+                    elseif (!empty($plan) && $plan->getIsFree()){
+                        $freePlans[] = $plan->getId();
+                    }
+                ?>
+                <option value="<?php echo $plan->getId(). '_' . $roleIds[$plan->getId()]?>"><?php echo $plan->getPlanName()?><?php if (!empty($plan) && !$plan->getIsFree()) { echo $block->formatPrice($plan->getPrice()); }?></option>
+            <?php } ?>
+        </select>
+    </div>
+</div>
+<?php } ?>
+
+<?php if (!empty($plan) && !$plan->getIsFree()) { ?>
+<div id="subscription-child">
+<?php echo $block->getChildHtml();?>
+</div>
+<?php } ?>
+
+<script type="text/javascript">
+    require(['jquery'], function($){
+        $(document).ready(function(){
+        <?php if (empty($planRoleId)) {?>
+            $('#is_free').val(0);
+            $('#plan_role_id').change(function(){
+                var arr = <?php echo json_encode($freePlans);?>;
+                var v = $('#plan_role_id').val().split('_');
+                if (arr.includes(v[0])) {
+                    $('#subscription-child').hide();
+                    $('#subscription').hide();
+                    $('#is_free').val(1);
+                }
+                else{
+                    $('#subscription-child').show();
+                    $('#subscription').show();
+                    $('#is_free').val(0);
+                }
+            });
+
+        <?php } else {
+            if (!empty($plan) && $plan->getIsFree()) {?>
+                $('#is_free').val(1);
+                $('#subscription-child').hide();
+                $('#subscription').hide();
+            <?php } else { ?>
+                $('#is_free').val(0);
+                $('#subscription-child').show();
+                $('#subscription').show();
+            <?php }
+        }?>
+        });
+    });
+</script>
+</div>
+    </div>
+</div>
+ 

@@ -1,0 +1,245 @@
+<?php $country = $block->getIndustry();?>
+<?php $childCategories = $block->getChildCategories(); ?>
+<?php $articleCollection = null; ?>
+<?php $industryCatId = $block->getIndustry()->getIndustryCategory(); ?>
+<?php $industryArticleCollection = $block->getArticleCollection($industryCatId);?>
+<?php
+$url = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+if (strpos($url, '/article/') !== false) {
+    $url = $country->getIndustryUrl().'tab/generalinfo/';
+}
+?>
+<?php if($block->getContentVisible()){?>
+<section class="mb-60">
+	<div class="container bg-white">
+		<div class="section-desc text-dark mt-30">
+			<h2 class="section-header"><?php echo __('General information')?></h2>
+		</div>
+		<div class="row page-content-row">
+			<div class="col-sm-5 col-sm-adjusted">
+				<div class="page-sidebar">
+					<div class="list-group sidebar-nav apie-tab-nav">
+						<span class="list-group-item nav-heading">
+							<?php echo __('General information')?>
+						</span>
+						<div class="btns-wrapper">
+							<?php if($childCategories){?>
+								<?php $i = 1; 
+									foreach($childCategories as $child):
+									$category = $block->getCategory($child);
+									if($category->getIsActive()){?>
+									<?php $articleCollection = $block->getArticleCollection($category->getId());?>
+									<?php if($articleCollection->getSize()>0){?>
+									<div class="sub-list-container">
+										<a href="#" class="list-group-item toggle-btn">
+											<?php echo $category->getTitle();?>
+											<span class="state-arrow"></span>
+										</a>
+										<div class="sub-list">
+											<?php $j =1; foreach($articleCollection as $article):?>
+											<?php $articleUrl = $url.'/article/'.$article->getIdentifier();?>
+												<div>
+													<a href="#tab-6-<?php echo $j.$category->getId()?>-<?php echo $article->getArticleId();?>" class="list-group-item" export-data-url="<?php echo $articleUrl;?>"><?php echo $article->getTitle()?></a>
+												</div>									
+											<?php $j++; endforeach;?>
+										</div>
+									</div>	
+									<?php } ?>
+								<?php $i++;
+									} 
+								endforeach;?>
+							<?php }?>
+							<?php if($industryArticleCollection->getSize()>0){?>
+								<?php foreach($industryArticleCollection as $_article):?>
+								<?php $articleUrl = $url.'/article/'.$_article->getIdentifier();?>
+									<div class="">
+										<a href="#tab-6-<?php echo $industryCatId.'-'.$_article->getArticleId();?>"  export-data-url="<?php echo $articleUrl;?>" class="list-group-item"><?php echo $_article->getTitle()?></a>
+									</div>
+								<?php endforeach;?>
+							<?php }?>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-7 col-sm-adjusted">
+                <div id="message" style="display:none"></div>
+				<?php if($childCategories){?>
+				<?php $i = 1; 
+					foreach($childCategories as $child):
+					$category = $block->getCategory($child);
+					if($category->getIsActive()){?>
+					<?php $articleCollection = $block->getArticleCollection($category->getId());?>
+					<?php if($articleCollection->getSize()>0){?>
+						<?php $j =1; foreach($articleCollection as $article):?>
+							<div id="tab-6-<?php echo $j.$category->getId()?>-<?php echo $article->getArticleId();?>" class="apie-tab-panel <?php if($j==1 && $i==1){echo ' active';}?>">
+								<div class="page-column">
+									<article class="article">
+										<h2 class="article-heading"><?php echo $article->getTitle()?></h2>
+										<div class="article-info-row">
+                                            <?php echo $this->getLayout()->createBlock("Omnyfy\MyReadingList\Block\Widget\Bookmark")->setArticleId($article->getArticleId())->toHtml(); ?>
+											<span class="article-info">Last updated <?php echo $this->helper('\Omnyfy\Cms\Helper\Data')->getDateFormat($article->getUpdateTime()); ?></span>
+										</div>
+										<?php echo $this->helper('\Omnyfy\Cms\Helper\Data')->getContent($article->getContent()); ?>
+									</article>
+									<?php $businessTypeCollection = $this->helper('\Omnyfy\Cms\Helper\Data')->getBusinessTypes($article->getArticleId()); ?>
+									<?php if ($businessTypeCollection->getSize() > 0) { ?>
+										<div class="related-block">
+											<p class="block-title"><?php echo __('Related business types'); ?></p>
+											<div class="sidebar-widget-tile">
+												<div class="tile-content bottom-adjusted">
+												<?php foreach ($businessTypeCollection as $business): ?>
+														<a href="<?php echo $block->getUrl('servicesearch/index/index').'?cat=' . $business->getId() . '&country=all'; ?>" class="link-title"><?php echo $business->getName() ?></a>
+												<?php endforeach; ?>
+												</div>
+											</div>							
+										</div>
+									<?php } ?>
+									
+									<?php $_relatedServiceProviderCollection = $this->helper('\Omnyfy\Cms\Helper\Data')->getServiceProvider($article->getArticleId()); ?>
+									<?php if ($_relatedServiceProviderCollection->getSize() > 0) { ?>
+										<div class="related-block">
+											<p class="block-title"><?php echo __('Related export service providers'); ?></p>
+											<div class="related-list">	
+												<?php foreach ($_relatedServiceProviderCollection as $service): ?>
+												<div class="related-tile">
+													<?php
+													$logoUrl = $this->getViewFileUrl('Omnyfy_Cms::images/related-image.jpg');
+													if ($service->getLogo()) {
+														$logoUrl = $this->helper('\Omnyfy\Cms\Helper\Data')->imageResize($service->getLogo(), 120, 130);
+													}
+													?>
+													<a href="<?php echo $block->getProviderUrl($service->getLocationId())?>" class="tile-image-container">
+														<img alt="image description" src="<?php echo $logoUrl ?>" class="tile-image">
+													</a>
+													<div class="tile-content">
+														<a href="<?php echo $block->getProviderUrl($service->getLocationId())?>" class="title"><?php echo $service->getLocationName() ?></a>
+														<?php if($service->getPromotionMessagesOne() || $service->getPromotionMessagesTwo() || $service->getPromotionMessagesThree()){?>
+															<ul class="bullet-list">
+																<?php if($service->getPromotionMessagesOne()){?>
+																	<li><?php echo $service->getPromotionMessagesOne()?></li>
+																<?php }?>	
+																<?php if($service->getPromotionMessagesTwo()){?>
+																	<li><?php echo $service->getPromotionMessagesTwo()?></li>
+																<?php }?>	
+																<?php if($service->getPromotionMessagesThree()){?>
+																	<li><?php echo $service->getPromotionMessagesThree()?></li>
+																<?php }?>	
+															</ul>
+														<?php }?>
+													</div>
+												</div>
+												<?php endforeach; ?>
+											</div>
+										</div>
+									<?php } if ($businessTypeCollection->getSize() == 0 && $_relatedServiceProviderCollection->getSize() == 0) { ?>
+										<div class="related-block">
+											<div class="topic-landing-cls">
+												<div class="sidebar-widget-tile">
+													<div class="tile-content">
+														<span class="title">
+															<span class="icon-question-circle"></span> Get assistance
+														</span>
+														<p>Find specialist service providers who can help you fast track your export goals.</p>
+														<a href="<?php echo $this->getUrl('servicesearch/index/index/') . '?cat=all&country=all'; ?>" class="btn btn-green btn-block">Find an export service provider</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									<?php } ?>
+								</div>
+							</div>
+						<?php $j++; endforeach;?>
+					<?php } ?>
+				<?php $i++;
+					} 
+				endforeach;?>
+			<?php }?>
+			<?php if($industryArticleCollection->getSize()>0){
+				$k=1;?>
+				<?php foreach($industryArticleCollection as $_article):?>
+					<div class="apie-tab-panel <?php if($k==1 && !$childCategories){echo ' active';}?>" id="tab-6-<?php echo $industryCatId.'-'.$_article->getArticleId();?>">
+						<div class="page-column">
+							<article class="article">
+								<h2 class="article-heading"><?php echo $_article->getTitle()?></h2>
+								<div class="article-info-row">
+                                    <?php echo $this->getLayout()->createBlock("Omnyfy\MyReadingList\Block\Widget\Bookmark")->setArticleId($_article->getArticleId())->toHtml(); ?>
+									<span class="article-info">Last updated <?php echo $this->helper('\Omnyfy\Cms\Helper\Data')->getDateFormat($_article->getUpdateTime()); ?></span>
+								</div>
+								<?php echo $this->helper('\Omnyfy\Cms\Helper\Data')->getContent($_article->getContent()); ?>
+							</article>
+							<?php $businessTypeCollection = $this->helper('\Omnyfy\Cms\Helper\Data')->getBusinessTypes($_article->getArticleId()); ?>
+							<?php if ($businessTypeCollection->getSize() > 0) { ?>
+								<div class="related-block">
+									<p class="block-title"><?php echo __('Related business types'); ?></p>
+									<div class="sidebar-widget-tile">
+										<div class="tile-content bottom-adjusted">
+										<?php foreach ($businessTypeCollection as $business): ?>
+												<a href="<?php echo $block->getUrl('servicesearch/index/index').'?cat=' . $business->getId() . '&country=all'; ?>" class="link-title"><?php echo $business->getName() ?></a>
+										<?php endforeach; ?>
+										</div>
+									</div>							
+								</div>
+							<?php } ?>
+							
+							<?php $_relatedServiceProviderCollection = $this->helper('\Omnyfy\Cms\Helper\Data')->getServiceProvider($_article->getArticleId()); ?>
+							<?php if ($_relatedServiceProviderCollection->getSize() > 0) { ?>
+								<div class="related-block">
+									<p class="block-title"><?php echo __('Related export service providers'); ?></p>
+									<div class="related-list">	
+										<?php foreach ($_relatedServiceProviderCollection as $service): ?>
+										<div class="related-tile">
+											<?php
+											$logoUrl = $this->getViewFileUrl('Omnyfy_Cms::images/related-image.jpg');
+											if ($service->getLogo()) {
+												$logoUrl = $this->helper('\Omnyfy\Cms\Helper\Data')->imageResize($service->getLogo(), 120, 130);
+											}
+											?>
+											<a href="<?php echo $block->getProviderUrl($service->getLocationId())?>" class="tile-image-container">
+												<img alt="image description" src="<?php echo $logoUrl ?>" class="tile-image">
+											</a>
+											<div class="tile-content">
+												<a href="<?php echo $block->getProviderUrl($service->getLocationId())?>" class="title"><?php echo $service->getLocationName() ?></a>
+												<?php if($service->getPromotionMessagesOne() || $service->getPromotionMessagesTwo() || $service->getPromotionMessagesThree()){?>
+													<ul class="bullet-list">
+														<?php if($service->getPromotionMessagesOne()){?>
+															<li><?php echo $service->getPromotionMessagesOne()?></li>
+														<?php }?>	
+														<?php if($service->getPromotionMessagesTwo()){?>
+															<li><?php echo $service->getPromotionMessagesTwo()?></li>
+														<?php }?>	
+														<?php if($service->getPromotionMessagesThree()){?>
+															<li><?php echo $service->getPromotionMessagesThree()?></li>
+														<?php }?>	
+													</ul>
+												<?php }?>
+											</div>
+										</div>
+										<?php endforeach; ?>
+									</div>
+								</div>
+							<?php } if ($businessTypeCollection->getSize() == 0 && $_relatedServiceProviderCollection->getSize() == 0) { ?>
+								<div class="related-block">
+									<div class="topic-landing-cls">
+										<div class="sidebar-widget-tile">
+											<div class="tile-content">
+												<span class="title">
+													<span class="icon-question-circle"></span> Get assistance
+												</span>
+												<p>Find specialist service providers who can help you fast track your export goals.</p>
+												<a href="<?php echo $this->getUrl('servicesearch/index/index/') . '?cat=all&country=all'; ?>" class="btn btn-green btn-block">Find an export service provider</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							<?php } ?>
+						</div>
+					</div>
+				<?php $k++; endforeach;?>
+			<?php }?>
+			</div>
+		</div>
+
+	</div>
+</section>
+<?php }?>

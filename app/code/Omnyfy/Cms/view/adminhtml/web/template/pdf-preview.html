@@ -1,0 +1,21 @@
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="file-uploader-summary">
+	<a attr="href: $parent.getFilePreview($file)" target="_blank">
+	   <div class="file-uploader-filename" text="$file.name"/>
+	</a>
+	<div class="actions">
+		<button
+			type="button"
+			class="action-remove"
+			data-role="delete-button"
+			attr="title: $t('Delete image')"
+			click="$parent.removeFile.bind($parent, $file)">
+			<span translate="'Delete File'"/>
+		</button>
+	</div>
+</div>

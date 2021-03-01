@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">cms_country_form.country_form_data_source</item>
+            <item name="deps" xsi:type="string">cms_country_form.country_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Country Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">cms_country_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Omnyfy\Cms\Block\Adminhtml\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Omnyfy\Cms\Block\Adminhtml\Edit\DeleteButton</item>
+<!--            <item name="reset" xsi:type="string">Omnyfy\Cms\Block\Adminhtml\Edit\ResetButton</item>-->
+            <item name="save" xsi:type="string">Omnyfy\Cms\Block\Adminhtml\Edit\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">Omnyfy\Cms\Block\Adminhtml\Edit\SaveAndContinueButton</item>
+        </item>
+    </argument>
+    <dataSource name="country_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Omnyfy\Cms\Ui\DataProvider\Country\Form\CountryDataProvider</argument>
+            <argument name="name" xsi:type="string">country_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="cms/country/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" />
+                <!--<item name="label" xsi:type="string">Profile Information</item>-->
+            </item>
+        </argument>
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <!--<item name="source" xsi:type="string">country</item>-->
+                    <item name="dataScope" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Enable Country</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+<!--                    <item name="source" xsi:type="string">status</item>-->
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </field>
+        <field name="country_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Directory\Model\ResourceModel\Country\Collection</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Select a Country</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <!--<item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>-->
+                    <item name="component" xsi:type="string">Omnyfy_Cms/js/components/country</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <!--<item name="component" xsi:type="string">Omnyfy_Cms/js/components/country</item>-->
+                    <!--<item name="source" xsi:type="string">country</item>-->
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataScope" xsi:type="string">country_id</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="country_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Country Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <!--<item name="source" xsi:type="string">country</item>-->
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="dataScope" xsi:type="string">country_name</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="introduction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Introduction</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="dataScope" xsi:type="string">introduction</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">1800</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+        <field name="population">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Population </item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">population</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+        <field name="income_level">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Omnyfy\Cms\Model\Config\Source\IncomeLevel</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Income Level</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">income_level</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+        <field name="gni_per_capita">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">GNI Per Capita</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">gni_per_capita</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+        <field name="gdp">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">GDP</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">gdp</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+        <field name="gdp_growth">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">GDP Growth</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">gdp_growth</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+        <field name="gdp_forecast">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">GDP Forecast</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">gdp_forecast</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+        <field name="total_exports">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Total Exports</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">total_exports</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+        <field name="currency_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Locale\Currency</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Currency</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">currency_id</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+		<field name="map_image">
+				<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="sortOrder" xsi:type="number">40</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="elementTmpl" xsi:type="string">Omnyfy_Cms/form/element/custom-button</item>
+					<item name="elementId" xsi:type="string">map_image</item>
+					<item name="additionalInfo" xsi:type="string" translate="true">
+					<![CDATA[ <div class="admin__field-note" ><span>Download the world map image and open it in a Image Editor, e.g. Photoshop. Pin the country on the map and get the pin position from left and from bottom.</span></div>]]>
+					</item>
+					<item name="label" xsi:type="string" translate="true">Download Map</item>
+				</item>
+			</argument>
+		</field>
+		<field name="position_left">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Map Pin Position From Left</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">position_left</item>
+                    <item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+						<item name="validate-digits" xsi:type="boolean">true</item>
+					</item>
+                </item>
+            </argument>
+        </field>
+		<field name="position_bottom">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Map Pin Position From Bottom</item>
+					<item name="additionalInfo" xsi:type="string" translate="true">
+                   <!--  <![CDATA[ <div class="admin__field-note" ><span> If you have not created a quote template, please <a href="#" target="_blank">click here to create a new one.</a> </span></div>]]> -->
+					</item>
+					<!-- <item name="tooltip" xsi:type="array">
+						 <item name="link" xsi:type="string">http://google.com</item>
+						 <item name="description" xsi:type="string">Download dummy image for display country pin on map.</item>
+					</item> -->
+					<!-- <item name="notice" xsi:type="string" translate="true"><![CDATA[Download dummy image for display country pin on map.]]></item> -->
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">position_bottom</item>
+                    <item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+						<item name="validate-digits" xsi:type="boolean">true</item>
+					</item>
+                </item>
+            </argument>
+        </field>
+        <field name="identifier">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">URL Key</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">identifier</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">120</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="content">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string">Content</item>
+            </item>
+        </argument>
+        <field name="general_info_category">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Omnyfy\Cms\Model\Config\Source\CategoryTree</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Country General Information</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Omnyfy_Cms/js/components/new-category</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">general_info_category</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+        <field name="industry_info_category">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Omnyfy\Cms\Model\Config\Source\CategoryTree</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Country Industry Information</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Omnyfy_Cms/js/components/new-category</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">industry_info_category</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="media">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string">Media Information</item>
+            </item>
+        </argument>
+        <field name="flag_image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="dataScope" xsi:type="string">flag_image</item>
+                    <item name="label" xsi:type="string" translate="true">Country Flag</item>
+                    <item name="notice" xsi:type="string" translate="true">Allow image type: jpg, jpeg, gif, png. The image resolution should be 150 x 150 pixels.</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                    <item name="allowedExtensions" xsi:type="string">jpg jpeg gif png</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="cms/country_upload/flagImage"/>
+                    </item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="banner_image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="dataScope" xsi:type="string">banner_image</item>
+                    <item name="label" xsi:type="string" translate="true">Banner Image</item>
+                    <item name="notice" xsi:type="string" translate="true"><![CDATA[Country banner on the Market Finder search result page.<br/>Allow image type: jpg, jpeg, gif, png. The image resolution should be 400 x 175 pixels.]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                    <item name="allowedExtensions" xsi:type="string">jpg jpeg gif png</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="cms/country_upload/bannerImage"/>
+                    </item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="background_image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="dataScope" xsi:type="string">background_image</item>
+                    <item name="label" xsi:type="string" translate="true">Background Image</item>
+                    <item name="notice" xsi:type="string" translate="true"><![CDATA[Background image on the Country Profile page. <br/>Allow image type: jpg, jpeg, gif, png. The image resolution should be 1000 x 500 pixels.]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                    <item name="allowedExtensions" xsi:type="string">jpg jpeg gif png</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="cms/country_upload/backgroundImage"/>
+                    </item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">80</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="featured_callout">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Enable Featured Callout</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="component" xsi:type="string">Omnyfy_Cms/js/components/featured_callout</item>
+                    <!--<item name="source" xsi:type="string">category</item>-->
+                    <item name="sortOrder" xsi:type="number">90</item>
+                    <item name="dataScope" xsi:type="string">featured_callout</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="callout_image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="dataScope" xsi:type="string">callout_image</item>
+                    <item name="label" xsi:type="string" translate="true">Callout Image</item>
+                    <item name="notice" xsi:type="string" translate="true">Allow image type: jpg, jpeg, gif, png. The image resolution should be 660 x 350 pixels.</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                    <item name="allowedExtensions" xsi:type="string">jpg jpeg gif png</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="cms/country_upload/calloutImage"/>
+                    </item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="callout_content">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Callout Content</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="dataScope" xsi:type="string">callout_content</item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="string">1024</item>
+                    </item> 
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

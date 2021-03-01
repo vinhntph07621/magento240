@@ -1,0 +1,161 @@
+Segments,Segments
+Reports,Reports
+"Add New","Add New"
+Settings,Settings
+From,From
+To,To
+"Customer Segment","Customer Segment"
+"Please select up to 3 segments","Please select up to 3 segments"
+"Segments Comparison","Segments Comparison"
+"Please select customer(s)","Please select customer(s)"
+"Total of %1 record(s) were removed from this segment.","Total of %1 record(s) were removed from this segment."
+"Total of %1 customer(s) were excluded from this segment.","Total of %1 customer(s) were excluded from this segment."
+"The segment has been successfully deleted.","The segment has been successfully deleted."
+"New Segment","New Segment"
+"Please select segment(s)","Please select segment(s)"
+"Total of %1 segment(s) were deleted.","Total of %1 segment(s) were deleted."
+"This segment no longer exists.","This segment no longer exists."
+"You have saved the segment.","You have saved the segment."
+"Manage Segments","Manage Segments"
+"Segment Refresh Started","Segment Refresh Started"
+"Segment Refresh Finished","Segment Refresh Finished"
+"Segment Refresh Iteration Started","Segment Refresh Iteration Started"
+"Segment Refresh Iteration Finished","Segment Refresh Iteration Finished"
+"Add Customer","Add Customer"
+"Remove Customer","Remove Customer"
+"Customer Group Change","Customer Group Change"
+"-- Please Select --","-- Please Select --"
+"All Segments","All Segments"
+Active,Active
+Inactive,Inactive
+"Registered and Guest Customers","Registered and Guest Customers"
+"Registered Customers","Registered Customers"
+"Guest Customers","Guest Customers"
+Customer,Customer
+"Customer Segment %1 %2","Customer Segment %1 %2"
+"Conditions Combination","Conditions Combination"
+Subtotal,Subtotal
+"Grand Total","Grand Total"
+Tax,Tax
+Shipping,Shipping
+"Shopping Cart %2 Amount %3 %4","Shopping Cart %2 Amount %3 %4"
+"Shopping Cart %1 Amount %2 %3","Shopping Cart %1 Amount %2 %3"
+Count,Count
+QTY,QTY
+"Shopping Cart Products %1 %2 %3","Shopping Cart Products %1 %2 %3"
+Billing,Billing
+Any,Any
+"If %1 %2 Address match %3 of these Conditions:","If %1 %2 Address match %3 of these Conditions:"
+Billing*,Billing*
+Shipping*,Shipping*
+Region,Region
+"Address: %1","Address: %1"
+exists,exists
+"does not exist","does not exist"
+"Customer %1","Customer %1"
+"Last Activity","Last Activity"
+"Last Activity was %1 %2 days ago","Last Activity was %1 %2 days ago"
+"Newsletter Subscription","Newsletter Subscription"
+subscribed,subscribed
+"not subscribed","not subscribed"
+"Customer is %1 to newsletter.","Customer is %1 to newsletter."
+"Date Range %1 within %2","Date Range %1 within %2"
+"Open Chooser","Open Chooser"
+"Follow Up Email Subscription","Follow Up Email Subscription"
+"one of these","one of these"
+"all of these","all of these"
+"Follow Up Email condition can only be used if the Follow Up Email extension is installed and enabled","Follow Up Email condition can only be used if the Follow Up Email extension is installed and enabled"
+"Customer is unsubscribed from %1 Follow Up Email triggers: %2.","Customer is unsubscribed from %1 Follow Up Email triggers: %2."
+All,All
+title,title
+SKU,SKU
+"Item: %1","Item: %1"
+"Order Address %1 a %2","Order Address %1 a %2"
+"Order Status %1 %2","Order Status %1 %2"
+"Value Provider for type %1 does not exist.","Value Provider for type %1 does not exist."
+"Product: %1","Product: %1"
+Was,Was
+"Was Not","Was Not"
+"If Product %1 %2 and matches %3 of these Conditions:","If Product %1 %2 and matches %3 of these Conditions:"
+"If Item %1 %2 and matches %3 of these Conditions:","If Item %1 %2 and matches %3 of these Conditions:"
+Found,Found
+"Not Found","Not Found"
+"If Product is %1 in the %2 with %3 of these Conditions match:","If Product is %1 in the %2 with %3 of these Conditions match:"
+"Last Shipping Date","Last Shipping Date"
+"Last Shipping Date was %1 %2 days ago","Last Shipping Date was %1 %2 days ago"
+"Last Order placed %1 %2 days ago while %3 of these Conditions match:","Last Order placed %1 %2 days ago while %3 of these Conditions match:"
+"Number of Orders  %1 %2 while %3 of these Conditions match:","Number of Orders  %1 %2 while %3 of these Conditions match:"
+"%1 Purchased Quantity %2 %3 while %4 of these Conditions match:","%1 Purchased Quantity %2 %3 while %4 of these Conditions match:"
+Total,Total
+Average,Average
+"%1 Sales Amount %2 %3 while %4 of these Conditions match:","%1 Sales Amount %2 %3 while %4 of these Conditions match:"
+"%1 out of %2","%1 out of %2"
+"ETA %1","ETA %1"
+"Sales by Segment","Sales by Segment"
+"Unknown operator specified.","Unknown operator specified."
+"Segment customers based on the following conditions","Segment customers based on the following conditions"
+Back,Back
+Delete,Delete
+"Are you sure you want to do this?","Are you sure you want to do this?"
+"Refresh Segment Data","Refresh Segment Data"
+"Save and Continue Edit","Save and Continue Edit"
+Save,Save
+"Matched Customers (%1)","Matched Customers (%1)"
+"Matched Guests (%1)","Matched Guests (%1)"
+Edit,Edit
+"Delete ""${ $.$data.title }""","Delete ""${ $.$data.title }"""
+"Are you sure you want to delete a ""${ $.$data.title }"" record?","Are you sure you want to delete a ""${ $.$data.title }"" record?"
+"Please enter at least 1 customer ID.","Please enter at least 1 customer ID."
+"Please save segment before validation.","Please save segment before validation."
+"Customer Segments","Customer Segments"
+"Is Active","Is Active"
+Sales,Sales
+"Sales Amount","Sales Amount"
+"Number of Orders","Number of Orders"
+"Purchased Quantity","Purchased Quantity"
+"Order Address","Order Address"
+"Last Order Date","Last Order Date"
+"Order Status","Order Status"
+"Shopping Cart","Shopping Cart"
+Products,Products
+"Products List","Products List"
+"Products History","Products History"
+"Ordered Item History","Ordered Item History"
+Attributes,Attributes
+"Item Attributes","Item Attributes"
+"Date Range","Date Range"
+ID,ID
+Name,Name
+Email,Email
+Group,Group
+"Customer Since","Customer Since"
+"Created At","Created At"
+Action,Action
+"Impacted Rows","Impacted Rows"
+Type,Type
+"General Information","General Information"
+"Segment Title","Segment Title"
+Description,Description
+Website,Website
+Status,Status
+"Apply To","Apply To"
+Rules,Rules
+"Customer IDs","Customer IDs"
+Validate,Validate
+Actions,Actions
+"Move to Group","Move to Group"
+"If no value is specified, customer's group will not be changed.","If no value is specified, customer's group will not be changed."
+Priority,Priority
+"Priority of a segment determines Customer Group assigned to customer in case customer belongs to multiple segments.","Priority of a segment determines Customer Group assigned to customer in case customer belongs to multiple segments."
+"Refresh Mode","Refresh Mode"
+"Refresh segment data automatically by cron or add customers only manually.","Refresh segment data automatically by cron or add customers only manually."
+Automatic,Automatic
+Manual,Manual
+"Matched Customers","Matched Customers"
+"Matched Guests","Matched Guests"
+History,History
+"Add New Segment","Add New Segment"
+"Delete items","Delete items"
+"Are you sure you want to delete selected segments?","Are you sure you want to delete selected segments?"
+"Updated At","Updated At"
+"Preview Customer Segment","Preview Customer Segment"

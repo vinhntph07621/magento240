@@ -1,0 +1,111 @@
+<?php
+/**
+ * Project: Service Booking.
+ * User: jing
+ * Date: 23/10/17
+ * Time: 11:06 AM
+ */
+?>
+<script type="text/javascript">
+
+    var regionsObj = <?php echo $this->helper('Magento\Directory\Helper\Data')->getRegionJson();?>;
+    var placeSearch, autocomplete, autocomplete_textarea;
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        postal_town: 'long_name',
+        administrative_area_level_1: 'long_name',
+        country: 'short_name',
+        postal_code: 'short_name'
+    };
+    function google_map_initialize() {
+
+        autocomplete = new google.maps.places.Autocomplete(
+            (document.getElementById("location_address_full")),
+            {types: ['geocode']}
+        );
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function(){
+            var place = autocomplete.getPlace();
+
+            var addressDetail = {};
+            for (var i = 0; i < place.address_components.length; i++) {
+                var addressType = place.address_components[i].types[0];
+
+                if (componentForm[addressType]) {
+                    //alert(addressType);
+                    var val = place.address_components[i][componentForm[addressType]];
+                    //alert(val);
+                    addressDetail[addressType] = val;
+                }
+            }
+
+            document.getElementById('location_latitude').value = place.geometry.location.lat();
+            document.getElementById('location_longitude').value = place.geometry.location.lng();
+            if('locality' in addressDetail){
+                document.getElementById('location_suburb').value = (typeof addressDetail.locality == 'undefined' ? '' : addressDetail.locality);
+            } else if ('postal_town' in addressDetail) {
+                document.getElementById('location_suburb').value = (typeof addressDetail.postal_town == 'undefined' ? '' : addressDetail.postal_town);
+            }
+            document.getElementById('location_postcode').value = (typeof addressDetail.postal_code == 'undefined' ? '': addressDetail.postal_code);
+            document.getElementById('location_region').value = (typeof addressDetail.administrative_area_level_1 == 'undefined'? '': addressDetail.administrative_area_level_1);
+            document.getElementById('location_country').value = (typeof addressDetail.country == 'undefined' ? '' : addressDetail.country);
+            if (typeof addressDetail.street_number !== 'undefined' && typeof addressDetail.route !== 'undefined') {
+                document.getElementById('location_address').value = addressDetail.street_number + ' ' + addressDetail.route;
+            }
+
+            var country = document.getElementById('location_country').value;
+            var countryRegions = regionsObj[country];
+            if (countryRegions) {
+                //console.log(countryRegions);
+                console.log(addressDetail);
+                if (typeof addressDetail.administrative_area_level_1 != 'undefined') {
+                    var region = addressDetail.administrative_area_level_1;
+                    for(var id in countryRegions) {
+                        console.log(countryRegions[id]);
+                        if (region == countryRegions[id].name) {
+                            document.getElementById('location_region_id').value = id;
+                            break;
+                        }
+                    }
+                }
+            }
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    var obj = JSON.parse(this.responseText);
+                    document.getElementById("location_timezone").value = obj.timeZoneId;
+
+                }
+            };
+            xhttp.open("GET", "https://maps.googleapis.com/maps/api/timezone/json?location=" + place.geometry.location.lat() + "," + place.geometry.location.lng() + "&timestamp=" + (Math.round((new Date().getTime()) / 1000)).toString() + "&sensor=false", true);
+
+            xhttp.send();
+
+            if ("createEvent" in document) {
+                var evt = document.createEvent("HTMLEvents");
+                evt.initEvent("change", false, true);
+                document.getElementById("location_suburb").dispatchEvent(evt);
+                document.getElementById("location_postcode").dispatchEvent(evt);
+                document.getElementById("location_region").dispatchEvent(evt);
+                document.getElementById("location_country").dispatchEvent(evt);
+                document.getElementById("location_address").dispatchEvent(evt);
+                document.getElementById("location_latitude").dispatchEvent(evt);
+                document.getElementById("location_longitude").dispatchEvent(evt);
+                document.getElementById("location_timezone").dispatchEvent(evt);
+            } else {
+                document.getElementById("location_suburb").fireEvent("onchange");
+                document.getElementById("location_postcode").fireEvent("onchange");
+                document.getElementById("location_region").fireEvent("onchange");
+                document.getElementById("location_country").fireEvent("onchange");
+                document.getElementById("location_address").fireEvent("onchange");
+                document.getElementById("location_latitude").fireEvent("onchange");
+                document.getElementById("location_longitude").fireEvent("onchange");
+                document.getElementById("location_timezone").fireEvent("onchange");
+            }
+        });
+    }
+
+</script>

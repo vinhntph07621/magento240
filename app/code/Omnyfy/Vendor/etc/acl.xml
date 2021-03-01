@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Omnyfy_Vendor::base" title="Omnyfy" translate="title" sortOrder="100">
+                    <resource id="Omnyfy_Vendor::vendor" title="Business and Location" translate="title" sortOrder="105">
+                        <resource id="Omnyfy_Vendor::vendors" title="Vendors" translate="title" sortOrder="110" />
+                        <resource id="Omnyfy_Vendor::locations" title="Locations" translate="title" sortOrder="120"/>
+                        <resource id="Omnyfy_Vendor::inventory" title="Inventory" translate="title" sortOrder="130" />
+                        <resource id="Omnyfy_Vendor::stock_report" title="Stock report" translate="title" sortOrder="140" />
+                        <resource id="Omnyfy_Vendor::vendor_stores" title="Vendor Frontend Store View" translate="title" sortOrder="150" />
+                    </resource>
+                    <resource id="Omnyfy_Vendor::attribute" title="Attributes" translate="title" sortOrder="150">
+                        <resource id="Omnyfy_Vendor::vendor_types" title="Vendor Types" translate="title" sortOrder="10" />
+                        <resource id="Omnyfy_Vendor::vendor_attributes" title="Vendor Attributes" translate="title" sortOrder="15" />
+                        <resource id="Omnyfy_Vendor::vendor_attribute_set" title="Vendor Attribute Set" translate="title" sortOrder="20" />
+                        <resource id="Omnyfy_Vendor::location_attributes" title="Location Attributes" translate="title" sortOrder="25" />
+                        <resource id="Omnyfy_Vendor::location_attribute_set" title="Location Attribute Set" translate="title" sortOrder="30" />
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::system">
+                    <resource id="Magento_Backend::tools">
+                        <resource id="Omnyfy_Reindex::reindexdata" title="Omnyfy Reindex Data" translate="title" sortOrder="50" />
+                    </resource>
+                </resource>
+	        </resource>
+	    </resources>
+    </acl>
+</config>

@@ -1,0 +1,92 @@
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.postcode-search {
+    &-wrap {
+        position: relative;
+        font-size: 14px;
+        color: #333;
+
+        &:before {
+            position: absolute;
+            top: 50%;
+            right: 0.5em;
+            margin-top: -0.5em;
+            line-height: 1em;
+            font-family: 'FontAwesome';
+        }
+
+        &.valid:before {
+            content: '\f00c';
+            color: #43a800;
+        }
+
+        &.invalid:before {
+            content: '\f00d';
+            color: #d20000;
+        }
+
+        &.loading:before {
+            content: '\f110';
+            color: #333;
+            -webkit-animation: spin 3s linear infinite;
+            -moz-animation: spin 3s linear infinite;
+            animation: spin 3s linear infinite;
+        }
+    }
+
+    &-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 100%;
+        margin: 0;
+        padding: 0;
+        border: 1px solid #ccc;
+        border-width: 0 1px;
+        background-color: #fff;
+        z-index: 100;
+    }
+
+    &-field {
+        background-color: transparent;
+        padding-right: 20px;
+
+        &:focus + .postcode-search-dropdown {
+            display: block;
+        }
+    }
+
+    &-option {
+        margin: 0;
+        padding: 0.5em;
+        cursor: pointer;
+        list-style: none;
+
+        &.selected {
+            background-color: #0071aa;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        &:hover {
+            background-color: #999;
+            color: #fff;
+        }
+
+        &.empty {
+            background-color: transparent;
+            color: #d20000;
+        }
+
+        &:first-child {
+            border-top: 1px solid #ccc;
+        }
+
+        &:last-child {
+            border-bottom: 1px solid #ccc;
+        }
+    }
+}

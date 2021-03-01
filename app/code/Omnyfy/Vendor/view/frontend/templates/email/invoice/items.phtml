@@ -1,0 +1,100 @@
+<?php $_invoice = $block->getInvoice() ?>
+<?php $_order   = $block->getOrder() ?>
+<?php /** @var $_helper \Omnyfy\Vendor\Helper\Product */?>
+<?php $_helper = $this->helper('Omnyfy\Vendor\Helper\Product'); ?>
+<?php /** @var $_vendorHelper \Omnyfy\Vendor\Helper\Data */?>
+<?php $_vendorHelper = $this->helper('Omnyfy\Vendor\Helper\Data'); ?>
+
+<?php if ($_vendorHelper->getInvoiceBy() == \Omnyfy\Vendor\Model\Config::INVOICE_BY_MO): ?>
+    <?php if ($_invoice && $_order) : ?>
+        <!-- use magento default template -->
+        <table class="email-items">
+            <thead>
+            <tr>
+                <th class="item-info">
+                    <?= $block->escapeHtml(__('Items')) ?>
+                </th>
+                <th class="item-qty">
+                    <?= $block->escapeHtml(__('Qty')) ?>
+                </th>
+                <th class="item-tax" style="text-align: right;">
+                    <?= $block->escapeHtml(__('Tax')) ?>
+                </th>
+                <th class="item-subtotal" style="text-align: center;">
+                    <?= $block->escapeHtml(__('Subtotal')) ?>
+                </th>
+            </tr>
+            </thead>
+            <?php foreach ($_invoice->getAllItems() as $_item) : ?>
+                <?php if (!$_item->getOrderItem()->getParentItem()) : ?>
+                    <tbody>
+                    <?= $block->getItemHtml($_item) ?>
+                    </tbody>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <tfoot class="order-totals">
+            <?= $block->getChildHtml('invoice_totals') ?>
+            </tfoot>
+        </table>
+    <?php endif; ?>
+<?php else: ?>
+    <?php if ($_invoice && $_order) : ?>
+        <?php $_items = $_invoice->getAllItems(); ?>
+        <?php $_locations = $_vendorHelper->getLocationsInfo($_items); ?>
+        <?php foreach($_locations as $_location): ?>
+            <table class="email-items" style="margin: 12px 0;">
+                <tr>
+                    <td colspan="3" class="item-extra" style="padding: 0;">
+                        <table class="pickup-location" style="width: 100%; background: #ECECEC; margin-top: 10px;">
+                            <tr>
+                                <td>
+                                    <p></p>
+                                    <p class="vendor" style="padding: 8px; text-align: center"><?= /* @escapeNotVerified */  __('Vendor'); ?>: <?= $block->escapeHtml($_helper->getLocation($_location->getId())->getName()) ?>
+                                        <br>
+                                        <?php $vendorDetails = $_helper->getVendor($_location->getVendorId()); ?>
+                                        <?php if (!empty($vendorDetails) && !empty($vendorDetails->getAbn())): ?>
+                                            <span>ABN: <?php echo $vendorDetails->getAbn(); ?></span>
+                                        <?php endif; ?>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table class="email-items">
+                <thead>
+                    <tr>
+                        <th class="item-info">
+                            <?= $block->escapeHtml(__('Items')) ?>
+                        </th>
+                        <th class="item-qty">
+                            <?= $block->escapeHtml(__('Qty')) ?>
+                        </th>
+                        <th class="item-tax" style="text-align: center;">
+                            <?= $block->escapeHtml(__('Tax')) ?>
+                        </th>
+                        <th class="item-subtotal" style="text-align: right;">
+                            <?= $block->escapeHtml(__('Subtotal')) ?>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($_invoice->getAllItems() as $_item) : ?>
+                        <?php if (!$_item->getOrderItem()->getParentItem()) : ?>
+                            <?php if ($_item->getLocationId() == $_location->getId()) :?>
+                                <?= $block->getItemHtml($_item) ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endforeach; ?>
+        <table class="email-items" >
+            <tfoot class="order-totals">
+                <?= $block->getChildHtml('invoice_totals') ?>
+            </tfoot>
+        </table>
+    <?php endif; ?>
+<?php endif; ?>
+

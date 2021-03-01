@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <referenceBlock name="invoice_items">
+                <block class="Omnyfy\Mcm\Block\Adminhtml\Items\Column\SellerFees" name="column_sellerfees" template="Omnyfy_Mcm::items/column/sellerfees.phtml" group="column"/>
+                <block class="Omnyfy\Mcm\Block\Adminhtml\Items\Column\CategoryFees" name="column_categoryfees" template="Omnyfy_Mcm::items/column/categoryfees.phtml" group="column"/>
+                <block class="Omnyfy\Mcm\Block\Adminhtml\Items\Column\CategoryRate" name="column_categoryrate" template="Omnyfy_Mcm::items/column/categoryrate.phtml" group="column"/>
+                <block class="Omnyfy\Mcm\Block\Adminhtml\Items\Column\TaxOnFees" name="column_taxpercentageonfees" template="Omnyfy_Mcm::items/column/taxpercentageonfees.phtml" group="column"/>
+                <action method="setTemplate">
+                    <argument name="template" xsi:type="string">Omnyfy_Mcm::order/invoice/view/items.phtml</argument>
+                </action>
+            </referenceBlock>
+        </referenceContainer>
+        <referenceBlock name="invoice_totals">
+            <block class="Omnyfy\Mcm\Block\Adminhtml\Sales\Order\Invoice\Totals" name="mcm_transaction_fee"></block>
+        </referenceBlock>
+    </body>
+</page>

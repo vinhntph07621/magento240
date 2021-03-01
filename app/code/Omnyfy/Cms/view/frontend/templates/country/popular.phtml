@@ -1,0 +1,11 @@
+<?php /* @var \Omnyfy\Cms\Block\Country\Popular $block*/ ?>
+<?php
+$collection = $block->getCollection();
+?>
+<?php if($collection->getSize()>0){?>
+	<ul class="no-bullet mb-30">
+		<?php foreach($collection as $country):?>
+			<li><a class="arrow-link reg-gate" href="<?php echo $block->getCountryUrl($country->getId());?>"><span class="arrow icon-angle-right"></span><?php echo $country->getCountryName()?></a></li>
+		<?php endforeach;?>
+	</ul>
+<?php }?>

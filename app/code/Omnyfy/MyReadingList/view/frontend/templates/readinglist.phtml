@@ -1,0 +1,255 @@
+<?php
+/**
+ * @var $block \Omnyfy\MyReadingList\Block\ReadingList
+ */
+?>
+<div class="wrapper-body bg-light-grey">
+
+    <section class="indication-section bg-green with-tabs">
+        <div class="container">
+            <div class="narrow-container">
+                <div class="indication-banner">
+                    <div class="banner-info">
+                        <h1>Export readiness checklist</h1>
+                        <p>The purpose of this checklist is to act as a guide, don't worry if you don't tick all the boxes immediately, rather use the topic  links to learn and improve your knowledge, to become export ready.</p>
+                    </div>
+                    <div class="completion-rate">
+                        <div class="c100 p0 big">
+                            <div class="c-text">
+                                <span class="text">Get started</span>
+                            </div>
+                            <div class="slice">
+                                <div class="bar"></div>
+                                <div class="fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tabs-section narrow-tabs mb-60">
+        <div class="container nav-tabs-container">
+            <div class="nav-wrapper">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="list-item"><a class="list-anchor" href="<?php echo $this->getUrl('checklist',["id"=>1])?>" aria-controls="New to selling overseas" aria-expanded="false">Checklist</a></li>
+                    <li role="presentation" class="list-item active"><a class="list-anchor" href="#tab-0-1" aria-controls="Selling overseas to Retail customers" role="tab" data-toggle="tab" aria-expanded="true">My reading list</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container bg-white">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane" id="tab-0-0">
+                    <div class="narrow-container">
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane active" id="tab-0-1">
+                    <div class="narrow-container">
+                        <h2 class="tier-title">My Reading List</h2>
+						<div id="message" style="display:none"></div>
+                        <?php if($block->isCustomerLogIn()): ?>
+                            <div  id ="my-reading-list-container" class="mark-tile-list"></div>
+                        <?php else: ?>
+                            <div  id ="my-reading-list-container" class="mark-tile-list">
+                                <p>Sign up or log in to view and edit your reading list.</p>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="tab-0-2">
+                    <div class="row page-content-row">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dialog-confirmation" style="display:none"></div>
+        <div id="dialog" title="" style="display:none">
+            <div class="modal-body">	
+				<h2 class="message-heading">Remove article</h2>
+				<div class="message-content">
+					<p>Are you sure you want to remove this article from your reading list?</p>
+				</div>
+			</div>
+        </div>
+
+    </section>
+</div>
+<?php if($block->isCustomerLogIn()): ?>
+<?php $customer = $block->userLoggedDetails()?>
+<?php $customerId = $customer->getId()?>
+<script id="my-reading-template" type="text/x-magento-template">
+	<div class="mark-tile">
+		<div class="tile-content">                                            
+			<a href="/cms/article/<%- data.url_key %>" class="heading reg-gate"><%- data.topic %></a>
+			<p class="date">Last updated <%- data.updated_time %></p>
+		</div>
+		<span id="bookmark_<%- data.readinglist_id %>" class="mark-btn marked"
+			  data-articlelistid="<%- data.readinglist_id %>"
+			  data-articleId="<%- data.article_id %>"
+			  data-readinglistarticleid="<%- data.reading_list_article_id %>"
+			  ><span>
+		</span></span>
+	</div>
+</script>
+<script>
+    require(
+    ["jquery",
+     "mage/template",
+     "mage/mage",
+     "Magento_Ui/js/block-loader"
+    ],
+    function($,mageTemplate, mage, blockLoader){
+        $(document).ready(function() {
+            blockLoader("<?php echo $this->getViewFileUrl('images/logo.svg'); ?>");
+            loadMyReadingList ();
+        });
+
+        function loadMyReadingList () {           			
+            var ajaxurl = '<?php echo $block->getAjaxUrl() ?>';
+			var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            $.ajax({
+                url: ajaxurl,
+                type: 'POST',
+                showLoader: true,
+                dataType: 'json',
+                data: {customer_id:<?php echo $customerId ?>},
+                success: function (response) {
+					
+					if (response['totalRecords'] > 0) {
+						var bookmarks = "";
+						$.each(response['items'], function () {
+							var progressTmpl = mageTemplate('#my-reading-template'), tmpl;
+							var date = new Date(this['updated_time']);
+							tmpl = progressTmpl({
+								data: {
+									readinglist_id: this['readinglist_id'],
+									article_id: this['article_id'],
+									added_date: this['added_date'],
+									user_id: this['user_id'],
+									topic: this['topic'],
+									updated_time: date.getDate()+" "+ monthNames[date.getMonth()]+" "+ date.getFullYear(),
+									title: this['title'],
+									url_key: this['url-key'],
+									reading_list_article_id: this['list_id'],
+								}
+							});
+							bookmarks = bookmarks+ tmpl;
+						});
+						$('#my-reading-list-container').html(bookmarks);
+					} else {
+						$('#my-reading-list-container').html("<p>No bookmarks found</p>");
+					}
+                }
+            });
+            return true;
+        }
+
+        $("#tab-0-1").on("click",".mark-btn", function(){
+            var id=$(this).data("articleid");
+            var listId=$(this).data("articlelistid");
+            var rlistId=$(this).data("readinglistarticleid");
+            $(".dialog-confirmation").show();
+            $(".ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-dialog-buttons.ui-draggable.ui-resizable").show();
+            $("#dialog").dialog({
+                buttons : [{text  : 'Confirm', 
+							 click : function() {
+								var ajaxurl = '<?php echo $block->getDeleteUrl() ?>';
+								$.ajax({
+									url:ajaxurl,
+									type:'POST',
+									showLoader: true,
+									dataType:'json',
+									data: {readinglist_id:listId, articleid:id, readinglistarticleid:rlistId},
+									dataType: "json",
+									success:function(response){								
+										loadMyReadingList ();
+										$("#message").html("Bookmark Removed");
+									},
+									fail:function () {
+										alert('Error');
+									},
+									always:function () {
+										alert('always');
+									}
+								});
+								$("#message").show();
+								$(".ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-dialog-buttons.ui-draggable.ui-resizable").hide();
+								$(".dialog-confirmation").hide();
+								setTimeout(function() {
+									$("#message").hide('blind', {}, 500);							                            
+								}, 5000);
+							 }, 
+							 class : 'btn btn-dark-green'
+						   },
+						   {text  : 'Cancel', 
+							 click : function() {
+								$(".ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-dialog-buttons.ui-draggable.ui-resizable").hide();
+								$(".dialog-confirmation").hide();
+								$(this).dialog("close");
+							 }, 
+							 class : 'btn btn-link-dark'
+						   }],
+				create:function () {
+					$(this).closest(".ui-dialog").addClass("readinglist-section");
+				}
+            });
+        });
+    });
+</script>
+<?php endif; ?>
+
+<style>
+div#message {
+    background: #00c1aa;
+    color: #fff;
+    padding: 5px 20px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+    .dialog-confirmation {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #000;
+        opacity: 0.5;
+    }
+
+    .ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-dialog-buttons.ui-draggable.ui-resizable {
+        background: #fff;
+        z-index: 1000;
+        padding: 30px;
+    }
+
+    button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ui-dialog-titlebar-close .ui-button-text {
+        display: none;
+    }
+
+    button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ui-dialog-titlebar-close {
+        border: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ui-dialog-titlebar-close span.ui-button-icon-primary.ui-icon.ui-icon-closethick:after {
+        display:none;
+    }
+
+    .ui-dialog-buttonset button {
+        margin-left: 10px;
+        margin-top: 23px;
+    }
+
+    .ui-dialog-buttonset {
+        text-align: center;
+    }
+</style> 

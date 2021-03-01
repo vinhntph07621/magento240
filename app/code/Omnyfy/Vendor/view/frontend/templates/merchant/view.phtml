@@ -1,0 +1,70 @@
+<?php
+/**
+ * Copyright © Omnyfy, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Vendor view template
+ *
+ * @var $block \Omnyfy\Vendor\Block\Vendor\View
+ */
+$vendor = $block->getVendor();
+$vendorAttributesObject = $block->loadVendorAttributes();
+$vendorAttributes = $vendorAttributesObject->getData();
+
+/** @var $favouriteHelper \Omnyfy\Vendor\Helper\FavouriteVendor */
+$favouriteHelper = $this->helper('Omnyfy\Vendor\Helper\FavouriteVendor');
+?>
+<div class="vendor-header">
+    <div class="container">
+        <div class="vendor-brand">
+            <div class="logo-container">
+                <?php if ($block->getLogoUrl()): ?>
+                    <img src="<?php echo $block->getLogoUrl()?>" class="vendor-logo" title="<?= __("Logo of ") . __($vendor->getName());?>">
+                <?php endif; ?>
+            </div>
+            <div class="main-content">
+                <h1 class="merchant-name"><?= __($vendor->getName());?></h1>
+                <p class="location"><?php echo $block->getVendorAddress();?></p>
+                <div class="info-row">
+                    <?= $block->getChildHtml('vendor.additional.info');?>
+                </div>
+            </div>
+        </div>
+        <div class="vendor-actions">
+            <?php if ($this->helper('Omnyfy\Vendor\Helper\Session')->isLoggedIn()): ?>
+                <button
+                        class="favourite-add-btn <?= $favouriteHelper->isVendorSetFavourite($vendor->getEntityId()) ? 'hide' : ''?>"
+                        data-action-type="add"
+                        data-vendor-id="<?= $vendor->getEntityId(); ?>"
+                ><?= __('Favourite')?>
+                </button>
+
+                <button
+                        class="favourite-remove-btn <?= $favouriteHelper->isVendorSetFavourite($vendor->getEntityId()) ? 'active' : 'hide'?>"
+                        data-action-type="remove"
+                        data-vendor-id="<?= $vendor->getEntityId(); ?>"
+                ><?= __('Remove Favourite')?>
+                </button>
+            <?php endif; ?>
+            <?= $block->getChildHtml('vendor.actions');?>
+        </div>
+    </div>
+</div>
+
+<?= $block->getChildHtml('vendor.navigation')?>
+
+<?= $block->getChildHtml('vendor.after.navigation');?>
+<?= $block->getChildHtml('vendor.sections');?>
+
+<script type="text/javascript">
+    require([
+        "Omnyfy_Vendor/js/customscript",
+        "Omnyfy_Vendor/js/favorite-vendor"
+    ], function(customscript, fv){
+        customscript.init();
+        fv.init();
+    });
+</script>
+

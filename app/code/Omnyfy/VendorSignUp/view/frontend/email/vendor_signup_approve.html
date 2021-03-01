@@ -1,0 +1,17 @@
+<!--@subject Your signup request has been approved @-->
+<!--@vars { 
+    "template config_path=\"design\/email\/footer_template\"":"Email Footer Template", 
+    "template config_path=\"design\/email\/header_template\"":"Email Header Template"
+    }
+ @-->
+{{template config_path="design/email/header_template"}}
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">Dear {{var businessname}},</p>
+			<p>Congratulations! {{config path="general/store_information/name"}} has approved your vendor signup request. To start your journey, please <a href="{{var admin_forgot_password}}">click here<a/> to reset your password and login to your vendor portal.</p>
+			<p>Please contact {{config path="general/store_information/name"}} via {{config path="trans_email/ident_general/email"}} or call us at {{config path="general/store_information/phone"}} if you need any further assistance.</p>
+		</td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

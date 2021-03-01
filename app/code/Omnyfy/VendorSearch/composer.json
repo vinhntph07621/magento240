@@ -1,0 +1,22 @@
+{
+    "name": "omnyfy/module-vendorsearch",
+    "description": "Vendor Search Module",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Omnyfy",
+            "email": "info@omnyfy.com"
+        }
+    ],
+    "minimum-stability": "production",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Omnyfy\\VendorSearch\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

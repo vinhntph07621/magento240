@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">omnyfy_vendor_inventory_form.omnyfy_vendor_inventory_form_data_source</item>
+            <item name="deps" xsi:type="string">omnyfy_vendor_inventory_form.omnyfy_vendor_inventory_form_data_source</item>
+            <item name="namespace" xsi:type="string">omnyfy_vendor_inventory_form</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Omnyfy\Vendor\Block\Adminhtml\Inventory\Edit\Button\Back</item>
+            <item name="stockRepor" xsi:type="string">Omnyfy\Vendor\Block\Adminhtml\Inventory\Edit\Button\StockReport</item>
+            <item name="addProduct" xsi:type="string">Omnyfy\Vendor\Block\Adminhtml\Inventory\Edit\Button\AddProduct</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+
+        <item name="childrenFromMeta" xsi:type="boolean">true</item>
+    </argument>
+    <dataSource name="omnyfy_vendor_inventory_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Omnyfy\Vendor\Ui\DataProvider\Inventory\Form\DataProvider</argument>
+            <argument name="name" xsi:type="string">omnyfy_vendor_inventory_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <insertListing>
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="autoRender" xsi:type="string">true</item>
+                <item name="externalProvider" xsi:type="string">${ $.ns }.omnyfy_vendor_inventory_listing_data_source</item>
+                <item name="ns" xsi:type="string">omnyfy_vendor_inventory_listing</item>
+                <item name="dataLinks" xsi:type="array">
+                    <item name="imports" xsi:type="boolean">false</item>
+                    <item name="exports" xsi:type="boolean">false</item>
+                </item>
+            </item>
+        </argument>
+    </insertListing>
+
+</form>

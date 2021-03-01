@@ -1,0 +1,9 @@
+<klarna xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Klarna_KcoCore:etc/klarna.xsd">
+    <order_lines id="payments">
+        <line id="rewards" class="Mirasvit\RewardsCheckout\Model\KlarnaPayment\Orderline\Items\RewardsDiscount"/>
+    </order_lines>
+    <order_lines id="kcokasper">
+        <line id="rewards" class="Mirasvit\RewardsCheckout\Model\KlarnaCheckout\Orderline\Items\RewardsDiscount"/>
+    </order_lines>
+</klarna>

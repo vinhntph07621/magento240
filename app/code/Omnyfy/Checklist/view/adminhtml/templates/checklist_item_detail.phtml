@@ -1,0 +1,107 @@
+<h3><?php echo __("Add Checklist Items")?></h3>
+<p><?php echo __("Add Items to the current checklist")?></p>
+<?php $checklistId = $this->getRequest()->getParam('checklist_id');?>
+<div class="check-list-item-detail">
+    <div class="checklist-item-detail">
+        <div class="fieldset-wrapper">
+            <div class="fieldset-wrapper-content">
+                <?php $checklistItems = $block->getChecklistItems($checklistId) ?>
+                <?php if (isset($checklistItems)) { ?>
+                    <?php foreach($checklistItems as $checklistItem) {?>
+                        <?php $itemId = $checklistItem->getChecklistitemsId(); ?>
+                        <div class="fieldset-wrapper admin__collapsible-block-wrapper opened" id="option_<?php echo $itemId?>">
+                            <div class="fieldset-wrapper-title">
+                                <strong
+                                        class="admin__collapsible-title"
+                                        data-toggle="collapse"
+                                        data-target="#<?php echo $itemId?>-content">
+                                    <span id="option_<?php echo $itemId?>_header_title"><?php echo $checklistItem->getChecklistItemTitle() ?></span>
+                                </strong>
+                                <div class="actions">
+                                    <button type="button" title="<?php /* @escapeNotVerified */ echo __('Delete Custom Option'); ?>" class="action-delete" id="<?php /* @escapeNotVerified */ echo $block->getFieldId() ?>_<?php echo $itemId?>_delete">
+                                        <span><?php /* @escapeNotVerified */ echo __('Delete Custom Option'); ?></span>
+                                    </button>
+                                </div>
+                                <div id="<?php /* @escapeNotVerified */ echo "" ?>_<?php echo $itemId?>_move" data-role="draggable-handle" class="draggable-handle"
+                                     title="<?php /* @escapeNotVerified */ echo __('Sort Custom Options'); ?>"></div>
+                            </div>
+                            <div class="fieldset-wrapper-content in collapse" id="<?php echo $itemId?>-content">
+                                <fieldset class="fieldset collapse">
+                                    <div>
+                                        <label><?php echo __("Item Name")?></label>
+                                        <input class="admin__control-text" id="item-name[<?php echo $itemId?>]" name="checklist-item[<?php echo $itemId?>][item-name]" type="input" value="<?php echo $checklistItem->getChecklistItemTitle()?>"/>
+                                    </div>
+                                    <div>
+                                        <label><?php echo __("Item Description")?></label>
+                                        <textarea id="item-description[<?php echo $itemId?>]" name="checklist-item[<?php echo $itemId?>][item-description]">
+                                            <?php echo $checklistItem->getChecklistItemDescription()?>
+                                        </textarea>
+                                    </div>
+                                    <div>
+                                        <label><?php echo __("Enable Upload Document")?></label>
+                                        <input id="enable-upload-document[<?php echo $itemId?>]" name="checklist-item[<?php echo $itemId?>][enable-upload-document]" type="checkbox">
+                                    </div>
+                                    <?php $uploads = $block->getChecklistItemUploads($itemId) ?>
+                                    <?php foreach ($uploads as $upload) { ?>
+                                        <?php $uploadId = $upload->getChecklistitemuploadsId() ?>
+                                            <div>
+                                                <label><?php echo __("Document Name")?></label>
+                                                <input id="document-name[<?php echo $itemId?>][<?php echo $uploadId; ?>]" name="checklist-item[<?php echo $itemId?>][<?php echo $uploadId; ?>][document-name]" type="input" value="<?php echo $upload->getUploadName() ?>"/>
+                                            </div>
+                                    <?php } ?>
+                                </fieldset>
+                            </div>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script id="checklist-item-template" type="text/x-magento-template">
+    <div class="fieldset-wrapper admin__collapsible-block-wrapper opened" id="option_<%- data.id %>">
+        <div class="fieldset-wrapper-title">
+            <strong
+                    class="admin__collapsible-title"
+                    data-toggle="collapse"
+                    data-target="#<%- data.id %>-content">
+                <span id="option_<%- data.id %>_header_title"><%- data.title %></span>
+            </strong>
+            <div class="actions">
+                <button type="button" title="<?php /* @escapeNotVerified */ echo __('Delete Custom Option'); ?>" class="action-delete" id="<?php /* @escapeNotVerified */ echo $block->getFieldId() ?>_<%- data.id %>_delete">
+                    <span><?php /* @escapeNotVerified */ echo __('Delete Custom Option'); ?></span>
+                </button>
+            </div>
+            <div id="<?php /* @escapeNotVerified */ echo "" ?>_<%- data.id %>_move" data-role="draggable-handle" class="draggable-handle"
+                 title="<?php /* @escapeNotVerified */ echo __('Sort Custom Options'); ?>"></div>
+        </div>
+        <div class="fieldset-wrapper-content in collapse" id="<%- data.id %>-content">
+            <fieldset class="fieldset">
+                <fieldset class="fieldset-alt" id="<?php /* @escapeNotVerified */ echo "" ?>_<%- data.id %>">
+                </fieldset>
+            </fieldset>
+        </div>
+    </div>
+</script>
+<script>
+    require([
+        "jquery",
+        "Magento_Catalog/js/custom-options"
+    ], function(jQuery){
+
+        jQuery(function ($) {
+            var fieldSet = $('[data-block=product-custom-options]');
+            fieldSet.customOptions(<?php /* @escapeNotVerified */ echo $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode(
+                [
+                    'fieldId' => '',
+                ]
+            )?>);
+            //adding data to templates
+            <?php /** @var $_value \Magento\Framework\DataObject */ ?>
+            fieldSet.customOptions('addOption', "");
+        });
+
+    });
+</script>

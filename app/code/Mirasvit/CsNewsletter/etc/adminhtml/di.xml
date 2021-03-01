@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Newsletter\Model\ResourceModel\Queue">
+        <plugin name="filterBySegment" type="Mirasvit\CsNewsletter\Plugin\Adminhtml\Magento\Newsletter\Model\ResourceModel\Queue\FilterBySegmentPlugin" />
+    </type>
+
+    <type name="Magento\Newsletter\Block\Adminhtml\Queue\Edit\Form">
+        <plugin name="addSegmentFilterBlock" type="Mirasvit\CsNewsletter\Plugin\Adminhtml\Magento\Newsletter\Block\Adminhtml\Queue\Edit\Form\AddSegmentFilterBlockPlugin" />
+    </type>
+
+    <type name="Magento\Newsletter\Controller\Adminhtml\Queue\Save">
+        <plugin name="removeSegmentFilter" type="Mirasvit\CsNewsletter\Plugin\Adminhtml\Magento\Newsletter\Controller\Adminhtml\Queue\Save\RemoveSegmentFilterPlugin" />
+    </type>
+
+    <type name="Magento\Newsletter\Model\Queue">
+        <plugin name="saveSegmentFilter" type="Mirasvit\CsNewsletter\Plugin\Adminhtml\Magento\Newsletter\Model\Queue\SaveSegmentFilterPlugin" />
+    </type>
+</config>

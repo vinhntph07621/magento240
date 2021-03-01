@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="omnyfy_vendor_type_form_validation">
+        <observer name="omnyfy_subscription_observer_vendor_type_validate" instance="Omnyfy\VendorSubscription\Observer\VendorTypeFormValidation" />
+    </event>
+    <event name="omnyfy_vendor_type_form_save_after">
+        <observer name="omnyfy_subscription_observer_vendor_type_save_after" instance="Omnyfy\VendorSubscription\Observer\VendorTypeFormSaveAfter"/>
+    </event>
+    <event name="omnyfy_vendor_edit_tabs_before_html">
+        <observer name="omnyfy_subscription_observer_add_tab" instance="Omnyfy\VendorSubscription\Observer\AddHistoryTabToVendorForm"/>
+    </event>
+    <event name="omnyfy_vendor_edit_form_add_button">
+        <observer name="omnyfy_subscription_observer_add_cancel_button" instance="Omnyfy\VendorSubscription\Observer\AddCancelSubscriptionButton"/>
+    </event>
+
+    <event name="omnyfy_vendor_form_validation">
+        <observer name="omnyfy_subscription_observer_vendor_form_validation" instance="Omnyfy\VendorSubscription\Observer\VendorFormValidation"/>
+    </event>
+    <event name="omnyfy_vendor_form_after_save">
+        <observer name="omnyfy_subscription_observer_vendor_form_save_after" instance="Omnyfy\VendorSubscription\Observer\VendorFormAfterSave" />
+    </event>
+    <event name="omnyfy_vendorsignup_approve_before">
+        <observer name="omnyfy_subscription_observer_sign_up_approve_before" instance="Omnyfy\VendorSubscription\Observer\SignUp\ApproveBefore"/>
+    </event>
+    <event name="omnyfy_vendorsignup_approve_after">
+        <observer name="omnyfy_subscription_observer_sign_up_approve_after" instance="Omnyfy\VendorSubscription\Observer\SignUp\ApproveAfter"/>
+    </event>
+
+    <event name="catalog_product_save_before">
+        <observer name="omnyfy_subscription_observer_product" instance="Omnyfy\VendorSubscription\Observer\Restrict\Product" />
+    </event>
+    <event name="catalog_product_save_after">
+        <observer name="omnyfy_subscription_observer_product" instance="Omnyfy\VendorSubscription\Observer\Restrict\Product" />
+    </event>
+    <event name="catalog_product_delete_after">
+        <observer name="omnyfy_subscription_observer_product" instance="Omnyfy\VendorSubscription\Observer\Restrict\Product" />
+    </event>
+    <event name="omnyfy_landingpages_page_save_before">
+        <observer name="omnyfy_subscription_observer_kit_store" instance="Omnyfy\VendorSubscription\Observer\Restrict\KitStore" />
+    </event>
+    <event name="omnyfy_landingpages_page_save_after">
+        <observer name="omnyfy_subscription_observer_kit_store" instance="Omnyfy\VendorSubscription\Observer\Restrict\KitStore" />
+    </event>
+    <event name="omnyfy_landingpages_page_delete_after">
+        <observer name="omnyfy_subscription_observer_kit_store" instance="Omnyfy\VendorSubscription\Observer\Restrict\KitStore" />
+    </event>
+</config>

@@ -1,0 +1,97 @@
+// /**
+//  * Copyright © Omnyfy, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+
+//
+//  Variables
+//  ---------------------------------------------
+@policy-section__margin: 0 0 @indent__xl * 2;
+
+@policies-list__border: @border-width__base solid @border-color__base;
+
+@policy-title__font-size: @font-size__base;
+@policy-title__font-weight: bold;
+@policy-title__padding: @indent__base 0;
+@policy-title__icon: @icon-next;
+@policy-title__icon__active: @icon-down;
+@policy-title__icon__font-size: 18px;
+@policy-title__icon__font-size__active: 24px;
+@policy-title__icon__margin-right: 14px;
+@policy-title__icon__margin-right__active: 20px;
+
+
+//
+//    Common
+//--------------------------------------
+
+& when (@media-common = true) {
+
+	.policy-section {
+		margin: @policy-section__margin;
+	}
+
+	.policies-list {
+		border-top: @policies-list__border;
+		margin: 0;
+		padding: 0;
+	}
+
+	.policy-item {
+		list-style: none;
+		margin: 0;
+		border-bottom: @policies-list__border;
+	}
+
+	.policy-title-wrapper {
+		&.active {
+			.policy-title {
+				.lib-icon-font(
+					@_icon-font-content: @policy-title__icon__active,
+					@_icon-font-size: @policy-title__icon__font-size__active,
+					@_icon-font-line-height: @policy-title__font-size
+				);
+				display: block;
+
+				&:before {
+					margin-right: @policy-title__icon__margin-right__active;
+				}
+			}
+
+			& + .policy-content {
+				display: block;
+				padding: 0 0 @indent__base 30px;
+			}
+		}
+	}
+
+	.policy-title {
+		cursor: pointer;
+		font-size: @policy-title__font-size;
+		font-weight: @policy-title__font-weight;
+		padding: @policy-title__padding;
+		.lib-icon-font(
+			@_icon-font-content: @policy-title__icon,
+			@_icon-font-size: @policy-title__icon__font-size,
+			@_icon-font-line-height: @policy-title__font-size
+		);
+		display: block;
+
+		&:before {
+			margin-right: @policy-title__icon__margin-right;
+		}
+	}
+
+	.policy-content {
+		display: none;
+	}
+}
+
+
+//
+//    Tablet
+//--------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+}

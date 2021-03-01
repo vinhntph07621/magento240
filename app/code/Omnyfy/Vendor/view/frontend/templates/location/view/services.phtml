@@ -1,0 +1,57 @@
+<?php if($block->getCollection()->getSize()){
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$abstractProductBlock = $block->getLayout()->createBlock('\Magento\Catalog\Block\Product\AbstractProduct');?>
+<div class="profile-block anchor-target" id="services">
+	<div class="block-title">
+		<?php echo __('Services');?>
+	</div>
+	<div class="block-body">
+		<?php foreach($block->getCollection() as $product):
+				if($product->getVisibility()!='1' && $product->getStatus()=='1'){?>
+			<div class="tier-wrapper">
+				<div class="top-row">
+					<div class="primary">
+						<a href="<?php echo $product->getProductUrl()?>"  class="heading">
+							<?php echo $product->getName();?>
+						</a>	
+						<?php /* <div class="rating-row-container">
+							<div class="rating-stars-container">
+								<div class="score">
+									4.0
+								</div>
+								<div class="rating-stars-wrapper">
+									<div class="rating-stars">
+										<span style="width: 80%;"></span>
+									</div>
+								</div>
+
+							</div>
+
+						</div> */ ?>
+						<div class="desc">
+							<?php echo $product->getDescription();?>
+						</div>
+					</div>
+					<div class="secondary">
+						<span class="heading"><?php echo $abstractProductBlock->getProductPrice($product) ?></span>
+						<span class="sub-line">4 days</span>
+					</div>
+				</div>
+				<div class="desc mobile">
+					<?php echo $product->getDescription();?>
+				</div>
+
+				<div class="actions">
+					<div class="btn-row">
+						<?php #echo $product->getLocationId().'-------'.$product->getProductUrl().'---'.$product->getName().'-----<br />';?>
+						<a href="<?php echo $product->getProductUrl()?>" class="btn btn-green-stroke">
+							Learn more
+						</a>
+					</div>
+				</div>
+			</div>
+				<?php }?>
+		<?php endforeach;?>
+	</div>
+</div>
+<?php }?>

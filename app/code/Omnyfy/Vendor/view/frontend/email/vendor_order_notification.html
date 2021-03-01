@@ -1,0 +1,13 @@
+<!--@subject New Order Notification @-->
+{{template config_path="design/email/header_template"}}
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr class="email-intro">
+        <td>You have received a new order on {{config path="general/store_information/name"}}.<br/>
+            New order ID: {{var order_id}}
+            <br/>
+            <br/>
+            Please login to <a href="{{store url=""}}{{var admin_uri}}">{{config path="general/store_information/name"}} Admin</a> to manage your orders.
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

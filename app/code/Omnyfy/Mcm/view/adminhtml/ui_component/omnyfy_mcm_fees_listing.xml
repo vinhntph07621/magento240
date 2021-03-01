@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">omnyfy_mcm_fees_listing.omnyfy_mcm_fees_listing_data_source</item>
+            <item name="deps" xsi:type="string">omnyfy_mcm_fees_listing.omnyfy_mcm_fees_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">omnyfy_mcm_fees_columns</item>
+    </argument>
+
+    <dataSource name="omnyfy_mcm_fees_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Omnyfy\Mcm\Ui\DataProvider\Fees\Grid\FeeDataProvider</argument>
+            <argument name="name" xsi:type="string">omnyfy_mcm_fees_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <container name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">ui/grid/toolbar</item>
+            </item>
+        </argument>
+        <bookmark name="bookmarks">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="namespace" xsi:type="string">omnyfy_mcm_fees_listing</item>
+                    </item>
+                </item>
+            </argument>
+        </bookmark>
+        <component name="columns_controls">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsData" xsi:type="array">
+                        <item name="provider" xsi:type="string">omnyfy_mcm_fees_listing.omnyfy_mcm_fees_listing.omnyfy_mcm_fees_columns</item>
+                    </item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
+                    <item name="displayArea" xsi:type="string">dataGridActions</item>
+                </item>
+            </argument>
+        </component>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsProvider" xsi:type="string">omnyfy_mcm_fees_listing.omnyfy_mcm_fees_listing.omnyfy_mcm_fees_columns</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">omnyfy_mcm_fees_listing.omnyfy_mcm_fees_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.filters</item>
+                    </item>
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                    <item name="childDefaults" xsi:type="array">
+                        <item name="provider" xsi:type="string">omnyfy_mcm_fees_listing.omnyfy_mcm_fees_listing.listing_top.listing_filters</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">omnyfy_mcm_fees_listing.omnyfy_mcm_fees_listing.omnyfy_mcm_fees_columns.${ $.index }:visible</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+        </filters>
+<!--        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">omnyfy_mcm_fees_listing.omnyfy_mcm_fees_listing.omnyfy_mcm_fees_columns.ids</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                    <item name="indexField" xsi:type="string">id</item>
+                </item> 
+            </argument>
+            <action name="change_status">  
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">status</item>
+                        <item name="label" xsi:type="string" translate="true">Change Status</item>
+                    </item>
+                </argument>  
+                <argument name="actions" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Omnyfy\Mcm\Ui\Component\MassAction\Status\Options</argument>
+                    <argument name="data" xsi:type="array">
+                        <item name="urlPath" xsi:type="string">omnyfy_mcm/fees/massStatus</item>
+                        <item name="paramName" xsi:type="string">status</item>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Change Status</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure to change status of selected fees and charges?</item>
+                        </item>
+                    </argument>
+                </argument>                
+            </action>
+        </massaction>-->
+        <paging name="listing_paging">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">omnyfy_mcm_fees_listing.omnyfy_mcm_fees_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.paging</item>
+                    </item>
+                    <item name="selectProvider" xsi:type="string">omnyfy_mcm_fees_listing.omnyfy_mcm_fees_listing.omnyfy_mcm_fees_columns.ids</item>
+                </item>
+            </argument>
+        </paging>
+    </container>
+    <columns name="omnyfy_mcm_fees_columns">        
+<!--        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">55</item>
+                    <item name="indexField" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </selectionsColumn>-->
+
+        <column name="vendor_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sortable" xsi:type="boolean">true</item>
+                    <item name="sorting" xsi:type="string">desc</item>
+                    <item name="label" xsi:type="string" translate="true">Vendor ID</item>
+                    <item name="sortOrder" xsi:type="number">5</item>
+                </item>
+            </argument>
+        </column>
+        <column name="vendor_name_status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="filter" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Vendor Name</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </column>
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="label" xsi:type="string" translate="true">Last Updated</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="dateFormat" xsi:type="string" translate="true">MMM d, YYYY hh:mm:ss a</item>
+                    <item name="sortOrder" xsi:type="number">15</item>
+                    <item name="sortable" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </column>
+        <column name="seller_fee_per">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Seller Fees</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </column>
+        
+        <column name="min_seller_fee_currency">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Min Seller Fee</item>
+                    <item name="sortOrder" xsi:type="number">25</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </column>
+        <column name="max_seller_fee_currency">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Max Seller Fee</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </column>      
+        <column name="disbursement_fee_currency">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Disbursement Fee</item>
+                    <item name="sortOrder" xsi:type="number">35</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </column>
+        <column name="tax_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Tax Name</item>
+                    <item name="sortOrder" xsi:type="number">45</item>
+                    <item name="sortable" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </column>      
+        <column name="tax_rate">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Tax Rate</item>
+                    <item name="sortOrder" xsi:type="number">55</item>
+                    <item name="sortable" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </column>
+         <column name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Omnyfy\Mcm\Model\Source\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="editor" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                </item>
+            </argument>
+        </column>
+        <actionsColumn name="actions" class="Omnyfy\Mcm\Ui\Component\Listing\Column\FeeActions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">id</item>
+                    <item name="urlEntityParamName" xsi:type="string">id</item>
+                    <item name="dataType" xsi:type="string">actions</item>
+                </item>
+            </argument>
+        </actionsColumn>        
+    </columns>
+</listing>

@@ -1,0 +1,10 @@
+<?php 
+$ewalletAvailableBalance = $block->ewalletAvailableBalance();
+?>
+<script>
+    window.vendorBankAccountUrl = "<?php echo $block->getVendorBankUrl() ? $block->getVendorBankUrl() : '#'; ?>";
+    window.bankAccountDetailAjaxUrl = "<?php echo $block->getVendorBankAccDetailAjaxUrl() ? $block->getVendorBankAccDetailAjaxUrl() : ''; ?>";
+    window.vendorWithdrawalLimitCurrency = "<?php echo $block->currency($ewalletAvailableBalance['ewallet_balance'] ? $ewalletAvailableBalance['ewallet_balance'] : 0); ?>";
+    window.vendorWithdrawalLimit = "<?php echo $ewalletAvailableBalance['ewallet_balance'] ? $ewalletAvailableBalance['ewallet_balance'] : 0; ?>";
+    window.vendorId = "<?php echo $block->getVendorId();?>";
+</script>

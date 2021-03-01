@@ -1,0 +1,202 @@
+.payout-tile{
+    margin: 0 0 3rem; 
+    background: #f5f5f5; 
+    border-bottom: 1px solid #e3e3e3; 
+    border: 1px solid #e3e3e3; 
+    padding: 1.5rem;
+    float:left; 
+    width:45%;
+    border-radius: 5px
+}
+.payout-3tile{
+    margin: 0 0 3rem; 
+    background: #f5f5f5; 
+    border-bottom: 1px solid #e3e3e3; 
+    border: 1px solid #e3e3e3; 
+    padding: 1.5rem;
+    float:left; 
+    width:30%;
+    border-radius: 5px
+}
+.withdrawal-tile{
+    margin: 0 0 3rem; 
+    background: #f5f5f5; 
+    border-bottom: 1px solid #e3e3e3; 
+    border: 1px solid #e3e3e3; 
+    padding: 1.5rem;
+    float:left; 
+    width:55%;
+    border-radius: 5px
+}
+.tile-row {
+    width:100%;
+    float:left;
+    margin-bottom: 20px
+}
+.tile-title {
+    float:left; 
+    font-size: 1.7rem
+}
+.tile-updated {
+    float:right;font-size: 1rem;
+}
+.width100p {
+    width:100%
+}
+.tile-first-col {
+    float:left; width:37%
+}
+.tile-withdrawal-col {
+    float:left; width:25%
+}
+.font-size-1r {
+    font-size: 1.2rem
+}
+.tile-currency {
+    font-size: 1.8rem;margin: 5px 0 5px 0; font-weight: bold;
+}
+.tile3-currency {
+    font-size: 1.6rem;margin: 5px 0 5px 0; font-weight: bold;
+}
+.tile-2nd-col {
+    float:left; width:34%;
+}
+.tile-3rd-col {
+    float:left; width:28%
+}
+.tile-separator {
+    float:left;width:10%
+}
+.tile-3separator {
+    float:left;width:5%
+}
+.payout-wrapper{
+    margin:0;
+}
+.payout-row{
+    clear: both;
+}
+.payout-wrapper .payout-row .payout-currency{
+    width: calc( (100%) * .5 - 30px ); 
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 3.2rem;
+    float: left;
+    margin-left: 30px;
+}
+.payout-wrapper .payout-row .payout-label{
+    width: calc( (100%) * .25 - 30px );
+    font-size: 1.4rem;
+    line-height: 3.2rem;
+    float:left;
+    text-align: right;
+
+}
+.payout-orders .admin__scope-old{
+    display:flow-root;    
+}
+.payout-orders .admin__scope-old .admin__data-grid-outer-wrap{
+    width:100%
+}
+.payout-orders .admin__data-grid-header-row .action-select {
+    width: 65%;
+}
+.payout-orders .admin__data-grid-header .admin__data-grid-header-row.row.row-gutter {width:100%}
+.payout-orders .admin__data-grid-header .admin__data-grid-header-row.row.row-gutter .col-xs-10 {width:76%}
+.payout-orders .admin__data-grid-header .admin__data-grid-header-row.row.row-gutter .col-xs-10 .row .col-xs-3{width:16.66%}
+.payout-tile hr, .payout-3tile hr {
+    border: 0;
+    clear: both;
+    background-color: #e3e3e3;
+    height: 1px;
+    margin-bottom: 20px;
+}
+.width50p {
+    width:50%;
+    float: left;
+}
+.clear-both{
+    clear:both;
+}
+.internal-1sthalf {
+    width:70%;
+    float: left;
+    margin-bottom: 10px;
+    clear:both;
+}
+.internal-2ndhalf {
+    width:30%;
+    float: right;
+    padding-left:1.5px;
+    text-align: right;
+}
+.internal-row{
+    width:100%;
+    clear:both;
+}
+.row-half{
+    width:45%;
+    float:left        
+} 
+.payout-status .message.message-success{
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+.payout-status .message.message-success::before{
+    left: 50%;
+    margin-left: -14px;
+}
+.payout-status .pending-icon{
+    font-size: 25px;
+    color: red;
+    text-align: center;
+    float: none;
+    width: 100%;
+    vertical-align: middle;
+    line-height: 23px;
+}
+.payout-status .in-progress-icon{
+    font-size: 25px;
+    color: #e8ce00;
+    text-align: center;
+    float: none;
+    width: 100%;
+    vertical-align: middle;
+    line-height: 28px;
+}
+.view-withdrawal{
+    font-size: 1.4rem;
+    padding-top:66px;
+    text-align: right;
+}
+.new_withdrawal .admin__additional-info {padding-top: 0}
+.new_withdrawal .account-detail{
+    margin: 1rem 0 0 0; 
+    background: #f5f5f5; 
+    border-bottom: 1px solid #e3e3e3; 
+    border: 1px solid #e3e3e3; 
+    padding: 1.5rem;
+    float:left; 
+    width:65%;
+    border-radius: 5px;
+    font-size: 1.4rem;
+}
+.new_withdrawal .account-detail .row{
+    width: 100%;
+    clear: both;
+}
+.new_withdrawal .account-detail .row .half1{
+    width: 50%;
+    float: left;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.new_withdrawal .account-detail .row .half2{
+    width: 50%;
+    float: left;
+    margin-bottom: 10px;
+}
+.hidden {
+     display:none;
+}

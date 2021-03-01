@@ -1,0 +1,19 @@
+<div class="payout-wrapper">
+    <div class="payout-row">
+        <label class="payout-label">
+            <span>Total Payout Amount</span>
+        </label>
+        <div class="payout-currency" >
+            <span><?php echo $block->escapeHtml($block->getTotalPayoutAmount()); ?></span>
+        </div>
+    </div>
+    <div class="payout-row">
+        <label class="payout-label">
+            <span>Total Fees Charges</span>
+        </label>
+        <div class="payout-currency">
+            <span><?php echo $block->escapeHtml($block->getTotalFeesCharged()); ?></span>
+
+        </div>
+    </div>
+</div>

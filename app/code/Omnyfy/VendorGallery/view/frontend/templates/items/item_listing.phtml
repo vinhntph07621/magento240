@@ -1,0 +1,75 @@
+<?php
+$itemCollection = $block->getAlbumItems();
+$albumInfo = $block->getAlbumInfo();
+$vendor = $block->getVendor();
+?>
+<div class="vendor-gallery__vendor-name">
+    <?= __("By ") ?><a href="<?= $block->getUrl('shop/brands/view', ['id' => $vendor->getId()]) ?>"><?= $vendor->getname() ?></a>
+</div>
+<div><?= $albumInfo->getDescription() ?></div><br/>
+<?php if (!empty($itemCollection->getData())): ?>
+<div class="masonry-grid">
+    <div class="grid-sizer"></div>
+    <div class="gutter-sizer"></div>
+    <?php foreach ($itemCollection as $item): ?>
+        <?php if ($item->getData('type') == 1): ?>
+            <div class="grid-item">
+                <a data-caption="<h1><?= $item->getCaption() ?></h1>" class="play-button" data-fslightbox="gallery1" href="<?= $item->getItemUrl(); ?>">
+                    <img src="<?= $item->getItemUrl(); ?>" alt="<?= __('Items')?>"></a>
+            </div>
+            <?php continue;endif; ?>
+        <div class="grid-item">
+            <?php if(strpos($item->getItemUrl(), 'youtube.com') !== false || strpos($item->getItemUrl(), 'youtu.be') !== false): ?>
+            <a class="video-thumb-icon" data-type="youtube" data-fslightbox="html5-youtube-videos" href="<?= $item->getItemUrl(); ?>">
+                <img class="img" src="<?= $item->getPreviewImageUrl(); ?>" alt="<?= __('Items')?>"/>
+            </a>
+            <?php else: ?>
+                <a class="video-thumb-icon"
+                        data-fslightbox="lightbox"
+                        data-custom-class="fslightbox-source"
+                        href="#vimeo">
+                    <img class="img" src="<?= $item->getPreviewImageUrl(); ?>" alt="<?= __('Items')?>"/>
+                </a>
+                <iframe
+                        src="<?= $item->getItemUrl(); ?>"
+                        id="vimeo"
+                        class="fslightbox-source"
+                        frameBorder="0"
+                        width="1920px" height="1080px"
+                        allow="autoplay; fullscreen"
+                        allowFullScreen>
+                </iframe>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+<script type="text/javascript">
+    requirejs([
+        'jquery',
+        'Omnyfy_VendorGallery/js/libraries/masonry.pkgd',
+        'Omnyfy_VendorGallery/js/libraries/imagesloaded.pkgd',
+        'Omnyfy_VendorGallery/js/libraries/fslightbox'
+    ], function ($, Masonry, imagesLoaded) {
+
+        var $grid = new Masonry('.masonry-grid', {
+            itemSelector: '.grid-item',
+            percentPosition: true,
+            columnWidth: '.grid-sizer'
+        });
+        // layout Masonry after each image loads
+        imagesLoaded( '.masonry-grid', function() {
+            new Masonry('.masonry-grid', {
+                itemSelector: '.grid-item',
+                percentPosition: true,
+                columnWidth: '.grid-sizer'
+            });
+        });
+    })
+    ;
+</script>
+
+<?php else: ?>
+    <?= __('This album is empty') ?>
+<?php endif ?>
+

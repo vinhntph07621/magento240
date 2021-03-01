@@ -1,0 +1,433 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">omnyfy_subscription_plan_form.plan_form_data_source</item>
+            <item name="deps" xsi:type="string">omnyfy_subscription_plan_form.plan_form_data_source</item>
+            <item name="namespace" xsi:type="string">omnyfy_subscription_plan_form</item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">omnyfy_subscription_plan_form</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Omnyfy\VendorSubscription\Block\Adminhtml\Plan\Edit\Button\Back</item>
+            <item name="save" xsi:type="string">Omnyfy\VendorSubscription\Block\Adminhtml\Plan\Edit\Button\Save</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="childrenFromMeta" xsi:type="boolean">true</item>
+    </argument>
+    <dataSource name="plan_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Omnyfy\VendorSubscription\Ui\DataProvider\Plan\Form</argument>
+            <argument name="name" xsi:type="string">plan_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">plan_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="omnyfy_subscription/plan/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+            </item>
+        </argument>
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">id</item>
+                    <item name="source" xsi:type="string">plan</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                    <item name="source" xsi:type="string">plan</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="plan_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Subscription Plan Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">plan_name</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-alphanum-with-spaces" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="number">20</item>
+                    </item>
+                    <item name="source" xsi:type="string">plan</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="is_free">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Is Free</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="dataScope" xsi:type="string">is_free</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="source" xsi:type="string">plan</item>
+                    <item name="switcherConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">true</item>
+                        <item name="rules" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="value" xsi:type="boolean">true</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">omnyfy_subscription_plan_form.omnyfy_subscription_plan_form.general.gateway_id</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="target" xsi:type="string">omnyfy_subscription_plan_form.omnyfy_subscription_plan_form.general.price</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                    <item name="2" xsi:type="array">
+                                        <item name="target" xsi:type="string">omnyfy_subscription_plan_form.omnyfy_subscription_plan_form.general.interval</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="boolean">false</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">omnyfy_subscription_plan_form.omnyfy_subscription_plan_form.general.gateway_id</item>
+                                        <item name="callback" xsi:type="string">show</item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="target" xsi:type="string">omnyfy_subscription_plan_form.omnyfy_subscription_plan_form.general.price</item>
+                                        <item name="callback" xsi:type="string">show</item>
+                                    </item>
+                                    <item name="2" xsi:type="array">
+                                        <item name="target" xsi:type="string">omnyfy_subscription_plan_form.omnyfy_subscription_plan_form.general.interval</item>
+                                        <item name="callback" xsi:type="string">show</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="gateway_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Gateway ID</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">gateway_id</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="number">250</item>
+                    </item>
+                    <item name="source" xsi:type="string">plan</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="price">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Price</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">price</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-zero-or-greater" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="number">15</item>
+                    </item>
+                    <item name="source" xsi:type="string">plan</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="interval">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Omnyfy\VendorSubscription\Model\Source\Interval</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Interval</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">interval</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="source" xsi:type="string">plan</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Description</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="dataScope" xsi:type="string">description</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">plan</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="benefits">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Benefits</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="dataScope" xsi:type="string">benefits</item>
+                    <item name="sortOrder" xsi:type="number">80</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">plan</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="button_label">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Button Label</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">button_label</item>
+                    <item name="sortOrder" xsi:type="number">80</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-alphanum-with-spaces" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="number">90</item>
+                    </item>
+                    <item name="source" xsi:type="string">plan</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="promo_text">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Promo Text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">promo_text</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                        <item name="validate-alphanum-with-spaces" xsi:type="boolean">true</item>
+                        <item name="max_text_length" xsi:type="number">250</item>
+                    </item>
+                    <item name="source" xsi:type="string">plan</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="trial_days">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Trial Days</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">trial_days</item>
+                    <item name="source" xsi:type="string">plan</item>
+                    <item name="sortOrder" xsi:type="number">105</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="show_on_front">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Show On Frontend</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="dataScope" xsi:type="string">show_on_front</item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                    <item name="source" xsi:type="string">plan</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="product_limit">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Number of Products (one off)</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">product_limit</item>
+                    <item name="source" xsi:type="string">plan</item>
+                    <item name="sortOrder" xsi:type="number">120</item>
+                </item>
+            </argument>
+        </field>
+        <field name="kit_store_limit">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Number of Kit Store (one off)</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">kit_store_limit</item>
+                    <item name="source" xsi:type="string">plan</item>
+                    <item name="sortOrder" xsi:type="number">130</item>
+                </item>
+            </argument>
+        </field>
+        <field name="enquiry_limit">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Number of Enquiry (one off)</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">enquiry_limit</item>
+                    <item name="source" xsi:type="string">plan</item>
+                    <item name="sortOrder" xsi:type="number">140</item>
+                </item>
+            </argument>
+        </field>
+        <field name="request_for_quote_limit">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Number of Request for Quote (one off)</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">request_for_quote_limit</item>
+                    <item name="source" xsi:type="string">plan</item>
+                    <item name="sortOrder" xsi:type="number">140</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="plan_usage_section">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">Assign Leads Usage to Plan</item>
+                <item name="sortOrder" xsi:type="number">150</item>
+            </item>
+        </argument>
+        <container name="container_header">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" />
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="componentType" xsi:type="string">container</item>
+                    <item name="template" xsi:type="string">ui/form/components/complex</item>
+                    <item name="content" xsi:type="string" translate="true">Repeat usage assign</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </container>
+        <dynamicRows name="plan_usage">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
+                    <item name="recordTemplate" xsi:type="string">record</item>
+                    <item name="deleteButtonLabel" xsi:type="string">Remove</item>
+                    <item name="deleteProperty" xsi:type="string">delete</item>
+                    <item name="dndConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="addButton" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+            <container name="record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string" translate="true">Magento_Ui/js/dynamic-rows/record</item>
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="showFallbackReset" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+                <field name="usage_type_id">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">Omnyfy\VendorSubscription\Model\Source\LeadsType</item>
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string">Usage Type</item>
+                            <item name="visible" xsi:type="boolean">true</item>
+                            <item name="dataType" xsi:type="string">number</item>
+                            <item name="formElement" xsi:type="string">select</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="usage_limit">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string">Usage Count</item>
+                            <item name="visible" xsi:type="boolean">true</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                        </item>
+                    </argument>
+                </field>
+                <actionDelete>
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="componentType" xsi:type="string">actionDelete</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="fit" xsi:type="boolean">false</item>
+                            <item name="label" xsi:type="string">Actions</item>
+                            <item name="additionalClasses" xsi:type="string">data-grid-actions-cell</item>
+                            <item name="template" xsi:type="string">Magento_Backend/dynamic-rows/cells/action-delete</item>
+                        </item>
+                    </argument>
+                </actionDelete>
+            </container>
+        </dynamicRows>
+    </fieldset>
+</form>

@@ -1,0 +1,433 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--DATA-->
+    <preference for="Mirasvit\CustomerSegment\Api\Data\Segment\CustomerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Data\CandidateInterface" type="Mirasvit\CustomerSegment\Model\Candidate"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Data\Segment\CustomerInterface" type="Mirasvit\CustomerSegment\Model\Segment\Customer"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Data\Segment\OptionSourceInterface" type="Mirasvit\CustomerSegment\Model\Config\Source\Segment"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Data\Segment\StateInterface" type="Mirasvit\CustomerSegment\Model\Segment\State"/>
+
+    <!--REPOSITORY-->
+    <preference for="Mirasvit\CustomerSegment\Api\Repository\SegmentRepositoryInterface" type="Mirasvit\CustomerSegment\Repository\SegmentRepository"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Repository\Segment\CustomerRepositoryInterface" type="Mirasvit\CustomerSegment\Repository\Segment\CustomerRepository"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Repository\Segment\HistoryRepositoryInterface" type="Mirasvit\CustomerSegment\Repository\Segment\HistoryRepository"/>
+
+    <preference for="Mirasvit\CustomerSegment\Api\Repository\Candidate\FinderRepositoryInterface" type="Mirasvit\CustomerSegment\Repository\Candidate\FinderRepository"/>
+
+    <!--FACTORY-->
+    <preference for="Mirasvit\CustomerSegment\Api\Factory\Segment\ConditionFactoryInterface" type="Mirasvit\CustomerSegment\Factory\Segment\ConditionFactory"/>
+
+    <!--SERVICE-->
+    <preference for="Mirasvit\CustomerSegment\Api\Service\Segment\RuleServiceInterface" type="Mirasvit\CustomerSegment\Service\Segment\RuleService"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Service\Candidate\SearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Service\Candidate\SearchServiceInterface" type="Mirasvit\CustomerSegment\Service\Candidate\SearchService"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Service\Segment\CustomerManagementInterface" type="Mirasvit\CustomerSegment\Service\Segment\CustomerManagement"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Service\SegmentServiceInterface" type="Mirasvit\CustomerSegment\Service\SegmentService"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Service\Segment\CustomerDataProviderInterface" type="Mirasvit\CustomerSegment\Service\Segment\CustomerDataProvider"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Service\OperatorConversionInterface" type="Mirasvit\CustomerSegment\Service\OperatorConversion"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Service\Segment\Condition\ValueProviderInterface" type="Mirasvit\CustomerSegment\Service\Segment\Condition\ValueProvider"/>
+    <preference for="Mirasvit\CustomerSegment\Api\Service\Segment\History\WriterInterface" type="Mirasvit\CustomerSegment\Service\Segment\History\Writer"/>
+
+    <!-- Console Commands -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="segmentInfoCommand" xsi:type="object">Mirasvit\CustomerSegment\Console\Command\InfoCommand</item>
+                <item name="segmentRefreshCommand" xsi:type="object">Mirasvit\CustomerSegment\Console\Command\RefreshCommand</item>
+                <item name="segmentExportCommand" xsi:type="object">Mirasvit\CustomerSegment\Console\Command\ExportCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="customersegment_segment_listing_data_source" xsi:type="string">Mirasvit\CustomerSegment\Model\ResourceModel\Segment\Grid</item>
+                <item name="customersegment_customer_listing_data_source" xsi:type="string">Magento\Customer\Model\ResourceModel\Grid\Collection</item>
+                <item name="customersegment_guest_listing_data_source" xsi:type="string">Mirasvit\CustomerSegment\Model\ResourceModel\Segment\Customer\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Customer Segment Reports -->
+    <type name="Mirasvit\Report\Api\Repository\ReportRepositoryInterface">
+        <arguments>
+            <argument name="reports" xsi:type="array">
+                <item name="sales_by_segment" xsi:type="string">Mirasvit\CustomerSegment\Reports\Sales</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Integration with Mirasvit Email, filter by segments -->
+    <type name="Mirasvit\Email\Model\Rule\Condition\Combine">
+        <arguments>
+            <argument name="conditions" xsi:type="array">
+                <item name="segment" xsi:type="object">Mirasvit\CustomerSegment\Model\SalesRule\Rule\Condition\Segment</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\CustomerSegment\Controller\Adminhtml\Segment\Refresh">
+        <arguments>
+            <argument name="ruleService" xsi:type="object">Mirasvit\CustomerSegment\Service\Segment\AjaxRuleService</argument>
+        </arguments>
+    </type>
+    <type name="Mirasvit\CustomerSegment\Console\Command\RefreshCommand">
+        <arguments>
+            <argument name="ruleService" xsi:type="object">Mirasvit\CustomerSegment\Service\Segment\AjaxRuleService</argument>
+        </arguments>
+    </type>
+
+    <type name="Mirasvit\CustomerSegment\Service\Segment\AjaxRuleService">
+        <arguments>
+            <argument name="candidateSearchService" xsi:type="object">Mirasvit\CustomerSegment\Service\Candidate\AjaxSearchService</argument>
+        </arguments>
+    </type>
+    <type name="Mirasvit\CustomerSegment\Api\Repository\Candidate\FinderRepositoryInterface">
+        <arguments>
+            <argument name="candidateFinders" xsi:type="array">
+                <item name="customer_finder" xsi:type="object">Mirasvit\CustomerSegment\Service\Candidate\Finder\CustomerFinder</item>
+                <item name="guest_finder" xsi:type="object">Mirasvit\CustomerSegment\Service\Candidate\Finder\GuestFinder</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure Conditions for the Customer Segment Rules -->
+
+    <!-- Configure Top Level Conditions -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Combine">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="condition_options" xsi:type="array">
+                    <item name="customer_address" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Customer\Address</item>
+                    <item name="customer" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Customer</item>
+                    <item name="sales" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Sales</item>
+                    <item name="cart" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Cart</item>
+                    <item name="product" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Product</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure "Customer Address" Condition Group -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Customer\Address">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Customer\Address</item>
+                <item name="value" xsi:type="string"/>
+                <item name="label" xsi:type="string">Customer Address</item>
+                <item name="condition_options" xsi:type="array">
+                    <item name="attributes" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Customer\Address\Attributes</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure "Customer" Condition Group -->
+    <virtualType name="Mirasvit\CustomerSegment\Model\Segment\Condition\Customer" type="Mirasvit\CustomerSegment\Model\Segment\Condition\ConditionFactory">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Customer</item> <!-- Specify Condition Type -->
+                <item name="value" xsi:type="string"/> <!-- Specify Default Value of a Condition -->
+                <item name="label" xsi:type="string">Customer</item> <!-- Specify Condition Label in Dropdown -->
+                <!-- Expand child conditions immediately. Otherwise the child conditions are shown only after choosing condition -->
+                <item name="is_show_child_conditions" xsi:type="boolean">true</item>
+                <item name="condition_options" xsi:type="array"> <!-- Add Options to Condition -->
+                    <item name="attributes" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Customer\Attributes</item>
+                    <item name="newsletter" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Customer\Newsletter</item>
+                    <item name="lastActivity" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Customer\LastActivity</item>
+                    <item name="followUpEmail" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\FollowUpEmail\Subscription</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Configure "Customer -> Attributes" Condition Group -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Customer\Attributes">
+        <arguments>
+            <argument name="data" xsi:type="array"> <!-- Specify UI form name -->
+                <item name="is_show_child_conditions" xsi:type="boolean">true</item> <!-- Should we add new child select options as the value automatically or not -->
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Customer\Attributes</item> <!-- Specify Condition Type -->
+                <item name="value" xsi:type="string"/> <!-- Specify Default Value of a Condition, leave empty for null -->
+                <item name="label" xsi:type="string" translate="true"/> <!-- Specify Condition Label in Dropdown -->
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure "Sales" Condition Group -->
+    <virtualType name="Mirasvit\CustomerSegment\Model\Segment\Condition\Sales" type="Mirasvit\CustomerSegment\Model\Segment\Condition\ConditionFactory">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Sales</item>
+                <item name="value" xsi:type="string"/>
+                <item name="label" xsi:type="string" translate="true">Sales</item>
+                <item name="is_show_child_conditions" xsi:type="boolean">true</item>
+                <item name="condition_options" xsi:type="array">
+                    <item name="address" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Order\Address</item>
+                    <item name="sales_amount" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Sales\Salesamount</item>
+                    <item name="orders_number" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Sales\Ordersnumber</item>
+                    <item name="purchased_qty" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Sales\Purchasedqty</item>
+                    <item name="last_order" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Sales\Lastorder</item>
+                    <item name="last_shipment" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Sales\LastShipment</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Configure "Sales -> Sales Amount" Condition Group -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Sales\Salesamount">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <!-- This condition extends \Magento\Rule\Model\Condition\Combine class, which rewrites some params defined "value" and "type" params -->
+                <!-- So we have to manually declare them after calling parent::__construct() -->
+                <item name="label" xsi:type="string" translate="true">Sales Amount</item>
+                <item name="condition_options" xsi:type="array">
+                    <item name="order_status" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Order\Status</item>
+                    <item name="daterange" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Daterange</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Configure "Sales -> Number of Orders" Condition Group -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Sales\Ordersnumber">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Number of Orders</item>
+                <item name="condition_options" xsi:type="array">
+                    <item name="order_status" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Order\Status</item>
+                    <item name="daterange" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Daterange</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Configure "Sales -> Purchased QTY" Condition Group -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Sales\Purchasedqty">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Purchased Quantity</item>
+                <item name="condition_options" xsi:type="array">
+                    <item name="order_status" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Order\Status</item>
+                    <item name="daterange" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Daterange</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Configure "Sales -> Address" Condition Group -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Order\Address">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Order\Address</item>
+                <item name="value" xsi:type="string"/>
+                <item name="label" xsi:type="string" translate="true">Order Address</item>
+                <item name="condition_options" xsi:type="array">
+                    <item name="attributes" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Customer\Address\Attributes</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Configure "Sales -> Last Order" Condition Group -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Sales\Lastorder">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Sales\Lastorder</item>
+                <item name="value" xsi:type="string"/>
+                <item name="label" xsi:type="string" translate="true">Last Order Date</item>
+                <item name="condition_options" xsi:type="array">
+                    <item name="order_status" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Order\Status</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure "Sales -> Condition -> Order Status" Condition -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Order\Status">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Order\Status</item>
+                <item name="label" xsi:type="string" translate="true">Order Status</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure "Shopping Cart" Condition Group -->
+    <virtualType name="Mirasvit\CustomerSegment\Model\Segment\Condition\Cart" type="Mirasvit\CustomerSegment\Model\Segment\Condition\ConditionFactory">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Cart</item>
+                <item name="value" xsi:type="string"/>
+                <item name="label" xsi:type="string" translate="true">Shopping Cart</item>
+                <item name="is_show_child_conditions" xsi:type="boolean">true</item>
+                <item name="condition_options" xsi:type="array">
+                    <item name="amount" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Cart\Amount</item>
+                    <item name="products_qty" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Cart\Productsqty</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Configure "Shopping Cart Amount" Condition -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Cart\Amount">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Cart\Amount</item>
+                <item name="label" xsi:type="string">Shopping Cart Total</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Configure "Shopping Cart Items QTY/Count" Condition -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Cart\Productsqty">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Cart\Productsqty</item>
+                <item name="label" xsi:type="string">Shopping Cart Products Count/QTY</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure "Product" Condition Group -->
+    <virtualType name="Mirasvit\CustomerSegment\Model\Segment\Condition\Product" type="Mirasvit\CustomerSegment\Model\Segment\Condition\ConditionFactory">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Product</item>
+                <item name="value" xsi:type="string"/>
+                <item name="label" xsi:type="string" translate="true">Products</item>
+                <item name="is_show_child_conditions" xsi:type="boolean">true</item>
+                <item name="condition_options" xsi:type="array">
+                    <item name="list" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Product\Productlist</item>
+                    <item name="history" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Product\History</item>
+                    <item name="item_history" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Product\ItemHistory</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Configure "Products -> Product List" Condition Group -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Product\Productlist">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Products List</item>
+                <item name="default_value" xsi:type="string">cart</item>
+                <item name="condition_options" xsi:type="array">
+                    <item name="daterange" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Daterange</item>
+                    <item name="attributes" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Product\Attributes</item>
+                </item>
+            </argument>
+            <argument name="valueProviders" xsi:type="array">
+                <item name="cart" xsi:type="object">Mirasvit\CustomerSegment\Service\Segment\Condition\Product\List\CartValueProvider</item>
+                <item name="wishlist" xsi:type="object">Mirasvit\CustomerSegment\Service\Segment\Condition\Product\List\WishlistValueProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Configure "Products -> Product List" Condition Group -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Product\History">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Products History</item>
+                <item name="default_value" xsi:type="string">ordered</item>
+                <item name="condition_options" xsi:type="array">
+                    <item name="daterange" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Daterange</item>
+                    <item name="attributes" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Product\Attributes</item>
+                </item>
+            </argument>
+            <argument name="valueProviders" xsi:type="array">
+                <item name="ordered" xsi:type="object">Mirasvit\CustomerSegment\Service\Segment\Condition\Product\History\OrderValueProvider</item>
+                <item name="viewed" xsi:type="object">Mirasvit\CustomerSegment\Service\Segment\Condition\Product\History\ViewValueProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Configure "Products -> Product List" Condition Group -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Product\ItemHistory">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Ordered Item History</item>
+                <item name="default_value" xsi:type="string">ordered</item>
+                <item name="condition_options" xsi:type="array">
+                    <item name="daterange" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Daterange</item>
+                    <item name="attributes" xsi:type="object">Mirasvit\CustomerSegment\Model\Segment\Condition\Item\Attributes</item>
+                </item>
+            </argument>
+            <argument name="valueProviders" xsi:type="array">
+                <item name="ordered" xsi:type="object">Mirasvit\CustomerSegment\Service\Segment\Condition\Product\History\OrderItemValueProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Configure "Products -> Product List" Condition Group -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Product\Attributes">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Attributes</item>
+                <item name="is_show_child_conditions" xsi:type="boolean">true</item>
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Product\Attributes</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Configure "Products -> Product List" Condition Group -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Item\Attributes">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Item Attributes</item>
+                <item name="is_show_child_conditions" xsi:type="boolean">true</item>
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Item\Attributes</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure Conditions used across different Combine Condition Groups -->
+    <!-- Configure "Customer Address Attributes" Condition -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Customer\Address\Attributes">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Customer\Address\Attributes</item>
+                <item name="label" xsi:type="string">Address Attributes</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Configure "Date Range" Condition -->
+    <type name="Mirasvit\CustomerSegment\Model\Segment\Condition\Daterange">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">Mirasvit\CustomerSegment\Model\Segment\Condition\Daterange</item>
+                <item name="label" xsi:type="string" translate="true">Date Range</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Configure Value Providers -->
+    <virtualType name="Mirasvit\CustomerSegment\Service\Segment\Condition\Product\List\CartValueProvider"
+                 type="Mirasvit\CustomerSegment\Service\Segment\Condition\ValueProvider">
+        <arguments>
+            <argument name="code" xsi:type="string">cart</argument>
+            <argument name="label" xsi:type="string">Shopping Cart</argument>
+            <argument name="collectionProvider" xsi:type="object">Mirasvit\CustomerSegment\Service\Segment\Condition\ProductCollectionProvider\CartProvider</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Mirasvit\CustomerSegment\Service\Segment\Condition\Product\List\WishlistValueProvider"
+                 type="Mirasvit\CustomerSegment\Service\Segment\Condition\ValueProvider">
+        <arguments>
+            <argument name="code" xsi:type="string">wishlist</argument>
+            <argument name="label" xsi:type="string">Wishlist*</argument>
+            <argument name="collectionProvider" xsi:type="object">Mirasvit\CustomerSegment\Service\Segment\Condition\ProductCollectionProvider\WishlistProvider</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Mirasvit\CustomerSegment\Service\Segment\Condition\Product\History\OrderValueProvider"
+                 type="Mirasvit\CustomerSegment\Service\Segment\Condition\ValueProvider">
+        <arguments>
+            <argument name="code" xsi:type="string">ordered</argument>
+            <argument name="label" xsi:type="string">Ordered</argument>
+            <argument name="collectionProvider" xsi:type="object">Mirasvit\CustomerSegment\Service\Segment\Condition\ProductCollectionProvider\OrderProvider</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Mirasvit\CustomerSegment\Service\Segment\Condition\Product\History\OrderItemValueProvider"
+                 type="Mirasvit\CustomerSegment\Service\Segment\Condition\ValueProvider">
+        <arguments>
+            <argument name="code" xsi:type="string">ordered_item</argument>
+            <argument name="label" xsi:type="string">Ordered</argument>
+            <argument name="collectionProvider" xsi:type="object">Mirasvit\CustomerSegment\Service\Segment\Condition\ItemCollectionProvider\OrderProvider</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Mirasvit\CustomerSegment\Service\Segment\Condition\Product\History\ViewValueProvider"
+                 type="Mirasvit\CustomerSegment\Service\Segment\Condition\ValueProvider">
+        <arguments>
+            <argument name="code" xsi:type="string">viewed</argument>
+            <argument name="label" xsi:type="string">Viewed*</argument>
+            <argument name="collectionProvider" xsi:type="object">Mirasvit\CustomerSegment\Service\Segment\Condition\ProductCollectionProvider\ViewProvider</argument>
+        </arguments>
+    </virtualType>
+</config>

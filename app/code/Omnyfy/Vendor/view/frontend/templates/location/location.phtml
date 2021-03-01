@@ -1,0 +1,293 @@
+<?php
+$locationDetails = $this->getLocationDetails();
+$vendorDetails = $this->getVendorDetails($locationDetails->getVendorId());
+$allLocation = $this->getAllLocations($locationDetails->getVendorId());
+
+$locationAttributes = $block->loadLocationAttributes();
+
+$locationAttributes = $locationAttributes->getData();
+?>
+<div class="bg-light-grey">
+    <section class="obj-banner-section" style="background-image: url('<?php echo $this->getBannerUrl($vendorDetails->getBanner()); ?>');">
+        <img src="<?php echo $this->getBannerUrl($vendorDetails->getBanner()); ?>" class="banner-img" title="banner">
+    </section>
+    <section class="profile-header-section">
+        <div class="container">
+            <div class="main-row flex-columns">
+                <div class="info-pane main-column">
+                    <div class="thumbnail-pic">
+                        <img src="<?php echo $this->getLogoUrl($vendorDetails->getLogo()); ?>">
+                    </div>
+                    <div class="main-info">
+                        <h1 class="name"><?php echo $vendorDetails->getName() ?></h1>
+                        <div class="sub-line">
+                            <div class="location">
+                                <?php if ($locationDetails->getLocationName()) {
+                                    echo $locationDetails->getLocationName();
+                                } ?><br />
+                                <?php if ($locationDetails->getAddress()) {
+                                    echo $locationDetails->getAddress() . ', ';
+                                } ?>
+                            <?php if ($locationDetails->getSuburb()) {
+                                echo $locationDetails->getSuburb();
+                            } ?>
+                            <?php if ($locationDetails->getRegion()) {
+                                echo $locationDetails->getRegion();
+                            } ?>
+<?php if ($locationDetails->getPostcode()) {
+    echo $locationDetails->getPostcode();
+} ?>
+<?php if ($locationDetails->getCountry()) {
+    echo $locationDetails->getCountry();
+} ?>
+                            </div>
+                                            <?php /* echo '<pre>';?>
+                                              <?php print_r($this->getAllLocations($locationDetails->getVendorId())->getData());?>
+                                              <?php echo '</pre>'; */ ?>
+                                                    <?php if ($allLocation->getSize() > 0) { ?>
+                                <div class="actions">
+                                    <div class="btn-wrapper">
+                                        <button class="btn bold btn-text-green">
+                                                        <?php echo __('Change') ?>
+                                            <span class="arrow icon-chevron-down"></span>
+                                        </button>
+                                        <div class="dropdown-container">
+                                            <div class="dropdown-wrapper">
+    <?php foreach ($allLocation as $location): ?>
+                                                    <a href="<?php echo $block->getUrl('omnyfy/index/location/id/' . $location->getId()) ?>" class="option-item">
+                                                        <span class="option-name"><?php echo $location->getName(); ?></span>
+                                                        <span class="option-location">
+                                    <?php if ($location->getAddress()) {
+                                        echo $location->getAddress() . ', ';
+                                    } ?>
+                                <?php if ($location->getSuburb()) {
+                                    echo $location->getSuburb();
+                                } ?>
+                                <?php if ($location->getRegion()) {
+                                    echo $location->getRegion();
+                                } ?>
+                                <?php if ($location->getPostcode()) {
+                                    echo $location->getPostcode();
+                                } ?>
+                                <?php if ($location->getCountry()) {
+                                    echo $location->getCountry();
+                                } ?>
+                                                        </span>
+                                                    </a>
+                            <?php endforeach; ?>	
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+<?php } ?>
+                        </div>
+<?php /* <div class="rating-row-container">
+  <div class="rating-stars-container">
+  <div class="score">
+
+  4.0
+
+  </div>
+  <div class="rating-stars-wrapper">
+  <div class="rating-stars">
+  <span style="width: 80%;"></span>
+  </div>
+  </div>
+
+  </div>
+
+  <div class="rating-review">
+  <a href="#">From 126 verified reviews</a>
+  </div>
+  </div> */ ?>
+                    </div>
+                </div>
+
+                <div class="actions-pane sidebar-column">
+                    <button class="btn btn-block btn-green-stroke">
+                        <span class="icon-heart"></span> 
+                        Add to Favourite
+                    </button>
+<?php if ($this->isLoggedIn()) { ?>
+                        <div class="contact-btn-wrapper">
+                            <button class="btn btn-block btn-green-stroke show-contact-btn">
+                                <span class="icon-phone2"></span> 
+                                Click to view contact number
+                            </button>
+                            <a href="tel:<?php echo $vendorDetails->getPhone() ?>" class="btn btn-block btn-green-stroke contact-btn">
+                                <span class="icon-phone2"></span> 
+                                        <?php echo $vendorDetails->getPhone() ?>
+                            </a>
+                        </div>
+<?php } else { ?>
+                        <a href="<?php echo $this->getLoginUrl() ?>" class="btn btn-block btn-green-stroke">
+                            <span class="icon-phone2"></span> 
+                            Click to view contact number
+                        </a>
+                                            <?php } ?>
+                    <a href="<?php echo 'http://maps.google.com/maps?q=' . $locationDetails->getLatitude() . ',' . $locationDetails->getLongitude() ?>" target="_blank" class="btn btn-block btn-green-stroke">
+                        <span class="icon-pin_solid"></span> 
+                        View on map
+                    </a>
+                    <div class="btn-wrapper">
+                        <button class="btn btn-block btn-green-stroke">
+                            <span class="icon-time"></span> 
+                            Opening hours
+                        </button>
+                        <div class="dropdown-container">
+                            <div class="dropdown-wrapper">
+                                <div class="opening-hours-table">
+                                                    <?php
+                                                    $hours = $block->getOpeningHours($locationDetails->getOpeningHours());
+                                                    /* $abc = array_shift($hours);
+                                                      var_dump($abc); */
+                                                    ?>
+                                    <table>
+                                        <tbody>
+                                                    <?php /* foreach ($hours as $dayNum => $hours): ?>
+                                                      <tr>
+                                                      <td>
+                                                      <?php echo __(\Omnyfy\Core\Helper\Date::WEEKDAYS[$dayNum]); ?>
+                                                      </td>
+                                                      <td>
+                                                      <?php if (isset($hours['close']) && $hours['close']): ?>
+                                                      <?php echo __('Closed'); ?>
+                                                      <?php else: ?>
+                                                      <?php echo date('g:i a', strtotime($hours['start_time'])); ?> - <?php echo date('g:i a', strtotime($hours['end_time'])); ?>
+                                                      <?php endif; ?>
+                                                      </td>
+                                                      </tr>
+                                                      <?php endforeach; */ ?>
+                                                    <?php for ($i = 1; $i < count($hours); $i++) { ?>
+                                                <tr>
+                                                    <td>
+    <?php echo __(\Omnyfy\Core\Helper\Date::WEEKDAYS[$i]); ?>
+                                                    </td>
+                                                    <td>
+    <?php if (isset($hours[$i]['close']) && $hours[$i]['close']): ?>
+        <?php echo __('Closed'); ?>
+    <?php else: ?>
+        <?php echo date('g:i a', strtotime($hours[$i]['start_time'])); ?> - <?php echo date('g:i a', strtotime($hours[$i]['end_time'])); ?>
+    <?php endif; ?>
+                                                    </td>
+                                                </tr>
+<?php } ?>
+                                            <tr>
+                                                <td>
+<?php echo __(\Omnyfy\Core\Helper\Date::WEEKDAYS[0]); ?>
+                                                </td>
+                                                <td>
+                            <?php if (isset($hours[0]['close']) && $hours[0]['close']): ?>
+                                <?php echo __('Closed'); ?>
+                            <?php else: ?>
+                                <?php echo date('g:i a', strtotime($hours[0]['start_time'])); ?> - <?php echo date('g:i a', strtotime($hours[0]['end_time'])); ?>
+                            <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="internal-nav-wrapper">
+            <div class="internal-nav">
+                <div class="container">
+                    <div class="nav-wrapper">
+                        <div class="nav-row">
+
+                            <a href="#overview" class="nav-item internal-nav-item">Overview</a>
+                            <?php echo $block->getChildHtml('services_link'); ?>
+                            <?php echo $block->getChildHtml('personnel_link'); ?>
+                            <?php echo $block->getChildHtml('review_link'); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="profile-section">
+        <div class="container">
+            <div class="flex-columns">
+                <div class="main-column">
+
+                    <?php if (!empty($locationAttributes)): ?>
+
+                        <section class="profile-section normal-section-2" id="details" style="padding: 20px 0;">
+                            <div class="container">
+                                <div class="flex-columns">
+                                    <div class="main-column">
+                                        <div class="column-box">
+                                            <div class="details-wrapper">
+                                                <div class="row">
+                                                    <!-- @TODO - put into configuration value -->
+                                                    <?php $excludeFields = ['entity_id', 'vendor_id', 'priority', 'location_name', 'description', 'address', 'suburb', 'region', 'country', 'postcode', 'lat', 'lon', 'rad_lon', 'rad_lat', 'cos_lat', 'sin_lat', 'region_id', 'status', 'booking_lead_time', 'timezone', 'is_warehouse', 'vendor_type_id', 'attribute_set_id']; ?>
+                                                    <?php $numberOfItems = count($locationAttributes) - count($excludeFields); ?>
+                                                    <?php $splitItems = (int)$block->getColumnSplitValue($locationAttributes) / 2; ?>
+                                                    <?php $rowCount = 0; ?>
+                                                    <?php $splitRows = false; ?>
+                                                    <?php ksort($locationAttributes); ?>
+                                                    <div class="col-sm-6">
+                                                        <?php foreach ($locationAttributes as $locationAttributeKey => $locationAttributeValue) : ?>
+                                                            <?php if ($block->shouldDisplayAttribute($locationAttributeKey)): ?>
+                                                                <?php if (!in_array($locationAttributeKey, $excludeFields)): ?>
+                                                                    <?php $rowCount++; ?>
+                                                                    <?php if ($block->isAttributeMultiselect($locationAttributeKey)): ?>
+                                                                        <div class="detail-item">
+                                                                            <span class="title">
+                                                                                <?php echo $block->getAttributeLabel($locationAttributeKey); ?>
+                                                                            </span>
+                                                                            <div class="badge-group">
+                                                                                <?php foreach ($block->getMultiSelectValues($locationAttributeKey) as $multiselectValue): ?>
+                                                                                    <span class="badge badge-primary">
+                                                                                        <?php echo $multiselectValue; ?>
+                                                                                    </span>
+                                                                                <?php endforeach; ?>
+                                                                            </div>
+                                                                        </div>
+                                                                    <?php else: ?>
+                                                                        <div class="detail-item">
+                                                                            <span class="title">
+                                                                                <?php echo $block->getAttributeLabel($locationAttributeKey); ?>
+                                                                            </span>
+                                                                            <p><?php echo $block->getAttributeValue($locationAttributeKey); ?></p>
+                                                                        </div>
+                                                                    <?php endif; ?>
+                                                                    <?php if ($rowCount > $splitItems && !$splitRows): ?>
+                                                                        <?php $splitRows = true; ?>
+                                                                        </div><div class="col-sm-6">
+                                                                    <?php endif; ?>
+                                                                <?php endif; ?>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>     
+                                                    </div>           
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    <?php endif; ?>
+
+
+                    <div class="overview anchor-target" id="overview">
+                    <?php echo $vendorDetails->getDescription(); ?>
+                    </div>
+                    <?php echo $block->getChildHtml('location_products'); ?>
+                    <?php echo $block->getChildHtml('locationservices'); ?>
+                    <?php echo $block->getChildHtml('locationpersonnel'); ?>
+                    <?php echo $block->getChildHtml('location_reviews'); ?>
+                </div>
+<?php echo $block->getChildHtml('enquiryform'); ?>
+            </div>
+        </div>
+    </section>
+</div>
+<?php echo $block->getChildHtml('enquiry_form_script'); ?>

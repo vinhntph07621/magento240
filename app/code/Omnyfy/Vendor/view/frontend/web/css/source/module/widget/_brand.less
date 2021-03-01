@@ -1,0 +1,195 @@
+// /**
+//  * Copyright © Omnyfy, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  ---------------------------------------------
+@horizontal-product-vendor__display: flex;
+@horizontal-product-vendor__justify-content: space-between;
+@horizontal-product-vendor__align-items: center;
+@horizontal-product-vendor__text-align: left;
+@horizontal-product-vendor__padding: @indent__base;
+@horizontal-product-vendor__margin: @indent__base 0;
+@horizontal-product-vendor__border: 1px solid @ui-03;
+@horizontal-product-vendor__border-radius: 0;
+
+@horizontal-vendor-details__display: flex;
+@horizontal-vendor-details__justify-content: flex-start;
+@horizontal-vendor-details__align-items: center;
+
+@horizontal-vendor-logo__width: 56px;
+@horizontal-vendor-logo__min-width: 56px;
+@horizontal-vendor-logo__margin: 0 @indent__base 0 0;
+
+@horizontal-vendor-name__margin: 0;
+
+@horizontal-vendor-button__display: none;
+@horizontal-vendor-button__margin: 0;
+
+@vertical-product-vendor__display: block;
+@vertical-product-vendor__justify-content: center;
+@vertical-product-vendor__align-items: center;
+@vertical-product-vendor__text-align: center;
+@vertical-product-vendor__padding: @indent__base;
+@vertical-product-vendor__margin: @indent__base 0;
+@vertical-product-vendor__border: 1px solid @ui-03;
+@vertical-product-vendor__border-radius: 0;
+
+@vertical-vendor-details__display: block;
+@vertical-vendor-details__justify-content: flex-start;
+@vertical-vendor-details__align-items: center;
+
+@vertical-vendor-logo__width: 150px;
+@vertical-vendor-logo__margin: 0 0 @indent__base 0;
+
+@vertical-vendor-name__margin: 0 0 @indent__s;
+
+@vertical-vendor-button__display: inline-block;
+@vertical-vendor-button__margin: 0 0 @indent__s;
+
+@vendor-title__color: @text__color__muted;
+@vendor-title__font-family: @font-family__base;
+@vendor-title__font-size: @font-size__xs;
+@vendor-title__letter-spacing: normal;
+@vendor-title__text-transform: none;
+@vendor-title__padding: 0;
+@vendor-title__margin: 0 0 @indent__xs;
+
+@vendor-name__color: @text__color;
+@vendor-name__font-family: @font-family__base;
+@vendor-name__font-size: @font-size__l;
+@vendor-name__letter-spacing: normal;
+@vendor-name__text-transform: none;
+@vendor-name__padding: 0;
+
+@vendor-button__background-color: @button-primary__background;
+@vendor-button__color: @button-primary__color;
+@vendor-button__font-family: @button-primary__font-family;
+@vendor-button__font-size: @button-primary__font-size;
+@vendor-button__letter-spacing: normal;
+@vendor-button__text-transform: none;
+@vendor-button__padding: @button-primary__padding;
+@vendor-button__border: 1px solid @button-primary__background;
+@vendor-button__border-radius: @button__border-radius;
+@vendor-button__background-color__hover: @button-primary__active__background;
+@vendor-button__color__hover: @button-primary__active__color;
+
+
+
+//
+//    Common
+//--------------------------------------
+& when (@media-common = true) {
+	.product-vendor.horizontal a {
+		display: @horizontal-product-vendor__display;
+		justify-content: @horizontal-product-vendor__justify-content;
+		align-items: @horizontal-product-vendor__align-items;
+		text-align: @horizontal-product-vendor__text-align;
+		padding: @horizontal-product-vendor__padding;
+		margin: @horizontal-product-vendor__margin;
+		border: @horizontal-product-vendor__border;
+		border-radius: @horizontal-product-vendor__border-radius;
+
+		&:hover,
+		&:active {
+			text-decoration: none;
+		}
+
+		.vendor-details {
+			display: @horizontal-vendor-details__display;
+			justify-content: @horizontal-vendor-details__justify-content;
+			align-items: @horizontal-vendor-details__align-items;
+		}
+
+		.vendor-logo {
+			width: @horizontal-vendor-logo__width;
+			min-width: @horizontal-vendor-logo__min-width;
+			margin: @horizontal-vendor-logo__margin;
+		}
+
+		.vendor-name {
+			margin: @horizontal-vendor-name__margin;
+		}
+
+		.vendor-button {
+			display: @horizontal-vendor-button__display;
+			margin: @horizontal-vendor-button__margin;
+		}
+	}
+
+	.product-vendor.vertical a {
+		display: @vertical-product-vendor__display;
+		justify-content: @vertical-product-vendor__justify-content;
+		align-items: @vertical-product-vendor__align-items;
+		text-align: @vertical-product-vendor__text-align;
+		padding: @vertical-product-vendor__padding;
+		margin: @vertical-product-vendor__margin;
+		border: @vertical-product-vendor__border;
+		border-radius: @vertical-product-vendor__border-radius;
+
+		&:hover,
+		&:active {
+			text-decoration: none;
+		}
+
+		.vendor-details {
+			display: @vertical-vendor-details__display;
+			justify-content: @vertical-vendor-details__justify-content;
+			align-items: @vertical-vendor-details__align-items;
+		}
+
+		.vendor-logo {
+			width: @vertical-vendor-logo__width;
+			margin: @vertical-vendor-logo__margin;
+		}
+
+		.vendor-name {
+			margin: @vertical-vendor-name__margin;
+		}
+
+		.vendor-button {
+			display: @vertical-vendor-button__display;
+			margin: @vertical-vendor-button__margin;
+		}
+	}
+
+	.product-vendor {
+		.vendor-title {
+			color: @vendor-title__color;
+			font-family: @vendor-title__font-family;
+			font-size: @vendor-title__font-size;
+			letter-spacing: @vendor-title__letter-spacing;
+			text-transform: @vendor-title__text-transform;
+			padding: @vendor-title__padding;
+			margin: @vendor-title__margin;
+		}
+
+		.vendor-name {
+			color: @vendor-name__color;
+			font-family: @vendor-name__font-family;
+			font-size: @vendor-name__font-size;
+			letter-spacing: @vendor-name__letter-spacing;
+			text-transform: @vendor-name__text-transform;
+			padding: @vendor-name__padding;
+		}
+
+		.vendor-button {
+			background-color: @vendor-button__background-color;
+			color: @vendor-button__color;
+			font-family: @vendor-button__font-family;
+			font-size: @vendor-button__font-size;
+			letter-spacing: @vendor-button__letter-spacing;
+			text-transform: @vendor-button__text-transform;
+			padding: @vendor-button__padding;
+			border: @vendor-button__border;
+			border-radius: @vendor-button__border-radius;
+
+			&:hover {
+				background-color: @vendor-button__background-color__hover;
+				color: @vendor-button__color__hover;
+			}
+		}
+	}
+}

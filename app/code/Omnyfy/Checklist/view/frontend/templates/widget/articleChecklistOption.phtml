@@ -1,0 +1,62 @@
+<?php $articleId = $this->getArticleId() ?>
+<?php $uname = "check_".$articleId ?>
+<div class="column-footer">
+    <div class="checkbox-container">
+        <div class="checkbox-style">
+            <input class="complete-task" id="<?php echo $uname ?>" type="checkbox" name="<?php echo $uname ?>" value="<?php echo $articleId ?>" data-articleid="<?php echo $articleId ?>">
+            <label for="<?php echo $uname ?>"><?php echo __("Completed this checklist task") ?></label>
+            <div id="message-complete" style="display:none"></div>
+        </div>
+    </div>
+</div>
+<script>
+    require(
+        ["jquery"],
+        function($) {
+            $(document).ready(function () {
+                $(".wrapper-body").on("click",".complete-task", function(){
+                    var id = $(this).data('articleid');
+                    var ajaxurl = '<?php echo $this->getCompleteArticleUrl() ?>';
+                    $.ajax({
+                        url:ajaxurl,
+                        type:'POST',
+                        showLoader: true,
+                        dataType:'json',
+                        data: {articleid:id},
+                        success:function(response){
+                            console.log(response);
+                            $("#message-complete").show();
+                            $("#message-complete").addClass(response['type']);
+                            $("#message-complete").html(response['message']);
+                        },
+                        fail:function () {
+                            $("#message-complete").show();
+                            $("#message-complete").html('Unexpected Error. Please try again.');
+                            $("#message-complete").addClass('error');
+                        },
+                        always:function () {
+                        }
+                    });
+                    setTimeout(function() {
+                        $("#message-complete").hide('blind', {}, 500)
+                    }, 5000);
+                });
+            });
+        });
+</script>
+<style>
+    div#message-complete {
+        color: #fff;
+        padding: 5px 20px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+    }
+
+    div#message-complete.success {
+        background: #00c1aa;
+    }
+
+    div#message-complete.error {
+        background: #e02b27;
+    }
+</style>

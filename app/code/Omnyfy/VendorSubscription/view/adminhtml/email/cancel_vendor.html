@@ -1,0 +1,20 @@
+<!--@subject You have cancelled the subscription plan to {{trans "%store_name" store_name=$store.getFrontendName()}} @-->
+<!--@vars {
+    "template config_path=\"design\/email\/footer_template\"":"Email Footer Template",
+    "template config_path=\"design\/email\/header_template\"":"Email Header Template"
+    }
+ @-->
+{{template config_path="design/email/header_template"}}
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">Hi {{var vendor_name}},</p>
+            <p>You have canceled the subscription plan and the current subscription will be valid until {{var end_date}}.Your account to access the vendor portal will be disabled once the subscription is expired.</p>
+            <p>Please view the details of the canceled subscription plan, as below:</p>
+            <p>Subscription Plan Name: {{var plan_name}}</p>
+            <p>Plan Price: {{var plan_price}}</p>
+            <p>Billing Interval: {{var billing_interval}}</p>
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

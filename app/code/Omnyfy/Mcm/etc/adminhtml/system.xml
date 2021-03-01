@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="omnyfy_mcm" translate="label" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Marketplace Commercials Management</label>
+            <tab>omnyfy</tab>
+            <resource>Omnyfy_MCM::omnyfy_mcm_configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Setting</label>
+                <field id="fees_management" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Turn on Fees Management</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[
+    <script type="text/javascript">
+    require(['jquery'],function($){                    
+        jQuery(document).ready(function() {
+            if(jQuery('#omnyfy_mcm_general_fees_management').val() != 1){
+                jQuery("#omnyfy_mcm_category_commissions-head").hide();
+                jQuery("#omnyfy_mcm_transaction_fees-head").hide();
+                jQuery("#omnyfy_mcm_set_default_fees-head").hide();
+                jQuery("#omnyfy_mcm_refund-head").hide();
+                jQuery("#omnyfy_mcm_category_commissions").hide();
+                jQuery("#omnyfy_mcm_transaction_fees").hide();
+                jQuery("#omnyfy_mcm_set_default_fees").hide();
+                jQuery("#omnyfy_mcm_refund").hide();
+                                       
+            }else{
+                jQuery("#omnyfy_mcm_category_commissions-head").show();
+                jQuery("#omnyfy_mcm_category_commissions").show();
+                jQuery("#omnyfy_mcm_transaction_fees-head").show();
+                jQuery("#omnyfy_mcm_set_default_fees-head").show();
+                jQuery("#omnyfy_mcm_refund-head").show();
+                jQuery("#omnyfy_mcm_transaction_fees").show();
+                jQuery("#omnyfy_mcm_set_default_fees").show();
+                jQuery("#omnyfy_mcm_refund").show();
+            }
+        });   
+        jQuery("#omnyfy_mcm_general_fees_management").on('change',function(){
+            var getValue=jQuery(this).val();
+            if(getValue == 1){
+                jQuery("#omnyfy_mcm_category_commissions-head").show();
+                jQuery("#omnyfy_mcm_category_commissions").show();
+                jQuery("#omnyfy_mcm_transaction_fees-head").show();
+                jQuery("#omnyfy_mcm_set_default_fees-head").show();
+                jQuery("#omnyfy_mcm_refund-head").show();
+                jQuery("#omnyfy_mcm_transaction_fees").show();
+                jQuery("#omnyfy_mcm_set_default_fees").show();
+                jQuery("#omnyfy_mcm_refund").show();
+            }else{
+                jQuery("#omnyfy_mcm_category_commissions-head").hide();
+                jQuery("#omnyfy_mcm_transaction_fees-head").hide();
+                jQuery("#omnyfy_mcm_set_default_fees-head").hide();
+                jQuery("#omnyfy_mcm_refund-head").hide();
+                jQuery("#omnyfy_mcm_category_commissions").hide();
+                jQuery("#omnyfy_mcm_transaction_fees").hide();
+                jQuery("#omnyfy_mcm_set_default_fees").hide();
+                jQuery("#omnyfy_mcm_refund").hide();
+            }
+        });                          
+    });                    
+    </script>]]>
+                    </comment>
+                </field>
+                <field id="include_kyc" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>On-Platform KYC</label>
+                    <comment>KYC check process on-platform or in payment gateway</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="ship_by_type" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Ship By Type</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This will allow the shipping to be shipped by Marketplace Owner or Vendor.
+                        (Retain Shipping Fees as Marketplace Earnings will be disabled)
+                    </comment>
+                </field>
+                <field id="shipping_fees_management" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Retain Shipping Fees as Marketplace Earnings</label>
+                    <source_model>Omnyfy\Mcm\Model\Source\Yesno</source_model>
+                    <depends>
+                        <field id="omnyfy_mcm/general/ship_by_type">0</field>
+                    </depends>
+                    <comment>If “NO” then shipping fees transferred to Vendor
+                        - If “YES” then shipping fees retained for Marketplace.
+                    Please Note - Omnyfy Shipping needs to be set to Overall Cart for this to be activated.</comment>
+                </field>
+            </group>
+            <group id="category_commissions" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Category Commissions</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Category Commissions</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="transaction_fees" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Transaction Fees</label>
+                <field id="allow_transaction_fees" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Transaction Fees</label>
+                    <comment>The Transaction Fees will always be paid by customers.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                    </depends>
+                </field>
+                <field id="transaction_fee_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Transaction Fee %</label>
+                    <validate>validate-number validate-zero-or-greater validate-not-negative-number validate-digits-range digits-range-0-99</validate>
+                    <comment>Please enter the percentage transaction fee charged per order. Entering 1.6 means charging 1.6% per order.</comment>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                        <field id="omnyfy_mcm/transaction_fees/allow_transaction_fees">1</field>
+                    </depends>
+                </field>
+                <field id="transaction_fee_amount" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Transaction Fee $</label>
+                    <validate>validate-currency-dollar validate-number validate-zero-or-greater validate-not-negative-number validate-digits-range digits-range-0-9999999999</validate>
+                    <comment>Please enter the fixed amount of transaction fee charged per order. Entering 0.3 means charging 30c per order.</comment>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                        <field id="omnyfy_mcm/transaction_fees/allow_transaction_fees">1</field>
+                    </depends>
+                </field>
+                <field id="transaction_fee_surcharge_percentage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Transaction Fee Surcharge %</label>
+                    <validate>validate-number validate-zero-or-greater validate-not-negative-number validate-digits-range digits-range-0-99</validate>
+                    <comment>Please enter the percentage of the transaction surcharge which is used to secure additional revenue from the transaction. Entering 0.2 means charging extra 0.2% on top of the transaction fee.</comment>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                        <field id="omnyfy_mcm/transaction_fees/allow_transaction_fees">1</field>
+                    </depends>
+                </field>
+                <field id="transaction_fee_tax_rate" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tax rate on Transaction Fee %</label>
+                    <validate>validate-number validate-zero-or-greater validate-not-negative-number validate-digits-range digits-range-0-99</validate>
+                    <comment>Please enter a number without %.</comment>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                        <field id="omnyfy_mcm/transaction_fees/allow_transaction_fees">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="set_default_fees" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Default Vendor Fees</label>
+                <field id="allow_vendor_fees" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Default Vendor Fees</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                    </depends>
+                </field>
+                <field id="default_seller_fees" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Seller Fees %</label>
+                    <validate>validate-currency-dollar validate-number validate-zero-or-greater validate-not-negative-number validate-digits-range digits-range-0-9999999999</validate>
+                    <comment>% of Sub-total charged as fees to this Vendor. Seller Fees are calculated in addition to the Category Commission.</comment>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                        <field id="omnyfy_mcm/set_default_fees/allow_vendor_fees">1</field>
+                    </depends>
+                </field>
+                <field id="default_min_seller_fees" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Minimum Seller Fees $</label>
+                    <validate>validate-currency-dollar validate-number validate-zero-or-greater validate-not-negative-number validate-digits-range digits-range-0-9999999999</validate>
+                    <comment>Leave blank for no minimum seller fees. This amount will be charged if the calculated Seller Fee is less than the Minimum Seller Fees.</comment>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                        <field id="omnyfy_mcm/set_default_fees/allow_vendor_fees">1</field>
+                    </depends>
+                </field>
+                <field id="default_max_seller_fees" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Maximum Seller Fees $</label>
+                    <validate>validate-currency-dollar validate-number validate-zero-or-greater validate-not-negative-number validate-digits-range digits-range-0-9999999999</validate>
+                    <comment>Leave blank for no maximum seller fees. This amount will be charged if the calculated Seller Fee exceed the Maximum Seller Fees.</comment>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                        <field id="omnyfy_mcm/set_default_fees/allow_vendor_fees">1</field>
+                    </depends>
+                </field>
+                <field id="default_disbursment_fees" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Disbursement Fees $</label>
+                    <validate>validate-currency-dollar validate-number validate-zero-or-greater validate-not-negative-number validate-digits-range digits-range-0-9999999999</validate>
+                    <comment>Amount deducted from each order to cover disbursement costs for this Vendor.</comment>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                        <field id="omnyfy_mcm/set_default_fees/allow_vendor_fees">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="refund" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Refund</label>
+                <field id="allow_refund_commercials_management" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Refund Commercials Management</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                    </depends>
+                </field>
+                <field id="refund_category_management" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Refund Category Commission</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                        <field id="omnyfy_mcm/refund/allow_refund_commercials_management">1</field>
+                    </depends>
+                </field>
+                <field id="refund_seller_fee" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Refund Seller Fee</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                        <field id="omnyfy_mcm/refund/allow_refund_commercials_management">1</field>
+                    </depends>
+                </field>
+                <field id="refund_disbursment_fee" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Refund Disbursement Fee</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                        <field id="omnyfy_mcm/refund/allow_refund_commercials_management">1</field>
+                    </depends>
+                </field>
+                <field id="charge_transaction_fee_for_refund" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Withhold Transaction Fee from Refund</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="omnyfy_mcm/general/fees_management">1</field>
+                        <field id="omnyfy_mcm/refund/allow_refund_commercials_management">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="email" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Email Templates</label>
+                <field id="payout_notification_to_mo_template" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payout Notification To Mo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
+

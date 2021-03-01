@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="payout_order_queue" xsi:type="object">Omnyfy\Mcm\Command\ProcessPayoutQueue</item>
+                <item name="order_placed_queue" xsi:type="object">Omnyfy\Mcm\Command\ProcessSubmitQueue</item>
+                <item name="process_shipping_queue" xsi:type="object">Omnyfy\Mcm\Command\ProcessMcmShipping</item>
+                <item name="process_mcm_payout_amount" xsi:type="object">Omnyfy\Mcm\Command\ProcessPayoutAmount</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Omnyfy\Mcm\Model\Calculation\Calculator\CalculatorInterface" type="Omnyfy\Mcm\Model\Calculation\CalculationService" />
+    
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="omnyfy_mcm_order_extension_attribute" type="Omnyfy\Mcm\Plugin\OrderRepositoryPlugin" />
+    </type>
+
+    <!--
+    <type name="Omnyfy\Vendor\Model\Vendor">
+        <plugin name="add_mcm_default_fee_charges_payout" type="Omnyfy\Mcm\Plugin\Vendor\Model\Vendor" sortOrder="100" />
+    </type>
+    -->
+    
+    <type name="Omnyfy\Mcm\Model\ResourceModel\FeesCharges\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_fees_and_charges</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_fee_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_fee_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\FeesCharges\Collection</argument>
+        </arguments>
+    </type>
+    
+    <type name="Omnyfy\Mcm\Model\ResourceModel\VendorPayoutHistory\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_vendor_payout_history</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_vendor_payout_history_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_vendor_payout_history_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorPayoutHistory\Collection</argument>
+        </arguments>
+    </type>
+    
+    <type name="Omnyfy\Mcm\Model\ResourceModel\VendorPayoutHistory\Grid\Main\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_vendor_payout_history</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_vendor_main_payout_history_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_vendor_main_payout_history_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorPayoutHistory\Collection</argument>
+        </arguments>
+    </type>
+    
+    <type name="Omnyfy\Mcm\Model\ResourceModel\VendorWithdrawalHistory\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_vendor_bank_withdrawals_history</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_vendor_withdrawals_history_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_vendor_withdrawals_history_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorWithdrawalHistory\Collection</argument>
+        </arguments>
+    </type>
+    
+    <type name="Omnyfy\Mcm\Model\ResourceModel\VendorPayout\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_vendor_payout</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_vendor_payout_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_vendor_payout_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorPayout\Collection</argument>
+        </arguments>
+    </type>
+    
+    <type name="Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Grid\PayoutOrder\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_vendor_order</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_vendor_order_grid_payout_order_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_vendor_order_grid_payout_order_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Grid\PendingOrder\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_vendor_order</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_vendor_order_grid_pending_order_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_vendor_order_grid_pending_order_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Grid\VendorEarnings\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_vendor_order</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_vendor_earnings_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_vendor_earnings_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Grid\MarketplaceEarnings\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_vendor_order</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_marketplace_earnings_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_marketplace_earnings_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Grid\PayoutRefPayoutOrder\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_vendor_order</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_vendor_earnings_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_vendor_earnings_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Collection</argument>
+        </arguments>
+    </type>
+    
+    <type name="Omnyfy\Mcm\Model\ResourceModel\VendorWithdrawalHistory\Grid\Main\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_vendor_bank_withdrawals_history</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_vendor_withdrawals_history_grid_main_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_vendor_withdrawals_history_main_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorWithdrawalHistory\Collection</argument>
+        </arguments>
+    </type>
+    
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="omnyfy_mcm_fees_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\FeesCharges\Grid\Collection</item>
+                <item name="omnyfy_mcm_vendor_payout_history_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorPayoutHistory\Grid\Collection</item>
+                <item name="omnyfy_mcm_vendor_main_payout_history_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorPayoutHistory\Grid\Main\Collection</item>
+                <item name="omnyfy_mcm_vendor_withdrawal_history_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorWithdrawalHistory\Grid\Collection</item>
+                <item name="omnyfy_mcm_pending_payout_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorPayout\Grid\Collection</item>
+                <item name="omnyfy_mcm_pending_payout_payout_order_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Grid\PayoutOrder\Collection</item>
+                <item name="omnyfy_mcm_payout_ref_payout_order_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Grid\PayoutRefPayoutOrder\Collection</item>
+                <item name="omnyfy_mcm_payout_ref_payout_order_mo_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Grid\PayoutRefPayoutOrder\Collection</item>
+                <item name="omnyfy_mcm_pending_payout_pending_order_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Grid\PendingOrder\Collection</item>
+                <item name="omnyfy_mcm_vendor_earning_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Grid\VendorEarnings\Collection</item>
+                <item name="omnyfy_mcm_marketplace_earning_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorOrder\Grid\MarketplaceEarnings\Collection</item>
+                <item name="omnyfy_mcm_vendor_withdrawal_history_main_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorWithdrawalHistory\Grid\Main\Collection</item>               
+                <item name="omnyfy_mcm_marketplacedetailedreport_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\MarketplaceDetailedReport\Grid\Collection</item>
+                <item name="omnyfy_mcm_marketplacecommissionreport_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\MarketplaceCommissionReport\Grid\Collection</item>
+                <item name="omnyfy_mcm_vendorfeereport_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorFeeReport\Grid\Collection</item>
+                <item name="omnyfy_mcm_categoryreport_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\CategoryCommissionReport\Grid\Collection</item>
+                <item name="omnyfy_mcm_vendorreport_listing_data_source" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorFeeReportAdmin\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- override template got conflicts with vendor module -->
+    <preference for="Magento\Sales\Block\Adminhtml\Order\View\Items\Renderer\DefaultRenderer" type="Omnyfy\Mcm\Block\Adminhtml\Order\View\Items\Renderer\DefaultRenderer" />
+    <preference for="Magento\Sales\Block\Adminhtml\Items\Renderer\DefaultRenderer" type="Omnyfy\Mcm\Block\Adminhtml\Items\Renderer\DefaultRenderer" />
+    <preference for="Magento\Bundle\Block\Adminhtml\Sales\Order\View\Items\Renderer" type="Omnyfy\Mcm\Block\Adminhtml\Items\Renderer\BundleRenderer" />
+    <preference for="Magento\Bundle\Block\Adminhtml\Sales\Order\Items\Renderer" type="Omnyfy\Mcm\Block\Adminhtml\Items\Renderer\BundleItemsRenderer" />
+
+    <type name="Omnyfy\Mcm\Model\ResourceModel\MarketplaceDetailedReport\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_marketplace_fee_report_admin</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_marketplacedetailedreport_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_marketplacedetailedreport_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\MarketplaceDetailedReport\Collection</argument>
+        </arguments>
+    </type>
+    
+    <type name="Omnyfy\Mcm\Model\ResourceModel\MarketplaceCommissionReport\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_vendor_order</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_marketplacecommissionreport_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_marketplacecommissionreport_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\MarketplaceCommissionReport\Collection</argument>
+        </arguments>
+    </type>
+    
+    <type name="Omnyfy\Mcm\Model\ResourceModel\VendorFeeReport\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_vendor_vendor_entity</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_vendorfeereport_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_vendorfeereport_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorFeeReport\Collection</argument>
+        </arguments>
+    </type>
+    
+    <type name="Omnyfy\Mcm\Model\ResourceModel\CategoryCommissionReport\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_category_commission_report</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_categorycommissionreport_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_categorycommissionreport_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\CategoryCommissionReport\Collection</argument>
+        </arguments>
+    </type>
+    
+    <type name="Omnyfy\Mcm\Model\ResourceModel\VendorFeeReportAdmin\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">omnyfy_mcm_vendor_fee_report_admin</argument>
+            <argument name="eventPrefix" xsi:type="string">omnyfy_mcm_vendorreport_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">omnyfy_mcm_vendorreport_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Omnyfy\Mcm\Model\ResourceModel\VendorFeeReportAdmin\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Config\Model\Config">
+        <plugin name="admin_mcm_system_config_save_plugin" type="Omnyfy\Mcm\Plugin\Config\ConfigPlugin" sortOrder="1"/>
+    </type>
+
+    <preference for="Omnyfy\Mcm\Api\GetTransactionFeeInterface" type="Omnyfy\Mcm\Model\Api\GetTransactionFee" />
+</config>

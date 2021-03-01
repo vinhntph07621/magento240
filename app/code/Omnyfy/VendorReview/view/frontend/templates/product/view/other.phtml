@@ -1,0 +1,15 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+
+<?php /** @var $block \Omnyfy\VendorReview\Block\Vendor\View\Other */ ?>
+<?php $_vendor = $block->getVendor(); ?>
+<div class="actions">
+    <a href="<?php /* @escapeNotVerified */ echo $_vendor->getVendorUrl() ?>" class="action back"><span><?php /* @escapeNotVerified */ echo __('Back to Main Vendor Info') ?></span></a>
+</div>

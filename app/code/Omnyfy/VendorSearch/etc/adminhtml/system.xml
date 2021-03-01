@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="omnyfy" sortOrder="999" translate="label">
+			<label>omnyfy</label>
+		</tab>
+		<section id="vendor_search" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Vendor Search</label>
+			<tab>omnyfy</tab>
+			<resource>Omnyfy_VendorSearch::config_omnyfy_vendorsearch</resource>
+			<group id="options" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Vendor Search</label>
+				<field id="is_active" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Is Enabled?</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+				</field>
+			</group>
+			<group id="search_result" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Vendor Search Result Page</label>
+				<field id="page_title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Page title</label>
+					<comment/>
+				</field>
+				<field id="is_search_form" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Display Search Form?</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+				</field>
+				<field id="is_filters" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Display Filters?</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+				</field>
+				<field id="is_filter_distance" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Display Distance Filters?</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+				</field>
+				<field id="location_page" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Location page url?</label>
+					<comment/>
+					<source_model>Omnyfy\VendorSearch\Model\Config\Source\LocationPage</source_model>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

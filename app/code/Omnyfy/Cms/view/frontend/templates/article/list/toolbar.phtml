@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Cms article list toolbar template
+ *
+ * @var $block \Omnyfy\Cms\Block\Article\ArticleList\Toolbar
+ */
+?>
+<?php if ($block->getCollection()->getSize()) { ?>
+	<?php $woj = $block->getWidgetOptionsJson() ?>
+    <div class="toolbar toolbar-cms-articles" <?php if ($woj) echo 'data-mage-init="'.$woj.'"' ?>>
+        <?php echo $block->getPagerHtml() ?>
+    </div>
+<?php } ?>

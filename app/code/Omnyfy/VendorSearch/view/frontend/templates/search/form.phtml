@@ -1,0 +1,101 @@
+<?php
+/**
+ * @var $block \Omnyfy\VendorSearch\Block\Search\Form
+ */
+?>
+<?php if ($block->isDisplayForm()): ?>
+    <?php $forms = $block->getSearchForms(); ?>
+    <div class="container">
+        <div class="search-bar-row">
+            <div class="search-type-wrapper">
+                <div class="search-type-container">
+                    <?php $isFirstForm = true; ?>
+                    <?php foreach($forms as $form): ?>
+                        <?php $isActive = $block->isFormActive($block->getRequest()->getParam('type'), $form["vendor_type_id"], $isFirstForm); ?>
+                        <?php if ($isActive == "active"): ?>
+                            <div class="selected-search-type">
+                                <span class="name"><?php echo __($form["name"])?></span>
+                                <?php if (count($forms) > 1): ?>
+                                    <span class="arrow porto-icon-angle-down"></span>
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php $isFirstForm = false; ?>
+                    <?php endforeach; ?>
+                    <div class="search-type-dropdown">
+						<div class="type-item" onclick="location.href='<?php echo $block->getUrl("vendorsearch/result/index")?>';">
+                                <span class="nav-name" >All</span>
+                        </div>
+                        <?php
+                            $types = $block->getSearchForms();
+                            $num = 0;
+                            foreach($forms as $index => $form):?>
+                            <div class="type-item" 
+							onclick="location.href='<?php echo $block->getUrl("vendorsearch/result/index",["type" => $form["vendor_type_id"]])?>';">
+                                <span class="nav-name"><?php echo __($form["name"])?></span>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="search-main-wrapper">
+                <?php
+
+                $isFirstForm = true;
+                $num = 0;
+                foreach($forms as $index=>$form): ?>
+                    <div class="search-container <?php echo $block->isFormActive($block->getRequest()->getParam('type'), $form["vendor_type_id"], $isFirstForm) ?>" id="search-container-<?php echo $num++ ?>">
+                        <form action="<?php echo $block->getSearchPostUrl($form["action_url"])?>" method="get" id="<?php echo $index ?>">
+                            <div class="fields-wrapper">
+                                <?php $numFields = count($form["search_fields"]) ?>
+                                <?php foreach($form["search_fields"] as $searchField): ?>
+                                    <?php if ($searchField['type'] == "dropdown"): ?>
+                                        <?php $options = $block->getFieldOptions($searchField) ?>
+                                        <div class="form-group form-group-left">
+                                            <select
+                                                 name="<?php echo $searchField["name"]?>"
+                                                 class="form-control <?php echo $searchField["class"]?>">
+                                                    <option value=""><?php echo __("All %1",$searchField["label"])?></option>
+                                                    <?php foreach($options as $value=>$option): ?>
+                                                        <?php if ($value != ""): ?>
+                                                            <option
+                                                                value="<?php echo __($value)?>"
+                                                                <?php echo $block->isOptionActive($block->getRequest()->getParam($searchField["name"]),$value) ?>>
+                                                                <?php echo __($option)?>
+                                                            </option>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if ($searchField['type'] == "text"): ?>
+                                        <div class="form-group form-group-middle">
+                                            <input
+                                               type="text"
+                                               class="form-control"
+                                               name="<?php echo $searchField["name"]?>"
+                                               placeholder="<?php echo $searchField["placeholder"] ?>"
+                                               value = "<?php echo $block->getRequest()->getParam($searchField["name"],"") ?>"
+                                            />
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                                <input type="hidden" name="type" value="<?php echo $form["vendor_type_id"]?>" />
+                                <input type="hidden" name="distance" value="<?php echo $form["default_distance"]?>" />
+                                <input type="hidden" name="sort" value="<?php echo $form["default_sort_order"]?>" />
+
+                                <div class="form-group form-group-btn">
+                                    <button class="btn btn-secondary btn-search">
+                                        <span class="porto-icon-search-1"></span>
+                                        <span class="text"><?php echo __("Search") ?></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <?php $isFirstForm = false;?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

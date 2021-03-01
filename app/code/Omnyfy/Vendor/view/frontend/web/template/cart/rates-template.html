@@ -1,0 +1,31 @@
+    <form data-bind="blockLoader: isLoading, visible: isVisible()">
+        <ul class="rate-list" data-bind="foreach: {data: shippingRateGroups, as: 'rateGroups'}">
+            <!-- ko foreach: {data: $parent.getRatesForGroup(rateGroups), as: 'rateItem'} -->
+                <li class="rate-list-item">
+                    <!-- ko ifnot: (rateItem.available) -->
+                    <div data-bind="text: rateItem.error_message" class="error-msg"></div>
+                    <!-- /ko -->
+
+                    <!-- ko if: (rateItem.available) -->
+                    <input type="radio"
+                           class="radio data-val-ignore"
+                           data-bind="
+                                click: $parents[1].selectShippingMethod,
+                                checked: $parents[1].selectedShippingMethod,
+                                attr: {
+                                        value: rateItem.carrier_code + '_' + rateItem.method_code,
+                                        id: 's_method_' + rateItem.carrier_code + '_' + rateItem.method_code + '_' + rateItem.extension_attributes.vendor_id + '_' + rateItem.extension_attributes.location_id,
+                                        name: 'estimate_method[' + rateItem.extension_attributes.location_id + ']'
+                                        }
+                                "/>
+                    <label class="label" data-bind="attr: {for: 's_method_' + rateItem.carrier_code + '_' + rateItem.method_code + '_' + rateItem.extension_attributes.vendor_id + '_' + rateItem.extension_attributes.location_id}">
+                        <span class="carrier-title"><!-- ko text: rateItem.carrier_title --><!-- /ko --></span>
+                        <span class="carrier-method"><!-- ko text: rateItem.method_title --><!-- /ko --></span>
+                        <span class="carrier-amount"><!-- ko text: $parents[1].getFormattedPrice(rateItem.amount) --><!-- /ko --></span>
+                    </label>
+                    <!-- /ko -->
+
+                </li>
+            <!-- /ko -->
+        </ul>
+    </form>

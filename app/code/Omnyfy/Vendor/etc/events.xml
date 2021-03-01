@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_submit_all_after">
+        <observer name="omnyfy_vendor_observer_order" instance="Omnyfy\Vendor\Observer\OrderObserver" />
+    </event>
+    <event name="sales_order_invoice_save_after">
+        <observer name="omnyfy_vendor_observer_invoice" instance="Omnyfy\Vendor\Observer\InvoicePay" />
+    </event>
+    <event name="catalog_product_save_after">
+        <observer name="omnyfy_vendor_observer_product_save" instance="Omnyfy\Vendor\Observer\ProductSaveObserver" />
+    </event>
+    <event name="sales_quote_address_save_before">
+        <observer name="omnyfy_vendor_observer_quote_address" instance="Omnyfy\Vendor\Observer\QuoteAddressSaveBefore" />
+    </event>
+    <event name="sales_order_creditmemo_refund">
+        <observer name="omnyfy_vendor_observer_return_qty" instance="Omnyfy\Vendor\Observer\RefundQty" />
+    </event>
+    <event name="email_invoice_set_template_vars_before">
+        <observer name="omnyfy_vendor_add_marketplace_owner_abn" instance="Omnyfy\Vendor\Observer\AddMarketplaceOwnerAbn" />
+    </event>
+    <event name="sales_order_save_after">
+        <observer name="omnyfy_sales_order_save_after" instance="Omnyfy\Vendor\Observer\OrderSaveAfter" />
+    </event>
+</config>

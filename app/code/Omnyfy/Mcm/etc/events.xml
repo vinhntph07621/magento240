@@ -1,0 +1,56 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="omnyfy_mcm_quote_submit_before" instance="Omnyfy\Mcm\Observer\AfterOrder" />
+    </event>
+    <event name="checkout_submit_all_after">
+        <observer name="omnyfy_mcm_submit_order_to_queue" instance="Omnyfy\Mcm\Observer\AddOrderToQueue" />
+    </event>
+    <event name="mcm_after_place_order">
+        <observer name="omnyfy_mcm_observer_order" instance="Omnyfy\Mcm\Observer\OrderObserver" />
+    </event>
+    <event name="catalog_category_prepare_save">
+        <observer name="omnyfy_mcm_category_prepare_save" instance="Omnyfy\Mcm\Observer\CategorySave" />
+    </event>
+    <event name="sales_order_invoice_save_after">
+        <observer name="omnyfy_mcm_observer_invoice" instance="Omnyfy\Mcm\Observer\VendorInvoice" />
+    </event>
+    <event name="sales_order_creditmemo_save_after">
+        <observer name="omnyfy_mcm_observer_refund" instance="Omnyfy\Mcm\Observer\RefundEarning" />
+    </event>
+    <event name="sales_order_shipment_save_after">
+        <observer name="omnyfy_mcm_add_shipment_to_queue" instance="Omnyfy\Mcm\Observer\AddShipmentToQueue" />
+    </event>
+    <event name="mcm_order_payout">
+        <observer name="change_mcm_payout_action" instance="Omnyfy\Mcm\Observer\PayoutOrderSaveAfter" />
+    </event>
+    
+    <event name="omnyfy_payout_item_fail">
+        <observer name="omnyfy_vendor_payout_fail_update" instance="Omnyfy\Mcm\Observer\VendorPayoutFail" />
+    </event>
+    <event name="omnyfy_payout_item_change">
+        <observer name="omnyfy_vendor_payout_status_update" instance="Omnyfy\Mcm\Observer\VendorPayoutChange" />
+    </event>
+    
+    <event name="omnyfy_payout_withdraw_fail">
+        <observer name="omnyfy_vendor_withdrawal_fail_update" instance="Omnyfy\Mcm\Observer\VendorWithdrawalFail" />
+    </event>
+    <event name="omnyfy_payout_withdraw_success">
+        <observer name="omnyfy_vendor_withdrawal_status_success" instance="Omnyfy\Mcm\Observer\VendorWithdrawalSuccess" />
+    </event>
+
+    <event name="omnyfy_vendor_form_validation">
+        <observer name="omnyfy_mcm_validation_observer" instance="Omnyfy\Mcm\Observer\VendorFormValidate"/>
+    </event>
+
+    <event name="omnyfy_vendor_form_after_save">
+        <observer name="omnyfy_mcm_form_after_save" instance="Omnyfy\Mcm\Observer\VendorFormSave"/>
+    </event>
+
+    <event name="omnyfy_vendorsignup_kyc_status_update">
+        <observer name="omnyfy_mcm_update_payout_account" instance="Omnyfy\Mcm\Observer\UpdatePayoutAccount" />
+    </event>
+
+    <event name="mcm_order_process_shipping">
+        <observer name="mcm_process_shipping_calculations" instance="Omnyfy\Mcm\Observer\ShippingCalculation" />
+    </event>
+</config>

@@ -1,0 +1,7 @@
+<?php /* @var \Omnyfy\MyReadingList\Block\Widget\Bookmark $block*/ ?>
+<?php $isbm = $block->isBookmarked(); ?>
+<div class="message-readinglist" style="display:none"></div>
+<button class="mark-btn <?php echo $isbm?"marked":"" ?>" data-articleid="<?php echo $block->getArticleId() ?>">
+    <span class="mark-icon"></span>
+    <span class="bookmark-message"><?php echo $isbm?"Added to reading list":"Add to reading list" ?></span>
+</button>

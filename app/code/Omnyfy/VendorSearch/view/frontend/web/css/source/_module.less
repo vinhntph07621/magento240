@@ -1,0 +1,26 @@
+// /**
+//  * Copyright © Omnyfy, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables for new theme
+//  ---------------------------------------------
+
+@ui-03: #F0F1F3;
+
+@import "module/_tile";
+@import "module/_filters";
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+	.vendorsearch-result-index {
+		.columns {
+			position: relative;
+			padding-top: 60px;
+		}
+	}
+}

@@ -1,0 +1,99 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php //$layout = $this->helper('\Omnyfy\Cms\Helper\Data')->getLayoutValue();?>
+<?php
+/**
+ * Cms article list template
+ *
+ * @var $block \Omnyfy\Cms\Block\Article\ArticleList
+ */
+?>
+<?php /* echo '<pre>';
+print_r($block->getChildCategory()->getData());
+echo '</pre>'; */
+
+?>
+
+<?php $_articleCollection = $block->getArticleCollection();
+if (!$_articleCollection->count()): ?>
+    <div class="message info empty"><?php echo __('We can\'t find articles matching the selection.') ?></div>
+<?php else: ?>
+    <section class="">
+        <div class="container">
+            <ul class="tile-articles-wrapper">
+                <?php $i=1;
+                $customCondition = null;
+                $cls = null;
+                foreach ($_articleCollection as $_article):
+                    if($i>8){
+                        $customCondition = ' style="display:none;"';
+                    }
+                    if($i>1){
+                        $cls = ' moreBox';
+                    }
+                    $_articleUrl = $_article->getArticleUrl().'category/'.$this->getRequest()->getParam('id');
+                    $_articleName = $block->escapeHtml($_article->getTitle(), null, true);?>
+                    <li class="tile-article-wrapper<?php echo $cls?>" <?php echo $customCondition?>>
+                        <div class="tile-article">
+                            <?php if ($featuredImage = $_article->getFeaturedImage()) { ?>
+                                <a href="<?php echo $_articleUrl?>" class="tile-image-link">
+                                    <img alt="<?php echo $_articleName?>" src="<?php echo $featuredImage?>" class="tile-image">
+                                </a>
+                            <?php }?>
+                            <div class="tile-article-content">
+                                <h4 class="text-center tile-article-title title"><a href="<?php echo $_articleUrl?>" class="title-link"><?php echo $_articleName?></a></h4>
+                                <div class="article-published">
+                                    <div class="author">by <span class="author-name"><?php echo $_article->getAuthor()->getName(); ?></span></div>
+                                    <div class="date"><?php echo date("F j, Y", strtotime($_article->getPublishTime()));?></div>
+                                </div>
+                                <?php $postCategories = $_article->getParentCategories(); ?>
+                                <?php if (count($postCategories) > 0): ?>
+                                    <div class="cms-tags-list">
+                                        <?php foreach ($postCategories as $category) { ?>
+                                            <?php if ($category->getCategoryId() != 1) { ?>
+                                                <a class="article-tag" href="/<?= $category->getUrl()?>"><?php echo $category->getTitle(); ?></a>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </div>
+                                <?php endif ?>
+                                <div class="description"><?php echo mb_strimwidth($_article->getMetaDescription(), 0, 120, "..."); ?></div>
+                            </div>
+                            <div class="tile-article-footer">
+                                <a class="tile-article-read-more" href="<?php echo $_articleUrl?>"><?= __('Read More')?></a>
+                            </div>
+                        </div>
+                    </li>
+                    <?php $i++;
+                endforeach; ?>
+            </ul>
+            <?php if($_articleCollection->getSize()>8){?>
+                <div class="text-center">
+                    <button class="loadMore"><?= __('LOAD MORE')?></button>
+                </div>
+            <?php }?>
+        </div>
+    </section>
+
+    <script>
+        require(['jquery'],function($){
+            jQuery(".moreBox").slice(0, 5).show();
+            if (jQuery(".articleBox:hidden").length != 0) {
+                jQuery(".loadMore").show();
+            }
+            jQuery(".loadMore").on('click', function (e) {
+                e.preventDefault();
+                jQuery(".moreBox:hidden").slice(0, 6).slideDown();
+                if (jQuery(".moreBox:hidden").length == 0) {
+                    jQuery(".loadMore").fadeOut('slow');
+                }
+            });
+        });
+    </script>
+<?php endif;
+?>

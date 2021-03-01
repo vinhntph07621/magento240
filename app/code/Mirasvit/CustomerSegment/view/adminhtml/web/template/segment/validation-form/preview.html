@@ -1,0 +1,20 @@
+<dl class="cs-segment-validation-form__preview">
+    <!-- ko foreach: validation -->
+    <dt class="customer">
+        <i class="fa" data-bind="css: {'fa-check-circle': is_valid, 'fa-times-circle': !is_valid}"></i>
+        <!-- ko if: link -->
+        <a data-bind="attr: {href: link}, text: candidate"></a>
+        <!-- /ko -->
+
+        <!-- ko ifnot: link -->
+        <span data-bind="text: candidate"></span>
+        <!-- /ko -->
+    </dt>
+    <!-- ko foreach: conditions -->
+    <dd class="condition">
+        <i class="fa" data-bind="css: {'fa-check-circle': is_valid, 'fa-times-circle': !is_valid}"></i>
+        <span data-bind="html: label"></span>
+    </dd>
+    <!-- /ko -->
+    <!-- /ko -->
+</dl>

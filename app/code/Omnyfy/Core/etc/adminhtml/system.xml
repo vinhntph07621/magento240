@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="google">
+            <group id="maps" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Google Maps</label>
+                <field id="key" type="text" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Api Key</label>
+                </field>
+            </group>
+        </section>
+        <section id="customer">
+            <group id="create_account" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="allow_registration" translate="label" type="select" sortOrder="-5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Allow Registration</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+        <tab id="omnyfy" translate="label" sortOrder="10">
+            <label>Omnyfy</label>
+        </tab>
+        <section id="omnyfy_core" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Basic</label>
+            <tab>omnyfy</tab>
+            <resource>Omnyfy_Core::base</resource>
+            <group id="sms" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>SMS Configuration</label>
+                <field id="api_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Url</label>
+                </field>
+                <field id="api_user" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Account Name</label>
+                </field>
+                <field id="api_pass" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Password</label>
+                    <!--
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    -->
+                </field>
+                <field id="from_number" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>From Information</label>
+                    <comment>No more than 12 characters</comment>
+                </field>
+            </group>
+            <group id="rest" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Rest API configuration</label>
+                <field id="log_enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log all Rest API request and response</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="site_message" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Site message (appears at the very top of every page)</label>
+                <field id="site_message_enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable message above site</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="site_message_text" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Message text</label>
+                    <depends>
+                        <field id="*/*/site_message_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="site_message_ie_only" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Show only in Internet Explorer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/site_message_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
+
+    <!-- Login Example to get Bearer: curl -X POST "http://mystore.com/index.php/rest/V1/integration/admin/token" \
+     -H "Content-Type:application/json" \
+     -d '{"username":"username", "password":"userpassword"}' -->
+
+    <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/cms/article" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+      -H "Content-Type:application/json" \
+      -d '{"data":"{\"title\":\"value_1\",\"content\":"Test",\"is_active\":1,\"store_ids\":\"0\"}"}' -->
+    <route url="/V1/cms/article" method="POST">
+        <service class="Omnyfy\Cms\Api\ArticleManagementInterface" method="create"/>
+        <resources>
+            <resource ref="Omnyfy_Cms::article"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X PUT "http://mystore.com/index.php/rest/V1/cms/article/:id" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+      -H "Content-Type:application/json" \
+      -d '{"data":"{\"title\":\"value_1\",\"content\":"Test2",\"is_active\":1,\"store_ids\":\"0\"}"}' -->
+    <route url="/V1/cms/article/:id" method="PUT">
+        <service class="Omnyfy\Cms\Api\ArticleManagementInterface" method="update"/>
+        <resources>
+            <resource ref="Omnyfy_Cms::article"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X DELETE "http://mystore.com/index.php/rest/V1/cms/article/:id" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/cms/article/:id" method="DELETE">
+        <service class="Omnyfy\Cms\Api\ArticleManagementInterface" method="delete"/>
+        <resources>
+            <resource ref="Omnyfy_Cms::article"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X POST "http://mystore.com/index.php/rest/V1/cms/category" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+      -H "Content-Type:application/json" \
+      -d '{"data":"{\"param_1\":\"value_1\",\"param_2\":\"value_2\",\"param_n\":\"value_n\"}"}' -->
+    <route url="/V1/cms/category" method="POST">
+        <service class="Omnyfy\Cms\Api\CategoryManagementInterface" method="create"/>
+        <resources>
+            <resource ref="Omnyfy_Cms::category"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X PUT "http://mystore.com/index.php/rest/V1/cms/category/:id" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" \
+      -H "Content-Type:application/json" \
+      -d '{"data":"{\"param_1\":\"new_value_1\",\"param_2\":\"new_value_2\",\"param_n\":\"new_value_n\"}"}' -->
+    <route url="/V1/cms/category/:id" method="PUT">
+        <service class="Omnyfy\Cms\Api\CategoryManagementInterface" method="update"/>
+        <resources>
+            <resource ref="Omnyfy_Cms::category"/>
+        </resources>
+    </route>
+    <!-- Example: curl -X DELETE "http://mystore.com/index.php/rest/V1/cms/category/:id" \
+      -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" -->
+    <route url="/V1/cms/category/:id" method="DELETE">
+        <service class="Omnyfy\Cms\Api\CategoryManagementInterface" method="delete"/>
+        <resources>
+            <resource ref="Omnyfy_Cms::category"/>
+        </resources>
+    </route>
+</routes>

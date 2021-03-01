@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.media.image">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Omnyfy_PortoPatch::product/view/gallery.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="product_view_main_custom_block2">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Omnyfy_PortoPatch::product/view/main_custom_block2.phtml</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

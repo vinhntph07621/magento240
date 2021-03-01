@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      layout="admin-2columns-left">
+    <head>
+        <title>Manage Gallery</title>
+    </head>
+    <body>
+        <referenceContainer name="left">
+            <block class="Omnyfy\VendorGallery\Block\Adminhtml\Album\Edit\Tabs" name="omnyfy_vendor_gallery_tab">
+                <block class="Omnyfy\VendorGallery\Block\Adminhtml\Album\Edit\Tab\General" name="omnyfy_vendor_gallery_edit_tab_general"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">vendor_gallery_general</argument>
+                    <argument name="block" xsi:type="string">omnyfy_vendor_gallery_edit_tab_general</argument>
+                </action>
+                <block class="Omnyfy\VendorGallery\Block\Adminhtml\Album\Edit\Tab\ImagesAndVideos" name="omnyfy_vendor_gallery_edit_tab_images_and_video">
+                    <block name="gallery" class="Omnyfy\VendorGallery\Block\Adminhtml\Album\Helper\Form\Gallery">
+                        <arguments>
+                            <argument name="config" xsi:type="array">
+                                <item name="label" xsi:type="string" translate="true">Images And Videos</item>
+                                <item name="collapsible" xsi:type="boolean">true</item>
+                                <item name="opened" xsi:type="boolean">false</item>
+                                <item name="sortOrder" xsi:type="string">22</item>
+                                <item name="canShow" xsi:type="boolean">true</item>
+                                <item name="componentType" xsi:type="string">fieldset</item>
+                            </argument>
+                        </arguments>
+                        <block class="Omnyfy\VendorGallery\Block\Adminhtml\Album\Helper\Form\Gallery\Content" name="image_content" as="image_content">
+                            <arguments>
+                                <argument name="config" xsi:type="array">
+                                    <item name="parentComponent" xsi:type="string">omnyfy_vendor_gallery_edit_tab_images_and_video.omnyfy_vendor_gallery_edit_tab_images_and_video.block_gallery.block_gallery</item>
+                                </argument>
+                            </arguments>
+                            <block class="Omnyfy\VendorGallery\Block\Adminhtml\Album\Edit\NewVideo" name="new-video" template="Magento_ProductVideo::product/edit/slideout/form.phtml"/>
+                        </block>
+                    </block>
+                </block>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">vendor_gallery_images</argument>
+                    <argument name="block" xsi:type="string">omnyfy_vendor_gallery_edit_tab_images_and_video</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Omnyfy\VendorGallery\Block\Adminhtml\Album\Edit" name="omnyfy_vendor_gallery_albumn_edit"/>
+            <block class="Magento\Framework\View\Element\Template" name="location-update" template="Omnyfy_VendorGallery::album/js_location.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

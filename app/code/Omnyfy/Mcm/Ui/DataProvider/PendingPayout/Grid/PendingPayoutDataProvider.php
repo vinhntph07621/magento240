@@ -1,0 +1,80 @@
+<?php
+
+namespace Omnyfy\Mcm\Ui\DataProvider\PendingPayout\Grid;
+
+use Magento\Framework\Api\FilterBuilder;
+use Magento\Framework\Api\Search\SearchCriteriaBuilder;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\View\Element\UiComponent\DataProvider\Reporting;
+use Magento\Framework\Api\Search\SearchResultInterface;
+use Omnyfy\Mcm\Model\ResourceModel\VendorPayout;
+use Omnyfy\Mcm\Helper\Data as HelperData;
+
+class PendingPayoutDataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider {
+
+    protected $pricing;
+
+    /**
+     * @param string                $name
+     * @param string                $primaryFieldName
+     * @param string                $requestFieldName
+     * @param Reporting             $reporting
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param RequestInterface      $request
+     * @param FilterBuilder         $filterBuilder
+     * @param array                 $meta
+     * @param array                 $data
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     */
+    public function __construct(
+    $name, $primaryFieldName, $requestFieldName, Reporting $reporting, SearchCriteriaBuilder $searchCriteriaBuilder, RequestInterface $request, FilterBuilder $filterBuilder, \Magento\Framework\Pricing\Helper\Data $pricing, VendorPayout $vendorPayoutResource, HelperData $helper, array $meta = [], array $data = []
+    ) {
+        $this->pricing = $pricing;
+        $this->vendorPayoutResource = $vendorPayoutResource;
+        $this->_helper = $helper;
+        parent::__construct(
+                $name, $primaryFieldName, $requestFieldName, $reporting, $searchCriteriaBuilder, $request, $filterBuilder, $meta, $data
+        );
+    }
+
+    /**
+     * @param SearchResultInterface $searchResult
+     * @return array
+     */
+    protected function searchResultToOutput(SearchResultInterface $searchResult) {
+        $arrItems = [];
+        $arrItems['totalRecords'] = $searchResult->getTotalCount();
+
+        $arrItems['items'] = [];
+        foreach ($searchResult->getItems() as $item) {
+            $arrItems['items'][] = $item->getData();
+        }
+
+        return $arrItems;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getData() {
+
+        $collection = $this->getSearchResult();
+
+        foreach ($collection as $payout) {
+            $balanceOwing = $this->vendorPayoutResource->getTotalPayoutsPending($payout['vendor_id']);
+            $payoutAmount = $this->vendorPayoutResource->getTotalReadyToPay($payout['vendor_id']);
+            $payout->setData('vendor_name_status', ($payout['vendor_name']) ? ($payout['vendor_status'] == 0 ? $payout['vendor_name'] . ' (Disabled)' : $payout['vendor_name']) : '');
+            $payout->setData('balance_owing', $this->currency($balanceOwing['total_balance_owing']));
+            $payout->setData('payout_amount', $this->currency($payoutAmount['total_payout_amount']));
+
+            //$payout->setData('vendor_name_status', ($payout['payout_amount']) ? $this->currency($payout['payout_amount'], true, false) : '');
+        }
+
+        return $this->searchResultToOutput($collection);
+    }
+    
+    public function currency($value) {
+        return $this->_helper->formatToBaseCurrency($value);
+    }
+
+}

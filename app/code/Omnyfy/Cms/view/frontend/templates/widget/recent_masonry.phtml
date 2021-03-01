@@ -1,0 +1,101 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Cms recent articles widget
+ *
+ * @var $block \Omnyfy\Cms\Block\Widget\Recent
+ */
+?>
+
+<?php
+    $_articleCollection = $block->getArticleCollection();
+?>
+<?php if ($_articleCollection->count()) { ?>
+<div class="article-list-wrapper cms-widget-recent cms-widget-recent-masonry">
+    <h3 class="title"><?php echo $block->escapeHtml($block->getTitle()) ?></h3>
+    <ul class="article-list clearfix">
+        <?php foreach ($_articleCollection as $_article) { ?>
+            <?php
+                $_articleUrl = $_article->getArticleUrl();
+                $_articleName = $block->escapeHtml($_article->getTitle(), null, true);
+            ?>
+            <li class="article-holder article-holder-<?php echo $_article->getId() ?>">
+                <div class="article-header">
+
+                    <div class="article-title-holder clearfix">
+                        <div class="article-title">
+                            <a class="article-item-link"
+                               href="<?php echo $_articleUrl ?>">
+                                <?php echo $_articleName; ?>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="article-info clear">
+                        <div class="item article-posed-date">
+                            <span class="label"><?php echo __('Articleed:') ?></span>
+                            <span class="value"><?php echo $_article->getPublishDate('F d, Y') ?></span>
+                        </div>
+                        <?php if ($_categoriesCount = $_article->getCategoriesCount()) { ?>
+                        <div class="dash">|</div>
+                        <div class="item article-categories">
+                            <span class="label"><?php echo __('Categories:') ?></span>
+                            <?php $n = 0; foreach($_article->getParentCategories() as $ct) { $n++; ?>
+                                <a title="<?php echo $block->escapeHtml($ct->getTitle()) ?>" href="<?php echo $ct->getCategoryUrl() ?>"><?php echo $block->escapeHtml($ct->getTitle()) ?></a>
+                                <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
+                            <?php } ?>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <div class="article-content">
+                    <div class="article-description clearfix">
+                        <?php if ($featuredImage = $_article->getFeaturedImage()) { ?>
+                        <div class="article-ftimg-hld">
+                            <a href="<?php echo $_articleUrl ?>" title="<?php echo $_articleName ?>">
+                                <img src="<?php echo $featuredImage ?>" alt="<?php echo $_articleName ?>" />
+                            </a>
+                        </div>
+                        <?php } ?>
+                        <?php if ($content = $block->getShorContent($_article)) { ?>
+                            <div class="article-text-hld clearfix">
+                                <?php echo $content ?>
+                            </div>
+                        <?php } ?>
+                        <a class="article-read-more" href="<?php echo $_articleUrl ?>" title="<?php echo $_articleName ?>">
+                           <?php echo __('Read more &#187;') ?>
+                        </a>
+                    </div>
+                </div>
+                <div class="article-footer">
+
+                </div>
+            </li>
+
+        <?php } ?>
+    </ul>
+</div>
+<script>
+requirejs( [ 'require', 'jquery', 'Omnyfy_Cms/js/lib/masonry.pkgd.min' ],
+function( require, $, Masonry ) {
+    require( [ 'jquery-bridget/jquery-bridget' ],
+    function( jQueryBridget ) {
+        jQueryBridget( 'masonry', Masonry, $ );
+        $('.article-list').masonry({
+            itemSelector: '.article-holder',
+            percentPosition: true
+        })
+    });
+});
+<?php /* more info http://masonry.desandro.com/extras.html */ ?>
+</script>
+
+<?php } ?>

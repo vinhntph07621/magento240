@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Manage Vendors</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+<!--
+            <uiComponent name="omnyfy_vendor_vendor_listing"/>
+-->
+
+            <block class="Omnyfy\Vendor\Block\Adminhtml\Vendor" name="adminhtml.block.vendor.vendor.grid.container">
+                <block class="Omnyfy\Vendor\Block\Adminhtml\Vendor\Grid" name="adminhtml.block.vendor.vendor.grid" as="grid">
+                    <arguments>
+                        <argument name="id" xsi:type="string">omnyfy_vender_vendor_grid</argument>
+                    </arguments>
+                    <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" as="grid.columnSet" name="adminhtml.block.vendor.vendor.grid.columnSet">
+                        <arguments>
+                            <argument name="rowUrl" xsi:type="array">
+                                <item name="path" xsi:type="string">omnyfy_vendor/vendor/edit</item>
+                                <item name="extraParamsTemplate" xsi:type="array">
+                                    <item name="id" xsi:type="string">getEntityId</item>
+                                </item>
+                            </argument>
+                        </arguments>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="vendor_id">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">ID</argument>
+                                <argument name="index" xsi:type="string">entity_id</argument>
+                                <argument name="column_css_class" xsi:type="string">col-id</argument>
+                                <argument name="header_css_class" xsi:type="string">col-id</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="name">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Vendor Name</argument>
+                                <argument name="index" xsi:type="string">name</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="status">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Status</argument>
+                                <argument name="index" xsi:type="string">status</argument>
+                                <argument name="type" xsi:type="string">options</argument>
+                                <argument name="options" xsi:type="options" model="Omnyfy\Core\Model\Source\BooleanActive" />
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="email">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Email</argument>
+                                <argument name="index" xsi:type="string">email</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="telephone">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">telephone</argument>
+                                <argument name="index" xsi:type="string">telephone</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="action">
+                            <arguments>
+                                <argument name="id" xsi:type="string">action</argument>
+                                <argument name="header" xsi:type="string" translate="true">Action</argument>
+                                <argument name="type" xsi:type="string">action</argument>
+                                <argument name="getter" xsi:type="string">getId</argument>
+                                <argument name="filter" xsi:type="boolean">false</argument>
+                                <argument name="sortable" xsi:type="boolean">false</argument>
+                                <argument name="index" xsi:type="string">stores</argument>
+                                <argument name="is_system" xsi:type="boolean">true</argument>
+                                <argument name="actions" xsi:type="array">
+                                    <item name="view_action" xsi:type="array">
+                                        <item name="caption" xsi:type="string" translate="true">
+                                            Edit
+                                        </item>
+                                        <item name="url" xsi:type="array">
+                                            <item name="base" xsi:type="string">*/*/edit</item>
+                                        </item>
+                                        <item name="field" xsi:type="string">id</item>
+                                    </item>
+                                </argument>
+                                <argument name="header_css_class" xsi:type="string">
+                                    col-actions
+                                </argument>
+                                <argument name="column_css_class" xsi:type="string">
+                                    col-actions
+                                </argument>
+                            </arguments>
+                        </block>
+                    </block>
+                </block>
+            </block>
+
+        </referenceContainer>
+    </body>
+</page>
+

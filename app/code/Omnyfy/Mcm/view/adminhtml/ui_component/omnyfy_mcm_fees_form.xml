@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">omnyfy_mcm_fees_form.omnyfy_mcm_fees_form_data_source</item>
+            <item name="deps" xsi:type="string">omnyfy_mcm_fees_form.omnyfy_mcm_fees_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Vendor Fee Management</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">omnyfy_mcm_fees_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Omnyfy\Mcm\Block\Adminhtml\Edit\BackButton</item>
+            <item name="save" xsi:type="string">Omnyfy\Mcm\Block\Adminhtml\Edit\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">Omnyfy\Mcm\Block\Adminhtml\Edit\SaveAndContinueButton</item>
+        </item>
+    </argument>
+    <dataSource name="omnyfy_mcm_fees_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Omnyfy\Mcm\Ui\DataProvider\Fees\Form\FeeDataProvider</argument>
+            <argument name="name" xsi:type="string">omnyfy_mcm_fees_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="omnyfy_mcm/fees/save"/>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="filter_url_params" xsi:type="array">
+                        <item name="id" xsi:type="string">*</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+            </item>
+        </argument>
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </field>
+        
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Set fees for vendor</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="component" xsi:type="string">Omnyfy_Mcm/js/form/components/enable_vendor_mcm</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </field>
+        <field name="seller_fee">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Seller Fee %</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataScope" xsi:type="string">seller_fee</item>
+                    <item name="notice" xsi:type="string">% of Sub-total charged as fees to this Vendor. Seller Fees are calculated in addition to the Category Commission.</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="greater-than-equals-to" xsi:type="string">0</item>
+                        <item name="less-than-equals-to" xsi:type="string">100</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="min_seller_fee">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Minimum Seller Fee ($)</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="dataScope" xsi:type="string">min_seller_fee</item>
+                    <item name="notice" xsi:type="string">Leave blank for no minimum seller fees. This amount will be charged if the calculated Seller Fee is less than the Minimum Seller Fees.</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                        <item name="greater-than-equals-to" xsi:type="string">0</item>
+                        <item name="less-than-equals-to" xsi:type="string">9999999999.99</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="max_seller_fee">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Maximum Seller Fee ($)</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="dataScope" xsi:type="string">max_seller_fee</item>
+                    <item name="notice" xsi:type="string">Leave blank for no maximum seller fees. This amount will be charged if the calculated Seller Fee exceed the Maximum Seller Fees.</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                        <item name="greater-than-equals-to" xsi:type="string">0</item>
+                        <item name="less-than-equals-to" xsi:type="string">9999999999.99</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="disbursement_fee">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Disbursement Fee ($)</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="dataScope" xsi:type="string">disbursement_fee</item>
+                    <item name="notice" xsi:type="string">Amount deducted from each order to cover disbursement costs for this Vendor.</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="greater-than-equals-to" xsi:type="string">0</item>
+                        <item name="less-than-equals-to" xsi:type="string">9999999999.99</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        
+        <field name="tax_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Tax Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="dataScope" xsi:type="string">tax_name</item>
+                    <item name="notice" xsi:type="string">Please enter the Tax Name.</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="max_text_length" xsi:type="number">255</item>
+                        <item name="validate-alphanum" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="tax_rate">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Tax Rate %</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="dataScope" xsi:type="string">tax_rate</item>
+                    <item name="notice" xsi:type="string">Please enter a number without %.</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="greater-than-equals-to" xsi:type="string">0</item>
+                        <item name="less-than-equals-to" xsi:type="string">100</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        
+    </fieldset>
+<!--    <fieldset name="payout_info">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Payout Information</item>
+            </item>
+        </argument>
+        <field name="ewallet_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">eWallet ID</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataScope" xsi:type="string">ewallet_id</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="max_text_length" xsi:type="string">255</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>    -->
+    <fieldset name="payout_info">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Payout Information</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <container name="custom_fieldset_container" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">200</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Omnyfy\Mcm\Block\Adminhtml\Fees\Edit\Tab\PayoutInfo</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="payout_history">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <!--<item name="opened" xsi:type="boolean">true</item>-->
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Payout History</item>
+            </item>
+        </argument>
+        <insertListing>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="autoRender" xsi:type="boolean">true</item>                    
+                    <item name="dataScope" xsi:type="string">omnyfy_mcm_vendor_payout_history_listing</item>
+                    <item name="externalProvider" xsi:type="string">omnyfy_mcm_vendor_payout_history_listing.omnyfy_mcm_vendor_payout_history_listing_data_source</item>
+                    <item name="ns" xsi:type="string">omnyfy_mcm_vendor_payout_history_listing</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="id" xsi:type="string">${ $.provider }:data.id</item>
+                    </item>
+                    <item name="exports" xsi:type="array">
+                        <item name="id" xsi:type="string">${ $.externalProvider }:params.id</item>
+                    </item>
+                    
+                </item>
+            </argument>
+        </insertListing>
+    </fieldset>
+    <fieldset name="withdrawal_history">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Withdrawal History</item>
+            </item>
+        </argument>
+        <insertListing>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="autoRender" xsi:type="boolean">true</item>
+                    <item name="ns" xsi:type="string">omnyfy_mcm_vendor_withdrawal_history_listing</item>
+                    <item name="externalProvider" xsi:type="string">omnyfy_mcm_vendor_withdrawal_history_listing.omnyfy_mcm_vendor_withdrawal_history_listing_data_source</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="id" xsi:type="string">${ $.provider }:data.id</item>
+                    </item>
+                    <item name="exports" xsi:type="array">
+                        <item name="id" xsi:type="string">${ $.externalProvider }:params.id</item>
+                    </item>
+                </item>
+            </argument>
+        </insertListing>
+    </fieldset>
+    
+</form>

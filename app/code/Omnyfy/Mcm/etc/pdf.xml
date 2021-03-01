@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/pdf_file.xsd">
+    <totals>
+        <total name="mcm_transaction_fee">
+            <title translate="true">Transaction Fee (incl. tax)</title>
+            <source_field>mcm_transaction_fee_incl_tax</source_field>
+            <model>Omnyfy\Mcm\Model\Sales\Pdf\TransactionFee</model>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <sort_order>450</sort_order>
+        </total>
+    </totals>
+</config>

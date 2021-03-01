@@ -1,0 +1,12 @@
+<?php $objectManagerInstance = \Magento\Framework\App\ObjectManager::getInstance();
+$url = $objectManagerInstance->get('Magento\Framework\UrlInterface');?>
+<script>
+<?php if($block->isVendorValidate()){?>
+	require(['jquery'], function ($) {
+		$(".page-main-actions").after('<div id="messages"><div class="messages"><div class="message message-error error"><div data-ui-id="messages-message-error">Your vendor account has not been verified. Please ensure you complete your Bank Account and KYC information.</div></div></div></div>');
+	});	
+<?php }
+if($block->isVendorValidate() && $block->getVendorUrl() != $url->getCurrentUrl()){?>
+	window.location.href="<?php echo $block->getVendorUrl();?>";
+<?php }?>
+</script>

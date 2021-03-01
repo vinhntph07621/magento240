@@ -1,0 +1,391 @@
+<?php $country = $block->getCountry()?>
+<?php $industryCategory = $block->getChildCategories(); ?>
+<?php $childCategories = $industryCategory->getChildrenIds(); ?>
+<?php $industryBlockObj = $block->getLayout()->createBlock('Omnyfy\Cms\Block\Country\View\Industry'); ?>
+<?php $industryCatId = $block->getCountry()->getIndustryInfoCategory(); ?>
+<?php $industryArticleCollection = $industryBlockObj->getArticleCollection($industryCatId);?>
+<div class="wrapper-body">
+<section class="hero-banner-corporate short-banner bg-green with-tabs">
+	<div class="banner-info-wrapper">
+		<div class="container">
+			<div class="banner-info">
+				<h1><?php echo __('Explore ');?><?php echo $country->getCountryName()?></h1>
+			</div>
+		</div>
+	</div>
+	<div class="banner-bg clearfix">
+		<div class="banner-img-wrapper hero-banner-img-custom">
+			<img alt="image description" src="<?php echo $block->getBannerUrl($country->getBackgroundImage(),675);?>" class="banner-img" alt="<?php echo $country->getCountryName()?>">
+		</div>
+	</div>
+</section>
+<section class="tabs-section">
+	<div class="container bg-white">
+		<div class="nav-wrapper">
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active list-item"><a class="list-anchor tab-url-change marketprofile" data-url="marketprofile" href="#tab-0-0" aria-controls="<?php echo __('Market profile')?>" role="tab" data-toggle="tab"><?php echo __('Market profile')?></a></li>
+				<li role="presentation" class="list-item"><a class="list-anchor tab-url-change exportingto export" href="#tab-0-1" data-url="export" aria-controls="<?php echo __('Exporting to ').$country->getCountryName()?>" role="tab" data-toggle="tab"><?php echo __('Exporting to ').$country->getCountryName()?></a></li>
+				<?php #if($industryArticleCollection->getSize()>0){?>
+				<?php if($industryBlockObj->getContentVisible()){?>
+					<li role="presentation" class="list-item"><a class="list-anchor  tab-url-change industryto industry" data-url="industry" href="#tab-0-2" aria-controls="<?php echo __('Industry information')?>" role="tab" data-toggle="tab"><?php echo __('Industry information')?></a></li>
+				<?php }?>
+				<li role="presentation" class="list-item"><a class="list-anchor  tab-url-change serviceto service" href="#tab-0-3" data-url="service" aria-controls="<?php echo __('Find International Specialists')?>" role="tab" data-toggle="tab"><?php echo __('Find International Specialists')?></a></li>
+				<?php /* <li role="presentation" class="list-item"><a class="list-anchor  tab-url-change tools" href="#tab-0-4" data-url="tools" aria-controls="<?php echo __('Tools & resources')?>" role="tab" data-toggle="tab"><?php echo __('Tools & resources')?></a></li> */ ?>
+				<li role="presentation" class="list-item"><a class="list-anchor  tab-url-change eventsto events" href="#tab-0-5"  data-url="events" aria-controls="<?php echo __('Events')?>" role="tab" data-toggle="tab"><?php echo __('Events')?></a></li>
+			</ul>
+		</div>
+	</div>
+</section>
+<!-- Tab panes -->
+<div class="tab-content">
+	<div role="tabpanel" class="tab-pane active" id="tab-0-0">
+		<section>
+			<div class="container bg-white">
+				<div class="content-box">
+					<div class="row page-content-row">
+						<div class="col-md-6">
+							<article class="article">
+								<?php echo $country->getIntroduction()?>
+							</article>
+						</div>
+						<div class="col-md-6">
+							<div class="metadata-table">
+								<div class="data-cell">
+									<div class="cell-header">
+										<?php echo __('Population')?>
+										<div class="info-symbol">
+											<span class="icon-info2"></span>
+											<div class="popover top">
+												<div class="arrow"></div>
+												<div class="popover-content">
+													<p>Total population is based on the definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="cell-content">
+										<?php echo $country->getPopulation()?>
+									</div>
+								</div>
+								<div class="data-cell">
+									<div class="cell-header">
+										<?php echo __('Income level')?>
+										<div class="info-symbol">
+											<span class="icon-info2"></span>
+											<div class="popover top">
+												<div class="arrow"></div>
+												<div class="popover-content">
+													<p>Classification of country’s income level into four income groupings: low, lower-middle, upper-middle, and high. Income is measured using gross national income (GNI) per capita.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="cell-content">
+										<?php echo $block->getIncomeLevel()?>
+									</div>
+								</div>
+								<div class="data-cell">
+									<div class="cell-header">
+										<?php echo __('GNI Per Capita')?>
+										<div class="info-symbol">
+											<span class="icon-info2"></span>
+											<div class="popover top">
+												<div class="arrow"></div>
+												<div class="popover-content">
+													<p>GNI per capita (formerly GNP per capita) is the gross national income divided by the midyear population. GNI is the sum of value added by all resident producers plus any product taxes (less subsidies) not included in the valuation of output plus net receipts of primary income (compensation of employees and property income) from abroad.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="cell-content">
+										<?php echo $country->getGniPerCapita()?>
+									</div>
+								</div>
+								<div class="data-cell">
+									<div class="cell-header">
+										<?php echo __('GDP')?>
+										<div class="info-symbol">
+											<span class="icon-info2"></span>
+											<div class="popover top">
+												<div class="arrow"></div>
+												<div class="popover-content">
+													<p>GDP is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="cell-content">
+										<?php echo $country->getGdp()?>
+									</div>
+								</div>
+								<div class="data-cell">
+									<div class="cell-header">
+										<?php echo __('GDP Growth')?>
+										<div class="info-symbol">
+											<span class="icon-info2"></span>
+											<div class="popover top">
+												<div class="arrow"></div>
+												<div class="popover-content">
+													<p>Annual percentage growth rate of GDP at market prices based on constant local currency.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="cell-content">
+										<?php echo $country->getGdpGrowth()?>
+									</div>
+								</div>
+								<div class="data-cell">
+									<div class="cell-header">
+										<?php echo __('GDP Forecast')?>
+										<div class="info-symbol">
+											<span class="icon-info2"></span>
+											<div class="popover top">
+												<div class="arrow"></div>
+												<div class="popover-content">
+													<p>Forecast of GDP Growth of the country based on the World Bank Global Economic Prospects.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="cell-content">
+										<?php echo $country->getGdpForecast()?>
+									</div>
+								</div>
+								<div class="data-cell">
+									<div class="cell-header">
+										<?php echo __('Export to')?>
+										<div class="info-symbol">
+											<span class="icon-info2"></span>
+											<div class="popover top">
+												<div class="arrow"></div>
+												<div class="popover-content">
+													<p>Total value of exports to Australia.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="cell-content">
+										<?php echo $country->getTotalExports()?>
+									</div>
+								</div>
+								<div class="data-cell">
+									<div class="cell-header">
+										<?php echo __('Currency')?>
+										<div class="info-symbol">
+											<span class="icon-info2"></span>
+											<div class="popover top">
+												<div class="arrow"></div>
+												<div class="popover-content">
+													<p>Generally accepted form of money, including coins and paper notes, which is issued by a government and circulated within an economy.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="cell-content">
+										<?php echo $country->getCurrencyId()?>
+									</div>
+								</div>
+								<div class="data-cell">
+									<div class="cell-header">
+										<?php echo __('Exchange Rate')?>
+										<div class="info-symbol">
+											<span class="icon-info2"></span>
+											<div class="popover top">
+												<div class="arrow"></div>
+												<div class="popover-content">
+													<p>The price of a nation's currency in terms of another currency.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="cell-content">
+										<?php echo __('A $1 = ')?><?php echo $country->getCurrencyId()?> <?php echo $block->currencyConvert(1,'AUD',$country->getCurrencyId());?>
+										<?php echo __('US $1 = ')?><?php echo $country->getCurrencyId()?> <?php echo $block->currencyConvert(1,'USD',$country->getCurrencyId());?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row flex-row">
+						<div class="col-sm-4 col-sm-adjusted col-xs-12">
+							<div class="feature-tile simple-tile">
+								<div class="tile-content">
+									<a href="javascript:void(0)" tab-move="exportingto" class="title movingtab"><?php echo __('Exporting to')?> <?php echo $country->getCountryName()?></a>
+									<p><?php echo __('Every thing you need to get started with exporting to ').$country->getCountryName()?></p>
+								</div>
+								<div class="link-container">
+									<a href="javascript:void(0)" tab-move="exportingto" class="movingtab link-bottom">
+										<span class="arrow icon-angle-right"></span>
+										<?php echo __('Learn more')?>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4 col-sm-adjusted">
+							<div class="feature-tile simple-tile">
+
+								<div class="tile-content">
+									<a href="javascript:void(0)" tab-move="serviceto" class="movingtab title"><?php echo __('Find export service providers')?></a>
+									<p><?php echo __('Specialist service providers for the')?> <?php echo $country->getCountryName()?> <?php echo __('market to help you grow your business')?></p>
+								</div>
+
+								<div class="link-container">
+									<a href="javascript:void(0)" tab-move="serviceto" class="movingtab link-bottom">
+										<span class="arrow icon-angle-right"></span>
+										<?php echo __('Learn more')?>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4 col-sm-adjusted">
+							<div class="feature-tile simple-tile">
+
+								<div class="tile-content">
+									<a href="javascript:void(0)" tab-move="eventsto" class="movingtab title"><?php echo __('Events and trade shows')?></a>
+									<p><?php echo __('Find upcoming events and trade shows to learn and network with other exporters')?></p>
+								</div>
+
+								<div class="link-container">
+									<a href="javascript:void(0)" tab-move="eventsto" class="movingtab link-bottom">
+										<span class="arrow icon-angle-right"></span>
+										<?php echo __('Learn more')?>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<?php if($country->getFeaturedCallout()){?>
+			<section class="bg-grey block-section">
+				<div class="container">
+					<div class="content-box">
+						<div class="short-banner-row">
+							<div class="image-container featured-image-container">
+								<img src="<?php echo $block->getBannerUrl($country->getCalloutImage(),432);?>">
+							</div>
+							<div class="banner-content">
+								<p class="text-marked">
+									<?php echo $country->getCalloutContent()?>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		<?php }?>
+		<section class="block-section">
+			<div class="container">
+				<div class="content-box">
+					<div class="row">
+						<div class="col-sm-8 col-sm-adjusted">
+						<?php if($industryBlockObj->getHeadingContentVisible()){?>
+						<?php $childCategories = $industryCategory->getChildrenIds();?>
+							<div class="tier-col">
+								<div class="tier-info">
+									<h2 class="tier-title"><?php echo __('Industry information')?></h2>
+								</div>
+								<div class="accordion-wrapper">
+									<?php $i = 1;
+										foreach($childCategories as $child):
+										$category = $block->getCategory($child);
+										if($category->getIsActive()){?>
+										<?php if($industryBlockObj->getArticleCollection($category->getId())->getSize()>0){?>
+											<div class="accordion-pane <?php #if($i==1){echo ' expanded';}?>">
+												<div class="header-area">
+													<span class="header-text">
+														<?php echo $category->getTitle();?>
+													</span>
+
+													<span class="state-symbol">
+													</span>
+												</div>
+												<div class="accordion-content" <?php #if($i==1){echo ' style="display:block;"';}?>>
+													<div class="desc">
+														<?php echo $category->getCategorySnippet();?>
+													</div>
+													<a href="javascript:void(0)" tab-move="industryto" data-id="<?php echo $category->getId()?>" class="movingtab arrow-link">
+														<span class="arrow icon-angle-right"></span>
+														<?php echo __('Learn more about ').$category->getTitle().' to '.$country->getCountryName()?>
+													</a>
+
+												</div>
+											</div>
+										<?php }?>
+									<?php }
+										$i++;
+									endforeach;?>
+								</div>
+							</div>
+						<?php }?>
+						</div>
+						<?php echo $this->getChildHtml('ready.to.sell');?>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<div role="tabpanel" class="tab-pane" id="tab-0-1">
+		<?php echo $this->getChildHtml('country.profile.export')?>
+	</div>
+	<div role="tabpanel" class="tab-pane" id="tab-0-2">
+		<?php echo $this->getChildHtml('country.profile.industry')?>
+	</div>
+	<div role="tabpanel" class="tab-pane" id="tab-0-3">
+        <section class="mb-60">
+            <div class="container bg-white">
+                <div class="section-desc text-dark mt-30">
+                    <h2 class="section-header">Find export service providers for <?php echo $country->getCountryName()?></h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="result-list">
+                            <?php echo $this->getLayout()->createBlock("Omnyfy\Servicesearch\Block\Widget\Country")->setCountryId($country->getCountryId())->toHtml(); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+	</div>
+	<?php /* <div role="tabpanel" class="tab-pane" id="tab-0-4">
+		ToolsTab
+	</div> */ ?>
+	<div role="tabpanel" class="tab-pane" id="tab-0-5">
+		<?php echo $this->getChildHtml('country.events')?>
+	</div>
+</div>
+</div>
+<script type="text/javascript">
+require(['jquery'],function($){
+	jQuery('.movingtab').click(function($) {
+		var tab = jQuery(this).attr('tab-move');
+		var id = jQuery(this).attr('data-id');
+		jQuery('.'+tab).trigger('click');
+		jQuery('.sub-list-container').removeClass('expanded');
+		jQuery('#category-'+id).addClass('expanded');
+		jQuery("#category-"+id+" .sub-list a.list-group-item:first").trigger('click');
+		jQuery('html, body').animate({ scrollTop: 0 }, 0);
+	});
+	jQuery(".list-group-item").click(function() {
+		var newtaburl = jQuery(this).attr('export-data-url');
+		window.history.pushState("updateurl", "searchURl", newtaburl);
+	});
+	<?php if($tabUrl = $block->escapeHtml($this->getRequest()->getParam('tab'))){?>
+		jQuery(".tab-url-change").click(function() {
+			var newtaburl = '<?php echo $this->getUrl('cms/country/view').'id/'.$this->getRequest()->getParam('id')?>/tab/'+jQuery(this).attr('data-url');
+			window.history.pushState("updateurl", "searchURl", newtaburl);
+		});
+		//var tab_active = '<?php echo $block->getActiveTab($tabUrl)?>';
+		jQuery('.<?php echo $tabUrl?>').trigger('click');
+		jQuery('html, body').animate({ scrollTop: 0 }, 0);
+	<?php } else{?>
+		jQuery(".tab-url-change").click(function() {
+			var newtaburl = '<?php echo $block->getCurrentUrl()?>tab/'+jQuery(this).attr('data-url');
+			window.history.pushState("updateurl", "searchURl", newtaburl);
+		});
+	<?php }?>
+});
+</script>

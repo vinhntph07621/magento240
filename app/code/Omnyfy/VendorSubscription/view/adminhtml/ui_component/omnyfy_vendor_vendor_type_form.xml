@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="role_plan_section">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">Assign User Roles and Subscription Plan</item>
+                <item name="sortOrder" xsi:type="number">150</item>
+            </item>
+        </argument>
+        <container name="container_header">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" />
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="componentType" xsi:type="string">container</item>
+                    <item name="template" xsi:type="string">ui/form/components/complex</item>
+                    <item name="content" xsi:type="string" translate="true">At least one role and plan should be assigned.</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </container>
+        <dynamicRows name="role_plan">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
+                    <item name="recordTemplate" xsi:type="string">record</item>
+                    <item name="deleteButtonLabel" xsi:type="string">Remove</item>
+                    <item name="deleteProperty" xsi:type="string">delete</item>
+                    <item name="dndConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="addButton" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+            <container name="record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string" translate="true">Magento_Ui/js/dynamic-rows/record</item>
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="showFallbackReset" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+                <field name="plan_id">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">Omnyfy\VendorSubscription\Model\Source\SubscriptionPlans</item>
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string">Subscription Plan</item>
+                            <item name="visible" xsi:type="boolean">true</item>
+                            <item name="dataType" xsi:type="string">number</item>
+                            <item name="formElement" xsi:type="string">select</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="role_id">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">Omnyfy\VendorSubscription\Model\Source\VendorRoles</item>
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string">User Role</item>
+                            <item name="visible" xsi:type="boolean">true</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">select</item>
+
+                        </item>
+                    </argument>
+                </field>
+                <actionDelete>
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="componentType" xsi:type="string">actionDelete</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="fit" xsi:type="boolean">false</item>
+                            <item name="label" xsi:type="string">Actions</item>
+                            <item name="additionalClasses" xsi:type="string">data-grid-actions-cell</item>
+                            <item name="template" xsi:type="string">Magento_Backend/dynamic-rows/cells/action-delete</item>
+                        </item>
+                    </argument>
+                </actionDelete>
+            </container>
+        </dynamicRows>
+    </fieldset>
+</form>

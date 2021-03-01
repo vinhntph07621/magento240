@@ -1,0 +1,72 @@
+<?php $_categoryCollection = $block->getCollection();?>
+<?php if ($_categoryCollection->getSize() > 0) :?>
+<section class="block-section" id="category-topics">
+	<div class="container">
+		<div class="row">
+		<?php $i=1;
+			$customCondition = null;
+			$cls = null;
+			foreach ($_categoryCollection as $_category): ?>
+			<?php if($this->getArticleCount($_category->getCategoryId()) != '0 article'){
+				if($i>3){
+					$customCondition = ' style="display:none;"';
+				}
+				if($i>1){
+					$cls = ' moreBox';
+				}
+				?>
+				<div class="col-sm-6 col-md-3 articleBox<?php echo $cls?>" <?php echo $customCondition?>>
+					<div class="topic-tile">
+						<div class="tile-body">
+							<div class="symbol-row">
+								<?php 
+									$imgUrl = $this->getViewFileUrl('Omnyfy_Cms::images/topic-icon01.png');
+									if($_category->getCategoryIconFrontend()){
+										$imgUrl = $_category->getCategoryIconFrontend();
+									}
+									?>
+								<img alt="image description" src="<?php echo $imgUrl?>" class="tile-icon">
+							</div>
+							<div class="tile-content">
+								<a href="<?php echo $this->getUrl().'cms/category/'.$_category->getIdentifier().'/usertype/'.$this->getRequest()->getParam('usertype');?>" class="title"><?php echo $_category->getTitle();?></a>
+								<p><?php echo strip_tags($_category->getCategorySnippet());?></p>
+							</div>
+						</div>
+						<div class="tile-footer">
+							<a href="<?php echo $this->getUrl().'cms/category/'.$_category->getIdentifier().'/usertype/'.$this->getRequest()->getParam('usertype');?>">
+								<span class="icon-file2"></span>
+								 <?php echo $this->getArticleCount($_category->getCategoryId())?>
+							</a>
+						</div>
+					</div>
+				</div>
+			<?php $i++;
+				}?>
+			<?php endforeach;?>
+		</div>
+		<?php if($_categoryCollection->getSize()>4){?>
+			<div class="load-more-wrapper">
+				<button class="btn btn-text-green btn-lg load-more-btn loadMore">
+					More topics 
+					<span class="icon-chevron-down"></span>
+				</button>
+			</div>
+		<?php }?>
+	</div>
+</section>
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+		jQuery(".moreBox").slice(0, 3).show();
+		if (jQuery(".articleBox:hidden").length != 0) {
+			jQuery(".loadMore").show();
+		}		
+		jQuery(".loadMore").on('click', function (e) {
+			e.preventDefault();
+			jQuery(".moreBox:hidden").slice(0, 4).slideDown();
+			if (jQuery(".moreBox:hidden").length == 0) {
+				jQuery(".load-more-wrapper").fadeOut('slow');
+			}
+		});
+    });
+</script>	
+<?php endif;?>

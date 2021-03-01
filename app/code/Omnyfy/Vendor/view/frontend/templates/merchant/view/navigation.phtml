@@ -1,0 +1,17 @@
+<!-- inner nav starts -->
+<div class="vendor-navigation-wrapper">
+    <section class="vendor-navigation">
+        <div class="container">
+            <div class="scroll-to">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.5001 17.3756L11.5001 5C11.5001 4.72386 11.7239 4.5 12.0001 4.5C12.2762 4.5 12.5001 4.72386 12.5001 5L12.5001 17.3756L18.238 11.6479C18.4323 11.4539 18.7471 11.4541 18.9412 11.6482C19.1355 11.8425 19.1355 12.1575 18.9412 12.3518L12.7072 18.5858C12.3167 18.9763 11.6835 18.9763 11.293 18.5858L5.05895 12.3518C4.86467 12.1575 4.86467 11.8425 5.05895 11.6482C5.2531 11.4541 5.56783 11.4539 5.76216 11.6479L11.5001 17.3756Z" fill="black"/>
+                </svg>
+                <span><?= __("Scroll to:") ?></span>
+            </div>
+            <nav>
+                <?= $block->getChildHtml('vendor.navigation.menu')?>
+            </nav>
+        </div>
+    </section>
+</div>
+<!-- inner nav ends -->

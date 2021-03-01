@@ -1,0 +1,46 @@
+<?php $templatesCollection = $block->getCollection();?>
+<?php if($templatesCollection->getSize()>0):?>
+	<h2 class="light-header"><?php echo __('Templates')?></h2>
+	<div class="row flex-row mb-30">
+		<?php foreach($templatesCollection as $template):?>
+			<div class="col-xs-12 col-sm-6 col-md-4">
+				<div class="templates-tile">
+					<div class="tile-content">
+						<div class="top-row">
+							<div class="tile-image">
+								<?php if($template->getIcon()){
+									$imgUrl = $block->getLogoUrl($template->getIcon());
+								} else{
+									$imgUrl = $this->getViewFileUrl("Omnyfy_Cms::images/topic-icon01.png");
+								}?>
+								<img src="<?php echo $imgUrl;?>" title="<?php echo $template->getTitle()?>">
+							</div>
+							<div class="heading"><?php echo $template->getTitle()?></div>
+						</div>
+						<div class="brief">
+							<p><?php echo $this->stripTags($template->getShortDescription())?></p>
+						</div>
+					</div>
+					<div class="tile-footer">
+						<?php if($template->getLinkType()){?>
+							<a href="<?php echo $this->stripTags($template->getLink())?>" target="_blank" class="link-bottom arrow-link">
+								<span class="arrow icon-angle-right"></span>
+								<?php echo __('Learn more')?>
+							</a>
+						<?php } else{?>
+							<?php if($block->isLoggedIn()){?>
+								<a href="<?php echo $block->getTemplateUrl($template->getUploadTemplate())?>" download target="_blank" class="btn btn-dark-green">
+									<?php echo __('Download template')?>
+								</a>
+							<?php } else{ ?>
+								<a href="<?php echo $block->getLoginUrl()?>" class="btn btn-dark-green">
+									<?php echo __('Download template')?>
+								</a>
+							<?php }?>
+						<?php }?>
+					</div>
+				</div>
+			</div>
+		<?php endforeach;?>
+	</div>
+<?php endif;?>	

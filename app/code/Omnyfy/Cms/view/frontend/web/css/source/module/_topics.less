@@ -1,0 +1,190 @@
+// /**
+//  * Copyright © Omnyfy, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+
+//
+//  Variables
+//  ---------------------------------------------
+@search-article-module__margin: 0 0 @indent__l;
+@tracking-field-desc__text-align: center;
+
+@tracking-field-wrapper__width: 90%;
+@tracking-field-wrapper__width-m: 50%;
+@tracking-field-wrapper__margin: auto;
+@tracking-field-wrapper__display: table;
+
+@topics-list-wrapper__display: flex;
+@topics-list-wrapper__flex-wrap: wrap;
+@topics-list-wrapper__justify-content: center;
+@topics-list-wrapper__margin: 0 -@indent__s;
+
+@topic-wrapper__width: 100%;
+@topic-wrapper__width-s: 50%;
+@topic-wrapper__width-m: 33.3333333%;
+@topic-wrapper__box-sizing: border-box;
+@topic-wrapper__padding: @indent__s;
+
+@topic-tile__position: relative;
+@topic-tile__overflow: hidden;
+@topic-tile__background-color: @color-black;
+
+@topic-icon__object-fit: cover;
+@topic-icon__position: absolute;
+@topic-icon__min-width: 100%;
+@topic-icon__min-height: 100%;
+@topic-icon__top: 50%;
+@topic-icon__left: 50%;
+@topic-icon__transform: translate(-50%, -50%);
+@topic-icon__z-index:1;
+@topic-icon__opacity: 0.6;
+
+@topic-link__position: absolute;
+@topic-link__width: 100%;
+@topic-link__height: 100%;
+@topic-link__z-index: 2;
+@topic-link__display: flex;
+@topic-link__justify-content: center;
+@topic-link__align-items: center;
+@topic-link__flex-wrap: wrap;
+@topic-link__color: @color-white;
+@topic-link__color__hover: @color-white;
+@topic-link__color__active: @color-white;
+@topic-link__color__visited: @color-white;
+@topic-link__text-decoration: none;
+
+@topic-content__text-align: center;
+
+@topic-button-wrapper__margin: @indent__base auto;
+@topic-button__text-transform: uppercase;
+
+//
+//    Common
+//--------------------------------------
+
+& when (@media-common = true) {
+	.search-article-module {
+		margin: @search-article-module__margin;
+	}
+
+	.tracking-field-desc {
+		text-align: @tracking-field-desc__text-align;
+	}
+
+	.tracking-field-wrapper {
+		width: @tracking-field-wrapper__width;
+		margin: @tracking-field-wrapper__margin;
+		display: @tracking-field-wrapper__display;
+
+		.field,
+		.actions {
+			display: table-cell;
+			vertical-align: top;
+		}
+
+		.actions {
+			button {
+				width: 100%;
+			}
+		}
+	}
+
+	.tracking-button {
+		.lib-button-primary();
+	}
+
+	.topics-list-wrapper {
+		justify-content: @topics-list-wrapper__justify-content;
+		flex-wrap: @topics-list-wrapper__flex-wrap;
+		display: @topics-list-wrapper__display;
+		margin: @topics-list-wrapper__margin;
+	}
+
+	.topic-wrapper {
+		width: @topic-wrapper__width;
+		box-sizing: @topic-wrapper__box-sizing;
+		padding: @topic-wrapper__padding;
+	}
+
+	.topic-tile {
+		position: @topic-tile__position;
+		overflow: @topic-tile__overflow;
+		background-color: @topic-tile__background-color;
+
+		&:after {
+			display: block;
+			content: '';
+			padding-bottom: 61%;
+		}
+	}
+
+	.topic-icon {
+		object-fit: @topic-icon__object-fit;
+		position: @topic-icon__position;
+		min-width: @topic-icon__min-width;
+		min-height: @topic-icon__min-height;
+		transform: @topic-icon__transform;
+		z-index: @topic-icon__z-index;
+		top: @topic-icon__top;
+		left: @topic-icon__left;
+		opacity: @topic-icon__opacity;
+	}
+
+	.topic-link {
+		position: @topic-link__position;
+		width: @topic-link__width;
+		height: @topic-link__height;
+		z-index: @topic-link__z-index;
+		display: @topic-link__display;
+		justify-content: @topic-link__justify-content;
+		align-items: @topic-link__align-items;
+		flex-wrap: @topic-link__flex-wrap;
+		color: @topic-link__color;
+		text-decoration: @topic-link__text-decoration;
+
+		&:hover {
+			color: @topic-link__color__hover;
+			text-decoration: @topic-link__text-decoration;
+		}
+
+		&:active {
+			color: @topic-link__color__active;
+			text-decoration: @topic-link__text-decoration;
+		}
+
+		&:visited {
+			color: @topic-link__color__visited;
+			text-decoration: @topic-link__text-decoration;
+		}
+	}
+
+	.topic-content {
+		text-align: @topic-content__text-align;
+	}
+
+	.topic-button-wrapper {
+		margin: @topic-button-wrapper__margin;
+	}
+
+	.topic-button {
+		text-transform: @topic-button__text-transform;
+	}
+}
+
+@media only screen and (min-width: @screen__s) {
+	.topic-wrapper {
+		width: @topic-wrapper__width-s;
+	}
+}
+
+@media only screen and (min-width: @screen__m) {
+	.tracking-field-wrapper {
+		width: @tracking-field-wrapper__width-m;
+	}
+
+	.topic-wrapper {
+		width: @topic-wrapper__width-m;
+	}
+}
+

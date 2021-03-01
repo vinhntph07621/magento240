@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright © Omnyfy, Inc. All rights reserved.
+ *
+ * Author: Kateryna Bieliaieva
+ * Date: 15/11/2020
+ *
+ * @var $block \Omnyfy\Core\Block\SiteMessage
+ */
+?>
+
+<?php if ($block->isSiteMessageEnabled()): ?>
+    <div class="site-message-wrapper" <?= $block->isIeOnly() ? "style='display: none;'" : '' ?>>
+        <div class="site-message"><?= $block->getSiteMessage() ?></div>
+    </div>
+
+    <?php if ($block->isIeOnly()): ?>
+    <script>
+        require([
+            "jquery",
+            "domReady!"
+        ], function($) {
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+                $(".site-message-wrapper").show();
+            }
+        })
+    </script>
+    <?php endif ?>
+<?php endif ?>

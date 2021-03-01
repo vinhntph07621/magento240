@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Omnyfy_Mcm::css/mcm_admin.css"/>
+    </head>
+    <body>
+        <referenceContainer name="page.content" >
+            <block class="Omnyfy\Mcm\Block\Adminhtml\VendorWithdrawal\Index" name="omnyfy_mcm_vendor_withdrawal_index" before="page.main.actions"/>            
+        </referenceContainer>
+        <referenceContainer name="content">            
+            <uiComponent name="omnyfy_mcm_vendor_withdrawal_history_main_listing"/>
+        </referenceContainer>
+    </body>
+</page>

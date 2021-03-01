@@ -1,0 +1,22 @@
+{
+    "name": "omnyfy/vendor_subscription",
+    "description": "",
+    "require": {
+        "php": "~7.0.0",
+        "magento/framework": "100.1.*",
+        "omnyfy/core": "~1.0",
+        "omnyfy/vendor": "~1.0.16"
+    },
+    "authors": [{
+      "email": "jing.xiao@omnyfy.com",
+      "name": "Jing Xiao"
+    }],
+    "minimum-stability": "dev",
+    "autoload": {
+      "psr-4": {
+          "Omnyfy\\VendorSubscription\\": ""
+      },
+      "files": ["registration.php"]
+    }
+}
+

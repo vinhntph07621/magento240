@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Omnyfy\Checklist\Api\ChecklistRepositoryInterface" type="Omnyfy\Checklist\Model\ChecklistRepository"/>
+	<preference for="Omnyfy\Checklist\Api\Data\ChecklistInterface" type="Omnyfy\Checklist\Model\Checklist"/>
+	<preference for="Omnyfy\Checklist\Api\Data\ChecklistSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Omnyfy\Checklist\Model\ResourceModel\Checklist\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">omnyfy_checklist_checklist</argument>
+			<argument name="resourceModel" xsi:type="string">Omnyfy\Checklist\Model\ResourceModel\Checklist\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="omnyfy_checklist_checklist_grid_data_source" xsi:type="string">Omnyfy\Checklist\Model\ResourceModel\Checklist\Grid\Collection</item>
+				<item name="omnyfy_checklist_checklistitems_grid_data_source" xsi:type="string">Omnyfy\Checklist\Model\ResourceModel\ChecklistItems\Grid\Collection</item>
+				<item name="omnyfy_checklist_checklistitemoptions_grid_data_source" xsi:type="string">Omnyfy\Checklist\Model\ResourceModel\ChecklistItemOptions\Grid\Collection</item>
+				<item name="omnyfy_checklist_checklistitemuploads_grid_data_source" xsi:type="string">Omnyfy\Checklist\Model\ResourceModel\ChecklistItemUploads\Grid\Collection</item>
+				<item name="omnyfy_checklist_checklistitemuseroptions_grid_data_source" xsi:type="string">Omnyfy\Checklist\Model\ResourceModel\ChecklistItemUserOptions\Grid\Collection</item>
+				<item name="omnyfy_checklist_checklistdocuments_grid_data_source" xsi:type="string">Omnyfy\Checklist\Model\ResourceModel\ChecklistDocuments\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<virtualType name="Omnyfy\Checklist\Model\ResourceModel\ChecklistItems\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">omnyfy_checklist_checklistitems</argument>
+			<argument name="resourceModel" xsi:type="string">Omnyfy\Checklist\Model\ResourceModel\ChecklistItems\Collection</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="Omnyfy\Checklist\Model\ResourceModel\ChecklistItemOptions\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">omnyfy_checklist_checklistitemoptions</argument>
+			<argument name="resourceModel" xsi:type="string">Omnyfy\Checklist\Model\ResourceModel\ChecklistItemOptions\Collection</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="Omnyfy\Checklist\Model\ResourceModel\ChecklistItemUploads\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">omnyfy_checklist_checklistitemuploads</argument>
+			<argument name="resourceModel" xsi:type="string">Omnyfy\Checklist\Model\ResourceModel\ChecklistItemUploads\Collection</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="Omnyfy\Checklist\Model\ResourceModel\ChecklistItemUserOptions\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">omnyfy_checklist_checklistitemuseroptions</argument>
+			<argument name="resourceModel" xsi:type="string">Omnyfy\Checklist\Model\ResourceModel\ChecklistItemUserOptions\Collection</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="Omnyfy\Checklist\Model\ResourceModel\ChecklistDocuments\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">omnyfy_checklist_checklistdocuments</argument>
+			<argument name="resourceModel" xsi:type="string">Omnyfy\Checklist\Model\ResourceModel\ChecklistDocuments\Collection</argument>
+		</arguments>
+	</virtualType>
+</config>

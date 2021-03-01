@@ -1,0 +1,552 @@
+<?php
+/* @var \Omnyfy\VendorSignUp\Block\SignUp\Form $block */
+?>
+<?php $countryList=$block->getCountries();?>
+<?php $siteKey = $block->getGoogleKey()?>
+<script src='https://www.google.com/recaptcha/api.js' async defer></script>
+<div id="vendor-signup-wrapper">
+	<?php echo $this->getChildHtml('become.vendor')?>
+	<?php echo $this->getChildHtml('steps.vendor')?>
+	<div class="main-wrapper">
+		<div class="step-container active" id="booking-step-0">
+			<div class="fields-header normal">
+				<h3 class="heading">Complete the form to sign up</h3>
+			</div>
+			<form class="form signup-omnyfy" name="vendor-signup" action="<?php #echo $block->getFormAction()?>" id="vendor-signup-form" method="post" novalidate="novalidate">
+				<input name="form_key" type="hidden" value="<?php echo $block->getFormKey();?>">
+				<input type="hidden" name="vendor_type_id" value="<?php echo $block->getVendorTypeId();?>"/>
+				<div class="fields-body">
+					<div class="fields-group">
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="firstname">First Name</label>
+								<input type="text" placeholder="Enter your first name" class="input-class-check maximum-length-100" data-validate="{required:true}" id="firstname" name="firstname">
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="lastname">Last Name</label>
+								<input type="text" placeholder="Enter your last name" class="input-class-check maximum-length-100" data-validate="{required:true}" id="lastname" name="lastname">
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="dobv">Date of Birth</label>
+								<input class="input-class-check control-text" name="dobv" data-validate="{required:true}" id="dobv" placeholder="Enter select your date of birth" type="text">
+								<input type="hidden" name="dob" id="dob"/>
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="businessname">Business Name</label>
+								<input type="text" placeholder="Enter your business name" class="input-class-check maximum-length-100" data-validate="{required:true}" id="businessname" name="businessname">
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="businessaddress">Business Address</label>
+								<input type="text" data-validate="{required:true}" class="input-class-check" placeholder="Enter your business address" id="businessaddress" name="businessaddress">
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="city">City</label>
+								<input type="text" placeholder="Enter your city" data-validate="{required:true}" class="input-class-check" id="city" name="city">
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="email">State</label>
+								<input type="text" placeholder="Enter your state" class="input-class-check" data-validate="{required:true}" id="state" name="state">
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="postcode">Postcode</label>
+								<input type="text" placeholder="Enter your postcode" class="input-class-check" data-validate="{required:true}" id="postcode" name="postcode">
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="country">Country</label>
+								<?php echo $countryList?>
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="contactnumber">Contact Number</label>
+								<div class="row">
+									<div class="col-sm-4">
+										<select id="countrycode" data-validate="{required:true}" class="input-class-check" name="countrycode">
+											<option value="">Country code</option>
+											<?php echo $block->countrySelector();?>
+										</select>
+									</div>
+									<div class="col-sm-8">
+										<input type="text" data-validate="{required:true}" class="input-class-check" data-msg-required="Please enter a valid phone number." data-msg-pattern="Please enter a valid phone number. For example 01 2345 6789 or 1234 457 890." placeholder="Enter your contact number" id="contactnumber" name="contactnumber">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="control-wrapper email-section">
+								<label for="email">Email</label>
+								<input type="text" placeholder="Enter your email address" data-validate="{required:true, 'validate-email':true}" class="input-class-check" data-msg-required="Please enter a correct email address." id="email" name="email">
+								<div for="email" generated="true" class="mage-error" id="email-error"></div>
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="legal_entity">Legal Entity Name</label>
+								<input type="text" placeholder="Enter your legal entity name" class="input-class-check" data-validate="{required:true}" id="legal_entity" name="legal_entity">
+							</div>
+						</div>
+						<?php /* <div class="group-item">
+							<div class="control-wrapper">
+								<label for="government_number">Government Number</label>
+								<select id="government_number" name="government_number"></select>
+								<input type="text" id="government_number_other" style="display:none;" name="government_number_other">
+							</div>
+						</div> */ ?>
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="businessapn">Tax Number</label>
+								<div class="row">
+									<div class="col-sm-4" id="taxnumber-apl">
+										<select id="tax_number" class="input-class-check" data-validate="{required:true}" name="tax_number">
+										<option value="">Tax Name</option>
+										</select>
+									</div>
+									<div class="col-sm-8" id="contactnumber-apl">
+										<input type="text" class="input-class-check" placeholder="Enter your tax number" data-validate="{required:true}" data-msg-required="Enter your tax number" id="businessapn" name="businessapn">
+										<div for="businessapn" generated="true" class="mage-error" style="display:none;" id="businessapn-error"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="control-wrapper">
+								<label for="businessdescription">Business Description</label>
+								<textarea name="businessdescription" data-validate="{required:true}" id="businessdescription" title="What’s on your mind?" class="maximum-length-100 input-class-check input-text" cols="5" rows="8"></textarea>
+							</div>
+						</div>
+
+						<!-- load custom vendor attributes -->
+						<?php echo $block->getChildHtml('vendor_attributes');?>
+
+						<input type="hidden" name="file-name" value="" />
+						<?php if (!empty($siteKey)) { ?>
+							<div class="group-item">
+								<div class="control-wrapper">
+									<div class="g-recaptcha input-class-check" data-sitekey="<?php echo $block->getGoogleKey()?>"></div>
+									<div for="captcha" generated="true" class="mage-error" id="captcha-error"></div>
+								</div>
+							</div>
+						<?php } ?>
+					</div>
+				</div>
+
+				<?php echo $this->getChildHtml('vendor_subscription')?>
+				<div class="step-actions">
+					<div class="note">
+						<p>By continuing to sign up, you are agreeing to the <a href="<?php echo $this->getUrl('terms-and-conditions');?>">Terms and Conditions</a> of <?php echo $block->getStoreName();?> and our <a href="<?php echo $this->getUrl('privacy-policy-cookie-restriction-mode');?>">Privacy Policy.</a></p>
+					</div>
+					<div class="actions">
+						<a class="btn btn-link-dark btn-lg close-vendor">Cancel</a>
+						<button class="btn btn-dark-green btn-lg" type="button" id="confirm-appointment-btn">Sign up</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="step-container" id="thank-you-section">
+			<?php echo $this->getChildHtml('thanks.vendor')?>
+		</div>
+	</div>
+</div>
+<script>
+	require(['jquery','accordion',"mage/calendar",'mage/mage','jquery/validate','domReady!'], function ($) {
+		var validateEmail = function(elementValue) {
+			var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+			return emailPattern.test(elementValue);
+		}
+
+		var formSubmit = function() {
+			var params = $('#vendor-signup-form').serialize();
+			console.log(params);
+			<?php if (!empty($siteKey)) { ?>
+
+			if(grecaptcha && grecaptcha.getResponse().length > 0){
+				$("#captcha-error").text("");
+			<?php } ?>									
+				var url = "<?php echo $block->getFormAction() ?>";
+				$.ajax({
+					url: url,
+					type: "POST",
+					dataType: "json",
+					data: params,
+					showLoader: true,
+					cache: false,
+					success: function (response) {
+						window.location.href = response.redirect;
+					}
+				});
+			<?php if (!empty($siteKey)) { ?>
+			} else{
+				$("#captcha-error").text("Incorrect response. Please try again!");
+				$("#captcha-error").show();
+			}
+			<?php } ?>
+		}
+
+		$("#vendor-signup-form").each(function(){
+			$(this, "input, textarea, select");
+		});
+		$('#vendor-signup-form input, select, textarea').on('keypress change',
+			function(index){
+				var input = $(this);
+				if(input.val()){
+					//alert('Type: ' + input.attr('type') + 'Name: ' + input.attr('name') + 'Value: ' + input.val());
+					$('#'+input.attr('id')).removeClass('mage-error');
+					$('#'+input.attr('id')+'-error').hide();
+				}
+			}
+		);
+
+        $(".input-file").on("change", function () {
+            var file = $(this).get(0).files[0];
+            var formData = new FormData();
+
+            formData.append('file', file);
+
+            var ajaxurl = '<?php echo $this->getUrl('vendorsignup/upload/index') ?>';
+            $.ajax({
+                url: ajaxurl,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                showLoader: true,
+                data: formData,
+                success: function (response) {
+                    $('.file-upload-message').remove();
+                    $(".input-file").after('<i class="file-upload-message" style="font-size: 12px">' + response["message"]+ '</i>')
+                    if (response.type == 'success') {
+                        $("input[name='file-name']").val(response["filelist"]);
+                    }
+                },
+                fail: function () {
+                    alert('Something went wrong while uploading the file.')
+                },
+                always: function () {}
+            });
+        });
+
+		$('#email').keyup(function() {
+			var value = $(this).val();
+			var valid = validateEmail(value);
+			if (valid) {
+				var url = "<?php echo $block->getEmailCheckAction() ?>";
+				$.ajax({
+					url: url,
+					type: "POST",
+					dataType: "json",
+					data: {
+						email : value
+					},
+					showLoader: false,
+					cache: false,
+					success: function (response) {
+						if(response['type'] == 'exist'){
+							$('.email-section #email-error').text(response['message']);
+							$('.email-section #email-error').show();
+							$('#email').val('');
+						} else{
+							$("#email-error").text('');
+							$('.email-section #email-error').hide();
+						}
+					}
+				});
+			}
+		});
+		function isValidAbn(abn){
+			var weights = [10, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+			abn = abn.replace(/\D/g,'');
+			// Check abn is 11 chars long
+			if (abn.length != 11) {
+				return false;
+			}
+			// Sum the products
+			var sum = 0;
+			$.each(abn.split(''), function( index, value ) {
+				// Subtract one from first digit
+				if(index==0){
+					value = (value*1) - 1;
+				}
+				sum += (value * weights[index]);
+			});
+			if ((sum % 89) != 0) {
+				return false;
+			}
+			return true;
+		}
+		
+		var subscriptionChild = document.getElementById('subscription-child');
+        var cardElement = document.getElementById('card-element');
+		
+        if (subscriptionChild && cardElement) {
+			var apiKey = $('#stripe-api-key').html();
+			var stripe = Stripe(apiKey);
+
+			var elements = stripe.elements();
+
+			var style = {
+				base: {
+					color: '#32325d',
+					fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+					fontSmoothing: 'antialiased',
+					fontSize: '16px',
+					'::placeholder': {
+						color: '#aab7c4'
+					}
+				},
+				invalid: {
+					color: '#fa755a',
+					iconColor: '#fa755a'
+				}
+			};
+
+			var card = elements.create('card', {style: style});
+
+			card.mount('#card-element');
+			card.addEventListener('change', function (event) {
+				var displayError = document.getElementById('card-errors');
+				if (event.error) {
+					displayError.textContent = event.error.message;
+				} else {
+					displayError.textContent = '';
+				}
+			});
+		}
+		
+		
+		$('#confirm-appointment-btn').click(function (e) {
+			e.preventDefault();
+			var dataForm = $('#vendor-signup-form');
+			var isAbn = null;
+			if($("#tax_number").val()=='ABN'){
+				isAbn = isValidAbn($("input[name='businessapn']").val());
+				if(!isAbn){
+					$("input[name='businessapn']").val('');
+					$("#businessapn-error").text('Please enter a valid ABN number eg. 53004085616.');
+					$("#businessapn-error").show();
+					return false;
+				}
+			}
+
+			if(dataForm.validation('isValid')){		
+				var country_id = $("#country").val();
+                $("<input />").attr("type", "hidden")
+                    .attr("name", "country_id")
+                    .attr("value", country_id)
+                    .appendTo("#vendor-signup-form");
+				
+				if (!!subscriptionChild && typeof stripe !== 'undefined') {
+					stripe.createToken(card).then(function (result) {
+						if (result.error) {
+							// Inform the user if there was an error.
+							var errorElement = document.getElementById('card-errors');
+							errorElement.textContent = result.error.message;	
+							console.log(result.error.message);
+						} else {					
+							// Send the token to your server.
+							var token = result.token;
+							console.log(token);
+							
+							// Insert the token ID into the form so it gets submitted to the server
+							var form = document.getElementById('vendor-signup-form');
+							var hiddenInput = document.createElement('input');
+							hiddenInput.setAttribute('type', 'hidden');
+							hiddenInput.setAttribute('name', 'card_token');
+							hiddenInput.setAttribute('value', token.id);
+							form.appendChild(hiddenInput);
+							
+							formSubmit();
+						}
+					});	
+
+				}else {
+
+					formSubmit();
+					
+				}	                
+			}
+		});
+        <?php if (!empty($siteKey)) { ?>
+            if(grecaptcha && grecaptcha.getResponse().length > 0){
+                $("#captcha-error").hide();
+            }
+		<?php } ?>
+		$("#dobv").calendar({
+			dateFormat: 'dd/mm/yy',
+            altFormat:'yy-mm-dd',
+            altField: '#dob',
+			changeYear: true,
+			changeMonth: true,
+			yearRange: "1900:2030",
+			buttonText: "Select Date",
+		});
+
+		$("#show-vendor-popup").click(function(e) {
+			$("body").addClass("signup-show");
+		});
+		$(".close-vendor").click(function(e) {
+			$("#vendor-signup-form")[0].reset();
+			$("#booking-step-0").addClass('active');
+			$("#thank-you-section").removeClass('active');
+			$(".input-class-check .mage-error").hide();
+			$("body").removeClass("signup-show");
+		});
+
+		var dataForm = $('#vendor-signup-form');
+		dataForm.mage(
+			'validation', {
+				"rules": {
+					"contactnumber": {
+						"required":true,
+						'pattern':/^(?=.*[0-9])[- +()0-9]+$/,
+						"minlength":6,
+						"maxlength":20
+					}
+				}
+			});
+		$("#country").on("change",function(e) {
+			var countryVal = $("#country").val();
+
+			var taxNumber  = {
+				US: ["EIN"],
+				AU: ["ABN", "ACN"],
+				NZ: ["NZBN", "NZCN"],
+				ZA: ["CIPC", "SARSNZ"]
+			}
+			var taxNumberArr = ["US", "AU", "NZ", "ZA"];
+
+			if (taxNumberArr.includes(countryVal)){
+				document.getElementById('tax_number').style.display  = 'block';
+				document.getElementById("taxnumber-apl").style.display = "block";
+				document.getElementById("tax_number").setAttribute("data-validate", "{required:true}");
+				document.getElementById("contactnumber-apl").className = "col-sm-8";
+				var taxNumberOptions = "<option value=''>Tax Name</option>";
+				for (categoryId in taxNumber[countryVal]) {
+					taxNumberOptions += "<option>" + taxNumber[countryVal][categoryId] + "</option>";
+				}
+				document.getElementById("tax_number").innerHTML = taxNumberOptions;
+			}
+			else {
+				document.getElementById('tax_number').style.display  = 'none';
+				document.getElementById("taxnumber-apl").style.display = "none";
+				$("#tax_number .mage-error").hide();
+				document.getElementById("tax_number").classList.remove("mage-error");
+				document.getElementById("tax_number").removeAttribute("data-validate");
+				document.getElementById("contactnumber-apl").className = "col-sm-12";
+			}
+		});
+
+		$("#country").trigger('change');
+
+	});
+</script>
+
+<script type="text/javascript">// <![CDATA[
+    window.onload = function () {
+        initialize();
+    };
+    var placeSearch, autocomplete, autocomplete_textarea;
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'long_name',
+        country: 'short_name',
+        postal_code: 'short_name'
+    };
+    function initialize() {
+        // Create the autocomplete object, restricting the search
+        // to geographical location types.
+        setTimeout(function () {
+            autocomplete = new google.maps.places.Autocomplete(
+                    (document.getElementsByName("businessaddress")[0]),
+                    {types: ['geocode']});
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+
+
+                var addressDetail = {};
+                // Get each component of the address from the place details
+                // and fill the corresponding field on the form.
+                for (var i = 0; i < place.address_components.length; i++) {
+                    var addressType = place.address_components[i].types[0];
+
+                    if (componentForm[addressType]) {
+                        var val = place.address_components[i][componentForm[addressType]];
+                        addressDetail[addressType] = val;
+                    }
+                }
+
+                console.log(addressDetail);
+                document.getElementsByName("city")[0].value = (typeof addressDetail.locality === 'undefined') ? '' : addressDetail.locality;
+                document.getElementsByName("postcode")[0].value = (typeof addressDetail.postal_code === 'undefined') ? '' : addressDetail.postal_code;
+                document.getElementsByName("state")[0].value = (typeof addressDetail.administrative_area_level_1 === 'undefined') ? '' : addressDetail.administrative_area_level_1;
+                document.getElementById("country").value = (typeof addressDetail.country == 'undefined') ? '' : addressDetail.country;
+
+
+				if(document.getElementById('city-error')){
+					document.getElementById('city-error').style.display  = 'none';
+					document.getElementById("city").classList.remove("mage-error");
+				}
+				if(document.getElementById('city-error')){
+					document.getElementById('state-error').style.display  = 'none';
+					document.getElementById("state").classList.remove("mage-error");
+				}
+				if(document.getElementById('city-error')){
+					document.getElementById('postcode-error').style.display  = 'none';
+					document.getElementById("postcode").classList.remove("mage-error");
+				}
+
+				var taxNumber  = {
+					US: ["EIN"],
+					AU: ["ABN", "ACN"],
+					NZ: ["NZBN", "NZCN"],
+					ZA: ["CIPC", "SARSNZ"]
+				}
+				var taxNumberArr = ["US", "AU", "NZ", "ZA"];
+
+				if (taxNumberArr.includes(addressDetail.country)){
+					document.getElementById('tax_number').style.display  = 'block';
+					document.getElementById("taxnumber-apl").style.display = "block";
+					document.getElementById("tax_number").setAttribute("data-validate", "{required:true}");
+					document.getElementById("contactnumber-apl").className = "col-sm-8";
+					/* $("#contactnumber-apl").attr('class', 'col-sm-8');
+					$("#contactnumber-apl").toggleClass("col-sm-8");
+					$("#contactnumber-apl").removeClass("col-sm-12");
+					$("#contactnumber-apl").addClass("col-sm-8"); */
+					var taxNumberOptions = "<option value=''>Tax Name</option>";
+					for (categoryId in taxNumber[addressDetail.country]) {
+						taxNumberOptions += "<option>" + taxNumber[addressDetail.country][categoryId] + "</option>";
+					}
+					document.getElementById("tax_number").innerHTML = taxNumberOptions;
+				} else {
+					document.getElementById('tax_number').style.display  = 'none';
+					document.getElementById("taxnumber-apl").style.display = "none";
+					/* $("#tax_number .mage-error").hide(); */
+					document.getElementById("tax_number").classList.remove("mage-error");
+					document.getElementById("tax_number").removeAttribute("data-validate");
+					/* $("#contactnumber-apl").attr('class', 'col-sm-12'); */
+					document.getElementById("contactnumber-apl").className = "col-sm-12";
+					/* $("#contactnumber-apl").removeClass("col-sm-8");
+					$("#contactnumber-apl").addClass("col-sm-12"); */
+				}
+            });
+        }, 1000);
+    }
+    // ]]>
+</script>

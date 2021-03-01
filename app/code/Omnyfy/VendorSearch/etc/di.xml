@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Omnyfy\LayeredNavigation\Model\Layer\Resolver">
+		<arguments>
+			<argument name="layersPool" xsi:type="array">
+				<item name="omnyfy_vendorsearch_provider" xsi:type="string">Omnyfy\VendorSearch\Model\Provider\Layer</item>
+			</argument>
+		</arguments>
+	</type>
+
+	<preference for="Omnyfy\VendorSearch\Api\SearchHistoryRepositoryInterface" type="Omnyfy\VendorSearch\Model\SearchHistoryRepository"/>
+	<preference for="Omnyfy\VendorSearch\Api\Data\SearchHistoryInterface" type="Omnyfy\VendorSearch\Model\SearchHistory"/>
+	<preference for="Omnyfy\VendorSearch\Api\Data\SearchHistorySearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Omnyfy\VendorSearch\Model\ResourceModel\SearchHistory\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">omnyfy_vendorsearch_searchhistory</argument>
+			<argument name="resourceModel" xsi:type="string">Omnyfy\VendorSearch\Model\ResourceModel\SearchHistory\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="omnyfy_vendorsearch_searchhistory_grid_data_source" xsi:type="string">Omnyfy\VendorSearch\Model\ResourceModel\SearchHistory\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

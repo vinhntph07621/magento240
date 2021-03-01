@@ -1,0 +1,167 @@
+"Please select event(s)","Please select event(s)"
+"Total of %1 record(s) were deleted","Total of %1 record(s) were deleted"
+"Admin / Logged In","Admin / Logged In"
+"Admin / Login Failed","Admin / Login Failed"
+"Admin Notification / New Notification","Admin Notification / New Notification"
+"%1\nSeverity: %2\n\n%3\n%4\n5","%1\nSeverity: %2\n\n%3\n%4\n5"
+"App / Error","App / Error"
+"%1: %2","%1: %2"
+"Cron / Cron job","Cron / Cron job"
+"Cron job #%1 [%2]: %3","Cron job #%1 [%2]: %3"
+"Customer / Birthday","Customer / Birthday"
+"Customer Birthday","Customer Birthday"
+"Customer / Change Group","Customer / Change Group"
+"Customer Change Group","Customer Change Group"
+"Customer / Sign Up","Customer / Sign Up"
+"Customer Sign Up","Customer Sign Up"
+"Customer / Logged In","Customer / Logged In"
+"Customer / Logged Out","Customer / Logged Out"
+"Customer Logged In/Out","Customer Logged In/Out"
+"Mirasvit Helpdesk / New message from customer","Mirasvit Helpdesk / New message from customer"
+"Ticket ID: #%1 \nSubject: %2 \nURL: %3 \nDetails: ""%4""","Ticket ID: #%1 \nSubject: %2 \nURL: %3 \nDetails: ""%4"""
+"Mirasvit Helpdesk / New ticket","Mirasvit Helpdesk / New ticket"
+"Ticket ID: #%1 \nSubject: %2 \nURL: %3","Ticket ID: #%1 \nSubject: %2 \nURL: %3"
+"Newsletter / Customer was subscribed","Newsletter / Customer was subscribed"
+"Newsletter / Customer was unsubscribed","Newsletter / Customer was unsubscribed"
+"Newsletter / Customer subscription status change","Newsletter / Customer subscription status change"
+"Subscription status was changed","Subscription status was changed"
+format,format
+"Product / Out Of Stock","Product / Out Of Stock"
+"Product %1 is out of stock now","Product %1 is out of stock now"
+"Product / Decreased QTY","Product / Decreased QTY"
+"QTY decreased for product %1 from %2 to %3 items","QTY decreased for product %1 from %2 to %3 items"
+"Product / View","Product / View"
+"Product %1 %2 has been viewed by %3","Product %1 %2 has been viewed by %3"
+"Shopping Cart / Abandoned Shopping Cart","Shopping Cart / Abandoned Shopping Cart"
+"Shopping Cart was abandoned","Shopping Cart was abandoned"
+"Review / Review has been approved","Review / Review has been approved"
+"Review (ID: %1) has been approved","Review (ID: %1) has been approved"
+"Review / New review was added","Review / New review was added"
+"New review was added","New review was added"
+"Sales / Order status was changed","Sales / Order status was changed"
+"Sales / Order obtained '%1' status","Sales / Order obtained '%1' status"
+"Order #%1. Status was changed to %2.","Order #%1. Status was changed to %2."
+"Wishlist / New product added to wishlist","Wishlist / New product added to wishlist"
+"%1 has added product(sku: %2) to wishlist","%1 has added product(sku: %2) to wishlist"
+"Wishlist / Wishlist was shared","Wishlist / Wishlist was shared"
+"%1 has shared wishlist","%1 has shared wishlist"
+"Shipping Address","Shipping Address"
+Country,Country
+City,City
+State/Province,State/Province
+Region,Region
+Postcode,Postcode
+Admin,Admin
+"First Name","First Name"
+"Last Name","Last Name"
+Username,Username
+"Is Active","Is Active"
+"Number of logins","Number of logins"
+"Last login date","Last login date"
+"Number of failed logins","Number of failed logins"
+"Updated At","Updated At"
+"Created At","Created At"
+is,is
+"is not","is not"
+"equal to or greater than","equal to or greater than"
+"equal to or less than","equal to or less than"
+"greater than","greater than"
+"less than","less than"
+contains,contains
+"does not contain","does not contain"
+"is one of","is one of"
+"is not one of","is not one of"
+"Conditions Combination","Conditions Combination"
+"Product Attribute","Product Attribute"
+"Additional Product Conditions","Additional Product Conditions"
+"Newest Products","Newest Products"
+"Top Selling Products","Top Selling Products"
+Same,Same
+Different,Different
+"Equal To","Equal To"
+"More Than","More Than"
+"Less Than","Less Than"
+All,All
+"If %1 %2 of %3 %4 found while %5 of these conditions match:","If %1 %2 of %3 %4 found while %5 of these conditions match:"
+"Product is one of %1 most recently added products is %2","Product is one of %1 most recently added products is %2"
+"If %1 products in cart/order matching these conditions:","If %1 products in cart/order matching these conditions:"
+"Product is one of %1 top selling products is %2","Product is one of %1 top selling products is %2"
+Subscribed,Subscribed
+"Not Activated","Not Activated"
+Unsubscribed,Unsubscribed
+Unconfirmed,Unconfirmed
+Customer,Customer
+Group,Group
+Error,Error
+Level,Level
+Message,Message
+Backtrace,Backtrace
+"Request URI","Request URI"
+"Ticket ID","Ticket ID"
+"Ticket Subject","Ticket Subject"
+"Ticket URL","Ticket URL"
+"User Name","User Name"
+"Triggered By","Triggered By"
+User,User
+"Third Party","Third Party"
+Rule,Rule
+Ticket,Ticket
+"Admin Notification","Admin Notification"
+Title,Title
+Description,Description
+Severity,Severity
+Url,Url
+"Is Read","Is Read"
+"Is Removed","Is Removed"
+"Date Added","Date Added"
+Order,Order
+"Grand Total","Grand Total"
+"Shipping Method","Shipping Method"
+"Shipment created","Shipment created"
+Status,Status
+"Invoice created","Invoice created"
+Product,Product
+Name,Name
+"Product stock quantity","Product stock quantity"
+Quote,Quote
+Subtotal,Subtotal
+Review,Review
+Schedule,Schedule
+"Job Code","Job Code"
+Pending,Pending
+Running,Running
+Missed,Missed
+Success,Success
+"Scheduled At","Scheduled At"
+"Executed At","Executed At"
+"Finished At","Finished At"
+Store,Store
+"Base URL","Base URL"
+"Store Name","Store Name"
+"Store View","Store View"
+Subscriber,Subscriber
+Wishlist,Wishlist
+Yes,Yes
+No,No
+"* Not available for EU clients","* Not available for EU clients"
+"Update the Ticket","Update the Ticket"
+"Apply the rule only if the following conditions are met.","Apply the rule only if the following conditions are met."
+"Please select event first","Please select event first"
+Debug,Debug
+Info,Info
+Notice,Notice
+Warning,Warning
+Critical,Critical
+Alert,Alert
+Emergency,Emergency
+Event,Event
+"Enable AJAX Data Capturing","Enable AJAX Data Capturing"
+"GeoLite2 Country database path","GeoLite2 Country database path"
+Products,Products
+"Products Subselection","Products Subselection"
+"Product Attribute Value Comparison","Product Attribute Value Comparison"
+Delete,Delete
+"Delete items","Delete items"
+"Are you sure you want to delete the selected events?","Are you sure you want to delete the selected events?"
+ID,ID
+Identifier,Identifier

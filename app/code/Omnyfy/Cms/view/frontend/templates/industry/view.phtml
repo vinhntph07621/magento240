@@ -1,0 +1,162 @@
+<?php $industry = $block->getIndustry()?>
+<div class="wrapper-body">
+<section class="hero-banner-corporate short-banner bg-green with-tabs">
+	<div class="banner-info-wrapper">
+		<div class="container">
+			<div class="banner-info">
+				<h1><?php echo $industry->getIndustryName()?></h1>
+			</div>
+		</div>
+	</div>
+	<div class="banner-bg clearfix">
+		<div class="banner-img-wrapper hero-banner-img-custom">
+			<img alt="image description" src="<?php echo $block->getBannerUrl($industry->getBackgroundImage(),675);?>" class="banner-img" alt="<?php echo $industry->getIndustryName()?>">
+		</div>
+	</div>
+</section>
+<section class="tabs-section">
+	<div class="container bg-white">
+		<div class="nav-wrapper">
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active list-item"><a class="list-anchor tab-url-change industryprofile" data-url="industryprofile" href="#tab-0-0" aria-controls="<?php echo __('Industry profile')?>" role="tab" data-toggle="tab"><?php echo __('Industry profile')?></a></li>
+				<?php if($block->isTabVisible($industry->getIndustryCategory())){?>
+					<li role="presentation" class="list-item"><a class="list-anchor tab-url-change generalinfo" href="#tab-0-1" data-url="generalinfo" aria-controls="<?php echo __('General information')?>" role="tab" data-toggle="tab"><?php echo __('General information')?></a></li>
+				<?php }?>
+				<?php if($block->isTabVisible($industry->getByCountry())){?>
+					<li role="presentation" class="list-item"><a class="list-anchor tab-url-change country" data-url="country" href="#tab-0-2" aria-controls="<?php echo __('By country')?>" role="tab" data-toggle="tab"><?php echo __('By country')?></a></li>
+				<?php }?>
+				<?php /* <li role="presentation" class="list-item"><a class="list-anchor  tab-url-change tools" href="#tab-0-3" data-url="tools" aria-controls="<?php echo __('Tools & resources')?>" role="tab" data-toggle="tab"><?php echo __('Tools & resources')?></a></li> */ ?>
+				<li role="presentation" class="list-item"><a class="list-anchor  tab-url-change events" href="#tab-0-4" data-url="service" aria-controls="<?php echo __('Events')?>" role="tab" data-toggle="tab"><?php echo __('Events')?></a></li>
+			</ul>
+		</div>
+	</div>
+</section>
+<!-- Tab panes -->
+<div class="tab-content">
+	<div role="tabpanel" class="tab-pane active" id="tab-0-0">
+		<section>
+			<div class="container bg-white">
+				<div class="content-box">
+					<div class="row page-content-row">
+						<div class="col-md-6">
+							<article class="article">
+								<?php echo $industry->getIntroduction()?>
+							</article>
+						</div>
+						<?php if($industry->getIndustryProfileImage()){?>
+							<div class="col-md-6">
+								<div class="metadata-image industry-banner">
+									<img src="<?php echo $block->getBannerUrl($industry->getIndustryProfileImage(),525,363);?>" class="banner-img" alt="<?php echo $industry->getIndustryName()?>">
+								</div>
+							</div>
+						<?php }?>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="block-section">
+			<div class="container">
+				<div class="content-box">
+					<div class="row">
+						<div class="col-sm-8 col-sm-adjusted">
+							<?php if($block->isChildHeadingVisible($industry->getByCountry())){?>
+							<?php $childCategories = $block->getChildCategories($industry->getByCountry());?>
+								<div class="tier-col">
+									<div class="tier-info">
+										<h2 class="tier-title"><?php echo __('Industry information by Country')?></h2>
+									</div>
+									<div class="accordion-wrapper">
+										<?php $i = 1; 
+											foreach($childCategories as $child):
+											$category = $block->getCategory($child);
+											if($category->getIsActive()){?>
+											<?php if($block->isArticle($category->getId())->getSize()>0){?>
+												<div class="accordion-pane <?php #if($i==1){echo ' expanded';}?>">
+													<div class="header-area">
+														<span class="header-text">
+															<?php echo $industry->getIndustryName()?> to <?php echo $category->getTitle();?>
+														</span>
+
+														<span class="state-symbol">
+														</span>
+													</div>
+													<div class="accordion-content" <?php #if($i==1){echo ' style="display:block;"';}?>>
+														<div class="desc">
+															<?php echo $category->getCategorySnippet();?>
+														</div>
+														<a href="javascript:void(0)" tab-move="country" data-id="<?php echo $category->getId()?>" class="movingtab arrow-link">
+															<span class="arrow icon-angle-right"></span>
+															<?php echo __('Learn more about ').$industry->getIndustryName().' exports to '.$category->getTitle()?>
+														</a>
+													</div>
+												</div>
+											<?php } ?>	
+										<?php } 
+											$i++;
+										endforeach;?>
+									</div>
+								</div>
+							<?php }?>
+						</div>
+						<?php echo $this->getChildHtml('ready.to.sell');?>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<?php if($block->isTabVisible($industry->getIndustryCategory())){?>
+		<div role="tabpanel" class="tab-pane" id="tab-0-1">
+			<?php echo $this->getChildHtml('industry.generalinfo')?>
+		</div>
+	<?php } if($block->isTabVisible($industry->getByCountry())){?>
+		<div role="tabpanel" class="tab-pane" id="tab-0-2">
+			<?php echo $this->getChildHtml('industry.bycountry')?>
+		</div>
+	<?php }?>
+	<?php /* <div role="tabpanel" class="tab-pane" id="tab-0-3">
+		ToolsTab
+	</div> */ ?>
+	<div role="tabpanel" class="tab-pane" id="tab-0-4">
+		<?php echo $this->getChildHtml('industry.events')?>
+	</div>
+</div>
+</div>
+<script type="text/javascript">
+require(['jquery'],function($){
+	jQuery('.movingtab').click(function($) {
+		var tab = jQuery(this).attr('tab-move');
+		var id = jQuery(this).attr('data-id');
+		jQuery('.'+tab).trigger('click');
+		jQuery('.sub-list-container').removeClass('expanded');
+		jQuery('#category-'+id).addClass('expanded');
+		jQuery("#category-"+id+" .sub-list a.list-group-item:first").trigger('click');
+		jQuery('html, body').animate({ scrollTop: 0 }, 0);
+	});	
+	jQuery(".list-group-item").click(function() {
+		var newtaburl = jQuery(this).attr('export-data-url');
+		window.history.pushState("updateurl", "searchURl", newtaburl);
+	});
+	<?php if($tabUrl = $block->escapeHtml($this->getRequest()->getParam('tab'))){?>
+		jQuery(".tab-url-change").click(function() {
+			var newtaburl = '<?php echo $industry->getIndustryUrl()?>tab/'+jQuery(this).attr('data-url');
+			window.history.pushState("updateurl", "searchURl", newtaburl);
+		});
+		jQuery('.<?php echo $tabUrl?>').trigger('click');
+		jQuery('html, body').animate({ scrollTop: 0 }, 0);
+	<?php } else{?>
+		jQuery(".tab-url-change").click(function() {
+			var newtaburl = '<?php echo $industry->getIndustryUrl()?>tab/'+jQuery(this).attr('data-url');
+			window.history.pushState("updateurl", "searchURl", newtaburl);
+		});
+	<?php }?>
+	<?php if (strpos($block->getRedirectedUrl(), 'market') !== false) {?>
+		<?php $categoryId = $block->escapeHtml($this->getRequest()->getParam('categoryid'));?>
+		jQuery('.sub-list-container').removeClass('expanded');
+		jQuery('#category-<?php echo $categoryId?>').addClass('expanded');
+		jQuery("#category-<?php echo $categoryId?> .sub-list a.list-group-item:first").trigger('click');
+		jQuery("#category-<?php echo $categoryId?> .sub-list div:first").addClass('active');
+		jQuery('html, body').animate({ scrollTop: 0 }, 0);
+	<?php } ?>
+});	
+</script>	

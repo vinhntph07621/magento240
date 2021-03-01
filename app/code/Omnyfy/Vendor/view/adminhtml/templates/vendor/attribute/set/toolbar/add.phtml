@@ -1,0 +1,17 @@
+<?php
+/**
+ * Project: Multi Vendor
+ * User: jing
+ * Date: 2019-04-16
+ * Time: 15:58
+ */
+?>
+<?php echo $block->getFormHtml() ?>
+<script>
+    require(['jquery', "mage/mage"], function(jQuery){
+
+        jQuery('#<?php /* @escapeNotVerified */ echo $block->getFormId();?>').mage('form').mage('validation');
+
+    });
+</script>
+ 

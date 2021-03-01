@@ -1,0 +1,16 @@
+<?php
+/**
+ * Project: Multi Vendor M2.
+ * User: jing
+ * Date: 17/7/17
+ * Time: 4:25 PM
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @see \Omnyfy\Vendor\Block\Adminhtml\Items\Column\VendorName */
+?>
+<?php if ($_item = $block->getItem()): ?>
+    <span><?php echo $block->escapeHtml($block->getVendorName($_item));?></span>
+<?php endif; ?>
+

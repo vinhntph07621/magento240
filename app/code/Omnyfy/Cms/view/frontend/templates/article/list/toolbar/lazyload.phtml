@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Cms article list lazyload template
+ *
+ * @var $block \Omnyfy\Cms\Block\Article\ArticleList\Toolbar\Pager
+ */
+?>
+<?php if ($block->useLazyload()) { ?>
+    <?php
+        $config = $block->getLazyloadConfig([
+            'trigger_element' => '.mbcms-lazyload-trigger'
+        ]);
+    ?>
+    <div class="mfcms-autoloader" data-mage-init='{"<?php echo $block->getLazyloadJs() ?>" : <?php echo $config ?>}'>
+    	<button class="mbcms-lazyload-trigger mfcms-hide-onload action primary" title="<?php echo __('See more') ?>" type="button">
+            <span><?php echo __('See more') ?></span>
+        </button>
+        <img class="articles-loader mfcms-show-onload" src="<?php echo $block->getViewFileUrl('images/loader-2.gif') ?>" />
+    </div>
+<?php } ?>

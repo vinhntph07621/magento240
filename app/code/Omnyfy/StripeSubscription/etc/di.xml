@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="callbacks" xsi:type="object">Omnyfy\StripeSubscription\Command\Callbacks</item>
+                <item name="send_cancel" xsi:type="object">Omnyfy\StripeSubscription\Command\CancelSubscription</item>
+                <item name="invoice_failed" xsi:type="object">Omnyfy\StripeSubscription\Command\InvoiceFailed</item>
+                <item name="invoice_succeeded" xsi:type="object">Omnyfy\StripeSubscription\Command\InvoiceSucceed</item>
+                <item name="subscription_delete" xsi:type="object">Omnyfy\StripeSubscription\Command\SubscriptionDelete</item>
+                <item name="subscription_update" xsi:type="object">Omnyfy\StripeSubscription\Command\SubscriptionUpdate</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Omnyfy\VendorSubscription\Helper\GatewayInterface" type="\Omnyfy\StripeSubscription\Helper\Data" />
+</config>

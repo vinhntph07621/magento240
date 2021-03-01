@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="omnyfy_vendorsignup_signup_form"/>
+			<block class="Magento\Framework\View\Element\Template" name="signup.scripts" template="Omnyfy_VendorSignUp::signup/signup-scripts.phtml"/>
+        </referenceContainer>
+		<!-- <referenceContainer name="left">
+            <block class="Omnyfy\VendorSignUp\Block\Adminhtml\Signup\Edit\Tabs"
+                name="omnyfy_vendorsignup.edit.tabs"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Omnyfy\VendorSignUp\Block\Adminhtml\Signup\Edit"
+                name="omnyfy_vendorsignup.edit"/>
+        </referenceContainer> -->
+    </body>
+</page>

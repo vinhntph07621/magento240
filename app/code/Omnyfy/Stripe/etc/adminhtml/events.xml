@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <event name="controller_action_predispatch_omnyfy_vendor_vendor_index">
+        <observer name="Handle_Stripe_Response_Code" instance="Omnyfy\Stripe\Observer\HandleStripeResponseCodeObserver" />
+    </event>
+    <event name="omnyfy_mcm_payout_send">
+        <observer name="omnyfy_assemblypay_payout_sender" instance="Omnyfy\Stripe\Observer\PayoutSend" />
+    </event>
+    <event name="omnyfy_mcm_payout_withdraw">
+        <observer name="handle_payout_withdraw" instance="Omnyfy\Stripe\Observer\PayoutWithDraw" />
+    </event>
+</config>

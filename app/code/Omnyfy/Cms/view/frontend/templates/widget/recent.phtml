@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © Omnyfy, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */?>
+<?php
+/**
+ * Cms recent articles widget
+ *
+ * @var $block \Omnyfy\Cms\Block\Widget\Recent
+ */
+?>
+
+<?php
+$_articleCollection = $block->getArticleCollection();
+?>
+<?php if ($_articleCollection->count()): ?>
+    <div class="recent-articles-wrapper blog-widget">
+        <h3 class="tier-title"><?php echo __('Latest articles') ?></h3>
+        <ul class="articles-list">
+            <?php foreach ($_articleCollection as $_article): ?>
+                <?php
+                $_articleUrl = $_article->getArticleUrl();
+                $_articleName = $block->escapeHtml($_article->getTitle(), null, true);
+                ?>
+            <li class="article-item">
+                <a href="<?php echo $_articleUrl ?>" class="article-item-link">
+                    <h4 class="article-title">
+                        <?php echo $_articleName; ?>
+                        <span class="article-item-date"><?php echo __('Posted') . " " . $this->helper('\Omnyfy\Cms\Helper\Data')->getDateFormat($_article->getUpdateTime()); ?></span>
+                    </h4>
+
+                </a>
+            </li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="vendor_subscription">
+            <block class="Omnyfy\StripeSubscription\Block\Card" name="card" template="Omnyfy_StripeSubscription::card.phtml"/>
+        </referenceBlock>
+        <referenceContainer name="before.body.end">
+            <block class="Omnyfy\StripeSubscription\Block\Card" name="stripe_js" template="Omnyfy_StripeSubscription::js.phtml"/>
+            <block class="Omnyfy\StripeSubscription\Block\Card" name="form_after" template="Omnyfy_StripeSubscription::form_after_js.phtml" after="stripe_js"/>
+        </referenceContainer>
+    </body>
+</page>

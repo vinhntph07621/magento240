@@ -1,0 +1,236 @@
+<?php $om = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $om->get('Magento\Store\Model\StoreManagerInterface');
+$folderName = 'wysiwyg';
+$imgname = 'topic-icon01.png';
+$path = $folderName . '/' . $imgname;
+$imageName = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $path;
+/** @var $cmsHelper Omnyfy\Cms\Helper\Data'*/
+$cmsHelper = $this->helper('Omnyfy\Cms\Helper\Data');
+$cmsUrl = $cmsHelper->getConfig('mfcms/permalink/route');
+?>
+<?php $_categoryCollection = $block->getCollection();?>
+<section class="block-section" id="export_guide">
+	<div class="container">
+		<div class="search-article-module">
+			<div class="tracking-field-desc">
+				<p><?= __('Search all blog posts')?></p>
+			</div>
+			<form action="<?php echo $this->getUrl('cms/index/search')?>" method="get" id="searchFrm" class="form">
+				<input type="hidden" value="<?php echo $this->getUrl(); ?>" id="baseUrl"/>
+                <input type="hidden" value="<?php echo $cmsUrl; ?>" id="cmsUrl"/>
+				<input type="hidden" name="ut" value="<?php echo $this->getData('user_type'); ?>" id="userType"/>
+				<div class="tracking-field-wrapper">
+					<div class="field tracking-field-container">
+                        <label class="sr-only" for="article-search-field"><?= __('Please enter your tracking number')?></label>
+						<div class="control input-field">
+							<input type="text" autocomplete="off" name="article-search" class="tracking-field form-control" id="article-search-field" placeholder="<?= __('Start typing to search blog')?>">
+						</div>
+					</div>
+                    <div class="actions">
+                        <button id="export-guide-search" type="submit" class="action primary tracking-button"><?= __('Search')?></button>
+                    </div>
+					<div id="articleList"></div>
+				</div>
+			</form>
+		</div>
+		<?php if ($_categoryCollection->getSize() > 0) :?>
+			<div id="container-search-rst">
+				<div class="topics-list-wrapper">
+					<?php $i=1;
+						$customCondition = null;
+						$cls = null;
+						foreach ($_categoryCollection as $_category): 
+						if($i>8){
+							$customCondition = ' style="display:none;"';
+						}
+						if($i>1){
+							$cls = ' moreBox';
+						}?>
+						<div class="topic-wrapper articleBox<?php echo $cls?>" <?php echo $customCondition?>>
+							<div class="topic-tile">
+                                <?php
+                                $imgUrl = $this->getViewFileUrl('Omnyfy_Cms::images/topic-icon01.png');
+                                if($_category->getCategoryIconFrontend()){
+                                    $imgUrl = $_category->getCategoryIconFrontend();
+                                }
+                                ?>
+                                <img alt="image description" src="<?php echo $imgUrl?>" class="topic-icon">
+
+                                <a class="topic-link" href="<?php echo $this->getUrl(). $cmsUrl. '/category/'.$_category->getIdentifier().'/usertype/'.$this->getData('user_type');?>">
+                                    <div class="topic-content">
+                                        <h3><?php echo $_category->getTitle();?></h3>
+                                        <div class="topic-count"><?php echo $this->getArticleCount($_category->getCategoryId(),$_category->getUserTypeId())?></div>
+                                        <div class="topic-button-wrapper"><button class="topic-button action primary"><?= __("View ") . $_category->getTitle() ?></button></div>
+                                    </div>
+                                </a>
+							</div>
+						</div>
+					<?php $i++; endforeach; ?>
+				</div>
+				<?php if($_categoryCollection->getSize()>8){?>
+				<div class="text-center">
+					<button class="btn btn-green btn-lg btn-xl-desktop padding-btn loadMore" >
+						<?= __("View all topics") ?>
+					</button>
+				</div> 
+				<?php }?>
+			</div>
+		<?php endif;?>
+	</div>
+</section>
+<script type="text/javascript">
+	require(['jquery'],function($){
+		/* jQuery('#export-guide-search').click(function($) {
+			var articleurl =
+			var article_keyword = jQuery("#article-search").val();
+			var user_type = jQuery("#userType").val();
+			jQuery.ajax({
+				url: articleurl,
+				type: 'POST',
+				dataType: 'jsonp',
+				showLoader: true,
+				data: {
+					article_keyword: article_keyword,
+					user_type: user_type
+				},
+				complete: function(response) {
+					jQuery('#container-search-rst').html(response.responseText);
+				}
+			});
+		}); */
+		var page_id = '<?php echo $this->getCurrentPageId();?>';
+		var pagesarray =  ['5', '6', '7'];
+		if(jQuery.inArray(page_id, pagesarray)!='-1'){
+			jQuery('.nav-tabs .list-item').removeClass('active');
+			jQuery('#selling-tab-'+page_id).addClass('active');
+		}
+		
+		$(".user-type-data").click(function() {
+			//alert($(this).attr('data-id')+url);
+			var tabUrl = $("#baseUrl").val()+ $("#cmsUrl").val() + '/index/tabsearch/';
+			var user_tab = $(this).attr('data-id');
+			var page_url = $(this).attr('data-url');
+			var article_keyword = $("#article-search").val();
+			$("#userType").val(user_tab);
+			$("#articleList").html('');
+			$("#article-search").val('');
+			$.fn.loaderShow();
+			$.ajax({
+				url: tabUrl,
+				type: 'POST',
+				dataType: 'jsonp',
+				showLoader: false,
+				data: {
+					article_keyword: article_keyword,
+					user_tab: user_tab
+				},
+				complete: function(response) {
+					var newtaburl = $("#baseUrl").val()+page_url;
+					window.history.pushState("updateurl", "searchURl", newtaburl);
+					$('#container-search-rst').html(response.responseText);
+					$.fn.loaderHide();
+				}
+			});
+		});
+		
+		$(document.body).append('<div class="page-loader" style="display:none;"><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>');
+		
+		$.fn.loaderShow = function() {
+			$(".page-loader").show();
+			return this;
+		}; 
+		$.fn.loaderHide = function() {
+			$(".page-loader").hide();
+			return this;
+		}; 
+		
+//		jQuery("#article-search").on("input paste",function($){
+//			var article = jQuery("#article-search").val().trim();
+//			article = article.replace(/\s+/g, '');
+//			var user_type = jQuery("#userType").val();
+//			
+//			if(article.length >= 3) { //for checking 3 characters
+//				var searchurl =
+//				jQuery.fn.loaderShow();
+//				jQuery.ajax({
+//					url: searchurl,
+//					type: 'POST',
+//					dataType: 'jsonp',
+//					showLoader: false,
+//					data:{article:jQuery("#article-search").val(),user_type: user_type},
+//					complete: function(response) {
+//						jQuery('#articleList').fadeIn(); 
+//						jQuery("#article-search").focus();						
+//						jQuery('#articleList').html(response.responseText);  
+//						jQuery.fn.loaderHide();
+//					}
+//				});
+//			}
+//		}); 
+		
+		jQuery("#articleList").on('click', 'li', function($){  
+		   jQuery('#article-search').val(jQuery(this).text());  
+		   jQuery('#articleList').fadeOut();  
+		}); 
+		
+		jQuery(".moreBox").slice(0, 7).show();
+		if (jQuery(".articleBox:hidden").length != 0) {
+			jQuery(".loadMore").show();
+		}		
+		jQuery(".loadMore").on('click', function (e) {
+			e.preventDefault();
+			jQuery(".moreBox:hidden").slice(0, 100).slideDown();
+			if (jQuery(".moreBox:hidden").length == 0) {
+				jQuery(".loadMore").fadeOut('slow');
+			}
+		});
+		
+//		jQuery('#article-search').keydown(function(e)
+//		{
+//			var $listItems = jQuery('.list-unstyled li');
+//			var key = e.keyCode,
+//				$selected = $listItems.filter('.selected'),
+//				$current;
+//			//if ( key != 40 && key != 38) return;
+//
+//			$listItems.removeClass('selected');
+//
+//			if ( key == 40 ) // Down key
+//			{
+//				if ( ! $selected.length || $selected.is(':last-child') ) {
+//					$current = $listItems.eq(0);
+//				}
+//				else {
+//					$current = $selected.next();
+//				}
+//			}
+//			else if ( key == 38 ) // Up key
+//			{
+//				if ( ! $selected.length || $selected.is(':first-child') ) {
+//					$current = $listItems.last();
+//				}
+//				else {
+//					$current = $selected.prev();
+//				}
+//			}
+//			jQuery(this).val($current.addClass('selected').text());
+//			jQuery('#event-postcode').val(jQuery(".selected").attr('id'));	
+//		});	
+//		jQuery("#article-search").keypress(function (e) {
+//			if (e.keyCode == 13) {
+//				var $listItems = jQuery('.list-unstyled li');
+//				if($listItems){
+//					jQuery("#articleList").hide();
+//					jQuery('#article-search').show();
+//				}	
+//			}
+//		});	
+//		jQuery('#article-search').on('keyup keypress', function(e) {
+//		  var keyCode = e.keyCode || e.which;
+//		  if (keyCode === 13) { 
+//			e.preventDefault();
+//			return false;
+//		  }
+//		});
+	});
+</script>	

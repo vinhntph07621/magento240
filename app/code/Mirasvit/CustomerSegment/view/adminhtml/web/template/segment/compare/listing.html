@@ -1,0 +1,37 @@
+<div class="mst-segment-compare__listing">
+    <if args="hasData()">
+        <div class="list">
+            <div class="segment" repeat="foreach: rows, item: '$segment'">
+                <div class="title"><span text="$segment().title"/></div>
+                <div class="size"><span text="$segment().size"/> customers</div>
+
+                <div class="reports">
+                    <div class="report" repeat="foreach: $segment().reports, item: '$report'">
+                        <div class="label"><span text="$report().label"/></div>
+                        <div class="value">
+                            <span text="$report().value"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table">
+            <div class="row">
+                <div class="segment">Segment / Intersection</div>
+                <div class="segment" repeat="foreach: rows, item: '$segment'">
+                    <span text="$segment().title"/>
+                </div>
+            </div>
+            <div class="row" repeat="foreach: rows, item: '$segment'">
+                <div class="segment">
+                    <span text="$segment().title"/>
+                </div>
+                <div class="size" repeat="foreach: $segment().intersection, item: '$inter'">
+                    <span text="$inter().size"/>
+                    <i text="percent($segment().size, $inter().size)"/>
+                </div>
+            </div>
+        </div>
+    </if>
+</div>

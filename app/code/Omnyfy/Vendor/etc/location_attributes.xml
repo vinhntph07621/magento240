@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Omnyfy_Vendor:etc/vendor_attributes.xsd">
+    <group name="location">
+        <attribute name="location_name"/>
+        <attribute name="description"/>
+        <attribute name="address"/>
+        <attribute name="suburb"/>
+        <attribute name="region"/>
+        <attribute name="country"/>
+        <attribute name="postcode"/>
+        <attribute name="region_id"/>
+        <attribute name="status"/>
+        <attribute name="is_warehouse"/>
+    </group>
+</config>

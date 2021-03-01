@@ -1,0 +1,240 @@
+"Follow Up Email","Follow Up Email"
+"No Emails Found","No Emails Found"
+ID,ID
+Status,Status
+"Ready to go","Ready to go"
+Sent,Sent
+Canceled,Canceled
+Error,Error
+Missed,Missed
+Unsubcribed,Unsubcribed
+Trigger,Trigger
+"Scheduled At","Scheduled At"
+"Sent At","Sent At"
+"Event Log","Event Log"
+"Fetch New Events","Fetch New Events"
+Event,Event
+Message,Message
+Arguments,Arguments
+"Created At","Created At"
+Triggers,Triggers
+Store,Store
+Actions,Actions
+"Reset & Process","Reset & Process"
+Delete,Delete
+"Are you sure?","Are you sure?"
+Validate,Validate
+"Select Trigger","Select Trigger"
+"Manage Campaigns","Manage Campaigns"
+"Mail Log","Mail Log"
+"Manage Templates","Manage Templates"
+Settings,Settings
+"Recipient Email","Recipient Email"
+"Recipient Name","Recipient Name"
+Action,Action
+Cancel,Cancel
+Send,Send
+Reset,Reset
+Pending,Pending
+"Change status","Change status"
+Back,Back
+"Unsubscription List","Unsubscription List"
+"Unsubscribe Email","Unsubscribe Email"
+"Close Window","Close Window"
+Unsubscribe,Unsubscribe
+"Unsubscribe & Close","Unsubscribe & Close"
+Save,Save
+"Set emails via comma to unsubscribe","Set emails via comma to unsubscribe"
+"Updated At","Updated At"
+Email,Email
+Subscribe,Subscribe
+"The cart for restoring can't be found.","The cart for restoring can't be found."
+"Operation is not allowed","Operation is not allowed"
+"Please specify an email address","Please specify an email address"
+"Please specify trigger event first","Please specify trigger event first"
+"Test email was successfully sent","Test email was successfully sent"
+"Unable to find email to send","Unable to find email to send"
+"Operation is not allowed.","Operation is not allowed."
+"A total of %1 record(s) have been sent.","A total of %1 record(s) have been sent."
+"Wrong unsubscription link","Wrong unsubscription link"
+"You have been successfully unsubscribed from receiving these emails.","You have been successfully unsubscribed from receiving these emails."
+"The email not found.","The email not found."
+"The Campaign has been deleted.","The Campaign has been deleted."
+"This Campaign no longer exists.","This Campaign no longer exists."
+"Campaign was successfully duplicated.","Campaign was successfully duplicated."
+"Unable to find campaign to duplicate","Unable to find campaign to duplicate"
+"This item no longer exists.","This item no longer exists."
+"New Campaign","New Campaign"
+"Campaign was successfully saved","Campaign was successfully saved"
+"Unable to find campaign to save","Unable to find campaign to save"
+"The email has been deleted.","The email has been deleted."
+"This email no longer exists.","This email no longer exists."
+"Email was successfully duplicated.","Email was successfully duplicated."
+"Unable to find email to duplicate","Unable to find email to duplicate"
+"Email was successfully saved","Email was successfully saved"
+"Unable to find email to save","Unable to find email to save"
+Events,Events
+"The event has been deleted.","The event has been deleted."
+Completed.,Completed.
+"Please select event(s)","Please select event(s)"
+"Total of %1 record(s) were deleted","Total of %1 record(s) were deleted"
+"Total of %1 record(s) were reset","Total of %1 record(s) were reset"
+"The event ID %1 passed validation","The event ID %1 passed validation"
+"The event ID %1 failed validation","The event ID %1 failed validation"
+"Selected event (ID: %1) is not compatible with the trigger ""%2"". Using this trigger, you can validate events with the code ""%3""","Selected event (ID: %1) is not compatible with the trigger ""%2"". Using this trigger, you can validate events with the code ""%3"""
+"Total of %1 event(s) were validated. Passed: %2, failed: %3","Total of %1 event(s) were validated. Passed: %2, failed: %3"
+Done.,Done.
+"Mail Queue","Mail Queue"
+"The message was canceled.","The message was canceled."
+"The mail was removed.","The mail was removed."
+"Local time: %1
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                GMT/Mysql time: %2
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Last cron job run time: %3","Local time: %1
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                GMT/Mysql time: %2
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Last cron job run time: %3"
+"A total of %1 record(s) have been canceled.","A total of %1 record(s) have been canceled."
+"A total of %1 record(s) have been removed.","A total of %1 record(s) have been removed."
+"A total of %1 record(s) have been changed.","A total of %1 record(s) have been changed."
+"The mail was changed.","The mail was changed."
+"The mail was sent.","The mail was sent."
+"Email to %1","Email to %1"
+"Manage Triggers","Manage Triggers"
+"The trigger has been deleted.","The trigger has been deleted."
+"This trigger no longer exists.","This trigger no longer exists."
+"New Trigger","New Trigger"
+"Trigger was successfully moved.","Trigger was successfully moved."
+"Trigger was successfully copied.","Trigger was successfully copied."
+"You cannot move the trigger to current campaign, use duplication instead.","You cannot move the trigger to current campaign, use duplication instead."
+"Unable to find trigger to move","Unable to find trigger to move"
+"Trigger was successfully saved","Trigger was successfully saved"
+"Unable to find trigger to save","Unable to find trigger to save"
+"Unable to find trigger to send","Unable to find trigger to send"
+"Trigger was successfully activated","Trigger was successfully activated"
+"Trigger was successfully disabled","Trigger was successfully disabled"
+"Unable to find trigger","Unable to find trigger"
+"This item does not exist.","This item does not exist."
+"New Unsubscription","New Unsubscription"
+"Total of %1 record(s) were removed","Total of %1 record(s) were removed"
+"The user has been unsubscribed.","The user has been unsubscribed."
+"You added new unsubscription(s) for emails: %1.","You added new unsubscription(s) for emails: %1."
+"No data to save.","No data to save."
+"This URL is not visible in preview.","This URL is not visible in preview."
+"does not have","does not have"
+has,has
+Any,Any
+"Recipient %1 emails with %2 status in the Mail Log for the trigger(s) %3 within last %4 days","Recipient %1 emails with %2 status in the Mail Log for the trigger(s) %3 within last %4 days"
+"Cross-sell products","Cross-sell products"
+"Related products","Related products"
+"Upsell products","Upsell products"
+"[Test Mail. Store #%1 %2]","[Test Mail. Store #%1 %2]"
+"Canceled by invalid recipient email address format","Canceled by invalid recipient email address format"
+"Scheduled at %1, attempt to send after 2 days","Scheduled at %1, attempt to send after 2 days"
+"Customer %1 is unsubscribed","Customer %1 is unsubscribed"
+"Canceled by trigger rules","Canceled by trigger rules"
+"Canceled by global limitation settings","Canceled by global limitation settings"
+"Missed Template","Missed Template"
+"Default status","Default status"
+"%1 - status changed to '%2'","%1 - status changed to '%2'"
+"Send <b>%1</b> email %2 %3 %4","Send <b>%1</b> email %2 %3 %4"
+"No Template Selected - <small>the previously used email template has likely been removed</small>.","No Template Selected - <small>the previously used email template has likely been removed</small>."
+"Cancellation Event (%1 - %2)","Cancellation Event (%1 - %2)"
+Disabled,Disabled
+"Campaign Template with ID ""%1"" does not exist","Campaign Template with ID ""%1"" does not exist"
+"Associated email chain was removed from a trigger.","Associated email chain was removed from a trigger."
+"
+                        This error is related to improper use of variables in the email template. Error Details:
+                            <b>Email template:</b> <a target=""_blank"" href=""%1"">%2</a> (ID: %3);
+                            <b>Area</b>: ""%4"";
+                            <b>line</b>: #%5;
+                            <b>Error message:</b> ""%6"".
+                    ","
+                        This error is related to improper use of variables in the email template. Error Details:
+                            <b>Email template:</b> <a target=""_blank"" href=""%1"">%2</a> (ID: %3);
+                            <b>Area</b>: ""%4"";
+                            <b>line</b>: #%5;
+                            <b>Error message:</b> ""%6"".
+                    "
+"No Template Selected","No Template Selected"
+"Are you sure you want to delete this Campaign?","Are you sure you want to delete this Campaign?"
+"Send Test Email","Send Test Email"
+"Are you sure you want to delete this trigger?","Are you sure you want to delete this trigger?"
+Loading...,Loading...
+"Please wait...","Please wait..."
+"General Information","General Information"
+Subject,Subject
+"Sender Email","Sender Email"
+"Sender Name","Sender Name"
+History,History
+Variables,Variables
+"Unique Key","Unique Key"
+"A campaign serves as a container for a well-planned series of emails that share a similar idea and intended for a single goal.","A campaign serves as a container for a well-planned series of emails that share a similar idea and intended for a single goal."
+"An email is added to a queue when an event set for a trigger is registered.","An email is added to a queue when an event set for a trigger is registered."
+"To add an email, follow the steps below:","To add an email, follow the steps below:"
+"Add Email","Add Email"
+"A campaign is just a collection of triggers that listen for events and initialize the sending of emails when a required event is triggered.","A campaign is just a collection of triggers that listen for events and initialize the sending of emails when a required event is triggered."
+edit,edit
+Audience,Audience
+Disable,Disable
+Enable,Enable
+On,On
+Off,Off
+"Limit number of emails per address","Limit number of emails per address"
+"Send maximum emails","Send maximum emails"
+"Period (hours)","Period (hours)"
+"Facebook Url","Facebook Url"
+"Twitter Url","Twitter Url"
+"Code Length","Code Length"
+"Code Prefix","Code Prefix"
+"Code Suffix","Code Suffix"
+"Dash Every X Characters","Dash Every X Characters"
+"Sandbox Mode","Sandbox Mode"
+"Test Recipient Email","Test Recipient Email"
+"Recipient has Follow Up emails","Recipient has Follow Up emails"
+"Campaign View","Campaign View"
+"Save settings","Save settings"
+Title,Title
+Description,Description
+"Is Active","Is Active"
+"Create Campaign","Create Campaign"
+"Are you sure you want to delete this campaign?","Are you sure you want to delete this campaign?"
+"Search for Campaign","Search for Campaign"
+"Custom Campaign","Custom Campaign"
+"My Campaign Name","My Campaign Name"
+"Campaign Name","Campaign Name"
+Create,Create
+Edit,Edit
+"Add Trigger","Add Trigger"
+"Are you sure you want to delete this email?","Are you sure you want to delete this email?"
+"Email Template","Email Template"
+"-- Please Select --","-- Please Select --"
+day(s),day(s)
+"-- Select Hour Delay --","-- Select Hour Delay --"
+"e.g. send an email 1 day 2 hours 35 minutes later. See more information on delaying email sending in our documentation.","e.g. send an email 1 day 2 hours 35 minutes later. See more information on delaying email sending in our documentation."
+"-- Select Minute Delay --","-- Select Minute Delay --"
+"Excluded Weekdays","Excluded Weekdays"
+"Do not send emails on these days.","Do not send emails on these days."
+"Include coupon in email","Include coupon in email"
+"Shopping Cart Price Rule","Shopping Cart Price Rule"
+"-- Select Cart Price Rule --","-- Select Cart Price Rule --"
+"The coupon codes are generated automatically. Check the option ""Use Auto Generation"" at the cart price rule to use it.","The coupon codes are generated automatically. Check the option ""Use Auto Generation"" at the cart price rule to use it."
+"Coupon expires after, days","Coupon expires after, days"
+"Include cross-sells in email","Include cross-sells in email"
+"Cross-sells source","Cross-sells source"
+"-- Select Cross-sells source --","-- Select Cross-sells source --"
+"Triggering Event","Triggering Event"
+"Cancellation Event","Cancellation Event"
+"Active From","Active From"
+"Active To","Active To"
+"Store View","Store View"
+"Send copy to email","Send copy to email"
+"Campaign Source","Campaign Source"
+"Campaign Medium","Campaign Medium"
+"Campaign Term","Campaign Term"
+"Campaign Content","Campaign Content"
+Copy,Copy
+Move,Move
+"Campaign(s) to move the trigger to","Campaign(s) to move the trigger to"

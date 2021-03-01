@@ -1,0 +1,41 @@
+// /**
+//  * Copyright © Omnyfy, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables for new theme
+//  ---------------------------------------------
+
+@ui-03: #F0F1F3;
+@narrow-box-width: 800px;
+@panel__background-color: #f5f5f5;
+
+@import "./module/merchant/_view";
+@import "./module/merchant/_store";
+@import "./module/widget/_brand";
+@import "./module/_cart";
+
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+	.vendors.table-checkout-shipping-method {
+		.row.vendor td {
+			background-color: @panel__background-color;
+		}
+	}
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+	.vendors.table-checkout-shipping-method {
+		width: 100%;
+	}
+}

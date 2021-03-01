@@ -1,0 +1,33 @@
+//
+// History styles
+// __________________
+
+@plus__color: #26A332;
+@minus__color: #DB1D1D;
+@up-arrow: '\f077';
+@down-arrow: '\f078';
+
+//
+// History grid styles
+// --------------------
+.segment-history {
+    &:before {
+        font: normal normal normal 14px/1 FontAwesome;
+    }
+
+    &.plus {
+        color: @plus__color;
+
+        &:before {
+            content: @up-arrow;
+        }
+    }
+
+    &.minus {
+        color: @minus__color;
+
+        &:before {
+            content: @down-arrow;
+        }
+    }
+}

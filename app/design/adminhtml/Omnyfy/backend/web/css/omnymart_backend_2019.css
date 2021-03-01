@@ -1,0 +1,524 @@
+/* body {
+    font-family: "Poppins", sans-serif;
+} */
+
+.abs-action-pattern,
+.abs-action-default,
+.abs-action-primary,
+.abs-action-secondary,
+.abs-action-tertiary,
+.abs-action-quaternary,
+.action-default,
+button,
+.action-primary,
+.action-secondary,
+.action-tertiary,
+.action-quaternary,
+.mass-select-wrap select + label,
+button,
+button.primary,
+button.secondary,
+button.tertiary,
+.ui-dialog .action-close,
+.ui-dialog .ui-button,
+.ui-dialog .action-primary,
+.attribute-popup-actions .action-default.reset,
+.attribute-popup-actions .page-actions-buttons > button.action-default.primary,
+.modal-popup .modal-footer .action-primary,
+.modal-popup .modal-footer .action-secondary,
+.page-actions > button,
+.page-actions .page-actions-buttons > button,
+.page-actions > button.action-primary,
+.page-actions .page-actions-buttons > button.action-primary,
+.page-actions > button.primary,
+.page-actions .page-actions-buttons > button.primary,
+.page-actions > button.action-secondary,
+.page-actions .page-actions-buttons > button.action-secondary,
+.steps-wizard .select-attributes-actions .action-default,
+.downloadable-form .action-add,
+.rma-items .col-actions .action-item-details,
+.rma-items .col-actions .action-item-split-line,
+.rma-items-block .col-actions a,
+.field-vat-number .action-default,
+.order-shipping-method-summary .action-default,
+.order-shipping-method-info .action-default,
+.block-footer .action-add,
+.block-footer .action-add,
+.popup-window .magento_buttons .ok_button,
+.popup-window .magento_buttons .cancel_button,
+.fade .actions .primary,
+.fade .actions .cancel,
+.block-footer .action-add,
+.block-footer .action-add.primary,
+.block-footer .action-add.secondary,
+.block-footer .action-add.tertiary,
+.attribute-popup-actions .page-actions-buttons > .block-footer .action-add.action-default.primary,
+.page-actions > .block-footer .action-add,
+.page-actions .page-actions-buttons > .block-footer .action-add,
+.page-actions > .block-footer .action-add.action-primary,
+.page-actions .page-actions-buttons > .block-footer .action-add.action-primary,
+.page-actions > .block-footer .action-add.primary,
+.page-actions .page-actions-buttons > .block-footer .action-add.primary,
+.page-actions > .block-footer .action-add.action-secondary,
+.page-actions .page-actions-buttons > .block-footer .action-add.action-secondary {
+    font-family: "Poppins", sans-serif;
+}
+.selector-Activator_CeDBW {
+    margin: 0;
+    line-height: inherit;
+    cursor: pointer;
+    font-size: 2.8rem;
+    font-weight: 400;
+    border: 1px solid transparent;
+    background: #00aeef;
+    display: flex;
+    border-radius: 30px;
+    padding: 5px 30px 5px 30px;
+    margin-left: -1.5rem;
+    color: #ffffff;
+}
+
+.data-grid-filters-action-wrap .action-default:before {
+    color: #fff;
+}
+
+.action-default,
+button,
+.block-footer .action-add,
+.block-footer .action-add {
+    background: #00aeef;
+    color: #f1f1f1;
+    border-radius: 30px;
+}
+
+.action-default:hover,
+.block-footer .action-add:hover,
+.block-footer .action-add:hover {
+    background: #35302c;
+}
+
+.action-default:hover,
+button:hover,
+.action-default:active,
+button:active,
+.action-default:focus,
+button:focus,
+.block-footer .action-add:hover,
+.block-footer .action-add:active,
+.block-footer .action-add:focus {
+    background: #35302c;
+}
+
+button.action-tertiary {
+    background-color: transparent;
+    color: #3a3f53;
+}
+
+.data-grid-search-control {
+    padding-right: 6rem;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.page-main-actions:not(._hidden),
+.page-actions._fixed {
+    background: #3a3f53;
+    border-bottom: 1px solid #e3e3e3;
+    border-top: 1px solid #e3e3e3;
+    padding: 1.5rem;
+}
+
+.page-main-actions .page-actions._fixed .page-actions-inner:before {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #ffffff;
+    content: attr(data-title);
+    float: left;
+    font-size: 2.8rem;
+    margin-top: 0.3rem;
+    max-width: 50%;
+}
+
+.data-grid th {
+    background-color: #b3b9c9;
+    border: 1px solid #f8f8f8;
+    border-left-color: transparent;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0;
+    text-align: left;
+}
+
+.menu-wrapper:before {
+    background-color: #222328;
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 8.800000000000001rem;
+    z-index: 699;
+}
+
+.data-grid th:first-child {
+    border-left-color: #f8f8f8;
+}
+
+.data-grid .data-grid-th._sortable:focus,
+.data-grid .data-grid-th._sortable:hover {
+    background-color: #3a3f53;
+}
+
+.admin__control-text,
+.admin__control-select,
+.admin__control-multiselect,
+.admin__control-file-label:before,
+.admin__control-textarea,
+.admin__control-addon [class*="admin__control-"][class] ~ [class*="admin__addon-"]:last-child:before,
+.selectmenu,
+.ui-datepicker .ui-datepicker-title select {
+    background-color: #fff;
+    border: 1px solid #adadad;
+    border-radius: 8px;
+    box-shadow: none;
+    color: #303030;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.selectmenu-toggle:before {
+    background: #e3e3e3;
+    border-left: 1px solid #adadad;
+    bottom: 0;
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 3.2rem;
+    border-radius: 30px;
+}
+
+.sticky-header .admin__data-grid-header-row:last-child {
+    margin: 0;
+    padding-top: 10px;
+}
+
+.admin__menu .level-0 > .submenu {
+    background-color: #38393d;
+    box-shadow: 0 0 3px #000;
+    left: 100%;
+    min-height: calc(7.5rem + 2rem + 100%);
+    padding: 2rem 0 0;
+    position: absolute;
+    top: 0;
+    transform: translateX(-100%);
+    transition-duration: 0.3s;
+    transition-property: transform, visibility;
+    transition-timing-function: ease-in-out;
+    visibility: hidden;
+    z-index: 697;
+}
+
+.admin__menu .level-0._active > a {
+    background-color: #38393d;
+}
+
+.admin__page-nav,
+.order-sidebar {
+    background: #f1f1f1;
+    border: 1px solid #e3e3e3;
+    border-radius: 8px 0px 0px 8px;
+}
+
+.admin__page-nav-item._active,
+.admin__page-nav-item.ui-state-active {
+    border-color: #00aeef;
+}
+
+.admin__field:not(.admin__field-option) > .admin__field-label {
+    font-family: "poppins", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 3.2rem;
+    padding: 0;
+    white-space: nowrap;
+    word-wrap: break-word;
+}
+
+.admin__action-multiselect-wrap .admin__action-multiselect {
+    border: 1px solid #adadad;
+    border-radius: 8px;
+}
+
+.action-select-wrap .action-select:before {
+    background-color: #00aeef;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 3.2rem;
+    line-height: 2;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.admin__data-grid-header .action-select-wrap .action-select:before {
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.admin__data-grid-header .selectmenu {
+    border-radius: 30px;
+    height: 33px;
+}
+
+.admin__data-grid-header .action-secondary {
+    border-radius: 30px;
+}
+
+.admin__data-grid-header input.admin__control-text,
+.admin__data-grid-header .admin__control-text {
+    border-radius: 30px;
+}
+
+.admin__data-grid-header .admin__control-select {
+    border-radius: 30px;
+}
+
+.modal-footer .action-primary,
+.page-actions > button.action-secondary,
+.page-actions .page-actions-buttons > button.action-secondary,
+.steps-wizard .select-attributes-actions .action-default,
+.popup-window .magento_buttons .ok_button,
+.fade .actions .primary,
+.block-footer .action-add.secondary,
+.attribute-popup-actions .page-actions-buttons > .block-footer .action-add.action-default.primary,
+.page-actions > .block-footer .action-add.action-secondary,
+.page-actions .page-actions-buttons > .block-footer .action-add.action-secondary {
+    background-color: #b3b9c9;
+    border-color: #514943;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+}
+
+.modal-footer .action-primary:hover,
+.page-actions > button.action-secondary:hover,
+.page-actions .page-actions-buttons > button.action-secondary:hover,
+.steps-wizard .select-attributes-actions .action-default:hover,
+.popup-window .magento_buttons .ok_button:hover,
+.fade .actions .primary:hover,
+.block-footer .action-add.secondary:hover,
+.attribute-popup-actions .page-actions-buttons > .block-footer .action-add.action-default.primary:hover,
+.page-actions > .block-footer .action-add.action-secondary:hover,
+.page-actions .page-actions-buttons > .block-footer .action-add.action-secondary:hover {
+    background-color: #959cad;
+    border-color: #959cad;
+    box-shadow: 0 0 0 1px #959cad;
+}
+
+/*.admin__control-text, .admin__control-select, .admin__control-multiselect, .admin__control-file-label:before, .admin__control-textarea, .admin__control-addon [class*='admin__control-'][class]~[class*='admin__addon-']:last-child:before, .selectmenu, .ui-datepicker .ui-datepicker-title select {
+    -webkit-appearance: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: none;
+    color: #303030;
+    font-size: 1.4rem;
+    font-weight: 400;
+    height: auto;
+    line-height: 2;
+    padding: .6rem 1rem .6rem;
+    transition: border-color .1s linear;
+    vertical-align: baseline;
+    width: auto;
+}*/
+
+.admin__field:not(.admin__field-option) > .admin__field-label {
+    font-family: "poppins", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 3.2rem;
+    padding: 0;
+    white-space: nowrap;
+    word-wrap: break-word;
+}
+
+.page-layout-admin-login .page-wrapper {
+    -webkit-flex-grow: 0;
+    flex-grow: 0;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    background-color: #ffffff;
+    /* border: 1px solid #e3e3e3; */
+    box-shadow: 0 5px 15px 0 #000;
+    display: block;
+    float: none;
+    margin: auto;
+    max-width: 45rem;
+    min-height: 30rem;
+    min-width: 0;
+    padding: 40px 80px 50px;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+.abs-action-primary,
+button.primary,
+.page-actions > button.action-primary,
+.page-actions .page-actions-buttons > button.action-primary,
+.page-actions > button.primary,
+.page-actions .page-actions-buttons > button.primary,
+.block-footer .action-add.primary,
+.page-actions > .block-footer .action-add.action-primary,
+.page-actions .page-actions-buttons > .block-footer .action-add.action-primary,
+.page-actions > .block-footer .action-add.primary,
+.page-actions .page-actions-buttons > .block-footer .action-add.primary {
+    border-radius: 8px;
+}
+
+.action-secondary {
+    border-radius: 8px;
+}
+
+.page-main-actions:not(._hidden) .page-actions .page-actions-buttons > button,
+.page-actions._fixed .page-actions-buttons > button {
+    color: #ffffff;
+    border-radius: 25px;
+}
+
+.page-main-actions:not(._hidden) .store-switcher,
+.page-actions._fixed .store-switcher {
+    color: #fff;
+}
+
+.actions-split .action-default {
+    border-radius: 25px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.actions-split .action-toggle {
+    border-radius: 25px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.actions-split.active,
+.actions-split._active,
+.actions-split:hover {
+    box-shadow: none;
+}
+
+.actions-split.active,
+.actions-split._active,
+.actions-split:hover {
+    box-shadow: none;
+}
+
+.actions-split.active .action-toggle.action-primary,
+.actions-split._active .action-toggle.action-primary,
+.actions-split.active .action-toggle.primary,
+.actions-split._active .action-toggle.primary,
+.abs-action-primary:hover,
+.abs-action-primary:active,
+.abs-action-primary:focus,
+button.primary:hover,
+button.primary:active,
+button.primary:focus,
+.page-actions > button.action-primary:hover,
+.page-actions > button.action-primary:active,
+.page-actions > button.action-primary:focus,
+.page-actions .page-actions-buttons > button.action-primary:hover,
+.page-actions .page-actions-buttons > button.action-primary:active,
+.page-actions .page-actions-buttons > button.action-primary:focus,
+.page-actions > button.primary:hover,
+.page-actions > button.primary:active,
+.page-actions > button.primary:focus,
+.page-actions .page-actions-buttons > button.primary:hover,
+.page-actions .page-actions-buttons > button.primary:active,
+.page-actions .page-actions-buttons > button.primary:focus,
+.block-footer .action-add.primary:hover,
+.block-footer .action-add.primary:active,
+.block-footer .action-add.primary:focus,
+.page-actions > .block-footer .action-add.action-primary:hover,
+.page-actions > .block-footer .action-add.action-primary:active,
+.page-actions > .block-footer .action-add.action-primary:focus,
+.page-actions .page-actions-buttons > .block-footer .action-add.action-primary:hover,
+.page-actions .page-actions-buttons > .block-footer .action-add.action-primary:active,
+.page-actions .page-actions-buttons > .block-footer .action-add.action-primary:focus,
+.page-actions > .block-footer .action-add.primary:hover,
+.page-actions > .block-footer .action-add.primary:active,
+.page-actions > .block-footer .action-add.primary:focus,
+.page-actions .page-actions-buttons > .block-footer .action-add.primary:hover,
+.page-actions .page-actions-buttons > .block-footer .action-add.primary:active,
+.page-actions .page-actions-buttons > .block-footer .action-add.primary:focus {
+    background-color: #00a3e0;
+    border-color: #00a3e0;
+}
+
+.admin__action-dropdown {
+    border-radius: 30px;
+}
+
+.admin__field-tooltip .admin__field-tooltip-action:before {
+    color: #b3b9c9;
+}
+
+.admin__data-grid-header-row .action-select-wrap .action-select {
+    color: #adadad;
+}
+
+.admin__data-grid-actions-wrap .admin__action-dropdown {
+    border-radius: 0;
+}
+
+.data-grid-filters-action-wrap .action-default._active {
+    border-radius: 0;
+}
+
+.admin-user .admin__action-dropdown {
+    border-radius: 0;
+}
+
+.admin__menu [class*="level-"]:not(.level-0) a:hover {
+    background-color: #b3b9c9;
+}
+
+.reports-report-view [class^="styles-Toolbar_"] button,
+.reports-report-view [class*=" styles-Toolbar_"] button {
+    color: #41362f;
+    border-radius: 0;
+}
+
+[class^="dateRange-"] button,
+.reports-report-view [class*=" dateRange-"] button {
+    border-radius: 0;
+}
+
+.admin__action-dropdown-wrap .admin__action-dropdown {
+    border-radius: 0;
+}
+
+.reports-report-view [class^="dataTable-Table_"] tfoot tr th,
+.reports-report-view [class^="dataTable-Table_"] thead tr th {
+    background-color: #b3b9c9;
+    border: 1px solid #f8f8f8;
+}
+
+.reports-report-view [class^="dataTable-Table_"] tfoot tr:first-child th:hover,
+.reports-report-view [class^="dataTable-Table_"] thead tr:first-child th:hover {
+    background-color: #3a3f53;
+}
+
+[class^="selector-Wrapper_"] button {
+    color: inherit;
+}
+
+.admin__control-table .action-delete {
+    color: #41362f;
+}

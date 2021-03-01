@@ -1,0 +1,26 @@
+{
+  "name": "magebees/module-import-export-categories",
+  "description": "This extension will import/export Categories, Sub Categories and Assign Products.",
+  "type": "magento2-module",
+  "version": "1.1.0",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "MageBees",
+      "email": "support@magebees.com",
+      "homepage": "https://www.magebees.com/",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Magebees\\Categories\\": ""
+    }
+  }
+}

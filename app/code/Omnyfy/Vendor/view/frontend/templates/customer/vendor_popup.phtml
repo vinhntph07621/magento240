@@ -1,0 +1,68 @@
+<?php
+/**
+ * Project: Multi Vendor.
+ * User: jing
+ * Date: 16/11/18
+ * Time: 9:49 AM
+ */
+?>
+<?php if (!$block->isLoggedIn()) {return '';} ?>
+<?php $currentStore = $block->getCurrentStore();?>
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <?php if($currentStore['vendor_id'] != 0) {?>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?php } ?>
+            <h4 class="modal-title">Change Store</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="vendor-wrapper">
+                <div class="block-content">
+                    <form action="#" class="vendor-form" method="post" id="vendor-form" data-role="omnyfy-vendor-form" data-bind="scope: 'vendor-form'" novalidate="novalidate">
+                        <?php echo $block->getBlockHtml('formkey'); ?>
+                        <fieldset class="fieldset vendor-fieldset" data-hasrequired="">
+
+                            <span id="input-message-box"></span>
+
+                            <div class="field vendor-field-name required">
+                                <label class="label"><span>Your Store</span></label>
+                                <div class="control">
+                                    <span><?php echo $currentStore['name'];?></span>
+                                </div>
+                            </div>
+                            <div class="field vendor-field-summary required">
+                                <label for="vendor_id" class="label"><span>Change</span></label>
+                                <div class="control">
+                                    <select name="vendor_id" class="input-select" data-validate="{required:true}" aria-required="true" id="vendor_id">
+                                        <?php foreach($block->getAllStores() as $store) { ?>
+                                            <option value="<?php echo $store->getVendorId();?>"<?php if ($currentStore['vendor_id'] == $store->getId()) {?>selected="selected"<?php }?>><?php echo $store->getName();?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="actions-toolbar vendor-form-actions">
+                            <?php if($currentStore['vendor_id'] != 0) {?>
+                                <button type="button" class="btn btn-text primary" data-dismiss="modal">Cancel</button>
+                            <?php } ?>
+                            <div class="primary actions-primary">
+                                <button type="submit" class="action submit primary" id="vendor_form_btn"><span>Confirm</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+{
+    "#vendor-form": {
+        "Omnyfy_Vendor/js/view/customer/vendor_popup": {}
+    }
+}
+</script>

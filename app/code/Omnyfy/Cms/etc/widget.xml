@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+/**
+ * Copyright © 2016 Ihor Vansach (ihor@omnyfy.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Widget/etc/widget.xsd">
+    <widget id="omnyfy_cms_recent" class="Omnyfy\Cms\Block\Widget\Recent">
+        <label translate="true">Recent Cms Articles</label>
+        <description>Display recent cms articles</description>
+        <parameters>
+            <parameter name="title" xsi:type="text"  visible="true" sort_order="10" >
+                <label translate="true">Title</label>
+                <description translate="true">Please specify title you want to display on the frontend. You can leave it blank if necessary.</description>
+            </parameter>
+            <parameter name="number_of_articles" xsi:type="text"  visible="true" sort_order="20" >
+                <label translate="true">Number of Articles</label>
+                <description translate="true">Please indicate number of recent articles you want to display. Leave blank to use predefined "Articles Per Page" value.</description>
+            </parameter>
+            <parameter name="category_id" xsi:type="select" source_model="Omnyfy\Cms\Model\Config\Source\Category" visible="true" sort_order="30" >
+                <label translate="true">Cms Category</label>
+                <description translate="true">Leave blank to display articles from all categories.</description>
+            </parameter>
+            <parameter name="custom_template" xsi:type="text" visible="true" sort_order="40" >
+                <label translate="true">Custom Template</label>
+                <description translate="true"><![CDATA[
+                    Leave blank to use default template <em>Omnyfy_Cms::widget/recent.phtml</em>.<br/>
+                    <em>Omnyfy_Cms::widget/recent_masonry.phtml</em> template is also available out of the box.
+                ]]></description>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

@@ -1,0 +1,101 @@
+<?php
+/**
+ * Project: Service Booking.
+ * User: jing
+ * Date: 15/12/17
+ * Time: 12:41 PM
+ */
+$_items = $block->getReviews();
+$format = $block->getDateFormat() ?: \IntlDateFormatter::SHORT;
+?>
+<?php if ($block->getReviewCount() > 0) {?>
+<div class="profile-block anchor-target last-anchor-target" id="reviews" id="reviews">
+	<div class="block-title">
+		Reviews
+	</div>
+	<div class="block-body">
+		<div class="reviews-wrapper">
+			<div class="reviews-list">
+				<?php foreach($_items as $_review) { ?>
+				<div class="reviews-item">
+					<div class="name-row">
+						<span class="name"><?php echo $block->escapeHtml($_review->getNickname());?></span>
+						<span class="sep"> | </span>
+						<span class="date"><?php echo $block->formatDate($_review->getCreatedAt(), $format);?></span>
+					</div>
+					<div class="rating-row-container">
+						<div class="rating-stars-container">
+							<div class="rating-stars-wrapper">
+								<div class="rating-stars">
+									<span style="width: <?php echo $_review->getPercent();?>%;"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<p class="title"><?php echo $_review->getTitle();?></p>
+					<p class="comments"><?php echo $_review->getDetail();?></p>
+				</div>
+			</div>
+			<?php } ?>
+			<?php if ($block->getReviewCount() > 2) {?>
+				<div class="actions">
+					<a href="<?php echo $block->getViewAllUrl();?>" class="btn btn-stroke-blue">See more <?php #echo $block->getReviewCount()?> reviews</a>
+				</div>
+			<?php } ?>
+		</div>
+	</div>
+</div>
+<?php }?>
+<?php /* <section class="review-section nav-target" id="reviews">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="section-header">
+                    Reviews
+                </h2>
+            </div>
+            <div class="col-md-9">
+                <div class="review-list">
+                    <?php foreach($_items as $_review) { ?>
+                    <div class="reivew-item">
+                        <div class="user-pic">
+                            <img src="<?php echo $block->getViewFileUrl('Omnyfy_Booking::/img/default-user.png');?>">
+                        </div>
+                        <div class="content-wrapper">
+                            <div class="top-row">
+                                <span class="name"><?php echo $block->escapeHtml($_review->getNickname());?></span>
+                                |
+                                <span class="date"><?php echo $block->formatDate($_review->getCreatedAt(), $format);?></span>
+                            </div>
+
+                            <div class="product-item large-stars">
+                                <div class="rating-summary">
+                                    <div class="rating-result" title="<?php echo $_review->getPercent();?>%">
+                                        <span style="width:<?php echo $_review->getPercent();?>%"><span><?php echo $_review->getPercent();?>%</span></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="title">
+                                <?php echo $_review->getTitle();?>
+                            </div>
+                            <div class="comment">
+                                <?php echo $_review->getDetail();?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <div class="actions">
+                        <?php if ($block->getReviewCount() > 2) {?>
+                        <a href="<?php echo $block->getViewAllUrl();?>" class="btn btn-stroke-blue">VIEW ALL <?php echo $block->getReviewCount()?> REVIEWS</a>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-separate"></div>
+    </div>
+
+</section> */ ?>
+
+<!-- reviews section ends -->

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <omnyfy_mcm>
+            <general>
+                <fees_management>0</fees_management>
+                <tax_rate>10</tax_rate>
+            </general>
+            <category_commissions>
+                <enable>0</enable>
+            </category_commissions>
+            <transaction_fees>
+                <allow_transaction_fees>0</allow_transaction_fees>
+                <transaction_fee_percentage>1.60</transaction_fee_percentage>
+                <transaction_fee_amount>30</transaction_fee_amount>
+                <transaction_fee_surcharge_percentage>.20</transaction_fee_surcharge_percentage>
+            </transaction_fees>
+            <set_default_fees>
+                <default_seller_fees>0</default_seller_fees>
+                <default_min_seller_fees>0</default_min_seller_fees>
+                <default_max_seller_fees>0</default_max_seller_fees>
+                <default_disbursment_fees>0</default_disbursment_fees>
+            </set_default_fees>
+            <refund>
+                <allow_refund_commercials_management>0</allow_refund_commercials_management>
+                <refund_category_management>0</refund_category_management>
+                <refund_seller_fee>0</refund_seller_fee>
+                <refund_disbursment_fee>0</refund_disbursment_fee>
+                <charge_transaction_fee_for_refund>0</charge_transaction_fee_for_refund>>
+            </refund>
+        </omnyfy_mcm>
+    </default>
+</config>

@@ -1,0 +1,8 @@
+<?php
+
+/** @see \Omnyfy\Mcm\Block\Adminhtml\Items\Column\TaxOnFees */
+?>
+<?php if ($_item = $block->getItem()): ?>
+    <span><?php echo $block->escapeHtml($block->getTaxPercentageOnFees($_item));?></span>
+<?php endif; ?>
+

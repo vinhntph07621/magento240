@@ -1,0 +1,8 @@
+<?php
+
+/** @see \Omnyfy\Mcm\Block\Adminhtml\Items\Column\CategoryRate */
+?>
+<?php if ($_item = $block->getItem()): ?>
+    <span><?php echo $block->escapeHtml($block->getCategoryRate($_item));?></span>
+<?php endif; ?>
+

@@ -1,0 +1,17 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$conf = $objectManager->get('Magento\Framework\App\Config\ScopeConfigInterface')->getValue('marketplacesetting/category_commissions/enable');
+?>
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        jQuery(document).ready(function () {
+            var conf = <?php echo $conf; ?>;
+            if (conf != 1) {
+                setTimeout(function () {
+                    jQuery("input[name='category_commission_percentage']").prop('disabled', true);
+                }, 15000);
+            }
+        });
+
+    });
+</script>

@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Omnyfy::omnyfy_dashboard" module="Omnyfy_VendorDashBoard" resource="Omnyfy_VendorDashBoard::Dashboard" sortOrder="9999" title="Vendor Dashboard" parent="Omnyfy_Vendor::base" />
+		<add action="omnyfy_vendordashboard/dashboard/index" id="Omnyfy_VendorDashBoard::omnyfy_vendordashboard_dashboard" module="Omnyfy_VendorDashBoard" parent="Omnyfy::omnyfy_dashboard" resource="Omnyfy_VendorDashBoard::Dashboard" sortOrder="9999" title="Dashboard Generator"/>
+	</menu>
+</config>
